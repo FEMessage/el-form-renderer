@@ -1,8 +1,8 @@
 {
-  "name": "vue-json-pretty",
+  "name": "el-form-renderer",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "leezng <294795201@qq.com>",
+  "author": "leezng <leezng@outlook.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/e2e/specs"
   },
   "dependencies": {
+    "element-ui": "^2.0.10",
     "vue": "^2.4.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import ElFormItemRenderer from './render'
+import ElFormItemRenderer from './render-form-item'
 import { Form } from 'element-ui'
 
 export default {
@@ -10,15 +10,21 @@ export default {
         }),
         ref: 'elForm'
       },
-      this.description.map((item, index) =>
-        <el-form-item-renderer
-          key={ index }
-          data={ item }
-          value={ this.value }
-          itemValue={ this.value[item.id] }
-          onUpdateValue={ this.updateValue }>
-        </el-form-item-renderer>
-      )
+      this.description.map((item, index) => {
+        return h(
+          'el-form-item-renderer', {
+            props: {
+              key: index,
+              data: item,
+              value: this.value,
+              itemValue: this.value[item.id]
+            },
+            on: {
+              updateValue: this.updateValue
+            }
+          }
+        )
+      })
     )
   },
   components: {
