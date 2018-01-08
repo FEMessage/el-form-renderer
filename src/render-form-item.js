@@ -1,6 +1,6 @@
 import mixinOptionExtensions from './mixin-package-option'
 import mixinEnableWhen from './mixin-enable-when'
-import { toCamelCase } from '../utils'
+import { toCamelCase } from './utils'
 
 export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen],

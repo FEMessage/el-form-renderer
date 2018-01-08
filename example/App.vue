@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ElFormRenderer from './render'
+import ElFormRenderer from '@'
 
 export default {
   name: 'app',
