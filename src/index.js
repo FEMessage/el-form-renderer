@@ -10,14 +10,14 @@ export default {
         }),
         ref: 'elForm'
       },
-      this.description.map((item, index) => {
+      this.content.map((item, index) => {
         return h(
           'el-form-item-renderer', {
             props: {
               key: index,
               data: item,
               value: this.value,
-              itemValue: this.value[item.id]
+              itemValue: this.value[item.r_id]
             },
             on: {
               updateValue: this.updateValue
@@ -31,7 +31,6 @@ export default {
     ElFormItemRenderer
   },
   mounted () {
-    window.cc = this
     this.$nextTick(() => {
       Object.keys(Form.methods).forEach((item) => {
         this[item] = this.$refs.elForm[item]
@@ -39,43 +38,9 @@ export default {
     })
   },
   props: Object.assign({}, Form.props, {
-    // 描述
-    description: {
+    content: {
       type: Array,
-      default () {
-        return [{
-          type: 'input',
-          label: '输入框测试',
-          id: 'input',
-          rules: [{ required: true, message: '请输入活动名称', trigger: 'blur' }]
-        }, {
-          type: 'switch',
-          label: 'switch测试',
-          id: 'switch'
-        }, {
-          type: 'radio-group',
-          label: 'radio-group测试',
-          id: 'radio-group',
-          options: [{
-            label: 'A',
-            value: 'a'
-          }, {
-            label: 'B',
-            value: 'b'
-          }]
-        }, {
-          type: 'select',
-          label: 'select测试',
-          id: 'select',
-          options: [{
-            label: 'A',
-            value: 'a'
-          }, {
-            label: 'B',
-            value: 'b'
-          }]
-        }]
-      }
+      required: true
     }
   }),
   data () {

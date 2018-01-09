@@ -1,6 +1,6 @@
 import mixinOptionExtensions from './mixin-package-option'
 import mixinEnableWhen from './mixin-enable-when'
-import { toCamelCase } from './utils'
+import { toCamelCase, isObject } from './utils'
 
 export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen],
@@ -24,7 +24,7 @@ export default {
     return h(
       'el-form-item', {
         props: {
-          prop: this.data.id,
+          prop: this.data.r_id,
           label: this.data.label,
           rules: this._show && Array.isArray(this.data.rules) ? this.data.rules : []
         },
@@ -44,22 +44,23 @@ export default {
      * @param  {All} value 单项表单数据值
      */
     renderFormItemContent (h, data, value) {
-      return h('el-' + data.type, {
-        props: Object.assign({}, data, {
+      let obj = isObject(data.r_el) ? data.r_el : {}
+      return h('el-' + data.r_type, {
+        props: Object.assign({}, obj, {
           value
           // disabled: this.configDisabled
         }),
         on: {
           // 手动更新表单数据
           input: (value) => {
-            this.$emit('updateValue', { id: data.id, value })
+            this.$emit('updateValue', { id: data.r_id, value })
           }
         }
       }, [
         (() => {
-          let optRenderer = this[`${toCamelCase(data.type)}_opt`]
-          if (typeof optRenderer === 'function' && Array.isArray(data.options)) {
-            return data.options.map(optRenderer)
+          let optRenderer = this[`${toCamelCase(data.r_type)}_opt`]
+          if (typeof optRenderer === 'function' && Array.isArray(data.r_options)) {
+            return data.r_options.map(optRenderer)
           }
         })()
       ])
