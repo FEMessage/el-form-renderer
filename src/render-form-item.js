@@ -24,7 +24,7 @@ export default {
     return h(
       'el-form-item', {
         props: {
-          prop: this.data.r_id,
+          prop: this.data.$id,
           label: this.data.label,
           rules: this._show && Array.isArray(this.data.rules) ? this.data.rules : []
         },
@@ -37,6 +37,11 @@ export default {
       ]
     )
   },
+  created () {
+    if (this.data.$id && this.data.$default !== undefined) {
+      this.$emit('updateValue', { id: this.data.$id, value: this.data.$default })
+    }
+  },
   methods: {
     /**
      * 渲染表单项的内容
@@ -44,8 +49,9 @@ export default {
      * @param  {All} value 单项表单数据值
      */
     renderFormItemContent (h, data, value) {
-      let obj = isObject(data.r_el) ? data.r_el : {}
-      return h('el-' + data.r_type, {
+      let obj = isObject(data.$el) ? data.$el : {}
+      let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type
+      return h('el-' + elType, {
         props: Object.assign({}, obj, {
           value
           // disabled: this.configDisabled
@@ -53,14 +59,14 @@ export default {
         on: {
           // 手动更新表单数据
           input: (value) => {
-            this.$emit('updateValue', { id: data.r_id, value })
+            this.$emit('updateValue', { id: data.$id, value })
           }
         }
       }, [
         (() => {
-          let optRenderer = this[`${toCamelCase(data.r_type)}_opt`]
-          if (typeof optRenderer === 'function' && Array.isArray(data.r_options)) {
-            return data.r_options.map(optRenderer)
+          let optRenderer = this[`${toCamelCase(data.$type)}_opt`]
+          if (typeof optRenderer === 'function' && Array.isArray(data.$options)) {
+            return data.$options.map(optRenderer)
           }
         })()
       ])

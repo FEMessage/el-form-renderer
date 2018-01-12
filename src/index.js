@@ -17,7 +17,7 @@ export default {
               key: index,
               data: item,
               value: this.value,
-              itemValue: this.value[item.r_id]
+              itemValue: this.value[item.$id]
             },
             on: {
               updateValue: this.updateValue
