@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <el-form-renderer :content="content" label-width="100px"></el-form-renderer>
+    <el-form-renderer
+      class="demo-form"
+      label-width="100px"
+      :content="content">
+    </el-form-renderer>
   </div>
 </template>
 
@@ -98,3 +102,20 @@ export default {
   }
 }
 </script>
+
+<style>
+  .demo-form {
+    width: 460px;
+  }
+  .demo-form .el-select,
+  .demo-form .el-date-editor {
+    width: 100%;
+  }
+  .demo-form .el-checkbox-group .el-checkbox {
+    float: left;
+    width: 160px;
+    padding-right: 20px;
+    margin: 0;
+    padding: 0;
+  }
+</style>

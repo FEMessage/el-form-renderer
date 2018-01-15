@@ -7,16 +7,13 @@ export default {
   props: {
     data: Object,
     itemValue: {},
-    value: Object
+    value: Object,
+    disabled: Boolean
   },
   computed: {
     // 是否显示
     _show () {
       return this.getEnableWhenSatatus()
-    },
-    // 是否所有表单都禁用
-    configDisabled () {
-      return false
     }
   },
   render (h) {
@@ -37,11 +34,6 @@ export default {
       ]
     )
   },
-  created () {
-    if (this.data.$id && this.data.$default !== undefined) {
-      this.$emit('updateValue', { id: this.data.$id, value: this.data.$default })
-    }
-  },
   methods: {
     /**
      * 渲染表单项的内容
@@ -51,11 +43,10 @@ export default {
     renderFormItemContent (h, data, value) {
       let obj = isObject(data.$el) ? data.$el : {}
       let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type
+      let props = Object.assign({}, obj, { value })
+      this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       return h('el-' + elType, {
-        props: Object.assign({}, obj, {
-          value
-          // disabled: this.configDisabled
-        }),
+        props: props,
         on: {
           // 手动更新表单数据
           input: (value) => {

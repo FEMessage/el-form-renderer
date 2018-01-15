@@ -11,13 +11,18 @@ export default {
         ref: 'elForm'
       },
       this.content.map((item, index) => {
+        // handle default value
+        if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
+          this.updateValue({ id: item.$id, value: item.$default })
+        }
         return h(
           'el-form-item-renderer', {
             props: {
               key: index,
               data: item,
               value: this.value,
-              itemValue: this.value[item.$id]
+              itemValue: this.value[item.$id],
+              disabled: this.disabled
             },
             on: {
               updateValue: this.updateValue
@@ -41,6 +46,11 @@ export default {
     content: {
       type: Array,
       required: true
+    },
+    // 禁用所有表单
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }),
   data () {
@@ -58,6 +68,10 @@ export default {
       this.value = Object.assign({}, this.value, {
         [id]: value
       })
+    },
+    // 对外提供获取表单数据的函数
+    getFormValue () {
+      return this.value
     }
   }
 }
