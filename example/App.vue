@@ -1,20 +1,47 @@
 <template>
-  <div id="app">
-    <el-form-renderer
-      class="demo-form"
-      label-width="100px"
-      :content="content">
-    </el-form-renderer>
+  <div class="demo">
+    <div class="demo-code">
+      <h3>.vue文件</h3>
+      <pre>
+&lt;template&gt;
+  &lt;el-form-renderer :content="content"&gt;&lt;/el-form-renderer&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import ElFormRenderer from 'path/el-form-renderer'
+
+export default {
+  components: {
+    ElFormRenderer
+  },
+  data () {
+    return {
+      content: [ObjectArray] // 见下方JSON 
+    }
+  }
+}
+&lt;/script&gt;
+      </pre>
+      <h3>content属性的具体内容：</h3>
+      <vue-json-pretty :data="content"></vue-json-pretty>
+    </div>
+
+    <div class="demo-form">
+      <h3>高度还原<a href="http://element.eleme.io/#/zh-CN/component/form" target="_blank">element-ui</a>官方例子：</h3>
+      <el-form-renderer label-width="100px" :content="content"></el-form-renderer>
+    </div>
   </div>
 </template>
 
 <script>
 import ElFormRenderer from '@'
+import VueJsonPretty from 'vue-json-pretty'
 
 export default {
   name: 'app',
   components: {
-    ElFormRenderer
+    ElFormRenderer,
+    VueJsonPretty
   },
   data () {
     return {
@@ -104,8 +131,39 @@ export default {
 </script>
 
 <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  .demo {
+    font-size: 14px;
+  }
+  .demo:after {
+    display: table;
+    content: "";
+    clear: both;
+  }
+  .demo-code {
+    float: left;
+    padding: 15px;
+    width: 50%;
+    box-sizing: border-box;
+  }
+  .demo-code {
+    font-family: Monaco, Menlo, Consolas, Bitstream Vera Sans Mono;
+  }
+  .demo-code pre {
+    margin: 0;
+    padding: 10px;
+    font-family: inherit;
+    background-color: #efefef;
+  }
   .demo-form {
-    width: 460px;
+    position: fixed;
+    padding: 15px;
+    left: 50%;
+    max-width: 460px;
+    box-sizing: border-box;
   }
   .demo-form .el-select,
   .demo-form .el-date-editor {
