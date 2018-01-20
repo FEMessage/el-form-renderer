@@ -10,26 +10,28 @@ export default {
         }),
         ref: 'elForm'
       },
-      this.content.map((item, index) => {
-        // handle default value
-        if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
-          this.updateValue({ id: item.$id, value: item.$default })
-        }
-        return h(
-          'el-form-item-renderer', {
-            props: {
-              key: index,
-              data: item,
-              value: this.value,
-              itemValue: this.value[item.$id],
-              disabled: this.disabled
-            },
-            on: {
-              updateValue: this.updateValue
-            }
+      this.content
+        .map((item, index) => {
+          // handle default value
+          if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
+            this.updateValue({ id: item.$id, value: item.$default })
           }
-        )
-      })
+          return h(
+            'el-form-item-renderer', {
+              props: {
+                key: index,
+                data: item,
+                value: this.value,
+                itemValue: this.value[item.$id],
+                disabled: this.disabled
+              },
+              on: {
+                updateValue: this.updateValue
+              }
+            }
+          )
+        })
+        .concat(this.$slots.default)
     )
   },
   components: {
