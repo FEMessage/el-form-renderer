@@ -1,6 +1,7 @@
 <template>
   <div class="demo">
     <div class="demo-code">
+      <h1>el-form-renderer example</h1>
       <h3>.vue文件</h3>
       <pre>
 &lt;template&gt;
@@ -22,13 +23,19 @@ export default {
 }
 &lt;/script&gt;
       </pre>
-      <h3>content属性的具体内容：</h3>
+      <h3>content属性的具体内容：<span class="tips">(show by <a href="https://github.com/leezng/vue-json-pretty" target="_blank">vue-json-pretty</a>)</span></h3>
+
       <vue-json-pretty :data="content"></vue-json-pretty>
     </div>
 
     <div class="demo-form">
       <h3>高度还原<a href="http://element.eleme.io/#/zh-CN/component/form" target="_blank">element-ui</a>官方例子：</h3>
-      <el-form-renderer label-width="100px" :content="content"></el-form-renderer>
+      <el-form-renderer label-width="100px" :content="content" ref="ruleForm">
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form-renderer>
     </div>
   </div>
 </template>
@@ -42,6 +49,21 @@ export default {
   components: {
     ElFormRenderer,
     VueJsonPretty
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    }
   },
   data () {
     return {
@@ -135,7 +157,12 @@ export default {
     margin: 0;
     padding: 0;
   }
+  h1 {
+    position: sticky;
+  }
   .demo {
+    margin: 0 auto;
+    width: 1200px;
     font-size: 14px;
   }
   .demo:after {
@@ -157,6 +184,9 @@ export default {
     padding: 10px;
     font-family: inherit;
     background-color: #efefef;
+  }
+  .demo-code .tips {
+    font-size: 12px;
   }
   .demo-form {
     position: fixed;
