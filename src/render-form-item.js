@@ -25,9 +25,7 @@ export default {
           label: this.data.label,
           rules: this._show && Array.isArray(this.data.rules) ? this.data.rules : []
         },
-        class: {
-          'hidden': !this._show // 使用 v-show 减少 dom 操作
-        }
+        style: !this._show ? 'display: none;' : ''// 使用 v-show 减少 dom 操作
       },
       [
         this.renderFormItemContent(h, this.data, this.itemValue)

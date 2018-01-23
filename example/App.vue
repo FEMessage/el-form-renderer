@@ -30,6 +30,7 @@ export default {
 
     <div class="demo-form">
       <h3>高度还原<a href="http://element.eleme.io/#/zh-CN/component/form" target="_blank">element-ui</a>官方例子：</h3>
+      <p>在本例子中，额外增加了一个表单原子项，作为 <code>$enableWhen</code> 属性的展示效果，可尝试点击 “即时配送” 进行查看。</p>
       <el-form-renderer label-width="100px" :content="content" ref="ruleForm">
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -107,6 +108,15 @@ export default {
           $type: 'switch',
           $id: 'delivery',
           label: '即时配送'
+        }, {
+          // 增加的 enableWhen 示例, 与 element 无关
+          $type: 'input',
+          $id: 'enableWhenDelivery',
+          $el: {
+            placeholder: '如果你选择即时配送就看到我啦'
+          },
+          label: '隐藏项demo',
+          $enableWhen: { delivery: true }
         }, {
           $type: 'checkbox-group',
           $id: 'type',
