@@ -66,3 +66,7 @@ export default {
 * 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有方法。
 
 * `getFormValue` 获取当前表单的值。
+
+## Slot
+
+* 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
