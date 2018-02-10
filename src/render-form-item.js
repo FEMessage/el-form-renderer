@@ -25,6 +25,7 @@ export default {
           label: this.data.label,
           rules: this._show && Array.isArray(this.data.rules) ? this.data.rules : []
         },
+        attrs: this.data.$attrs, 
         style: !this._show ? 'display: none;' : ''// 使用 v-show 减少 dom 操作
       },
       [

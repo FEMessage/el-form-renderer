@@ -16,7 +16,7 @@ export const toUpperCaseFirst = str => {
 }
 
 /**
- * 首字母大写, 其他不变
+ * 是否对象
  */
 export const isObject = obj => {
   return Object.prototype.toString.call(obj) === '[object Object]'
