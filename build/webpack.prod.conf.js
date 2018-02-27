@@ -8,6 +8,10 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var nodeExternals = require('webpack-node-externals');
+
+var isDist = !!process.env.DIST_ENV
+var distPath = './dist'
 
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -35,8 +39,37 @@ var webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       },
-      sourceMap: true
+      sourceMap: config.build.productionSourceMap
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../README.md'),
+        to: isDist ? distPath : config.build.assetsRoot
+      }
+    ])
+  ]
+})
+
+if (isDist) {
+  webpackConfig.entry = {
+    'el-form-renderer': './src/index.js'
+  }
+  webpackConfig.output = {
+    filename: `${distPath}/[name].js`,
+    library: 'ElFormRenderer',
+    libraryTarget: 'umd'
+  }
+  webpackConfig.externals = [nodeExternals()]
+  webpackConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../package.json'),
+        to: distPath
+      }
+    ])
+  )
+} else {
+  webpackConfig.plugins.push(
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
@@ -97,8 +130,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
-  ]
-})
+  )
+}
 
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin')
