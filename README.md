@@ -2,12 +2,12 @@
 
 基于 [element-ui](https://github.com/ElemeFE/element) 封装的表单渲染器，完整继承了 element 的属性定义，并进行了简单扩展，从而用户能够通过使用一段预设的数据渲染出一个完整的 element 表单。[查看demo](https://leezng.github.io/el-form-renderer/)
 
-## Installation
-
-### Quick start
+## Quick start
 
 ```html
-// Step1 安装
+// Step1 确认你已经正确安装并使用了 element-ui
+
+// Step2 安装
 yarn add el-form-renderer
 
 // Step2 在需要使用该渲染器的 .vue 文件中
