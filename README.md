@@ -4,28 +4,19 @@
 
 ## Installation
 
-### NPM
-
-```
-yarn add el-form-renderer
-```
-
-### Local
-
-```
-git clone https://github.com/leezng/el-form-renderer.git
-```
-
-## Usage
+### Quick start
 
 ```html
-// 在需要使用该渲染器的 .vue 文件中
+// Step1 安装
+yarn add el-form-renderer
+
+// Step2 在需要使用该渲染器的 .vue 文件中
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
 
 <script>
-import ElFormRenderer from 'path/el-form-renderer'
+import ElFormRenderer from 'el-form-renderer'
 
 export default {
   components: {
