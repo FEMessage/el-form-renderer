@@ -1,16 +1,16 @@
 # el-form-renderer
 
-基于 [element-ui](https://github.com/ElemeFE/element) 封装的表单渲染器，完整继承了 element 的属性定义，并进行了简单扩展，从而用户能够通过使用一段预设的数据渲染出一个完整的 element 表单。[查看demo](https://leezng.github.io/el-form-renderer/)
+Form renderer is based on [element-ui](https://github.com/ElemeFE/element). It inherits all of the element's attribute definitions completely and extends them briefly. So users can render a complete element form by using a piece of preset data. [demo](https://leezng.github.io/el-form-renderer/)
 
 ## Quick start
 
 ```html
-// Step1 确认你已经正确安装并使用了 element-ui
+// Step1: Make sure you have properly installed element-ui and used it correctly.
 
-// Step2 安装
+// Step2: Install
 yarn add el-form-renderer
 
-// Step2 在需要使用该渲染器的 .vue 文件中
+// Step3: In the .vue file that needs the renderer
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
@@ -28,36 +28,36 @@ export default {
 
 ## Props
 
-* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。
+* Support all attributes on [el-form](http://element.eleme.io/#/en-US/component/form).
 
-* `disabled` [Boolean] 设置为 `true` 可禁用所有原子表单。
+* `disabled` [Boolean] Set `true` to disable all atomic forms. If the `element-ui` version is still below `2.1.0`, it is still compatible.
 
-* `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id, $type, $enableWhen[可选], $options[可选], $attrs[可选]`。
+* `content` [ObjectArray] Define the contents of the form, each `Object` represents an atomic form (such as `el-input, el-select, ...`), All attributes on the `el-form-item` are declared here, and attributes on the `el-input` etc. are declared on the `$el` attribute. There are other attributes on the Object such as: `$id, $type, $enableWhen[optional], $options[optional], $attrs[optional]`.
 
 ```js
 // content example
 [
   {
-    $id: "form1", // 每一个原子都存在id，用于存储该原子的值，注意不能重复
-    $type: "input", // 类型，element 提供的所有表单类型，即 el-xxx
-    $enableWhen: { form2: 'beijing' }, // 可选属性，表示当 form2 的值为 beijing 时显示
-    $attrs: { 'data-name': 'form1' }, // 可选, 写法与 Vue 的 Render 函数规范保持一致
-    label: "输入框", // el-form-item上的属性
-    rules: [{ required: true, message: '请输入活动名称', trigger: 'blur' }] // el-form-item上的属性
+    $id: "form1", // Each atomic form uses an id to store its value, be careful not to repeat
+    $type: "input", // Type, all the form types provided by element, like el-xxx
+    $enableWhen: { form2: 'beijing' }, // Optional attribute, which means that the this atomic form will display when form2's value is beijing
+    $attrs: { 'data-name': 'form1' }, // Optional attribute, wording follows the Render function specification of Vue
+    label: "Input", // A property on the el-form-item
+    rules: [{ required: true, message: 'Please enter the name of the activity name', trigger: 'blur' }] // A property on the el-form-item
   }, {
     $id: "form2",
     $type: "select",
-    label: "选择框",
-    // $el 上用于定义具体原子表单(此处为el-select)的属性
+    label: "Select",
+    // $el: Used to define the properties of a specific atomic form (el-select in this case)
     $el: {
-      placeholder: "请选择内容"
+      placeholder: "Please select your zone"
     },
-    // $options 具有选择功能的原子表单可用此定义可选项，例如: select, radio-group, radio-button, checkbox-group, checkbox-button
+    // $options: Each atomic form with Selection Capabilities use this to define options. (such as: select, radio-group, radio-button, checkbox-group, checkbox-button, etc.)
     $options: [{
-      label: '区域一',
+      label: 'Zone one',
       value: 'shanghai'
     }, {
-      label: '区域二',
+      label: 'Zone two',
       value: 'beijing'
     }]
   }
@@ -66,10 +66,10 @@ export default {
 
 ## Methods
 
-* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有方法。
+* Supports all methods on [el-form](http://element.eleme.io/#/en-US/component/form).
 
-* `getFormValue` 获取当前表单的值。
+* `getFormValue` Get the value of the current form.
 
 ## Slot
 
-* 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
+* You can insert a custom `VNode` at the end of the form by using the default `slot`.
