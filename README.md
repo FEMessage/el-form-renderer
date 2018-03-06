@@ -1,6 +1,9 @@
 # el-form-renderer
 
-Form renderer is based on [element-ui](https://github.com/ElemeFE/element). It inherits all of the element's attribute definitions completely and extends them briefly. So users can render a complete element form by using a piece of preset data. [demo](https://leezng.github.io/el-form-renderer/)
+Form renderer is based on [element-ui](https://github.com/ElemeFE/element). It inherits all of the element's attribute definitions completely and extends them briefly. So users can render a complete element form by using a piece of preset data. 
+
+- [Demo](https://leezng.github.io/el-form-renderer/)
+- [中文文档](./README.zh-CN.md)
 
 ## Quick start
 

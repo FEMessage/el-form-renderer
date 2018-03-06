@@ -1,6 +1,9 @@
 # el-form-renderer
 
-基于 [element-ui](https://github.com/ElemeFE/element) 封装的表单渲染器，完整继承了 element 的属性定义，并进行了简单扩展，从而用户能够通过使用一段预设的数据渲染出一个完整的 element 表单。[查看demo](https://leezng.github.io/el-form-renderer/)
+基于 [element-ui](https://github.com/ElemeFE/element) 封装的表单渲染器，完整继承了 element 的属性定义，并进行了简单扩展，从而用户能够通过使用一段预设的数据渲染出一个完整的 element 表单。
+
+- [Demo](https://leezng.github.io/el-form-renderer/)
+- [English Document](./README.md)
 
 ## Quick start
 
