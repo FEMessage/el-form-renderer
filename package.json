@@ -1,6 +1,6 @@
 {
   "name": "el-form-renderer",
-  "version": "1.0.2-rc.1",
+  "version": "1.0.2",
   "description": "A Vue.js project",
   "author": "leezng <leezng@outlook.com>",
   "main": "el-form-renderer.js",
