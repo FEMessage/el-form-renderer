@@ -2,6 +2,16 @@ import mixinOptionExtensions from './mixin-package-option'
 import mixinEnableWhen from './mixin-enable-when'
 import { toCamelCase, isObject } from './utils'
 
+function validator (data) {
+  if (!data) {
+    throw new Error('item data must be an Object.')
+  } else if (!data.$id) {
+    throw new Error('item $id is unvalidated.')
+  } else if (!data.$type) {
+    throw new Error('item $type is unvalidated.')
+  }
+}
+
 export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen],
   props: {
@@ -17,7 +27,7 @@ export default {
     }
   },
   render (h) {
-    if (!this.data) return
+    validator(this.data) // 对数据进行简单校验
     return h(
       'el-form-item', {
         props: {
