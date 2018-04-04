@@ -29,8 +29,8 @@
     "url": "https://github.com/leezng/el-form-renderer/issues"
   },
   "dependencies": {
-    "element-ui": "^1.2.0",
-    "vue": "^2.3.0"
+    "element-ui": "^2.0.0",
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
