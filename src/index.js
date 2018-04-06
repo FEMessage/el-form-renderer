@@ -1,7 +1,12 @@
-import ElFormItemRenderer from './render-form-item'
+import FormItemRenderer from './render-form-item'
+import FormGroupRenderer from './render-form-group'
 import { Form } from 'element-ui'
 
 export default {
+  components: {
+    FormItemRenderer,
+    FormGroupRenderer
+  },
   render (h) {
     return h(
       'el-form', {
@@ -16,8 +21,9 @@ export default {
           if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
             this.updateValue({ id: item.$id, value: item.$default })
           }
+          const renderTpl = item.$type === 'group' ? 'form-group-renderer' : 'form-item-renderer'
           return h(
-            'el-form-item-renderer', {
+            renderTpl, {
               props: {
                 key: index,
                 data: item,
@@ -33,9 +39,6 @@ export default {
         })
         .concat(this.$slots.default)
     )
-  },
-  components: {
-    ElFormItemRenderer
   },
   mounted () {
     this.$nextTick(() => {

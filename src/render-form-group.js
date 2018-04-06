@@ -1,33 +1,34 @@
-import ElFormItemRenderer from './render-form-item'
+import FormItemRenderer from './render-form-item'
 
 export default {
   components: {
-    ElFormItemRenderer
+    FormItemRenderer
   },
   props: {
     data: Object,
-    itemValue: {},
+    itemValue: {
+      type: Object,
+      default: () => {}
+    },
     value: Object,
     disabled: Boolean
   },
   render (h) {
     return h(
-      'el-form-group', {}, this.data.$items.map((item, index) => {
+      'div', {}, this.data.$items.map((item, index) => {
         return h(
-          'el-form-item-renderer', {
+          'form-item-renderer', {
             props: {
               key: index,
               data: item,
               value: this.value,
-              itemValue: this.itemValue[item.$id],
+              itemValue: this.itemValue && this.itemValue[item.$id],
               disabled: this.disabled
             },
             on: {
-              updateValue: (val) => {
-                let obj = Object.assign({}, this.itemValue, {
-                  [item.$id]: val
-                })
-                this.$emit('updateValue', obj)
+              updateValue: (obj) => {
+                let val = Object.assign({}, this.itemValue, obj)
+                this.$emit('updateValue', val)
               }
             }
           }
