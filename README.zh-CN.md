@@ -46,7 +46,7 @@ export default {
     $enableWhen: { form2: 'beijing' }, // 可选属性，表示当 form2 的值为 beijing 时显示
     $attrs: { 'data-name': 'form1' }, // 可选, 写法与 Vue 的 Render 函数规范保持一致
     label: "输入框", // el-form-item上的属性
-    $default: '这是默认值',
+    $default: "这是默认值",
     rules: [{ required: true, message: '请输入活动名称', trigger: 'blur' }] // el-form-item上的属性
   }, {
     $id: "form2",
