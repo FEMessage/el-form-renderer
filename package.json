@@ -28,8 +28,8 @@
   "bugs": {
     "url": "https://github.com/leezng/el-form-renderer/issues"
   },
-  "dependencies": {
-    "element-ui": "^1.2.0",
+  "peerDependencies": {
+    "element-ui": "^2.0.0",
     "vue": "^2.3.0"
   },
   "devDependencies": {
@@ -90,5 +90,8 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "element-ui": "^2.3.8"
+  }
 }
