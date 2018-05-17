@@ -72,7 +72,12 @@ export default {
 
 * Supports all methods on [el-form](http://element.eleme.io/#/en-US/component/form).
 
-* `getFormValue` Get the value of the current form.
+* Other Methods:
+
+| Method Name | Description | Parameters |
+| ---------- | -------- | ---------- |
+| getFormValue | Get the value of the current form | - |
+| updateValue  | Update form value manually | ({ id, value }) |
 
 ## Slot
 

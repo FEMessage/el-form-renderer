@@ -72,7 +72,12 @@ export default {
 
 * 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有方法。
 
-* `getFormValue` 获取当前表单的值。
+* 其他方法:
+
+| 方法名 | 描述 | 参数 |
+| ---------- | -------- | ---------- |
+| getFormValue | 获取当前表单的值 | - |
+| updateValue  | 手动更新表单的值 | ({ id, value }) |
 
 ## Slot
 
