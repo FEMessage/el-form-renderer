@@ -55,7 +55,8 @@ export default {
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       return h('el-' + elType, {
-        props: props,
+        attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
+        props,
         on: {
           // 手动更新表单数据
           input: (value) => {
