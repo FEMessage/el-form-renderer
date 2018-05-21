@@ -35,7 +35,7 @@ export default {
 
 * `disabled` [Boolean] Set `true` to disable all atomic forms. If the `element-ui` version is still below `2.1.0`, it is still compatible.
 
-* `content` [ObjectArray] Define the contents of the form, each `Object` represents an atomic form (such as `el-input, el-select, ...`), All attributes on the `el-form-item` are declared here, and attributes on the `el-input` etc. are declared on the `$el` attribute. There are other attributes on the Object such as: `$id, $type, $enableWhen[optional], $options[optional], $attrs[optional]`.
+* `content` [ObjectArray] Define the contents of the form, each `Object` represents an atomic form (such as `el-input, el-select, ...`), All attributes on the `el-form-item` are declared here, and attributes on the `el-input` etc. are declared on the `$el` attribute. There are other attributes on the Object such as: `$id, $type, $default，$enableWhen[optional], $options[optional], $attrs[optional]`.
 
 ```js
 // content example
@@ -46,6 +46,7 @@ export default {
     $enableWhen: { form2: 'beijing' }, // Optional attribute, which means that the this atomic form will display when form2's value is beijing
     $attrs: { 'data-name': 'form1' }, // Optional attribute, wording follows the Render function specification of Vue
     label: "Input", // A property on the el-form-item
+    $default: "this is default value",
     rules: [{ required: true, message: 'Please enter the name of the activity name', trigger: 'blur' }] // A property on the el-form-item
   }, {
     $id: "form2",
@@ -71,7 +72,12 @@ export default {
 
 * Supports all methods on [el-form](http://element.eleme.io/#/en-US/component/form).
 
-* `getFormValue` Get the value of the current form.
+* Other Methods:
+
+| Method Name | Description | Parameters |
+| ---------- | -------- | ---------- |
+| getFormValue | Get the value of the current form | - |
+| updateValue  | Update form value manually | ({ id, value }) |
 
 ## Slot
 

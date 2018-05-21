@@ -2,6 +2,16 @@ import mixinOptionExtensions from './mixin-package-option'
 import mixinEnableWhen from './mixin-enable-when'
 import { toCamelCase, isObject } from './utils'
 
+function validator (data) {
+  if (!data) {
+    throw new Error('item data must be an Object.')
+  } else if (!data.$id) {
+    throw new Error('item $id is unvalidated.')
+  } else if (!data.$type) {
+    throw new Error('item $type is unvalidated.')
+  }
+}
+
 export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen],
   props: {
@@ -17,7 +27,7 @@ export default {
     }
   },
   render (h) {
-    if (!this.data) return
+    validator(this.data) // 对数据进行简单校验
     return h(
       'el-form-item', {
         props: {
@@ -45,7 +55,8 @@ export default {
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       return h('el-' + elType, {
-        props: props,
+        attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
+        props,
         on: {
           // 手动更新表单数据
           input: (value) => {

@@ -1,4 +1,5 @@
-import ElFormItemRenderer from './render-form-item'
+import RenderFormItem from './render-form-item'
+import RenderFormGroup from './render-form-group'
 import { Form } from 'element-ui'
 
 export default {
@@ -16,26 +17,27 @@ export default {
           if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
             this.updateValue({ id: item.$id, value: item.$default })
           }
-          return h(
-            'el-form-item-renderer', {
-              props: {
-                key: index,
-                data: item,
-                value: this.value,
-                itemValue: this.value[item.$id],
-                disabled: this.disabled
-              },
-              on: {
-                updateValue: this.updateValue
-              }
+          const data = {
+            props: {
+              key: index,
+              data: item,
+              value: this.value,
+              itemValue: this.value[item.$id],
+              disabled: this.disabled
+            },
+            on: {
+              updateValue: this.updateValue
             }
-          )
+          }
+          if (item.$type === 'group') return h('render-form-group', data)
+          else return h('render-form-item', data)
         })
         .concat(this.$slots.default)
     )
   },
   components: {
-    ElFormItemRenderer
+    RenderFormItem,
+    RenderFormGroup
   },
   mounted () {
     this.$nextTick(() => {

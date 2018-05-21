@@ -35,7 +35,7 @@ export default {
 
 * `disabled` [Boolean] 设置为 `true` 可禁用所有原子表单。`element-ui` 版本如果在 `2.1.0` 以下本渲染器依旧兼容。
 
-* `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id, $type, $enableWhen[可选], $options[可选], $attrs[可选]`。
+* `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id, $type, $default，$enableWhen[可选], $options[可选], $attrs[可选]
 
 ```js
 // content example
@@ -46,6 +46,7 @@ export default {
     $enableWhen: { form2: 'beijing' }, // 可选属性，表示当 form2 的值为 beijing 时显示
     $attrs: { 'data-name': 'form1' }, // 可选, 写法与 Vue 的 Render 函数规范保持一致
     label: "输入框", // el-form-item上的属性
+    $default: "这是默认值",
     rules: [{ required: true, message: '请输入活动名称', trigger: 'blur' }] // el-form-item上的属性
   }, {
     $id: "form2",
@@ -71,7 +72,12 @@ export default {
 
 * 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有方法。
 
-* `getFormValue` 获取当前表单的值。
+* 其他方法:
+
+| 方法名 | 描述 | 参数 |
+| ---------- | -------- | ---------- |
+| getFormValue | 获取当前表单的值 | - |
+| updateValue  | 手动更新表单的值 | ({ id, value }) |
 
 ## Slot
 
