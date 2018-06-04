@@ -1,6 +1,6 @@
 {
   "name": "el-form-renderer",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A Vue.js project",
   "author": "leezng <leezng@outlook.com>",
   "main": "el-form-renderer.js",
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/leezng/el-form-renderer/issues"
   },
-  "dependencies": {
+  "peerDependencies": {
     "element-ui": "^2.0.0",
     "vue": "^2.5.2"
   },

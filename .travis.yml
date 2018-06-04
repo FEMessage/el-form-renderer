@@ -7,7 +7,9 @@ cache:
     - "node_modules"
 
 install:
-  - npm install
+  - npm i
+  - npm install element-ui@2
+  - npm install vue@2
 
 stages:
   - lint
