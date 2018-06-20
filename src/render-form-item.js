@@ -16,6 +16,12 @@ export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen],
   props: {
     data: Object,
+    prop: {
+      type: String,
+      default () {
+        return this.data.$id
+      }
+    },
     itemValue: {},
     value: Object,
     disabled: Boolean
@@ -31,7 +37,7 @@ export default {
     return h(
       'el-form-item', {
         props: {
-          prop: this.data.$id,
+          prop: this.prop,
           label: this.data.label,
           rules: this._show && Array.isArray(this.data.rules) ? this.data.rules : []
         },

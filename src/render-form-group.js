@@ -1,8 +1,8 @@
-import ElFormItemRenderer from './render-form-item'
+import RenderFormItem from './render-form-item'
 
 export default {
   components: {
-    ElFormItemRenderer
+    RenderFormItem
   },
   props: {
     data: Object,
@@ -15,9 +15,10 @@ export default {
       'div', {}, this.data.$items.map((item, index) => {
         const itemValue = this.itemValue || {}
         return h(
-          'el-form-item-renderer', {
+          'render-form-item', {
             props: {
               key: index,
+              prop: `${this.data.$id}.${item.$id}`, // deep
               data: item,
               value: this.value,
               itemValue: itemValue[item.$id],

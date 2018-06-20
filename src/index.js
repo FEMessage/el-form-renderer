@@ -4,6 +4,7 @@ import { Form } from 'element-ui'
 
 export default {
   render (h) {
+    this.content.forEach(this.initItemValue) // handle default value
     return h(
       'el-form', {
         props: Object.assign({}, this._props, {
@@ -13,10 +14,6 @@ export default {
       },
       this.content
         .map((item, index) => {
-          // handle default value
-          if (item.$id && this.value[item.$id] === undefined && item.$default !== undefined) {
-            this.updateValue({ id: item.$id, value: item.$default })
-          }
           const data = {
             props: {
               key: index,
@@ -41,6 +38,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      // proxy
       Object.keys(Form.methods).forEach((item) => {
         this[item] = this.$refs.elForm[item]
       })
@@ -63,6 +61,25 @@ export default {
     }
   },
   methods: {
+    /**
+     * 初始化每个表单原子的默认值
+     * @param  {Object} item 表单原子描述
+     */
+    initItemValue (item) {
+      if (!item.$id || this.value[item.$id] !== undefined) return
+      let defaultVal
+      if (item.$type === 'group') {
+        // group
+        defaultVal = item.$items.reduce((acc, cur) => {
+          cur.$default && cur.$id && (acc[cur.$id] = cur.$default)
+          return acc
+        }, {})
+      } else if (item.$default !== undefined) {
+        // not group
+        defaultVal = item.$default
+      }
+      defaultVal && this.updateValue({ id: item.$id, value: defaultVal })
+    },
     /**
      * 更新表单数据
      * @param  {String} options.id 表单ID

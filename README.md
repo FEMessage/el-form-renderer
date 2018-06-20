@@ -46,7 +46,7 @@ export default {
     $enableWhen: { form2: 'beijing' }, // Optional attribute, which means that the this atomic form will display when form2's value is beijing
     $attrs: { 'data-name': 'form1' }, // Optional attribute, wording follows the Render function specification of Vue
     label: "Input", // A property on the el-form-item
-    $default: "this is default value",
+    $default: "default value",
     rules: [{ required: true, message: 'Please enter the name of the activity name', trigger: 'blur' }] // A property on the el-form-item
   }, {
     $id: "form2",
@@ -66,6 +66,32 @@ export default {
     }]
   }
 ]
+```
+
+In addition, we added an optional value to the `$type` attribute: `group`, which can be used to create more complex data types:
+
+```js
+// This example will get the object data structure:
+// group1: {
+//   input1: '',
+//   input2: ''
+// }
+{
+  $id: "group1", // Follow the principle of the same level of ID is not repeated, essentially equivalent to the object's key
+  $type: "group",
+  label: "object data example",
+  $items: [{
+    $id: "input1",
+    $type: "input",
+    label: "input1",
+    $default: "default value"
+  }, {
+    $id: "input2",
+    $type: "input",
+    label: "input2",
+    $default: "default value",
+  }]
+}
 ```
 
 ## Methods

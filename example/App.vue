@@ -23,8 +23,11 @@ export default {
 }
 &lt;/script&gt;
       </pre>
-      <h3>content属性的具体内容：<span class="tips">(show by <a href="https://github.com/leezng/vue-json-pretty" target="_blank">vue-json-pretty</a>)</span></h3>
-
+      <h3>content属性的具体内容：<span class="tips">(power by <a href="https://github.com/leezng/vue-json-pretty" target="_blank">vue-json-pretty</a>)</span></h3>
+      <div class="demo-config">
+        <el-button size="mini" @click="addFormGroup">添加自定义group类型项</el-button>
+        <el-button size="mini" @click="removeFormGroup">移除自定义group类型项</el-button>
+      </div>
       <vue-json-pretty :data="content"></vue-json-pretty>
     </div>
 
@@ -53,6 +56,47 @@ export default {
     VueJsonPretty
   },
   methods: {
+    addFormGroup () {
+      const index = this.content.findIndex(item => item.isGroup)
+      if (index !== -1) {
+        this.$message.warning('自定义group表单项已存在！')
+        return
+      }
+      this.content.unshift({
+        isGroup: true, // 只是用于demo移除查找, 无实际作用
+        $type: 'group',
+        $id: 'aaaaa',
+        $items: [{
+          $type: 'input',
+          $id: 'group1',
+          $default: 'aaaa',
+          label: 'group1',
+          rules: [
+            { required: true, message: 'sss', trigger: 'change' }
+          ]
+        }, {
+          $type: 'select',
+          $id: 'group2',
+          label: 'group2',
+          $options: [{
+            label: '区域一',
+            value: 'shanghai'
+          }, {
+            label: '区域二',
+            value: 'beijing'
+          }]
+        }]
+      })
+      this.$message.success('操作成功！')
+    },
+    removeFormGroup () {
+      const index = this.content.findIndex(item => item.isGroup)
+      if (index !== -1) {
+        this.content.splice(index, 1)
+        this.$message.success('操作成功！')
+      }
+      else this.$message.error('请先添加自定义group表单项！')
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -67,6 +111,9 @@ export default {
       this.$refs[formName].resetFields();
     }
   },
+  created () {
+    window.q = this
+  },
   data () {
     return {
       // 描述
@@ -75,6 +122,11 @@ export default {
           $type: 'input',
           $id: 'name',
           label: '活动名称',
+          $default: 'aaaa2',
+          $el: {
+            size: 'mini',
+            placeholder: 'test placeholder'
+          },
           rules: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
@@ -198,6 +250,9 @@ export default {
   }
   .demo-code .tips {
     font-size: 12px;
+  }
+  .demo-config {
+    margin-bottom: 15px;
   }
   .demo-form {
     position: fixed;
