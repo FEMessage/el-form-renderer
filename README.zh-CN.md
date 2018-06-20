@@ -68,6 +68,32 @@ export default {
 ]
 ```
 
+此外，我们为 `$type` 属性增加了一个可选值: `group`，可用于创建更为复杂的表单数据类型:
+
+```js
+// 该例将获得对象数据结构:
+// group1: {
+//   input1: '',
+//   input2: ''
+// }
+{
+  $id: "group1", // 遵循同一层级的ID不重复的原则，实质上相当于对象的键
+  $type: "group",
+  label: "这是一个对象数据",
+  $items: [{
+    $id: "input1",
+    $type: "input",
+    label: "输入框1",
+    $default: "这是默认值"
+  }, {
+    $id: "input2",
+    $type: "input",
+    label: "输入框2",
+    $default: "这是默认值",
+  }]
+}
+```
+
 ## Methods
 
 * 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有方法。
