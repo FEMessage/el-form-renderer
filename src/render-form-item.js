@@ -57,7 +57,7 @@ export default {
      */
     renderFormItemContent (h, data, value) {
       let obj = isObject(data.$el) ? data.$el : {}
-      let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type
+      let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type === 'radio-button' ? 'radio-group' : data.$type
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       return h('el-' + elType, {
