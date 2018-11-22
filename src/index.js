@@ -1,6 +1,25 @@
 import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
-import { Form } from 'element-ui'
+import Form from 'element-ui/lib/form'
+
+// 拷贝简单数据
+//    不考虑引用，函数等复杂数据
+function clone (data) {
+  if (Array.isArray(data)) {
+    return data.map(clone)
+  } else if (data && typeof data === 'object') {
+    let obj = Object.assign({}, data)
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue
+      if (typeof obj[key] === 'object') {
+        obj[key] = clone(obj[key])
+      }
+    }
+    return obj
+  } else {
+    return data
+  }
+}
 
 export default {
   render (h) {
@@ -92,7 +111,7 @@ export default {
     },
     // 对外提供获取表单数据的函数
     getFormValue () {
-      return this.value
+      return clone(this.value)
     }
   }
 }
