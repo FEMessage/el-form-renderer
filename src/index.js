@@ -1,6 +1,6 @@
 import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
-import { Form } from 'element-ui'
+import Form from 'element-ui/lib/form'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
