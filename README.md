@@ -108,3 +108,34 @@ In addition, we added an optional value to the `$type` attribute: `group`, which
 ## Slot
 
 * You can insert a custom `VNode` at the end of the form by using the default `slot`.
+
+## dev
+
+install dependency
+
+```sh
+yarn
+
+yarn add element-ui
+```
+
+run dev server
+
+```sh
+yarn dev
+```
+
+publish to npm
+
+```sh
+// remove element-ui in package.json
+git checkout -- .
+
+npm version
+
+yarn dist
+
+cd dist
+
+npm publish --access public
+```
