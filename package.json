@@ -1,8 +1,11 @@
 {
-  "name": "el-form-renderer",
-  "version": "1.1.2",
-  "description": "A Vue.js project",
+  "name": "@femessage/el-form-renderer",
+  "version": "1.0.0",
+  "description": "render form-item easily",
   "author": "leezng <leezng@outlook.com>",
+  "contributors": [
+    {"name":  "alvin"}
+  ],
   "main": "el-form-renderer.js",
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -14,9 +17,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:leezng/el-form-renderer.git"
+    "url": "git@github.com:FEMessage/el-form-renderer.git"
   },
-  "homepage": "https://leezng.github.io/el-form-renderer",
+  "homepage": "https://github.com/FEMessage/el-form-renderer",
   "keywords": [
     "vue",
     "element",
