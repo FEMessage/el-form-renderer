@@ -4,11 +4,11 @@ import { toCamelCase, isObject } from './utils'
 
 function validator (data) {
   if (!data) {
-    throw new Error('item data must be an Object.')
+    throw new Error('data must be an Object.')
   } else if (!data.$id) {
-    throw new Error('item $id is unvalidated.')
-  } else if (!data.$type) {
-    throw new Error('item $type is unvalidated.')
+    throw new Error('$id is unvalidated.')
+  } else if (!data.$type && !data.component) {
+    throw new Error('$type and component cannot both be null.')
   }
 }
 
@@ -71,7 +71,7 @@ export default {
         }
       }, [
         (() => {
-          let optRenderer = this[`${toCamelCase(data.$type)}_opt`]
+          let optRenderer = data.$type && this[`${toCamelCase(data.$type)}_opt`]
           if (typeof optRenderer === 'function' && Array.isArray(data.$options)) {
             return data.$options.map(optRenderer)
           }
