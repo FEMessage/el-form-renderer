@@ -112,6 +112,21 @@ export default {
     // 对外提供获取表单数据的函数
     getFormValue () {
       return clone(this.value)
+    },
+    /**
+     * 批量更新表单数据, todo {k: obj} obj 有多余的字段，getFormValue 时会拿到
+     * @param  {Object} 要更新的表单数据
+     */
+    updateForm (values) {
+      this.content.forEach(item => {
+        if (values[item.$id] === undefined) {
+          return
+        }
+        this.updateValue({
+          id: item.$id,
+          value: values[item.$id]
+        })
+      })
     }
   }
 }
