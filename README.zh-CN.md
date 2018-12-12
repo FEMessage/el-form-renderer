@@ -100,7 +100,7 @@ export default {
 
 展示效果：
 
-![image-20181211170318736](/Users/alvin/Library/Application Support/typora-user-images/image-20181211170318736.png)
+![image-20181211170318736](./assets/image-20181211170318736.png)
 
 
 
@@ -135,7 +135,7 @@ export default {
 
 展示效果：
 
-![image-20181211165959102](/Users/alvin/Library/Application Support/typora-user-images/image-20181211165959102.png)
+![image-20181211165959102](./assets/image-20181211165959102.png)
 
 ###  radio-group
 
@@ -169,7 +169,7 @@ export default {
 
 展示效果：
 
-![image-20181211171344921](/Users/alvin/Library/Application Support/typora-user-images/image-20181211171344921.png)
+![image-20181211171344921](./assets/image-20181211171344921.png)
 
 ###  date-picker
 
@@ -196,7 +196,7 @@ export default {
 
 展示效果：
 
-![image-20181211171719502](/Users/alvin/Library/Application Support/typora-user-images/image-20181211171719502.png)
+![image-20181211171719502](./assets/image-20181211171719502.png)
 
 ### upload(自定义组件)
 
@@ -222,7 +222,7 @@ export default {
 
 展示效果：
 
-![image-20181211172910592](/Users/alvin/Library/Application Support/typora-user-images/image-20181211172910592.png)
+![image-20181211172910592](./assets/image-20181211172910592.png)
 
 ### updateFormValue
 
@@ -286,7 +286,7 @@ export default {
 
 展示效果：
 
-![image-20181211174208994](/Users/alvin/Library/Application Support/typora-user-images/image-20181211174208994.png)
+![image-20181211174208994](./assets/image-20181211174208994.png)
 
 ### nextTick
 
@@ -334,7 +334,7 @@ export default {
 
 
 
-![image-20181211175701822](/Users/alvin/Library/Application Support/typora-user-images/image-20181211175701822.png)
+![image-20181211175701822](./assets/image-20181211175701822.png)
 
 **[⬆ Back to Top](#table-of-contents)**
 
