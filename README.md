@@ -6,7 +6,7 @@
 
 1. **[Feature](#Feature)**
 2. **[Documentation](#Documentation)**
-3. **[Quick start](#Quick start)**
+3. **[Quick start](#Quick-start)**
 4. **[Example](#Example)**
 5. **[Props](#Props)**
 6. **[Methods](#Methods)**
