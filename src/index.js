@@ -114,7 +114,7 @@ export default {
       return clone(this.value)
     },
     /**
-     * 批量更新表单数据, todo {k: obj} obj 有多余的字段，getFormValue 时会拿到
+     * 批量更新表单数据, TODO， 假设values的数据结构为 {k: obj}, 会把整个 obj 更新至表单; 如果 obj 有多余的字段，getFormValue() 会拿到
      * @param  {Object} 要更新的表单数据
      */
     updateForm (values) {
