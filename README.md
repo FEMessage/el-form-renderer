@@ -154,7 +154,7 @@ export default {
           },
           $default: '广州',
           $options: [
-            // radio-group 获取到的 value 为对应的 label 值
+            // 注意：element radio-group 通过 label 而不是 value 来匹配值
             { label: '上海' },
             { label: '北京' },
             { label: '广州' },
