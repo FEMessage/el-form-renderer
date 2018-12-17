@@ -4,13 +4,15 @@
 
 ## Table of Contents
 
-1. **[Feature](#Feature)**
-2. **[Documentation](#Documentation)**
-3. **[Quick start](#Quick-start)**
-4. **[Example](#Example)**
-5. **[Props](#Props)**
-6. **[Methods](#Methods)**
-7. **[Slot](#Slot)**
+1. **[Feature](#feature)**
+2. **[Documentation](#documentation)**
+3. **[Quick start](#quick-start)**
+4. **[Example](#example)**
+5. **[Props](#props)**
+6. **[Methods](#methods)**
+7. **[Slot](#slot)**
+8. **[Dev](#dev)**
+9. **[License](#license)**
 
 ## Feature
 
@@ -175,23 +177,23 @@ export default {
 
 ```js
 export default {
-    name: 'date-picker-example',
-    data() {
-      return {
-        content: [
-          {
-            $id: 'date',
-            $type: 'date-picker',
-            label: '日期',
-            $el: {
-              placeholder: '请选择',
-              valueFormat: 'timestamp'  // 不使用 value-format 属性，则获取到的是一个空对象，格式请参考 element-ui 组件 date-picker 的日期格式部分
-            }
+  name: 'date-picker-example',
+  data() {
+    return {
+      content: [
+        {
+          $id: 'date',
+          $type: 'date-picker',
+          label: '日期',
+          $el: {
+            placeholder: '请选择',
+            valueFormat: 'timestamp'  // 不使用 value-format 属性，则获取到的是一个空对象，格式请参考 element-ui 组件 date-picker 的日期格式部分
           }
-        ]
-      }
+        }
+      ]
     }
   }
+}
 ```
 
 展示效果：
@@ -434,5 +436,45 @@ export default {
 ## Slot
 
 * 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
+
+**[⬆ Back to Top](#table-of-contents)**
+
+
+## Dev
+
+install dependency
+
+```sh
+yarn
+
+yarn add element-ui
+```
+
+run dev server
+
+```sh
+yarn dev
+```
+
+publish to npm
+
+```sh
+// remove element-ui in package.json
+git checkout -- .
+
+npm version
+
+yarn dist
+
+cd dist
+
+npm publish --access public
+```
+
+**[⬆ Back to Top](#table-of-contents)**
+
+## License
+
+[MIT](./LICENSE)
 
 **[⬆ Back to Top](#table-of-contents)**
