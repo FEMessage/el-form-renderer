@@ -11,7 +11,7 @@
 5. **[Props](#props)**
 6. **[Methods](#methods)**
 7. **[Slot](#slot)**
-8. **[ReDev](#dev)**
+8. **[ReDev](#redev)**
 9. **[License](#license)**
 
 ## Feature
