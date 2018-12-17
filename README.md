@@ -11,7 +11,7 @@
 5. **[Props](#props)**
 6. **[Methods](#methods)**
 7. **[Slot](#slot)**
-8. **[ReDev](#redev)**
+8. **[Redev](#redev)**
 9. **[License](#license)**
 
 ## Feature
@@ -440,14 +440,14 @@ export default {
 **[⬆ Back to Top](#table-of-contents)**
 
 
-## ReDev
+## Redev
 
 install dependency
 
 ```sh
 yarn
 
-yarn add element-ui
+yarn add element-ui -P
 ```
 
 run dev server
@@ -459,9 +459,6 @@ yarn dev
 publish to npm
 
 ```sh
-// remove element-ui in package.json
-git checkout -- .
-
 npm version
 
 yarn dist
