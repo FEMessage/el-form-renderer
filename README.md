@@ -4,11 +4,11 @@
 
 ![12月-18-2018 20-14-26](./assets/12月-19-2018 12-14-50.gif)
 
-**What is `el-form-renderer`? **
+**What is `el-form-renderer`?**
 
 `el-form-renderer`是基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，但不局限于 [element-ui](https://github.com/ElemeFE/element) 组件。`el-form-renderer`完整继承了 element 的form表单属性，并进行了简单扩展，从而用户能够通过使用一段预设的数据渲染出一个完整的表单。
 
-**Why? **
+**Why?**
 
 日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复，由各种简单的原子表单组件构建而成。el-form-renderer 没有复杂的逻辑，只需进行简单的配置JSON的方式就可实现常用表单功能，节省写代码的时间和精力，减少许多重复冗余的代码。
 
