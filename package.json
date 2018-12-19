@@ -95,5 +95,8 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "lodash.get": "^4.4.2"
+  }
 }

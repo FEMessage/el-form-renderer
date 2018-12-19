@@ -1,10 +1,11 @@
+import _get from 'lodash.get'
 /**
  * 该 mixin 负责处理依赖属性 enableWhen 问题
  */
 
 // 获取 value 对应 id 的配置值
 function getCurrentValue (value, id) {
-  return value && value[id]
+  return _get(value, id)
 }
 
 export default {
