@@ -2,7 +2,7 @@
 
 ## Introduction
 
-![12月-18-2018 20-14-26](./assets/12月-19-2018 12-14-50.gif)
+![12月-18-2018 20-14-26](./assets/form.gif)
 
 **What is `el-form-renderer`?**
 
