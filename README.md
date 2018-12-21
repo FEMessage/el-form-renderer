@@ -1,28 +1,40 @@
 # el-form-renderer
 
-## Introduction
-
 ![12月-18-2018 20-14-26](./assets/form.gif)
-
-**What is `el-form-renderer`?**
-
-`el-form-renderer`是基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，但不局限于 [element-ui](https://github.com/ElemeFE/element) 组件。在完整继承了 element 的form表单属性的基础上进行了简单扩展，一些非表单组件或者封装的自定义组件，如图片上传、富文本等也可进行整合，从而用户能够通过使用一段预设的数据渲染出一个完整的表单。
-
-**Why?**
-
-日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复，由各种简单的原子表单组件构建而成。el-form-renderer 没有复杂的逻辑，只需进行简单配置JSON的方式就可实现常用表单功能，节省写代码的时间和精力，减少许多重复冗余的代码。
 
 ## Table of Contents
 
-1. **[Feature](#feature)**
-2. **[Documentation](#documentation)**
-3. **[Quick start](#quick-start)**
-4. **[Example](#example)**
-5. **[Props](#props)**
-6. **[Methods](#methods)**
-7. **[Slot](#slot)**
-8. **[Redev](#redev)**
-9. **[License](#license)**
+1. **[Introduction](#introduction)**
+2. **[Feature](#feature)**
+3. **[Documentation](#documentation)**
+4. **[Quick start](#quick-start)**
+5. **[Example](#example)**
+   - **[input](#input)**
+   - **[select](#select)**
+   - **[select style](#select-style)**
+   - **[radio-group](#radio-group)**
+   - **[date-picker](#date-picker)**
+   - **[component](#component)**
+   - **[rules](#rules)**
+   - **[updateFormValue](#updateFormValue)**
+   - **[nextTick](#nextTick)**
+6. **[Props](#props)**
+7. **[Methods](#methods)**
+8. **[Slot](#slot)**
+9. **[Redev](#redev)**
+10. **[License](#license)**
+
+## Introduction
+
+基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**
+
+**WHAT**
+
+`el-form-renderer`是基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，但不局限于 [element-ui](https://github.com/ElemeFE/element) 组件。在完整继承了 element 的form表单属性的基础上进行了简单扩展，一些非表单组件或者封装的自定义组件，如图片上传、富文本等也可进行整合，从而用户能够通过使用一段预设的数据渲染出一个完整的表单。
+
+**WHY**
+
+日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复，由各种简单的原子表单组件构建而成。el-form-renderer 没有复杂的逻辑，只需进行简单配置JSON的方式就可实现常用表单功能，节省写代码的时间和精力，减少许多重复冗余的代码。
 
 ## Feature
 
@@ -149,6 +161,42 @@ export default {
 
 ![image-20181211165959102](./assets/image-20181211165959102.png)
 
+## select style
+
+```vue
+export default {
+  name: 'select-example',
+  data() {
+    return {
+      content: [
+        {
+          $id: 'area',
+          $type: 'select',
+          label: '选择框',
+          $el: {
+            placeholder: '请选择内容',
+            style: 'width: 100%'  // select 占据 100% 宽度
+          },
+          $options: [{
+            label: '区域一',
+            value: 'shanghai'
+          }, {
+            label: '区域二',
+            value: 'beijing'
+          }]
+        }
+      ]
+    }
+  }
+}
+```
+
+
+
+展示效果：
+
+![image-20181221194652643](./assets/image-20181221194652643.png)
+
 ###  radio-group
 
 ```js
@@ -196,6 +244,7 @@ export default {
           $type: 'date-picker',
           label: '日期',
           $el: {
+            // type: 'daterange',   // 如果 type 为 daterange，则获取到的是一个数组
             placeholder: '请选择',
             valueFormat: 'timestamp'  // 不使用 value-format 属性，则获取到的是一个空对象，格式请参考 element-ui 组件 date-picker 的日期格式部分
           }
@@ -210,7 +259,7 @@ export default {
 
 ![image-20181211171719502](./assets/image-20181211171719502.png)
 
-### upload(自定义组件)
+### component
 
 ```js
 // https://github.com/FEMessage/upload-to-ali
@@ -235,6 +284,40 @@ export default {
 展示效果：
 
 ![image-20181211172910592](./assets/image-20181211172910592.png)
+
+### rules
+
+```vue
+export default {
+  name: 'rule-example',
+  data() {
+    return {
+      content: [
+        {
+          $id: 'name',
+          $type: 'input',
+          label: '姓名',
+          $el: {
+            placeholder: '请输入'
+          },
+          rules: [
+            {
+              required: true,
+              message: '请输入姓名',
+              trigger: 'change',
+              whitespace: true  // 不能仅包含空格
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+展示效果：
+
+![image-20181221163020715](./assets/image-20181221163020715.png)
 
 ### updateFormValue
 
@@ -344,7 +427,7 @@ export default {
 </script>
 ```
 
-
+展示效果：
 
 ![image-20181211175701822](./assets/image-20181211175701822.png)
 
@@ -352,14 +435,30 @@ export default {
 
 ## Props
 
-* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。
+### 属性
 
+* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。 
 * `disabled` [Boolean] 设置为 `true` 可禁用所有原子表单。`element-ui` 版本如果在 `2.1.0` 以下本渲染器依旧兼容。
-
 * `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都可在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id`,` $type/component`, `$default`,`$enableWhen`[可选], `$options`[可选], `$attrs`[可选]
 
+### content
+
+每一个原子表单`Object`可配置如下内容：
+
+- `$id` 每一个原子都存在id，用于存储该原子的值，不能重复
+- ` $type`  类型，element 提供的所有表单类型，即 el-xxx
+- `component` 用于处理自定义组件，局部引用的组件
+- `$default`  默认值
+- `$enableWhen` [Object] 可选属性，用于表单对应的为指定值时显示
+- `$options` 具有选择功能的原子表单可用此定义可选项，例如: `select`, `radio-group`, `radio-button`, `checkbox-group`, `checkbox-button`
+- `$attrs` 可选, 写法与 Vue 的 Render 函数规范保持一致
+- `$el` 用于定义具体原子表单的属性，比如常见的`placeholder`
+- `label` 对应 `el-form-item`上的`label`属性，表单域标签
+- `rules` 对应 `el-form-item`上的`rules`属性， 用于验证
+
+content example：
+
 ```js
-// content example
 [
   {
     $id: "form1", // 每一个原子都存在id，用于存储该原子的值，注意不能重复
@@ -372,6 +471,7 @@ export default {
   }, {
     $id: "form2",
     $type: "select",
+      
     label: "选择框",
     // $el 上用于定义具体原子表单(此处为el-select)的属性
     $el: {
@@ -389,7 +489,13 @@ export default {
 ]
 ```
 
-此外，我们为 `$type` 属性增加了一个可选值: `group`，可用于创建更为复杂的表单数据类型:
+### 特殊属性说明
+
+为满足一些特殊场景，特单独说明如下属性：
+
+#### $type: 'group'
+
+ `$type` 属性有一个特殊的可选值: `group`，可用于创建更为复杂的表单数据类型:
 
 ```js
 // 该例将获得对象数据结构:
@@ -415,9 +521,11 @@ export default {
 }
 ```
 
-为了满足局部注册组件和使用自定义组件的需求，我们在原有组件的基础上拓展了原子表单的`component`属性，用于使用局部注册和自定义的组件
+#### component
 
-注意： `component`适用于渲染局部注册组件和使用自定义组件，而`$type`适用于带`el-`前缀的全局组件
+为了满足局部注册组件和使用自定义组件的需求，我们在原有组件的基础上拓展了原子表单的`component`属性，用于使用局部注册和自定义的组件。
+
+注意： `component`适用于渲染局部注册组件和自定义组件，而`$type`适用于带`el-`前缀的全局组件
 
 ```js
 {
