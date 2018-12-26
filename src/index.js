@@ -164,6 +164,10 @@ export default {
           return
         }
         if (item.$type === GROUP) {
+          // 如果该group是动态添加的，则为store重新初始化属性
+          if (store[item.$id] === undefined) {
+            this.$set(store, item.$id, {})
+          }
           this.updateStoreOptions(item.$items, store[item.$id])
           return
         }
