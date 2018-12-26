@@ -1,6 +1,7 @@
 import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
+import _set from 'lodash.set'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -39,7 +40,8 @@ export default {
               data: item,
               value: this.value,
               itemValue: this.value[item.$id],
-              disabled: this.disabled
+              disabled: this.disabled,
+              options: this.store[item.$id]
             },
             on: {
               updateValue: this.updateValue
@@ -76,7 +78,29 @@ export default {
   }),
   data () {
     return {
-      value: {} // 表单数据对象
+      value: {}, // 表单数据对象
+      store: this.content.reduce((con, item) => {
+        con[item.$id] = item.$type === 'group'
+          ? item.$items.reduce((acc, cur) => {
+            acc[cur.$id] = cur.$options || []
+            return acc
+          }, {})
+          : (item.$options || [])
+        return con
+      }, {})
+    }
+  },
+  watch: {
+    content (newVal) {
+      if (!newVal.length) {
+        return
+      }
+      newVal.forEach(item => {
+        if (this.store[item.$id]) {
+          return
+        }
+        this.$set(this.store, item.$id, item.$options || [])
+      })
     }
   },
   methods: {
@@ -127,6 +151,12 @@ export default {
           value: values[item.$id]
         })
       })
+    },
+    setOptions ($id, options) {
+      if (!$id || !Array.isArray(options)) {
+        return
+      }
+      _set(this.store, $id, options)
     }
   }
 }

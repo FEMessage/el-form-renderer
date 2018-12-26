@@ -24,7 +24,8 @@ export default {
     },
     itemValue: {},
     value: Object,
-    disabled: Boolean
+    disabled: Boolean,
+    options: Array
   },
   computed: {
     // 是否显示
@@ -72,8 +73,8 @@ export default {
       }, [
         (() => {
           let optRenderer = data.$type && this[`${toCamelCase(data.$type)}_opt`]
-          if (typeof optRenderer === 'function' && Array.isArray(data.$options)) {
-            return data.$options.map(optRenderer)
+          if (typeof optRenderer === 'function' && Array.isArray(this.options)) {
+            return this.options.map(optRenderer)
           }
         })()
       ])
