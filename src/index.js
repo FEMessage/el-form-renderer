@@ -91,16 +91,14 @@ export default {
     }
   },
   watch: {
-    content (newVal) {
-      if (!newVal.length) {
-        return
-      }
-      newVal.forEach(item => {
-        if (this.store[item.$id]) {
+    content: {
+      handler (newVal) {
+        if (!newVal.length) {
           return
         }
-        this.$set(this.store, item.$id, item.$options || [])
-      })
+        this.updateStoreOptions(newVal, this.store)
+      },
+      deep: true
     }
   },
   methods: {
@@ -157,6 +155,18 @@ export default {
         return
       }
       _set(this.store, $id, options)
+    },
+    updateStoreOptions (content, store) {
+      content.forEach(item => {
+        if (item.$type !== 'group' && store[item.$id]) {
+          return
+        }
+        if (item.$type === 'group') {
+          this.updateStoreOptions(item.$items, store[item.$id])
+          return
+        }
+        this.$set(store, item.$id, item.$options || [])
+      })
     }
   }
 }
