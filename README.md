@@ -26,7 +26,7 @@
 
 ## Introduction
 
-基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**
+基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，fork自开源项目[el-form-renderer](https://github.com/leezng/el-form-renderer)，并在原有基础上二次开发。
 
 **WHAT**
 
@@ -437,7 +437,7 @@ export default {
 
 ### 属性
 
-* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。 
+* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。
 * `disabled` [Boolean] 设置为 `true` 可禁用所有原子表单。`element-ui` 版本如果在 `2.1.0` 以下本渲染器依旧兼容。
 * `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都可在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id`,` $type/component`, `$default`,`$enableWhen`[可选], `$options`[可选], `$attrs`[可选]
 
