@@ -548,6 +548,7 @@ content example：
 | getFormValue | 获取当前表单的值     | -                          |
 | updateValue  | 手动更新表单的值     | ({ id: id, value: value }) |
 | updateForm   | 手动批量更新表单的值 | Object                     |
+| setOptions   | 动态设置新的options  | ($id, options)             |
 
 **[⬆ Back to Top](#table-of-contents)**
 
