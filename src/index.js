@@ -43,7 +43,7 @@ export default {
               value: this.value,
               itemValue: this.value[item.$id],
               disabled: this.disabled,
-              options: this.store[item.$id]
+              options: this.options[item.$id]
             },
             on: {
               updateValue: this.updateValue
@@ -81,7 +81,7 @@ export default {
   data () {
     return {
       value: {}, // 表单数据对象
-      store: this.content.reduce((con, item) => {
+      options: this.content.reduce((con, item) => {
         con[item.$id] = item.$type === GROUP
           ? item.$items.reduce((acc, cur) => {
             acc[cur.$id] = cur.$options || []
@@ -98,7 +98,7 @@ export default {
         if (!newVal.length) {
           return
         }
-        this.updateStoreOptions(newVal, this.store)
+        this.updateOptions(newVal, this.options)
       },
       deep: true
     }
@@ -156,22 +156,22 @@ export default {
       if (!$id || !Array.isArray(options)) {
         return
       }
-      _set(this.store, $id, options)
+      _set(this.options, $id, options)
     },
-    updateStoreOptions (content, store) {
+    updateOptions (content, options) {
       content.forEach(item => {
-        if (item.$type !== GROUP && store[item.$id]) {
+        if (item.$type !== GROUP && options[item.$id]) {
           return
         }
         if (item.$type === GROUP) {
-          // 如果该group是动态添加的，则为store重新初始化属性
-          if (store[item.$id] === undefined) {
-            this.$set(store, item.$id, {})
+          // 如果该group是动态添加的，则为 options 重新初始化属性
+          if (options[item.$id] === undefined) {
+            this.$set(options, item.$id, {})
           }
-          this.updateStoreOptions(item.$items, store[item.$id])
+          this.updateOptions(item.$items, options[item.$id])
           return
         }
-        this.$set(store, item.$id, item.$options || [])
+        this.$set(options, item.$id, item.$options || [])
       })
     }
   }
