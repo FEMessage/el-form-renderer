@@ -1,6 +1,6 @@
 {
   "name": "@femessage/el-form-renderer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "render form-item easily",
   "author": "leezng <leezng@outlook.com>",
   "contributors": [
@@ -97,6 +97,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "lodash.get": "^4.4.2"
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2"
   }
 }

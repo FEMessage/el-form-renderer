@@ -8,7 +8,8 @@ export default {
     data: Object,
     itemValue: {},
     value: Object,
-    disabled: Boolean
+    disabled: Boolean,
+    options: Object
   },
   render (h) {
     return h(
@@ -22,7 +23,8 @@ export default {
               data: item,
               value: this.value,
               itemValue: itemValue[item.$id],
-              disabled: this.disabled
+              disabled: this.disabled,
+              options: this.options[item.$id]
             },
             on: {
               updateValue: ({id, value}) => {

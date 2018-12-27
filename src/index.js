@@ -1,6 +1,9 @@
 import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
+import _set from 'lodash.set'
+
+const GROUP = 'group'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -39,13 +42,14 @@ export default {
               data: item,
               value: this.value,
               itemValue: this.value[item.$id],
-              disabled: this.disabled
+              disabled: this.disabled,
+              options: this.options[item.$id]
             },
             on: {
               updateValue: this.updateValue
             }
           }
-          if (item.$type === 'group') return h('render-form-group', data)
+          if (item.$type === GROUP) return h('render-form-group', data)
           else return h('render-form-item', data)
         })
         .concat(this.$slots.default)
@@ -76,7 +80,27 @@ export default {
   }),
   data () {
     return {
-      value: {} // 表单数据对象
+      value: {}, // 表单数据对象
+      options: this.content.reduce((con, item) => {
+        con[item.$id] = item.$type === GROUP
+          ? item.$items.reduce((acc, cur) => {
+            acc[cur.$id] = cur.$options || []
+            return acc
+          }, {})
+          : (item.$options || [])
+        return con
+      }, {})
+    }
+  },
+  watch: {
+    content: {
+      handler (newVal) {
+        if (!newVal.length) {
+          return
+        }
+        this.updateOptions(newVal, this.options)
+      },
+      deep: true
     }
   },
   methods: {
@@ -87,7 +111,7 @@ export default {
     initItemValue (item) {
       if (!item.$id || this.value[item.$id] !== undefined) return
       let defaultVal
-      if (item.$type === 'group') {
+      if (item.$type === GROUP) {
         // group
         defaultVal = item.$items.reduce((acc, cur) => {
           cur.$default && cur.$id && (acc[cur.$id] = cur.$default)
@@ -126,6 +150,28 @@ export default {
           id: item.$id,
           value: values[item.$id]
         })
+      })
+    },
+    setOptions ($id, options) {
+      if (!$id || !Array.isArray(options)) {
+        return
+      }
+      _set(this.options, $id, options)
+    },
+    updateOptions (content, options) {
+      content.forEach(item => {
+        if (item.$type !== GROUP && options[item.$id]) {
+          return
+        }
+        if (item.$type === GROUP) {
+          // 如果该group是动态添加的，则为 options 重新初始化属性
+          if (options[item.$id] === undefined) {
+            this.$set(options, item.$id, {})
+          }
+          this.updateOptions(item.$items, options[item.$id])
+          return
+        }
+        this.$set(options, item.$id, item.$options || [])
       })
     }
   }
