@@ -5,25 +5,6 @@ import _set from 'lodash.set'
 
 const GROUP = 'group'
 
-// 拷贝简单数据
-//    不考虑引用，函数等复杂数据
-function clone (data) {
-  if (Array.isArray(data)) {
-    return data.map(clone)
-  } else if (data && typeof data === 'object') {
-    let obj = Object.assign({}, data)
-    for (let key in obj) {
-      if (!obj.hasOwnProperty(key)) continue
-      if (typeof obj[key] === 'object') {
-        obj[key] = clone(obj[key])
-      }
-    }
-    return obj
-  } else {
-    return data
-  }
-}
-
 export default {
   render (h) {
     this.content.forEach(this.initItemValue) // handle default value
@@ -135,7 +116,20 @@ export default {
     },
     // 对外提供获取表单数据的函数
     getFormValue () {
-      return clone(this.value)
+      const getValue = (values, content) => {
+        return Object.keys(values).reduce((acc, key) => {
+          const item = content.find(it => it.$id === key)
+          if (!item) {
+            return acc
+          }
+
+          acc[key] = item.$type === GROUP
+            ? getValue(values[key], item.$items)
+            : item.outputFormat && item.outputFormat(values[key]) || values[key]
+          return acc
+        }, {})
+      }
+      return getValue(this.value, this.content)
     },
     /**
      * 批量更新表单数据, TODO， 假设values的数据结构为 {k: obj}, 会把整个 obj 更新至表单; 如果 obj 有多余的字段，getFormValue() 会拿到
