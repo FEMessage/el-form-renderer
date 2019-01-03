@@ -3,6 +3,25 @@ import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
 
+// 拷贝简单数据
+//    不考虑引用，函数等复杂数据
+function clone (data) {
+  if (Array.isArray(data)) {
+    return data.map(clone)
+  } else if (data && typeof data === 'object') {
+    let obj = Object.assign({}, data)
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue
+      if (typeof obj[key] === 'object') {
+        obj[key] = clone(obj[key])
+      }
+    }
+    return obj
+  } else {
+    return data
+  }
+}
+
 const GROUP = 'group'
 
 export default {
@@ -125,7 +144,7 @@ export default {
 
           acc[key] = item.$type === GROUP
             ? getValue(values[key], item.$items)
-            : item.outputFormat && item.outputFormat(values[key]) || values[key]
+            : item.outputFormat && item.outputFormat(clone(values[key])) || clone(values[key])
           return acc
         }, {})
       }
