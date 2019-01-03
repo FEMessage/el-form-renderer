@@ -22,6 +22,8 @@ function clone (data) {
   }
 }
 
+const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
+
 const GROUP = 'group'
 
 export default {
@@ -142,9 +144,19 @@ export default {
             return acc
           }
 
-          acc[key] = item.$type === GROUP
-            ? getValue(values[key], item.$items)
-            : item.outputFormat && item.outputFormat(clone(values[key])) || clone(values[key])
+          // 如果类型是group，对值递归处理
+          if (item.$type === GROUP) {
+            acc[key] = getValue(values[key], item.$items)
+          } else {
+            if (item.outputFormat) {
+              const formatVal = item.outputFormat(clone(values[key]))
+              // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
+              isObject(formatVal) ? Object.assign(acc, formatVal) : (acc[key] = formatVal)
+            } else {
+              acc[key] = clone(values[key])
+            }
+          }
+
           return acc
         }, {})
       }
