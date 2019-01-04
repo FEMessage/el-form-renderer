@@ -123,7 +123,6 @@ export default {
           $id: 'name',
           label: '活动名称',
           $default: 'aaaa2',
-          trim: true,
           $el: {
             size: 'mini',
             placeholder: 'test placeholder'
