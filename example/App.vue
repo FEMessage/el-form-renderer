@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      content: [ObjectArray] // 见下方JSON 
+      content: [ObjectArray] // 见下方JSON
     }
   }
 }
@@ -150,11 +150,16 @@ export default {
           $id: 'date',
           label: '活动时间',
           $el: {
-            type: 'datetime',
+            type: 'daterange',
+            clearable: false,
             placeholder: '请选择'
           },
+          outputFormat: (val) => ({
+            startDate: val[0],
+            endDate: val[1]
+          }),
           rules: [
-            { type: 'date', required: true, message: '请选择日期时间', trigger: 'change' }
+            { type: 'array', required: true, message: '请选择日期时间', trigger: 'change' }
           ]
         }, {
           $type: 'switch',
