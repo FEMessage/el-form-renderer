@@ -152,7 +152,8 @@ export default {
           $el: {
             type: 'daterange',
             clearable: false,
-            placeholder: '请选择'
+            placeholder: '请选择',
+            valueFormat: 'yyyy-MM-dd'
           },
           outputFormat: (val) => ({
             startDate: val[0],
