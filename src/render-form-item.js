@@ -67,7 +67,8 @@ export default {
         on: {
           // 手动更新表单数据
           input: (value) => {
-            this.$emit('updateValue', { id: data.$id, value })
+            const trimVal = data.trim && typeof value === 'string' ? value.trim() : value
+            this.$emit('updateValue', { id: data.$id, value: trimVal })
           }
         }
       }, [

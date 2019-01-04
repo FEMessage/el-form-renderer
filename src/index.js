@@ -148,13 +148,12 @@ export default {
           if (item.$type === GROUP) {
             acc[key] = getValue(values[key], item.$items)
           } else {
-            const trimVal = item.trim && typeof values[key] === 'string' ? values[key].trim() : values[key]
             if (item.outputFormat) {
-              const formatVal = item.outputFormat(clone(trimVal))
+              const formatVal = item.outputFormat(clone(values[key]))
               // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
               isObject(formatVal) ? Object.assign(acc, formatVal) : (acc[key] = formatVal)
             } else {
-              acc[key] = clone(trimVal)
+              acc[key] = clone(values[key])
             }
           }
 
