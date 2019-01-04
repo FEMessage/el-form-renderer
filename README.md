@@ -458,7 +458,7 @@ export default {
 - `$attrs` 可选, 写法与 Vue 的 Render 函数规范保持一致
 - `$el` 用于定义具体原子表单的属性，比如常见的`placeholder`
 - `label` 对应 `el-form-item`上的`label`属性，表单域标签
-- `trim`布尔值，如果为`true`并且对应的值为字符串，则对该字符串执行`trim()`方法
+- `trim`布尔值，如果为`true`或者不传该值并且对应原子的值为字符串，则对该字符串执行`trim()`方法
 - `outputFormat`用于处理输出值，参数为对应组件返回值
 - `rules` 对应 `el-form-item`上的`rules`属性， 用于验证
 
