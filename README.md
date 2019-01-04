@@ -26,7 +26,7 @@
 
 ## Introduction
 
-基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**
+基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，在开源项目[**el-form-renderer**](https://github.com/leezng/el-form-renderer)的基础上二次开发而来
 
 **WHAT**
 
@@ -39,6 +39,10 @@
 ## Feature
 
 #### fork 的版本
+
+##### v.1.2.0
+
+- 添加setOptions方法，支持动态改变options
 
 ##### v1.1.0
 
@@ -437,7 +441,7 @@ export default {
 
 ### 属性
 
-* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。 
+* 支持 [el-form](http://element.eleme.io/#/zh-CN/component/form) 上的所有属性。
 * `disabled` [Boolean] 设置为 `true` 可禁用所有原子表单。`element-ui` 版本如果在 `2.1.0` 以下本渲染器依旧兼容。
 * `content` [ObjectArray] 定义表单的内容，每一个 `Object` 代表一个原子表单(`el-input, el-select, ...`)，一切 `el-form-item` 上的属性都可在此声明，而对于 `el-input` 等之上的属性在 `$el` 属性上进行声明，该 `Object` 上还存在其他属性，例如: `$id`,` $type/component`, `$default`,`$enableWhen`[可选], `$options`[可选], `$attrs`[可选]
 
@@ -454,6 +458,7 @@ export default {
 - `$attrs` 可选, 写法与 Vue 的 Render 函数规范保持一致
 - `$el` 用于定义具体原子表单的属性，比如常见的`placeholder`
 - `label` 对应 `el-form-item`上的`label`属性，表单域标签
+- `outputFormat`用于处理输出值，参数为对应组件返回值
 - `rules` 对应 `el-form-item`上的`rules`属性， 用于验证
 
 content example：
@@ -471,7 +476,7 @@ content example：
   }, {
     $id: "form2",
     $type: "select",
-      
+
     label: "选择框",
     // $el 上用于定义具体原子表单(此处为el-select)的属性
     $el: {
@@ -543,12 +548,12 @@ content example：
 
 * 其他方法:
 
-| 方法名       | 描述                 | 参数                       |
-| ------------ | -------------------- | -------------------------- |
-| getFormValue | 获取当前表单的值     | -                          |
-| updateValue  | 手动更新表单的值     | ({ id: id, value: value }) |
-| updateForm   | 手动批量更新表单的值 | Object                     |
-| setOptions   | 动态设置新的options  | ($id, options)             |
+| 方法名       | 描述                                                         | 参数                       |
+| ------------ | ------------------------------------------------------------ | -------------------------- |
+| getFormValue | 获取当前表单的值                                             | -                          |
+| updateValue  | 手动更新表单的值                                             | ({ id: id, value: value }) |
+| updateForm   | 手动批量更新表单的值                                         | Object                     |
+| setOptions   | 动态设置新的options。第一个参数为要设置的$id，第二个参数为新的options | ($id, options)             |
 
 **[⬆ Back to Top](#table-of-contents)**
 

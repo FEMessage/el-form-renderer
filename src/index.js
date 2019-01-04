@@ -3,8 +3,6 @@ import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
 
-const GROUP = 'group'
-
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
 function clone (data) {
@@ -23,6 +21,10 @@ function clone (data) {
     return data
   }
 }
+
+const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
+
+const GROUP = 'group'
 
 export default {
   render (h) {
@@ -135,7 +137,30 @@ export default {
     },
     // 对外提供获取表单数据的函数
     getFormValue () {
-      return clone(this.value)
+      const getValue = (values, content) => {
+        return Object.keys(values).reduce((acc, key) => {
+          const item = content.find(it => it.$id === key)
+          if (!item) {
+            return acc
+          }
+
+          // 如果类型是group，对值递归处理
+          if (item.$type === GROUP) {
+            acc[key] = getValue(values[key], item.$items)
+          } else {
+            if (item.outputFormat) {
+              const formatVal = item.outputFormat(clone(values[key]))
+              // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
+              isObject(formatVal) ? Object.assign(acc, formatVal) : (acc[key] = formatVal)
+            } else {
+              acc[key] = clone(values[key])
+            }
+          }
+
+          return acc
+        }, {})
+      }
+      return getValue(this.value, this.content)
     },
     /**
      * 批量更新表单数据, TODO， 假设values的数据结构为 {k: obj}, 会把整个 obj 更新至表单; 如果 obj 有多余的字段，getFormValue() 会拿到
