@@ -168,12 +168,14 @@ export default {
      */
     updateForm (values) {
       this.content.forEach(item => {
-        if (values[item.$id] === undefined) {
+        const value = item.inputFormat && item.inputFormat(values) || values[item.$id]
+
+        if (value === undefined) {
           return
         }
         this.updateValue({
           id: item.$id,
-          value: values[item.$id]
+          value: value
         })
       })
     },
