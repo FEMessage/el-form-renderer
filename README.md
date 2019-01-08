@@ -554,8 +554,7 @@ content example：
 | 方法名       | 描述                                                         | 参数                       |
 | ------------ | ------------------------------------------------------------ | -------------------------- |
 | getFormValue | 获取当前表单的值                                             | -                          |
-| updateValue  | 手动更新表单的值（不推荐使用该方法，请使用updateForm代替，v2.0.0将舍弃该方法） | ({ id: id, value: value }) |
-| updateForm   | 手动批量更新表单的值                                         | Object                     |
+| updateForm   | 手动批量更新表单的值                                         | ({$id1: value1, $id2: value2})   |
 | setOptions   | 动态设置新的options。第一个参数为要设置的$id，第二个参数为新的options | ($id, options)             |
 
 **[⬆ Back to Top](#table-of-contents)**
