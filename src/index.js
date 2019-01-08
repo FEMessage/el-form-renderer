@@ -2,7 +2,6 @@ import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
-import _get from 'lodash.get'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -168,24 +167,21 @@ export default {
      * @param  {Object} 要更新的表单数据
      */
     updateForm (values) {
-      const updateValue = (content, path) => {
-        content.forEach(item => {
-          const key = path === undefined ? item.$id : `${path}.${item.$id}`
-          const value = item.inputFormat && item.inputFormat(values) || _get(values, key)
+      const updateValue = content => {
+        return content.reduce((acc, item) => {
+          const value = item.$type === GROUP
+            ? updateValue(item.$items)
+            : (item.inputFormat && item.inputFormat(values) || values[item.$id])
 
-          if (value === undefined) {
-            return
+          if (value !== undefined) {
+            _set(acc, item.$id, value)
           }
 
-          if (item.$type === GROUP) {
-            updateValue(item.$items, key)
-            return
-          }
-
-          _set(this.value, key, value)
-        })
+          return acc
+        }, {})
       }
-      updateValue(this.content)
+
+      this.value = Object.assign({}, this.value, updateValue(this.content))
     },
     setOptions ($id, options) {
       if (!$id || !Array.isArray(options)) {
