@@ -21,3 +21,11 @@ export const toUpperCaseFirst = str => {
 export const isObject = obj => {
   return Object.prototype.toString.call(obj) === '[object Object]'
 }
+
+/**
+ * 判断是否为vue组件对象结构
+ */
+export function isVueOpts (opts) {
+  if (!opts) return false
+  return typeof opts.template === 'string' || typeof opts.render === 'function'
+}

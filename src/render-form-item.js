@@ -1,5 +1,6 @@
 import mixinOptionExtensions from './mixin-package-option'
 import mixinEnableWhen from './mixin-enable-when'
+import resolveComponent from './resolve-component'
 import { toCamelCase, isObject } from './utils'
 
 function validator (data) {
@@ -61,25 +62,28 @@ export default {
       let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type === 'radio-button' ? 'radio-group' : data.$type
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
-      return h(data.component || ('el-' + elType), {
-        attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
-        props,
-        on: {
-          // 手动更新表单数据
-          input: (value) => {
-            // 默认字符串类型处理去空格
-            const trimVal = typeof value === 'string' && (data.trim === undefined || data.trim) ? value.trim() : value
-            this.$emit('updateValue', { id: data.$id, value: trimVal })
+      return h(
+        (data.component && resolveComponent(data)) || ('el-' + elType),
+        {
+          attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
+          props,
+          on: {
+            // 手动更新表单数据
+            input: (value) => {
+              // 默认字符串类型处理去空格
+              const trimVal = typeof value === 'string' && (data.trim === undefined || data.trim) ? value.trim() : value
+              this.$emit('updateValue', { id: data.$id, value: trimVal })
+            }
           }
-        }
-      }, [
-        (() => {
-          let optRenderer = data.$type && this[`${toCamelCase(data.$type)}_opt`]
-          if (typeof optRenderer === 'function' && Array.isArray(this.options)) {
-            return this.options.map(optRenderer)
-          }
-        })()
-      ])
+        }, [
+          (() => {
+            let optRenderer = data.$type && this[`${toCamelCase(data.$type)}_opt`]
+            if (typeof optRenderer === 'function' && Array.isArray(this.options)) {
+              return this.options.map(optRenderer)
+            }
+          })()
+        ]
+      )
     }
   }
 }
