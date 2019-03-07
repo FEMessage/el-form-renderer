@@ -6,11 +6,6 @@
   "contributors": [
     {
       "name": "alvin"
-    },
-    {
-      "name": "evillt",
-      "github": "https://github.com/evillt",
-      "email": "ijoec123@gmail.com"
     }
   ],
   "main": "el-form-renderer.js",
