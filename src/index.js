@@ -51,8 +51,15 @@ export default {
               updateValue: this.updateValue
             }
           }
-          if (item.$type === GROUP) return h('render-form-group', data)
-          else return h('render-form-item', data)
+          return h(
+            'div',
+            [
+              this.$slots[`$id:${item.$id}`],
+              item.$type === GROUP
+                ? h('render-form-group', data)
+                : h('render-form-item', data)
+            ]
+          )
         })
         .concat(this.$slots.default)
     )
