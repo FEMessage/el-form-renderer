@@ -45,7 +45,8 @@ export default {
               value: this.value,
               itemValue: this.value[item.$id],
               disabled: this.disabled,
-              options: this.options[item.$id]
+              options: this.options[item.$id],
+              _parent: this
             },
             on: {
               updateValue: this.updateValue

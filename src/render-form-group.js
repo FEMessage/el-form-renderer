@@ -9,7 +9,8 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
-    options: Object
+    options: Object,
+    _parent: Object
   },
   render (h) {
     return h(
@@ -18,7 +19,7 @@ export default {
         return h(
           'div',
           [
-            this.$parent.$parent.$slots[`$id:${item.$id}`],
+            this._parent.$slots[`$id:${item.$id}`],
             h('render-form-item', {
               props: {
                 key: index,
