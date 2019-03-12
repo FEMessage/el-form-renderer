@@ -46,6 +46,7 @@ export default {
               itemValue: this.value[item.$id],
               disabled: this.disabled,
               options: this.options[item.$id],
+              // _parent 指向el-form, 在render-form-group里有用到
               _parent: this
             },
             on: {
