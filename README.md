@@ -626,6 +626,38 @@ content example：
 ## Slot
 
 * 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
+* 支持具名插槽 `$id:{content.$id}` 于 `$id` 前插入任意内容。
+
+具名插槽示例
+
+```html
+<template>
+  <FormRenderer :content="content">
+    <button slot="$id:age">$id:age</button>
+  </FormRenderer>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      content: [
+        {
+          $id: 'name',
+          label: '名称',
+          $type: 'input'
+        },
+        {
+          $id: 'age',
+          label: '年龄',
+          $type: 'input'
+        }
+      ]
+    }
+  }
+}
+</script>
+```
 
 **[⬆ Back to Top](#table-of-contents)**
 
