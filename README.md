@@ -626,7 +626,7 @@ content example：
 ## Slot
 
 * 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
-* 支持具名插槽 `$id:{content.$id}` 于 `$id` 前插入任意内容。
+* 支持具名插槽 `$id:form-item的id` 于 `$id` 前插入任意内容。
 
 具名插槽示例
 
