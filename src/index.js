@@ -45,14 +45,23 @@ export default {
               value: this.value,
               itemValue: this.value[item.$id],
               disabled: this.disabled,
-              options: this.options[item.$id]
+              options: this.options[item.$id],
+              // _parent 指向el-form, 在render-form-group里有用到
+              _parent: this
             },
             on: {
               updateValue: this.updateValue
             }
           }
-          if (item.$type === GROUP) return h('render-form-group', data)
-          else return h('render-form-item', data)
+          return h(
+            'div',
+            [
+              this.$slots[`$id:${item.$id}`],
+              item.$type === GROUP
+                ? h('render-form-group', data)
+                : h('render-form-item', data)
+            ]
+          )
         })
         .concat(this.$slots.default)
     )

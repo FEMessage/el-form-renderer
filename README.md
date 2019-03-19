@@ -631,6 +631,42 @@ content example：
 ## Slot
 
 * 支持通过默认 `slot` 往表单尾部插入自定义 `VNode`。
+* 支持具名插槽 `$id:form-item的id` 于 `$id` 前插入任意内容。
+
+具名插槽示例
+
+```html
+<template>
+  <el-form-renderer :content="content">
+    <button slot="$id:age">a button insert before age</button>
+  </el-form-renderer>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      content: [
+        {
+          $id: 'name',
+          label: '名称',
+          $type: 'input'
+        },
+        {
+          $id: 'age',
+          label: '年龄',
+          $type: 'input'
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
+展示效果:
+
+![image-20190319195020391](./assets/image-20190319195020391.png)
 
 **[⬆ Back to Top](#table-of-contents)**
 
