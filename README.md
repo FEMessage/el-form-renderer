@@ -1,10 +1,5 @@
 # el-form-renderer
 
-[![NPM Download](https://img.shields.io/npm/dm/@femessage/el-form-renderer.svg)](https://www.npmjs.com/package/@femessage/el-form-renderer)
-[![NPM Version](https://img.shields.io/npm/v/@femessage/el-form-renderer.svg)](https://www.npmjs.com/package/@femessage/el-form-renderer)
-[![NPM License](https://img.shields.io/npm/l/@femessage/el-form-renderer.svg)](https://github.com/FEMessage/el-form-renderer/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
-
 ![12月-18-2018 20-14-26](./assets/form.gif)
 
 ## Table of Contents
@@ -24,6 +19,7 @@
    - **[updateFormValue](#updateFormValue)**
    - **[format](#format)**
    - **[nextTick](#nextTick)**
+   - **[atChange](#atChange)**
 6. **[Props](#props)**
 7. **[Methods](#methods)**
 8. **[Slot](#slot)**
@@ -504,6 +500,64 @@ export default {
 
 ![image-20181211175701822](./assets/image-20181211175701822.png)
 
+### atChange
+
+```html
+<template>
+  <el-form-renderer ref="form" :content="content"></el-form-renderer>
+</template>
+
+<script>
+const toyOpts = {
+  xiaoming: '小明喜欢钢铁侠',
+  xiaohong: '小红喜欢芭比娃娃'
+}
+
+export default {
+  data() {
+    return {
+      content: [
+        {
+          $type: 'select',
+          $id: 'name',
+          label: '名字',
+          $options: [
+            {
+              label: '小明',
+              value: 'xiaoming'
+            },
+            {
+              label: '小红',
+              value: 'xiaohong'
+            }
+          ],
+          atChange: (id, val) => {
+            this.$refs.form.updateValue({
+              id: 'confession',
+              value: toyOpts[val]
+            })
+          }
+        },
+        {
+          label: '告白',
+          $type: 'input',
+          $id: 'confession',
+          $el: {
+            disabled: true
+          }
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
+展示效果:
+
+![](./assets/atChange-20190319201639.png)
+![](./assets/atChange-20190319201711.png)
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## Props
@@ -529,9 +583,9 @@ export default {
 - `label` 对应 `el-form-item`上的`label`属性，表单域标签
 - `trim`布尔值，如果为`true`，则对该字符串执行`trim()`方法。默认为`true`
 - `inputFormat`用于处理输入值，辅助`updateForm`进行对应值更新，参数为`updateForm`传入的对象
-
 - `outputFormat`用于处理输出值，参数为对应组件返回值
 - `rules` 对应 `el-form-item`上的`rules`属性， 用于验证
+- `atChange`: `(id, value) => void` 当前表单值更新时触发, 入参分别为当前修改的`id:$id`和`值:value`
 
 content example：
 
@@ -561,7 +615,10 @@ content example：
     }, {
       label: '区域二',
       value: 'beijing'
-    }]
+    }],
+    atChange: (id, value) => {
+      // ...
+    }
   }
 ]
 ```
