@@ -632,9 +632,9 @@ content example：
 
 ```html
 <template>
-  <FormRenderer :content="content">
-    <button slot="$id:age">$id:age</button>
-  </FormRenderer>
+  <el-form-renderer :content="content">
+    <button slot="$id:age">a button insert before age</button>
+  </el-form-renderer>
 </template>
 
 <script>
