@@ -560,8 +560,7 @@ export default {
 
 展示效果:
 
-![](./assets/atChange-20190320103120.png)
-![](./assets/atChange-20190320103137.png)
+![](./assets/atChange.gif)
 
 **[⬆ Back to Top](#table-of-contents)**
 
