@@ -513,9 +513,9 @@ export default {
 </template>
 
 <script>
-const toyOpts = {
-  xiaoming: '小明喜欢钢铁侠',
-  xiaohong: '小红喜欢芭比娃娃'
+const fullNameOpts = {
+  xiaoming: '小明',
+  xiaohong: '小红'
 }
 
 export default {
@@ -538,15 +538,15 @@ export default {
           ],
           atChange: (id, val) => {
             this.$refs.form.updateValue({
-              id: 'confession',
-              value: toyOpts[val]
+              id: 'fullName',
+              value: `当前选择是:${fullNameOpts[val]}`
             })
           }
         },
         {
-          label: '告白',
+          label: '全称',
           $type: 'input',
-          $id: 'confession',
+          $id: 'fullName',
           $el: {
             disabled: true
           }
