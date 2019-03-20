@@ -24,6 +24,7 @@
    - **[updateFormValue](#updateFormValue)**
    - **[format](#format)**
    - **[nextTick](#nextTick)**
+   - **[atChange](#atChange)**
 6. **[Props](#props)**
 7. **[Methods](#methods)**
 8. **[Slot](#slot)**
@@ -504,6 +505,63 @@ export default {
 
 ![image-20181211175701822](./assets/image-20181211175701822.png)
 
+### atChange
+
+```html
+<template>
+  <el-form-renderer ref="form" :content="content"></el-form-renderer>
+</template>
+
+<script>
+const fullNameOpts = {
+  xiaoming: '小明',
+  xiaohong: '小红'
+}
+
+export default {
+  data() {
+    return {
+      content: [
+        {
+          $type: 'select',
+          $id: 'name',
+          label: '名字',
+          $options: [
+            {
+              label: '小明',
+              value: 'xiaoming'
+            },
+            {
+              label: '小红',
+              value: 'xiaohong'
+            }
+          ],
+          atChange: (id, val) => {
+            this.$refs.form.updateValue({
+              id: 'fullName',
+              value: `当前选择是:${fullNameOpts[val]}`
+            })
+          }
+        },
+        {
+          label: '全称',
+          $type: 'input',
+          $id: 'fullName',
+          $el: {
+            disabled: true
+          }
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
+展示效果:
+
+![](https://i.screenshot.net/7x0rvbo)
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## Props
@@ -529,9 +587,9 @@ export default {
 - `label` 对应 `el-form-item`上的`label`属性，表单域标签
 - `trim`布尔值，如果为`true`，则对该字符串执行`trim()`方法。默认为`true`
 - `inputFormat`用于处理输入值，辅助`updateForm`进行对应值更新，参数为`updateForm`传入的对象
-
 - `outputFormat`用于处理输出值，参数为对应组件返回值
 - `rules` 对应 `el-form-item`上的`rules`属性， 用于验证
+- `atChange`: `(id, value) => void` 当前表单值更新时触发, 入参分别为当前修改的`id:$id`和`值:value`
 
 content example：
 
@@ -561,7 +619,10 @@ content example：
     }, {
       label: '区域二',
       value: 'beijing'
-    }]
+    }],
+    atChange: (id, value) => {
+      // ...
+    }
   }
 ]
 ```

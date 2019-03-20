@@ -70,6 +70,10 @@ export default {
             // 默认字符串类型处理去空格
             const trimVal = typeof value === 'string' && (data.trim === undefined || data.trim) ? value.trim() : value
             this.$emit('updateValue', { id: data.$id, value: trimVal })
+            // 更新表单时调用
+            if (typeof data.atChange === 'function') {
+              data.atChange(data.$id, trimVal)
+            }
           }
         }
       }, [
