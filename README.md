@@ -560,7 +560,7 @@ export default {
 
 展示效果:
 
-![](./assets/atChange.gif)
+![](https://deepexi-moby.oss-cn-shenzhen.aliyuncs.com/atChange.gif)
 
 **[⬆ Back to Top](#table-of-contents)**
 
