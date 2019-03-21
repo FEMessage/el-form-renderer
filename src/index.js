@@ -55,6 +55,11 @@ export default {
           }
           return h(
             'div',
+            {
+              style: {
+                display: this.inline ? 'inline-block' : 'initial'
+              }
+            },
             [
               this.$slots[`$id:${item.$id}`],
               item.$type === GROUP
