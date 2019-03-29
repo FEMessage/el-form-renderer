@@ -53,20 +53,12 @@ export default {
               updateValue: this.updateValue
             }
           }
-          return h(
-            'div',
-            {
-              style: {
-                display: this.inline ? 'inline-block' : 'initial'
-              }
-            },
-            [
-              this.$slots[`$id:${item.$id}`],
-              item.$type === GROUP
-                ? h('render-form-group', data)
-                : h('render-form-item', data)
-            ]
-          )
+          return [
+            this.$slots[`$id:${item.$id}`],
+            item.$type === GROUP
+              ? h('render-form-group', data)
+              : h('render-form-item', data)
+          ]
         })
         .concat(this.$slots.default)
     )
