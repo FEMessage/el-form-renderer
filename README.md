@@ -21,6 +21,7 @@
    - **[date-picker](#date-picker)**
    - **[component](#component)**
    - **[rules](#rules)**
+   - **[updateForm](#updateForm)**
    - **[format](#format)**
    - **[nextTick](#nextTick)**
    - **[atChange](#atChange)**
@@ -332,6 +333,69 @@ export default {
 展示效果：
 
 ![image-20181221163020715](./assets/image-20181221163020715.png)
+
+### updateForm
+
+```html
+<template>
+  <div class="update-form">
+    <el-form-renderer :content="content" inline ref="formRender">
+      <el-button @click="setValue">设置名字</el-button>
+      <el-button type="primary" @click="getValue">获取数据</el-button>
+    </el-form-renderer>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'update-form',
+    data() {
+      return {
+        content: [
+          {
+            $id: 'name',
+            $type: 'input',
+            label: '姓名',
+            $el: {
+              placeholder: '请输入'
+            }
+          },
+          {
+            $id: 'area',
+            $type: 'select',
+            label: '选择框',
+            $el: {
+              placeholder: '请选择内容'
+            },
+            $options: [{
+              label: '区域一',
+              value: 'shanghai'
+            }, {
+              label: '区域二',
+              value: 'beijing'
+            }]
+          }
+        ]
+      }
+    },
+    methods: {
+      getValue () {
+        const value = this.$refs.formRender.getFormValue()
+        console.log(value)  // 输出为对应$id 和值组成的对象
+      },
+      setValue () {
+        this.$refs.formRender.updateForm({
+          name: 'alvin'
+        })
+      }
+    }
+  }
+</script>
+```
+
+展示效果：
+
+![](https://i.screenshot.net/8ed0lty)
 
 ### format
 
