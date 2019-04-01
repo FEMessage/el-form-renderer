@@ -76,13 +76,13 @@
 
 ## Quick start
 
-```vue
-// Step1 确认你已经正确安装并使用了 element-ui
+```html
+<!-- Step1 确认你已经正确安装并使用了 element-ui -->
 
-// Step2 安装
-yarn add @femessage/el-form-renderer
+<!-- Step2 安装 -->
+<!-- yarn add @femessage/el-form-renderer -->
 
-// Step3 在需要使用该渲染器的 .vue 文件中
+<!-- Step3 在需要使用该渲染器的 .vue 文件中 -->
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
@@ -108,7 +108,7 @@ export default {
 
 以下例子，如果没有指定template，则统一为：
 
-```vue
+```html
 <template>
   <el-form-renderer :content="content" inline></el-form-renderer>
 </template>
@@ -178,7 +178,7 @@ export default {
 
 ## select style
 
-```vue
+```js
 export default {
   name: 'select-example',
   data() {
@@ -302,7 +302,7 @@ export default {
 
 ### rules
 
-```vue
+```js
 export default {
   name: 'rule-example',
   data() {
@@ -399,7 +399,7 @@ export default {
 
 ### format
 
-```vue
+```html
 <template>
   <div class="format">
     <el-form-renderer :content="content" inline ref="formRender">
@@ -458,7 +458,7 @@ export default {
 
 ### nextTick
 
-```vue
+```html
 <template>
   <div class="nextTick">
     <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
