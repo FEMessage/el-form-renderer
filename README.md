@@ -21,7 +21,7 @@
    - **[date-picker](#date-picker)**
    - **[component](#component)**
    - **[rules](#rules)**
-   - **[updateFormValue](#updateFormValue)**
+   - **[updateForm](#updateForm)**
    - **[format](#format)**
    - **[nextTick](#nextTick)**
    - **[atChange](#atChange)**
@@ -76,13 +76,13 @@
 
 ## Quick start
 
-```vue
-// Step1 确认你已经正确安装并使用了 element-ui
+```html
+<!-- Step1 确认你已经正确安装并使用了 element-ui -->
 
-// Step2 安装
-yarn add @femessage/el-form-renderer
+<!-- Step2 安装 -->
+<!-- yarn add @femessage/el-form-renderer -->
 
-// Step3 在需要使用该渲染器的 .vue 文件中
+<!-- Step3 在需要使用该渲染器的 .vue 文件中 -->
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
@@ -108,7 +108,7 @@ export default {
 
 以下例子，如果没有指定template，则统一为：
 
-```vue
+```html
 <template>
   <el-form-renderer :content="content" inline></el-form-renderer>
 </template>
@@ -178,7 +178,7 @@ export default {
 
 ## select style
 
-```vue
+```js
 export default {
   name: 'select-example',
   data() {
@@ -302,7 +302,7 @@ export default {
 
 ### rules
 
-```vue
+```js
 export default {
   name: 'rule-example',
   data() {
@@ -334,11 +334,11 @@ export default {
 
 ![image-20181221163020715](./assets/image-20181221163020715.png)
 
-### updateFormValue
+### updateForm
 
-```vue
+```html
 <template>
-  <div class="update-form-value">
+  <div class="update-form">
     <el-form-renderer :content="content" inline ref="formRender">
       <el-button @click="setValue">设置名字</el-button>
       <el-button type="primary" @click="getValue">获取数据</el-button>
@@ -348,7 +348,7 @@ export default {
 
 <script>
   export default {
-    name: 'update-form-value',
+    name: 'update-form',
     data() {
       return {
         content: [
@@ -384,9 +384,8 @@ export default {
         console.log(value)  // 输出为对应$id 和值组成的对象
       },
       setValue () {
-        this.$refs.formRender.updateValue({
-          id: 'name',
-          value: 'alvin'
+        this.$refs.formRender.updateForm({
+          name: 'alvin'
         })
       }
     }
@@ -396,11 +395,11 @@ export default {
 
 展示效果：
 
-![image-20181211174208994](./assets/image-20181211174208994.png)
+![](https://i.screenshot.net/8ed0lty)
 
 ### format
 
-```vue
+```html
 <template>
   <div class="format">
     <el-form-renderer :content="content" inline ref="formRender">
@@ -459,7 +458,7 @@ export default {
 
 ### nextTick
 
-```vue
+```html
 <template>
   <div class="nextTick">
     <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
@@ -537,9 +536,8 @@ export default {
             }
           ],
           atChange: (id, val) => {
-            this.$refs.form.updateValue({
-              id: 'fullName',
-              value: `当前选择是:${fullNameOpts[val]}`
+            this.$refs.form.updateForm({
+              fullName: `当前选择是:${fullNameOpts[val]}`
             })
           }
         },
