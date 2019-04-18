@@ -1,38 +1,11 @@
 language: node_js
 node_js:
-  - "7"
-
-cache:
-  directories:
-    - "node_modules"
-
-install:
-  - npm i
-  - npm install element-ui@2
-  - npm install vue@2
-
-stages:
-  - lint
-  - name: gh_pages
-    if: branch = master
-
-jobs:
-  include:
-    - stage: lint
-      script: npm run lint
-    - stage: gh_pages
-      script: npm run build
-      after_script:
-        - cd ./example-dist
-        - git init
-        - git remote add origin "https://${GH_TOKEN}@${GH_REF}"
-        - git checkout -b gh-pages
-        - git config user.name "leezng"
-        - git config user.email "im.leezng@gmail.com"
-        - git add .
-        - git commit -m "update example page"
-        - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
-
-env:
-  global:
-    - GH_REF: github.com/leezng/el-form-renderer.git
+- lts/*
+git:
+  depth: 3
+deploy:
+  on:
+    branch: master
+  provider: npm
+  email: levy9527@qq.com
+  # api_key: travis encrypt YOUR_AUTH_TOKEN --add deploy.api_key --com
