@@ -26,7 +26,7 @@ module.exports = {
       sections: demoSections
     }
   ],
-  require: ['./config/element.js', './config/upload-to-ali.js'],
+  require: ['./styleguidist/element.js', './styleguidist/upload-to-ali.js'],
   webpackConfig: {
     module: {
       rules: [
