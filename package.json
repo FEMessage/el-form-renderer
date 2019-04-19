@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:FEMessage/el-form-renderer.git"
+    "url": "https://github.com/FEMessage/el-form-renderer.git"
   },
   "homepage": "https://github.com/FEMessage/el-form-renderer",
   "keywords": ["vue", "element", "render", "form", "component"],
