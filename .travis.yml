@@ -3,9 +3,21 @@ node_js:
 - lts/*
 git:
   depth: 3
+install:
+- yarn --frozen-lockfile
+script:
+- yarn build
+cache: yarn
 deploy:
-  on:
+- on:
+    branch: master
+  provider: pages
+  skip-cleanup: true
+  keep-history: true
+  local-dir: docs
+  github-token: $GITHUB_TOKEN
+- on:
     branch: master
   provider: npm
   email: levy9527@qq.com
-  # api_key: travis encrypt YOUR_AUTH_TOKEN --add deploy.api_key --com
+  api_key: $NPM_TOKEN
