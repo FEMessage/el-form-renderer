@@ -5,7 +5,7 @@ import _set from 'lodash.set'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
-function clone (data) {
+function clone(data) {
   if (Array.isArray(data)) {
     return data.map(clone)
   } else if (data && typeof data === 'object') {
@@ -22,15 +22,18 @@ function clone (data) {
   }
 }
 
-const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
+const isObject = obj =>
+  Object.prototype.toString.call(obj) === '[object Object]'
 
 const GROUP = 'group'
 
 export default {
-  render (h) {
+  name: 'ElFormRenderer',
+  render(h) {
     this.content.forEach(this.initItemValue) // handle default value
     return h(
-      'el-form', {
+      'el-form',
+      {
         props: Object.assign({}, this._props, {
           model: this.value // 用于校验
         }),
@@ -67,10 +70,10 @@ export default {
     RenderFormItem,
     RenderFormGroup
   },
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       // proxy
-      Object.keys(Form.methods).forEach((item) => {
+      Object.keys(Form.methods).forEach(item => {
         this[item] = this.$refs.elForm[item]
       })
     })
@@ -86,23 +89,24 @@ export default {
       default: false
     }
   }),
-  data () {
+  data() {
     return {
       value: {}, // 表单数据对象
       options: this.content.reduce((con, item) => {
-        con[item.$id] = item.$type === GROUP
-          ? item.$items.reduce((acc, cur) => {
-            acc[cur.$id] = cur.$options || []
-            return acc
-          }, {})
-          : (item.$options || [])
+        con[item.$id] =
+          item.$type === GROUP
+            ? item.$items.reduce((acc, cur) => {
+                acc[cur.$id] = cur.$options || []
+                return acc
+              }, {})
+            : item.$options || []
         return con
       }, {})
     }
   },
   watch: {
     content: {
-      handler (newVal) {
+      handler(newVal) {
         if (!newVal.length) {
           return
         }
@@ -116,7 +120,7 @@ export default {
      * 初始化每个表单原子的默认值
      * @param  {Object} item 表单原子描述
      */
-    initItemValue (item) {
+    initItemValue(item) {
       if (!item.$id || this.value[item.$id] !== undefined) return
       let defaultVal
       if (item.$type === GROUP) {
@@ -129,20 +133,24 @@ export default {
         // not group
         defaultVal = item.$default
       }
-      defaultVal !== undefined && this.updateValue({ id: item.$id, value: defaultVal })
+      defaultVal !== undefined &&
+        this.updateValue({id: item.$id, value: defaultVal})
     },
     /**
      * 更新表单数据
      * @param  {String} options.id 表单ID
      * @param  {All} options.value 表单数据
      */
-    updateValue ({ id, value }) {
+    updateValue({id, value}) {
       this.value = Object.assign({}, this.value, {
         [id]: value
       })
     },
-    // 对外提供获取表单数据的函数
-    getFormValue () {
+    /**
+     * 对外提供获取表单数据的函数
+     * @public
+     */
+    getFormValue() {
       const getValue = (values, content) => {
         return Object.keys(values).reduce((acc, key) => {
           const item = content.find(it => it.$id === key)
@@ -157,7 +165,9 @@ export default {
             if (item.outputFormat) {
               const formatVal = item.outputFormat(clone(values[key]))
               // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
-              isObject(formatVal) ? Object.assign(acc, formatVal) : (acc[key] = formatVal)
+              isObject(formatVal)
+                ? Object.assign(acc, formatVal)
+                : (acc[key] = formatVal)
             } else {
               acc[key] = clone(values[key])
             }
@@ -170,14 +180,17 @@ export default {
     },
     /**
      * 批量更新表单数据
-     * @param  {Object} 要更新的表单数据
+     * @param {Object} 要更新的表单数据
+     * @public
      */
-    updateForm (values) {
+    updateForm(values) {
       const updateValue = content => {
         return content.reduce((acc, item) => {
-          const value = item.$type === GROUP
-            ? updateValue(item.$items)
-            : (item.inputFormat && item.inputFormat(values) || values[item.$id])
+          const value =
+            item.$type === GROUP
+              ? updateValue(item.$items)
+              : (item.inputFormat && item.inputFormat(values)) ||
+                values[item.$id]
 
           if (value !== undefined) {
             _set(acc, item.$id, value)
@@ -189,13 +202,19 @@ export default {
 
       this.value = Object.assign({}, this.value, updateValue(this.content))
     },
-    setOptions ($id, options) {
+    /**
+     * 动态设置新的options
+     * @param {String} 表单id
+     * @param {Array} 新选项
+     * @public
+     */
+    setOptions($id, options) {
       if (!$id || !Array.isArray(options)) {
         return
       }
       _set(this.options, $id, options)
     },
-    updateOptions (content, options) {
+    updateOptions(content, options) {
       content.forEach(item => {
         if (item.$type !== GROUP && options[item.$id]) {
           return
