@@ -1,6 +1,6 @@
 {
   "name": "@femessage/el-form-renderer",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "render form-item easily",
   "author": "leezng <leezng@outlook.com>",
   "license": "MIT",
@@ -8,11 +8,7 @@
     "type": "git",
     "url": "https://github.com/FEMessage/el-form-renderer.git"
   },
-  "contributors": [
-    {
-      "name": "alvin"
-    }
-  ],
+  "contributors": ["https://github.com/FEMessage"],
   "keywords": ["vue", "element", "render", "form", "component"],
   "files": ["src", "dist", "yarn.lock"],
   "main": "dist/el-form-renderer.umd.js",
