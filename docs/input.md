@@ -2,12 +2,11 @@
 
 ```vue
 <template>
-  <el-form-renderer :content="content" inline></el-form-renderer>
+  <el-form-renderer :content="content" inline />
 </template>
 
 <script>
 export default {
-  name: 'input',
   data() {
     return {
       content: [
