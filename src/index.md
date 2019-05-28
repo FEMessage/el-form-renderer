@@ -30,6 +30,21 @@ export default {
 }
 
 /**
+ * typescript小知识
+ */
+interface obj { // 定义了一个对象类型obj，拥有以下属性
+  a: string // 属性a是string类型
+  b?: string // 属性b是string类型，可选
+  c = true //  属性c是boolean类型，可选，默认值为true
+  d: string[] // 属性d是数组类型，每一项都是string类型
+  e: any // 属性e可以是任何类型
+  f: (a: number) => void // 属性f是函数类型，接受一个number类型参数a，不返回任何值
+  g: object | string // 属性g可以是object类型或者是string类型
+  h: Vue // 属性h是Vue的实例
+  i: {a: number, b: any} // 属性i是对象类型，有a、b两个属性
+}
+
+/**
  * 表单项的定义
  * 一切 el-form-item上的属性都可在此声明，而对于表单组件本身的属性在$el属性上声明
  */
@@ -48,7 +63,7 @@ interface Content {
    */
   $items: Content[]
 
-  $default?: any // 默认值
+  $default?: any // 默认值，可选
 
   /**
    * 传入一个对象，key为属性路径，value为指定值，校验通过则显示该表单项
@@ -73,7 +88,7 @@ interface Content {
   component?: Vue
 
   label?: string // 对应el-form-item上的label属性，表单域标签
-  trim = true // 可选boolean，为true则对该字符串执行trim()方法
+  trim = true // 可选boolean，为true则对该字符串执行trim()方法，默认值为true
 
   // 用于处理输入值，辅助updateForm进行对应值更新，参数为updateForm传入的对象
   inputFormat?: (obj: any) => any
