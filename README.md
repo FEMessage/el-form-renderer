@@ -13,14 +13,8 @@
 
 * [Introduction](#introduction)
 * [Feature](#feature)
-  * [Fork 的版本](#fork-的版本)
-    * [v.1.3.0](#v130)
-    * [v.1.2.0](#v120)
-    * [v1.1.0](#v110)
-  * [原版本](#原版本)
 * [Demo](#demo)
 * [Quick start](#quick-start)
-* [Redev](#redev)
 * [License](#license)
 * [Contributors](#contributors)
 
@@ -38,26 +32,11 @@
 
 ## Feature
 
-### Fork 的版本
-
-#### v.1.3.0
-
-* content 添加 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
-
-#### v.1.2.0
-
-* 添加 setOptions 方法，支持动态改变 options
-
-#### v1.1.0
-
-* 支持局部注册组件
+* 只需进行简单的配置，即可实现常用表单功能
 * 支持使用自定义组件
 * 批量更新数据 updateForm
-
-### 原版本
-
-* 完整继承了 element 的 form 表单属性
-* 只需进行简单的配置，即可实现常用表单功能
+* 支持 setOptions 方法，支持动态改变 select 的 options
+* content 支持 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
 
 **[⬆ Back to Top](#table-of-contents)**
 
@@ -98,36 +77,6 @@ export default {
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## Redev
-
-install dependency
-
-```sh
-yarn
-
-yarn add element-ui -P
-```
-
-run dev server
-
-```sh
-yarn dev
-```
-
-publish to npm
-
-```sh
-npm version
-
-yarn dist
-
-cd dist
-
-npm publish --access public
-```
-
-**[⬆ Back to Top](#table-of-contents)**
-
 ## License
 
 [MIT](./LICENSE)
@@ -141,7 +90,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/Alvin-Liu"><img src="https://avatars0.githubusercontent.com/u/11909145?v=4" width="100px;" alt="Alvin"/><br /><sub><b>Alvin</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=Alvin-Liu" title="Code">💻</a> <a href="#review-Alvin-Liu" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3AAlvin-Liu" title="Bug reports">🐛</a> <a href="#blog-Alvin-Liu" title="Blogposts">📝</a> <a href="#ideas-Alvin-Liu" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="http://levy.work"><img src="https://avatars3.githubusercontent.com/u/9384365?v=4" width="100px;" alt="levy"/><br /><sub><b>levy</b></sub></a><br /><a href="#review-levy9527" title="Reviewed Pull Requests">👀</a> <a href="#infra-levy9527" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-levy9527" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://evila.me"><img src="https://avatars3.githubusercontent.com/u/19513289?v=4" width="100px;" alt="EVILLT"/><br /><sub><b>EVILLT</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=evillt" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3Aevillt" title="Bug reports">🐛</a> <a href="#blog-evillt" title="Blogposts">📝</a> <a href="#ideas-evillt" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/Alvin-Liu"><img src="https://avatars0.githubusercontent.com/u/11909145?v=4" width="100px;" alt="Alvin"/><br /><sub><b>Alvin</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=Alvin-Liu" title="Code">💻</a> <a href="#review-Alvin-Liu" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3AAlvin-Liu" title="Bug reports">🐛</a> <a href="#blog-Alvin-Liu" title="Blogposts">📝</a> <a href="#ideas-Alvin-Liu" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="http://levy.work"><img src="https://avatars3.githubusercontent.com/u/9384365?v=4" width="100px;" alt="levy"/><br /><sub><b>levy</b></sub></a><br /><a href="#review-levy9527" title="Reviewed Pull Requests">👀</a> <a href="#infra-levy9527" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-levy9527" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://evila.me"><img src="https://avatars3.githubusercontent.com/u/19513289?v=4" width="100px;" alt="EVILLT"/><br /><sub><b>EVILLT</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=evillt" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3Aevillt" title="Bug reports">🐛</a> <a href="#blog-evillt" title="Blogposts">📝</a> <a href="#ideas-evillt" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://donaldshen.github.io/portfolio"><img src="https://avatars3.githubusercontent.com/u/19591950?v=4" width="100px;" alt="Donald Shen"/><br /><sub><b>Donald Shen</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=donaldshen" title="Documentation">📖</a> <a href="#example-donaldshen" title="Examples">💡</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
