@@ -9,30 +9,28 @@
 
 ![12月-18-2018 20-14-26](./assets/form.gif)
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
-1.  **[Introduction](#introduction)**
-2.  **[Feature](#feature)**
-3.  **[Demo](#demo)**
-4.  **[Quick start](#quick-start)**
-5.  **[Example](#example)**
-    * **[input](#input)**
-    * **[select](#select)**
-    * **[select style](#select-style)**
-    * **[radio-group](#radio-group)**
-    * **[date-picker](#date-picker)**
-    * **[component](#component)**
-    * **[rules](#rules)**
-    * **[updateForm](#updateForm)**
-    * **[format](#format)**
-    * **[nextTick](#nextTick)**
-    * **[atChange](#atChange)**
-6.  **[Props](#props)**
-7.  **[Methods](#methods)**
-8.  **[Slot](#slot)**
-9.  **[Redev](#redev)**
-10. **[License](#license)**
-11. **[Contributors](#contributors)**
+* [Introduction](#introduction)
+* [Feature](#feature)
+  * [Fork 的版本](#fork-的版本)
+    * [v.1.3.0](#v130)
+    * [v.1.2.0](#v120)
+    * [v1.1.0](#v110)
+  * [原版本](#原版本)
+* [Demo](#demo)
+* [Quick start](#quick-start)
+* [Props](#props)
+  * [属性](#属性)
+  * [content](#content)
+  * [特殊属性说明](#特殊属性说明)
+    * [$type: 'group'](#type-group)
+    * [component](#component)
+* [Methods](#methods)
+* [Slot](#slot)
+* [Redev](#redev)
+* [License](#license)
+* [Contributors](#contributors)
 
 ## Introduction
 
@@ -48,23 +46,23 @@
 
 ## Feature
 
-#### fork 的版本
+### Fork 的版本
 
-##### v.1.3.0
+#### v.1.3.0
 
 * content 添加 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
 
-##### v.1.2.0
+#### v.1.2.0
 
 * 添加 setOptions 方法，支持动态改变 options
 
-##### v1.1.0
+#### v1.1.0
 
 * 支持局部注册组件
 * 支持使用自定义组件
 * 批量更新数据 updateForm
 
-#### 原版本
+### 原版本
 
 * 完整继承了 element 的 form 表单属性
 * 只需进行简单的配置，即可实现常用表单功能
@@ -105,466 +103,6 @@ export default {
 }
 </script>
 ```
-
-**[⬆ Back to Top](#table-of-contents)**
-
-## Example
-
-以下例子，如果没有指定 template，则统一为：
-
-```html
-<template>
-  <el-form-renderer :content="content" inline></el-form-renderer>
-</template>
-```
-
-### input
-
-```js
-export default {
-  name: 'input-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'name',
-          $type: 'input',
-          label: '姓名',
-          $default: 'alvin',
-          $el: {
-            placeholder: '请输入'
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181211170318736](./assets/image-20181211170318736.png)
-
-### select
-
-```js
-export default {
-  name: 'select-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'area',
-          $type: 'select',
-          label: '选择框',
-          $el: {
-            placeholder: '请选择内容'
-          },
-          $options: [
-            {
-              label: '区域一',
-              value: 'shanghai'
-            },
-            {
-              label: '区域二',
-              value: 'beijing'
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181211165959102](./assets/image-20181211165959102.png)
-
-## select style
-
-```js
-export default {
-  name: 'select-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'area',
-          $type: 'select',
-          label: '选择框',
-          $el: {
-            placeholder: '请选择内容',
-            style: 'width: 100%' // select 占据 100% 宽度
-          },
-          $options: [
-            {
-              label: '区域一',
-              value: 'shanghai'
-            },
-            {
-              label: '区域二',
-              value: 'beijing'
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181221194652643](./assets/image-20181221194652643.png)
-
-### radio-group
-
-```js
-export default {
-  name: 'radio-group-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'city',
-          $type: 'radio-group',
-          label: '城市',
-          $el: {
-            placeholder: '请输入'
-          },
-          $default: '广州',
-          $options: [
-            // 注意：element radio-group 通过 label 而不是 value 来匹配值
-            {label: '上海'},
-            {label: '北京'},
-            {label: '广州'},
-            {label: '深圳'}
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181211171344921](./assets/image-20181211171344921.png)
-
-### date-picker
-
-```js
-export default {
-  name: 'date-picker-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'date',
-          $type: 'date-picker',
-          label: '日期',
-          $el: {
-            // type: 'daterange',   // 如果 type 为 daterange，则获取到的是一个数组
-            placeholder: '请选择',
-            valueFormat: 'timestamp' // 不使用 value-format 属性，则获取到的是一个空对象，格式请参考 element-ui 组件 date-picker 的日期格式部分
-          }
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181211171719502](./assets/image-20181211171719502.png)
-
-### component
-
-```js
-// https://github.com/FEMessage/upload-to-ali
-
-import UploadToAli from 'upload-to-ali'
-export default {
-  name: 'upload-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'avatar',
-          component: UploadToAli,
-          label: '头像'
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181211172910592](./assets/image-20181211172910592.png)
-
-### rules
-
-```js
-export default {
-  name: 'rule-example',
-  data() {
-    return {
-      content: [
-        {
-          $id: 'name',
-          $type: 'input',
-          label: '姓名',
-          $el: {
-            placeholder: '请输入'
-          },
-          rules: [
-            {
-              required: true,
-              message: '请输入姓名',
-              trigger: 'change',
-              whitespace: true // 不能仅包含空格
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-展示效果：
-
-![image-20181221163020715](./assets/image-20181221163020715.png)
-
-### updateForm
-
-```html
-<template>
-  <div class="update-form">
-    <el-form-renderer :content="content" inline ref="formRender">
-      <el-button @click="setValue">设置名字</el-button>
-      <el-button type="primary" @click="getValue">获取数据</el-button>
-    </el-form-renderer>
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'update-form',
-    data() {
-      return {
-        content: [
-          {
-            $id: 'name',
-            $type: 'input',
-            label: '姓名',
-            $el: {
-              placeholder: '请输入'
-            }
-          },
-          {
-            $id: 'area',
-            $type: 'select',
-            label: '选择框',
-            $el: {
-              placeholder: '请选择内容'
-            },
-            $options: [{
-              label: '区域一',
-              value: 'shanghai'
-            }, {
-              label: '区域二',
-              value: 'beijing'
-            }]
-          }
-        ]
-      }
-    },
-    methods: {
-      getValue () {
-        const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应$id 和值组成的对象
-      },
-      setValue () {
-        this.$refs.formRender.updateForm({
-          name: 'alvin'
-        })
-      }
-    }
-  }
-</script>
-```
-
-展示效果：
-
-![](https://i.screenshot.net/8ed0lty)
-
-### format
-
-```html
-<template>
-  <div class="format">
-    <el-form-renderer :content="content" inline ref="formRender">
-      <el-button @click="setValue">设置</el-button>
-      <el-button type="primary" @click="getValue">获取数据</el-button>
-    </el-form-renderer>
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'format',
-    data() {
-      return {
-        content: [
-          {
-            $el: {
-              type: 'daterange',
-              placeholder: '选择日期',
-              valueFormat: 'yyyy-MM-dd'
-            },
-            $type: 'date-picker',
-            $id: 'date',
-            label: '日期',
-            inputFormat: (row) => {
-              return [row.startDate, row.endDate]
-            },
-            outputFormat: (val) => {
-              if (!val) {
-                return {startDate: '', endDate: ''}
-              }
-              return {
-                startDate: val[0],
-                endDate: val[1]
-              }
-            }
-          }
-        ]
-      }
-    },
-    methods: {
-      getValue () {
-        const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应$id 和值组成的对象
-      },
-      setValue () {
-        this.$refs.formRender.updateForm({
-          startDate: '2019-01-01',
-          endDate: '2019-01-02'
-        })
-      }
-    }
-  }
-</script>
-```
-
-### nextTick
-
-```html
-<template>
-  <div class="nextTick">
-    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
-
-    <el-dialog :visible.sync="dialogVisible" title="nextTick" @open="handleOpen">
-      <el-form-renderer :content="content" inline ref="formRender"></el-form-renderer>
-    </el-dialog>
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'nextTick',
-    data() {
-      return {
-        dialogVisible: false,
-        content: [
-          {
-            $id: 'name',
-            $type: 'input',
-            label: '姓名',
-            $el: {
-              placeholder: '请输入'
-            }
-          }
-        ]
-      }
-    },
-    methods: {
-      handleOpen () {
-        // Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上，所以需要使用 nextTick 等待 DOM 更新之后才能通过 $refs 获取到该实例
-        console.log(this.$refs.formRender)  // 第一次打开时为 undefined
-        this.$nextTick(() => {
-          console.log(this.$refs.formRender)  // 始终能获取到该实例
-        })
-      }
-    }
-  }
-</script>
-```
-
-展示效果：
-
-![image-20181211175701822](./assets/image-20181211175701822.png)
-
-### atChange
-
-```html
-<template>
-  <el-form-renderer ref="form" :content="content"></el-form-renderer>
-</template>
-
-<script>
-const fullNameOpts = {
-  xiaoming: '小明',
-  xiaohong: '小红'
-}
-
-export default {
-  data() {
-    return {
-      content: [
-        {
-          $type: 'select',
-          $id: 'name',
-          label: '名字',
-          $options: [
-            {
-              label: '小明',
-              value: 'xiaoming'
-            },
-            {
-              label: '小红',
-              value: 'xiaohong'
-            }
-          ],
-          atChange: (id, val) => {
-            this.$refs.form.updateForm({
-              fullName: `当前选择是:${fullNameOpts[val]}`
-            })
-          }
-        },
-        {
-          label: '全称',
-          $type: 'input',
-          $id: 'fullName',
-          $el: {
-            disabled: true
-          }
-        }
-      ]
-    }
-  }
-}
-</script>
-```
-
-展示效果:
-
-![](https://i.screenshot.net/7x0rvbo)
 
 **[⬆ Back to Top](#table-of-contents)**
 
