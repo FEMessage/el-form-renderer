@@ -2,7 +2,7 @@
 
 ```vue
 <template>
-  <el-form-renderer ref="form" :content="content"></el-form-renderer>
+  <el-form-renderer ref="form" :content="content" />
 </template>
 
 <script>
