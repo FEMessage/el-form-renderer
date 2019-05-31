@@ -6,7 +6,7 @@ $nextTick
     <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 
     <el-dialog :visible.sync="dialogVisible" title="Next Tick" @open="handleOpen">
-      <el-form-renderer :content="content" inline ref="formRender"></el-form-renderer>
+      <el-form-renderer :content="content" inline ref="formRender" />
     </el-dialog>
   </div>
 </template>
