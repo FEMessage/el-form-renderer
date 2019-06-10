@@ -68,7 +68,7 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "vue-sfc-cli": "1.9.0",
+  "vue-sfc-cli": "1.10.0",
   "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
   "dependencies": {
     "lodash.get": "^4.4.2",
