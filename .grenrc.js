@@ -12,7 +12,8 @@ module.exports = {
   onlyMilestones: false,
   changelogFilename: 'CHANGELOG.md',
   template: {
-    issue: '- {{name}} [{{text}}]({{url}})'
+    issue: '- {{name}} [{{text}}]({{url}})',
+    group: '\n### {{heading}}\n'
   },
   groupBy: {
     '✨ New Features:': ['enhancement'],
