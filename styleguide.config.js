@@ -24,7 +24,7 @@ module.exports = {
   sections: [
     {
       name: 'Components',
-      components: 'src/index.js',
+      components: 'src/el-form-renderer.js',
       usageMode: 'expand'
     },
     {
