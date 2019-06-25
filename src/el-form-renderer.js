@@ -2,6 +2,7 @@ import RenderFormItem from './render-form-item'
 import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
+import {isObject} from './utils'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -21,9 +22,6 @@ function clone(data) {
     return data
   }
 }
-
-const isObject = obj =>
-  Object.prototype.toString.call(obj) === '[object Object]'
 
 const GROUP = 'group'
 
