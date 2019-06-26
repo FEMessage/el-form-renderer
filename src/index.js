@@ -1,5 +1,5 @@
 // Import vue component
-import component from './el-form-renderer.vue'
+import component from './el-form-renderer'
 
 // install function executed by Vue.use()
 export function install(Vue) {
