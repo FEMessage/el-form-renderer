@@ -12,11 +12,11 @@ export default {
     return {
       content: [
         {
-          $id: 'name',
-          $type: 'input',
+          id: 'name',
+          type: 'input',
           label: '姓名',
-          $default: 'alvin',
-          $el: {
+          default: 'alvin',
+          el: {
             placeholder: '请输入'
           }
         }

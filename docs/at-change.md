@@ -17,10 +17,10 @@ export default {
     return {
       content: [
         {
-          $type: 'select',
-          $id: 'name',
+          type: 'select',
+          id: 'name',
           label: '名字',
-          $options: [
+          options: [
             {
               label: '小明',
               value: 'xiaoming'
@@ -38,9 +38,9 @@ export default {
         },
         {
           label: '全称',
-          $type: 'input',
-          $id: 'fullName',
-          $el: {
+          type: 'input',
+          id: 'fullName',
+          el: {
             disabled: true
           }
         }

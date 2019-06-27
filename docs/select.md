@@ -12,13 +12,13 @@ export default {
     return {
       content: [
         {
-          $id: 'area',
-          $type: 'select',
+          id: 'area',
+          type: 'select',
           label: '选择框',
-          $el: {
+          el: {
             placeholder: '请选择内容'
           },
-          $options: [{
+          options: [{
             label: '区域一',
             value: 'shanghai'
           }, {
