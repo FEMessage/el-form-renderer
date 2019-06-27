@@ -1,9 +1,6 @@
-import {shallowMount} from '@vue/test-utils'
-import Component from '../src'
+import {oldContent, expectContent} from './content'
+import transformContent from '../src/transform-content'
 
-describe('Component', () => {
-  it('is a Vue instance', () => {
-    const wrapper = shallowMount(Component)
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
+test('transform content', () => {
+  expect(transformContent(oldContent)).toEqual(expectContent)
 })
