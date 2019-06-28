@@ -39,6 +39,7 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@femessage/upload-to-ali": "^1.4.0",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
     "element-ui": "^2.7.2",
     "file-loader": "^3.0.1",
@@ -73,8 +74,6 @@
   "vue-sfc-cli": "1.10.0",
   "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
   "dependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
-    "babel-jest": "^24.8.0",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2"
   }
