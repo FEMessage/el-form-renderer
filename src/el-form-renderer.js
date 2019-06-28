@@ -96,6 +96,7 @@ export default {
     return {
       value: {}, // 表单数据对象
       options: {},
+      // 用于兼容数据操作
       _content: []
     }
   },
