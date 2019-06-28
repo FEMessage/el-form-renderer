@@ -1,4 +1,4 @@
-module.exports = function transformContent(content) {
+export default function transformContent(content) {
   return content.map(item => {
     if (item.type === 'group') {
       const {items} = item
