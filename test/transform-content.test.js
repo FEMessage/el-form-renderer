@@ -1,4 +1,4 @@
-import {oldContent, expectContent} from './content'
+import {oldContent, expectContent} from './config'
 import transformContent from '../src/transform-content'
 
 test('transform content', () => {
