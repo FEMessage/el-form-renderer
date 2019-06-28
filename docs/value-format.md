@@ -19,13 +19,13 @@
       return {
         content: [
           {
-            $el: {
+            el: {
               type: 'daterange',
               placeholder: '选择日期',
               valueFormat: 'yyyy-MM-dd'
             },
-            $type: 'date-picker',
-            $id: 'date',
+            type: 'date-picker',
+            id: 'date',
             label: '日期',
             inputFormat: (row) => {
               return [row.startDate, row.endDate]
@@ -46,7 +46,7 @@
     methods: {
       getValue () {
         const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应$id 和值组成的对象
+        console.log(value)  // 输出为对应id 和值组成的对象
       },
       setValue () {
         this.$refs.formRender.updateForm({

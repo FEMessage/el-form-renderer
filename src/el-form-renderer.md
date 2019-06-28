@@ -31,44 +31,44 @@ export default {
 
 /**
  * 表单项的定义
- * 一切 el-form-item上的属性都可在此声明，而对于表单组件本身的属性在$el属性上声明
+ * 一切 el-form-item上的属性都可在此声明，而对于表单组件本身的属性在el属性上声明
  */
 interface Content {
-  $id: string // 每一个原子都存在 id，用于存储该原子的值，不能重复
+  id: string // 每一个原子都存在 id，用于存储该原子的值，不能重复
 
   /**
    * 可以是element提供的所有表单组件类型，如传入'input'，则渲染出'el-input'
-   * 当$type="group"时，可以创造复杂对象类型的表单数据，配合$items使用。此时getFormValue()返回的是对象类型的数据，对象的每个属性对应$items里的每一项
+   * 当type="group"时，可以创造复杂对象类型的表单数据，配合items使用。此时getFormValue()返回的是对象类型的数据，对象的每个属性对应items里的每一项
    */
-  $type: string
+  type: string
 
   /**
-   * 当$type="group"时使用
-   * $items内依然遵循同一层级的$id不重复的原则
+   * 当type="group"时使用
+   * items内依然遵循同一层级的id不重复的原则
    */
-  $items: Content[]
+  items: Content[]
 
-  $default?: any // 默认值，可选
+  default?: any // 默认值，可选
 
   /**
    * 传入一个对象，key为属性路径，value为指定值，校验通过则显示该表单项
    * 比如当前表单项值为{a: {b: 1}}，enableWhen={'a.b': 1}， 则校验通过
    * 也可以只传入属性路径，此时该属性非空就通过校验
    */
-  $enableWhen?: object | string
+  enableWhen?: object | string
 
   /**
    * 具有选择功能的原子表单可用此定义可选项
    * 例如: select, radio-group, radio-button, checkbox-group, checkbox-button
    */
-  $options?: {label: string; value?: any}[]
+  options?: {label: string; value?: any}[]
 
-  $attrs?: object // 写法与 Vue 的 Render 函数规范保持一致
-  $el?: object // 用于定义具体原子表单（如el-input）的属性，比如定义el-input的placeholder
+  attrs?: object // 写法与 Vue 的 Render 函数规范保持一致
+  el?: object // 用于定义具体原子表单（如el-input）的属性，比如定义el-input的placeholder
 
   /**
    * 使用自定义组件
-   * component适用于渲染局部注册组件和自定义组件，而$type适用于带el-前缀的全局组件
+   * component适用于渲染局部注册组件和自定义组件，而type适用于带el-前缀的全局组件
    */
   component?: Vue
 
@@ -113,7 +113,7 @@ el-form.methods
 
 ## Slots
 
-| Slot      | 描述                                                             |
-| --------- | ---------------------------------------------------------------- |
-| default   | 插入位置在表单最末尾                                             |
-| $id:hello | 插入位置在表单项($id==='hello')之前，hello 可替换成任意表单项 id |
+| Slot     | 描述                                                            |
+| -------- | --------------------------------------------------------------- |
+| default  | 插入位置在表单最末尾                                            |
+| id:hello | 插入位置在表单项(id==='hello')之前，hello 可替换成任意表单项 id |

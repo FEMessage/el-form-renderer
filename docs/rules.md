@@ -12,10 +12,10 @@ export default {
     return {
       content: [
         {
-          $id: 'name',
-          $type: 'input',
+          id: 'name',
+          type: 'input',
           label: '姓名',
-          $el: {
+          el: {
             placeholder: '请输入'
           },
           rules: [

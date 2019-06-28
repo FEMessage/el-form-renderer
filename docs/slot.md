@@ -1,12 +1,12 @@
 插槽
 
 - 支持通过默认 slot 往表单尾部插入自定义 VNode。
-- 支持具名插槽 $id:form-item的id 于 $id 前插入任意内容。
+- 支持具名插槽 id:form-item的id 于 id 前插入任意内容。
 
 ```vue
 <template>
   <el-form-renderer :content="content">
-    <button type="button" slot="$id:age">a button insert before age</button>
+    <button type="button" slot="id:age">a button insert before age</button>
 
     <div style="color: #2a7">
       我是默认 slot: 位于底部
@@ -20,14 +20,14 @@ export default {
     return {
       content: [
         {
-          $id: 'name',
+          id: 'name',
           label: '名称',
-          $type: 'input'
+          type: 'input'
         },
         {
-          $id: 'age',
+          id: 'age',
           label: '年龄',
-          $type: 'input'
+          type: 'input'
         }
       ]
     }
