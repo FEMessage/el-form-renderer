@@ -20,22 +20,22 @@ export default {
       data: {},
       content: [
         {
-          $id: 'name',
-          $type: 'input',
+          id: 'name',
+          type: 'input',
           label: '姓名',
-          $default: 'alvin',
-          $el: {
+          default: 'alvin',
+          el: {
             placeholder: '请输入'
           }
         },
         {
-          $id: 'area',
-          $type: 'select',
+          id: 'area',
+          type: 'select',
           label: '选择框',
-          $el: {
+          el: {
             placeholder: '请选择内容'
           },
-          $options: [{
+          options: [{
             label: '区域一',
             value: 'shanghai'
           }, {

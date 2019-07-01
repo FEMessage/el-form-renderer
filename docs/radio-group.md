@@ -12,14 +12,14 @@ export default {
     return {
       content: [
         {
-          $id: 'city',
-          $type: 'radio-group',
+          id: 'city',
+          type: 'radio-group',
           label: '城市',
-          $el: {
+          el: {
             placeholder: '请输入'
           },
-          $default: '广州',
-          $options: [
+          default: '广州',
+          options: [
             // 注意：element radio-group 通过 label 而不是 value 来匹配值
             { label: '上海' },
             { label: '北京' },

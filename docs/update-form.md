@@ -17,21 +17,21 @@
       return {
         content: [
           {
-            $id: 'name',
-            $type: 'input',
+            id: 'name',
+            type: 'input',
             label: '姓名',
-            $el: {
+            el: {
               placeholder: '请输入'
             }
           },
           {
-            $id: 'area',
-            $type: 'select',
+            id: 'area',
+            type: 'select',
             label: '选择框',
-            $el: {
+            el: {
               placeholder: '请选择内容'
             },
-            $options: [{
+            options: [{
               label: '区域一',
               value: 'shanghai'
             }, {
@@ -45,7 +45,7 @@
     methods: {
       getValue () {
         const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应$id 和值组成的对象
+        console.log(value)  // 输出为对应id 和值组成的对象
       },
       setValue () {
         this.$refs.formRender.updateForm({
