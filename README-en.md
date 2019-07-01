@@ -7,12 +7,12 @@
 <a name="KjIVm"></a>
 ## Table of Contents
 
-- [Introduction](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#introduction)
-- [Feature](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#feature)
-- [Demo](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#demo)
-- [Quick start](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#quick-start)
-- [License](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#license)
-- [Contributors](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#contributors)
+- [Introduction](#introduction)
+- [Feature](#feature)
+- [Demo](#demo)
+- [Quick start](#quick-start)
+- [License](#license)
+- [Contributors](#contributors)
 
 <a name="mrThG"></a>
 ## Introduction
@@ -30,12 +30,12 @@ Based on [Element-ui](https://github.com/ElemeFE/element) Packaged **Form ren
 - Support for custom components
 - Batch update data up11-form
 - Support setOptions method, support dynamic change select options
-- Content support `inputFormat` , `outputFormat` , `trim` Processing of component input and output values<br />**[⬆Back to Top](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#table-of-contents)**
+- Content support `inputFormat` , `outputFormat` , `trim` Processing of component input and output values<br />**[⬆Back to Top](#table-of-contents)**
 
 <a name="WwXCE"></a>
 ## Demo
 
-- [Doc and online demo](https://femessage.github.io/el-form-renderer/)<br />**[⬆Back to Top](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#table-of-contents)**
+- [Doc and online demo](https://femessage.github.io/el-form-renderer/)<br />**[⬆Back to Top](#table-of-contents)**
 
 <a name="97knW"></a>
 ## Quick start
@@ -63,12 +63,12 @@ export default {
 </script>
 ```
 
-**[⬆Back to Top](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#table-of-contents)**
+**[⬆Back to Top](#table-of-contents)**
 
 <a name="1voE9"></a>
 ## License
 
-[MIT](https://www.yuque.com/deepexi-serverless/onx52o/LICENSE)<br />**[⬆Back to Top](https://www.yuque.com/deepexi-serverless/onx52o/twe41e?translate=en#table-of-contents)**
+[MIT](https://www.yuque.com/deepexi-serverless/onx52o/LICENSE)<br />**[⬆Back to Top](#table-of-contents)**
 
 <a name="GHmTm"></a>
 ## Contributors
