@@ -12,14 +12,14 @@ export default {
     return {
       content: [
         {
-          $id: 'city',
-          $type: 'checkbox-group',
+          id: 'city',
+          type: 'checkbox-group',
           label: '城市',
-          $el: {
+          el: {
             placeholder: '请输入'
           },
-          $default: ['广州'],
-          $options: [
+          default: ['广州'],
+          options: [
             { label: '上海' },
             { label: '北京' },
             { label: '广州' },

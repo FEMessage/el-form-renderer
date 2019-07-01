@@ -19,10 +19,10 @@ $nextTick
         dialogVisible: false,
         content: [
           {
-            $id: 'name',
-            $type: 'input',
+            id: 'name',
+            type: 'input',
             label: '姓名',
-            $el: {
+            el: {
               placeholder: '请输入'
             }
           }
