@@ -578,8 +578,9 @@
   resolved "https://registry.npm.taobao.org/@femessage/img-preview/download/@femessage/img-preview-1.2.2.tgz#9abf576629d147976c1950abfba74eccdcbf94e5"
 
 "@femessage/upload-to-ali@^1.4.0":
-  version "1.5.2"
-  resolved "https://registry.npm.taobao.org/@femessage/upload-to-ali/download/@femessage/upload-to-ali-1.5.2.tgz#d3840c8dadfa4287d6c96ec8746c68966ee16c42"
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@femessage/upload-to-ali/-/upload-to-ali-1.7.1.tgz#c07b2c8c9d579a7c5f09f7aff89f2e17ea39a5f3"
+  integrity sha512-DzSIbZIQlzsopA/h4aMKTgXTXPqU85WDwgkaILlZs/3oHDSlqsvkXD+XfIW2AY2czGmusddtxCD3ZwbYfSY/Yg==
   dependencies:
     "@femessage/img-preview" "^1.2.0"
     ali-oss "^6.0.1"
