@@ -18,7 +18,6 @@
     "./sfc": "src/el-form-renderer.vue"
   },
   "scripts": {
-    "test": "jest",
     "dev": "vue-styleguidist server",
     "doc": "vue-styleguidist build",
     "build":
@@ -31,7 +30,8 @@
       "rollup --config build/rollup.config.js --format iife --file dist/el-form-renderer.min.js",
     "precommit": "pretty-quick --staged",
     "stdver": "standard-version -m '[skip ci] chore(release): v%s'",
-    "release": "gren release --override"
+    "release": "gren release --override",
+    "test": "jest --verbose"
   },
   "homepage": "https://github.com/FEMessage/el-form-renderer",
   "devDependencies": {
