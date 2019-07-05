@@ -51,7 +51,7 @@
 
 ```sh
 # Step1 确认你已经正确安装并使用了 element-ui
-yarn add @femessage/el-form-rendere
+yarn add @femessage/el-form-renderer
 ```
 
 ```html
