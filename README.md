@@ -9,18 +9,19 @@
 
 ![12月-18-2018 20-14-26](./assets/form.gif)
 
+[English](./README-en.md)
+
 ## Table of Contents <!-- omit in toc -->
 
 * [Introduction](#introduction)
 * [Feature](#feature)
 * [Demo](#demo)
 * [Quick start](#quick-start)
+* [Inspiration](#inspiration)
 * [License](#license)
 * [Contributors](#contributors)
 
 ## Introduction
-
-基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，在开源项目[**el-form-renderer**](https://github.com/leezng/el-form-renderer)的基础上二次开发而来
 
 **WHAT**
 
@@ -28,14 +29,14 @@
 
 **WHY**
 
-日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复，由各种简单的原子表单组件构建而成。el-form-renderer 没有复杂的逻辑，只需进行简单配置 JSON 的方式就可实现常用表单功能，节省写代码的时间和精力，减少许多重复冗余的代码。
+日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复。el-form-renderer 没有复杂的逻辑，只需进行简单配置 JSON 的方式就可实现常用表单功能，节省写代码的时间和精力，减少重复冗余的代码, 让开发者专注业务逻辑。
 
 ## Feature
 
 * 只需进行简单的配置，即可实现常用表单功能
 * 支持使用自定义组件
 * 批量更新数据 updateForm
-* 支持 setOptions 方法，支持动态改变 select 的 options
+* 支持 setOptions 方法，动态改变 select 的 options
 * content 支持 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
 
 **[⬆ Back to Top](#table-of-contents)**
@@ -48,13 +49,12 @@
 
 ## Quick start
 
+```sh
+# Step1 确认你已经正确安装并使用了 element-ui
+yarn add @femessage/el-form-renderer
+```
+
 ```html
-<!-- Step1 确认你已经正确安装并使用了 element-ui -->
-
-<!-- Step2 安装 -->
-<!-- yarn add @femessage/el-form-renderer -->
-
-<!-- Step3 在需要使用该渲染器的 .vue 文件中 -->
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
@@ -76,6 +76,10 @@ export default {
 ```
 
 **[⬆ Back to Top](#table-of-contents)**
+
+## Inspiration
+
+thanks to [element-patch](https://github.com/leezng/element-patch)
 
 ## License
 

@@ -8,16 +8,8 @@
     "type": "git",
     "url": "https://github.com/FEMessage/el-form-renderer.git"
   },
-  "contributors": [
-    "https://github.com/FEMessage"
-  ],
-  "keywords": [
-    "vue",
-    "element",
-    "render",
-    "form",
-    "component"
-  ],
+  "contributors": ["https://github.com/FEMessage"],
+  "keywords": ["vue", "element", "render", "form", "component"],
   "files": [
     "src",
     "yarn.lock",
@@ -34,10 +26,14 @@
   "scripts": {
     "dev": "vue-styleguidist server",
     "doc": "vue-styleguidist build",
-    "build": "npm run build:unpkg & npm run build:es & npm run build:umd & npm run doc",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/el-form-renderer.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/el-form-renderer.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/el-form-renderer.min.js",
+    "build":
+      "npm run build:unpkg & npm run build:es & npm run build:umd & npm run doc",
+    "build:umd":
+      "rollup --config build/rollup.config.js --format umd --file dist/el-form-renderer.umd.js",
+    "build:es":
+      "rollup --config build/rollup.config.js --format es --file dist/el-form-renderer.esm.js",
+    "build:unpkg":
+      "rollup --config build/rollup.config.js --format iife --file dist/el-form-renderer.min.js",
     "precommit": "pretty-quick --staged",
     "stdver": "standard-version -m '[skip ci] chore(release): v%s'",
     "release": "gren release --override",
@@ -80,12 +76,8 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "vue-sfc-cli": "1.10.0",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
+  "vue-sfc-cli": "1.10.1",
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
   "dependencies": {
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2"
