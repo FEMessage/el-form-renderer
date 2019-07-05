@@ -53,7 +53,7 @@
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-vue": "^4.7.2",
+    "rollup-plugin-vue": "^5.0.1",
     "standard-version": "^6.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
