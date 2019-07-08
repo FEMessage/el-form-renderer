@@ -41,7 +41,7 @@ export default {
 
 ```html
 <template>
-  <[el-form-renderer] :content="content"/>
+  <el-form-renderer :content="content"/>
 </template>
 
 <script>
