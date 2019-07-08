@@ -1,18 +1,16 @@
-[el-form-renderer]:https://github.com/femessage/el-form-renderer
-
 # 自定义组件接入
 
 ## 前言
 
-[el-form-renderer] 的 `type` 有限, 默认只能渲染普通的表单项, 假如现在要渲染一个上传组件, `type` 就不够用了, 那怎么办呢? 这时候 component 选项就派上用场了
+[el-form-renderer](https://github.com/femessage/el-form-renderer) 的 `type` 有限, 默认只能渲染普通的表单项, 假如现在要渲染一个上传组件, `type` 就不够用了, 那怎么办呢? 这时候 component 选项就派上用场了
 
-本文将介绍如何开发符合 [el-form-renderer] 接入标准的自定义组件, 实现对自定义组件的渲染
+本文将介绍如何开发符合 [el-form-renderer](https://github.com/femessage/el-form-renderer) 接入标准的自定义组件, 实现对自定义组件的渲染
 
 ## 接入标准
 
 自定义组件接入的关键是在组件内部实现 v-model
 
-[el-form-renderer] 对 v-model 的要求是:
+[el-form-renderer](https://github.com/femessage/el-form-renderer) 对 v-model 的要求是:
 
 - 有一个 props 为 value
 - 对外触发 input 事件
@@ -37,7 +35,7 @@ export default {
 </script>
 ```
 
-则可以用 component 属性让 [el-form-renderer] 渲染此自定义组件
+则可以用 component 属性让 [el-form-renderer](https://github.com/femessage/el-form-renderer) 渲染此自定义组件
 
 ```html
 <template>
@@ -64,7 +62,7 @@ export default {
 
 ## 实际案例
 
-目前团队对常见的表单扩展组件都按 [el-form-renderer] 的标准实现了 v-model, 因此都可以不写 template, 由 [el-form-renderer] 实现数据驱动渲染
+目前团队对常见的表单扩展组件都按 [el-form-renderer](https://github.com/femessage/el-form-renderer) 的标准实现了 v-model, 因此都可以不写 template, 由 [el-form-renderer](https://github.com/femessage/el-form-renderer) 实现数据驱动渲染
 
 - 上传组件 [https://github.com/FEMessage/upload-to-ali](https://github.com/FEMessage/upload-to-ali)
 - 富文本编辑器 [https://github.com/FEMessage/v-editor](https://github.com/FEMessage/v-editor)
