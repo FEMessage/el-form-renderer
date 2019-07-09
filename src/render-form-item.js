@@ -1,5 +1,6 @@
-import mixinOptionExtensions from './mixin-package-option'
-import mixinEnableWhen from './mixin-enable-when'
+import mixinOptionExtensions from './mixins/package-option'
+import mixinEnableWhen from './mixins/enable-when'
+import mixinHidden from './mixins/hidden'
 import {toCamelCase, isObject} from './utils'
 
 function validator(data) {
@@ -13,7 +14,7 @@ function validator(data) {
 }
 
 export default {
-  mixins: [mixinOptionExtensions, mixinEnableWhen],
+  mixins: [mixinOptionExtensions, mixinEnableWhen, mixinHidden],
   props: {
     data: Object,
     prop: {
@@ -30,7 +31,9 @@ export default {
   computed: {
     // 是否显示
     _show() {
-      return this.getEnableWhenSatatus()
+      // 当存在 hidden 时优先响应
+      const isHidden = this.getHiddenStatus()
+      return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
     }
   },
   render(h) {
