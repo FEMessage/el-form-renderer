@@ -1,6 +1,6 @@
-import mixinOptionExtensions from './mixins/mixin-package-option'
-import mixinEnableWhen from './mixins/mixin-enable-when'
-import mixinHidden from './mixins/mixin-hidden'
+import mixinOptionExtensions from './mixins/package-option'
+import mixinEnableWhen from './mixins/enable-when'
+import mixinHidden from './mixins/hidden'
 import {toCamelCase, isObject} from './utils'
 
 function validator(data) {
