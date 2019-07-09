@@ -61,9 +61,9 @@ interface Content {
 
   /**
    * 传入一个方法，并返回 boolean，返回 true 时则隐藏该表单项
-   * form 为当前 form 的值，scope 为当前表单项的定义
+   * form 为当前 form 的值，item 为当前表单项的定义
    */
-  hidden?: (form: Object, scope: Content) => boolean
+  hidden?: (form: Object, item: Content) => boolean
 
   /**
    * 具有选择功能的原子表单可用此定义可选项
