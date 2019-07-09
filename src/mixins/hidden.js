@@ -10,13 +10,7 @@ export default {
         delete newData.hidden
 
         // 给 hidden 方法传递 form 值与当前 item 信息
-        const isHidden = hidden(this.value, newData)
-
-        if (typeof isHidden !== 'boolean') {
-          console.error('hidden must return boolean.')
-        } else {
-          return isHidden
-        }
+        return hidden(this.value, newData)
       }
     }
   }

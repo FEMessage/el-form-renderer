@@ -46,31 +46,6 @@ describe('mixin-hidden.js', () => {
     })
   })
 
-  describe('hidden 错误触发', () => {
-    test('使用 hidden，不返回 bool，console.error', () => {
-      const originError = console.error
-      console.error = err => {
-        throw Error(err)
-      }
-
-      const data = {...testOrigin, hidden: () => console.log('ok')}
-      try {
-        new Constructor({propsData: {data, value: testValue}})
-      } catch (err) {
-        expect(err).toThrow('hidden must return boolean.')
-      }
-
-      console.error = originError
-    })
-
-    test('使用 hidden，不返回 bool，废弃 hidden，不影响结果', () => {
-      const data = {...testOrigin, hidden: () => 'ok'}
-      const vm = new Constructor({propsData: {data, value: testValue}})
-
-      expect(vm.getHiddenStatus()).toBe(undefined)
-    })
-  })
-
   describe('使用 hidden', () => {
     test('使用 hidden，返回 true，不显示', () => {
       const data = {...testOrigin, hidden: () => true}
@@ -97,7 +72,7 @@ describe('mixin-hidden.js', () => {
     })
 
     test('hidden 可以获取 item 信息', () => {
-      const data = {...testOrigin, hidden: (_, scope) => scope.id === 'name'}
+      const data = {...testOrigin, hidden: (_, item) => item.id === 'name'}
       const vm = new Constructor({propsData: {data, value: testValue}})
 
       expect(vm.getHiddenStatus()).toBe(true)
