@@ -45,6 +45,8 @@
 
 * [doc and online demo](https://femessage.github.io/el-form-renderer/)
 
+- [自定义组件指南](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
+
 **[⬆ Back to Top](#table-of-contents)**
 
 ## Quick start
@@ -78,6 +80,7 @@ export default {
 **[⬆ Back to Top](#table-of-contents)**
 
 ## Inspiration
+
 thanks to [element-patch](https://github.com/leezng/element-patch)
 
 ## License

@@ -6,14 +6,13 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Feature](#feature)
-- [Demo](#demo)
-- [Quick start](#quick-start)
-- [Inspiration](#inspiration)
-- [License](#license)
-- [Contributors](#contributors)
-
+* [Introduction](#introduction)
+* [Feature](#feature)
+* [Demo](#demo)
+* [Quick start](#quick-start)
+* [Inspiration](#inspiration)
+* [License](#license)
+* [Contributors](#contributors)
 
 ## Introduction
 
@@ -27,24 +26,25 @@ In our daily development, there are lots page with form, and usually the form st
 
 ## Feature
 
-- Render form with json
-- Support integrate with custom components
-- Support batch update form data with updateForm method
-- Support setOptions method, dynamically change select options
-- Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
+* Render form with json
+* Support integrate with custom components
+* Support batch update form data with updateForm method
+* Support setOptions method, dynamically change select options
+* Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
 
 **[⬆Back to Top](#table-of-contents)**
 
 ## Demo
 
-- [Doc and online demo](https://femessage.github.io/el-form-renderer/)
+* [Doc and online demo](https://femessage.github.io/el-form-renderer/)
+* [guide custom component](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
 
 **[⬆Back to Top](#table-of-contents)**
 
 ## Quick start
 
 ```sh
-yarn add @femessage/el-form-renderer 
+yarn add @femessage/el-form-renderer
 ```
 
 ```html
@@ -69,6 +69,7 @@ export default {
 **[⬆Back to Top](#table-of-contents)**
 
 ## Inspiration
+
 thanks to [element-patch](https://github.com/leezng/element-patch)
 
 ## License
@@ -82,6 +83,5 @@ thanks to [element-patch](https://github.com/leezng/element-patch)
 Thanks goes to these wonderful people ( [Emoji key](https://allcontributors.org/docs/en/emoji-key) ):
 
 | [![](https://avatars0.githubusercontent.com/u/11909145?v=4#alt=Alvin&width=100)<br />**Alvin**](https://github.com/Alvin-Liu)<br />[💻](https://github.com/FEMessage/el-form-renderer/commits?author=Alvin-Liu) [👀](#review-Alvin-Liu) [🐛](https://github.com/FEMessage/el-form-renderer/issues?q=author%3AAlvin-Liu) [📝](#blog-Alvin-Liu) [🤔](#ideas-Alvin-Liu) | [![](https://avatars3.githubusercontent.com/u/9384365?v=4#alt=levy&width=100)<br />**levy**](http://levy.work)<br />[👀](#review-levy9527) [🚇](#infra-levy9527) [🤔](#ideas-levy9527) | [![](https://avatars3.githubusercontent.com/u/19513289?v=4#alt=EVILLT&width=100)<br />**EVILLT**](https://evila.me)<br />[💻](https://github.com/FEMessage/el-form-renderer/commits?author=evillt) [🐛](https://github.com/FEMessage/el-form-renderer/issues?q=author%3Aevillt) [📝](#blog-evillt) [🤔](#ideas-evillt) | [![](https://avatars3.githubusercontent.com/u/19591950?v=4#alt=Donald%20Shen&width=100)<br />**Donald Shen**](https://donaldshen.github.io/portfolio)<br />[📖](https://github.com/FEMessage/el-form-renderer/commits?author=donaldshen) [💡](#example-donaldshen) |
-| --- | --- | --- | --- |
-
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
