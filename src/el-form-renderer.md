@@ -51,11 +51,19 @@ interface Content {
   default?: any // 默认值，可选
 
   /**
+   * @deprecated
+   *
    * 传入一个对象，key为属性路径，value为指定值，校验通过则显示该表单项
    * 比如当前表单项值为{a: {b: 1}}，enableWhen={'a.b': 1}， 则校验通过
    * 也可以只传入属性路径，此时该属性非空就通过校验
    */
   enableWhen?: object | string
+
+  /**
+   * 传入一个方法，并返回 boolean，返回 true 时则隐藏该表单项
+   * form 为当前 form 的值，item 为当前表单项的定义
+   */
+  hidden?: (form: Object, item: Content) => boolean
 
   /**
    * 具有选择功能的原子表单可用此定义可选项

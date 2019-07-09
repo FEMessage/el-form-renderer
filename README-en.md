@@ -37,6 +37,7 @@ In our daily development, there are lots page with form, and usually the form st
 ## Demo
 
 * [Doc and online demo](https://femessage.github.io/el-form-renderer/)
+* [custom component guide](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
 
 **[⬆Back to Top](#table-of-contents)**
 
