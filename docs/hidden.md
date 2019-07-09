@@ -31,9 +31,8 @@ export default {
           type: 'input',
           id: 'reason',
           el: {
-            placeholder: '为什么不喜欢篮球？'
-          },
-          hidden: form => form.hobby ? form.hobby === 'basketball' : true // 通过 hidden 控制显示状态
+            placeholder: '喜欢的原因？'
+          }
         },
         {
           label: '偶像',
@@ -42,7 +41,7 @@ export default {
           el: {
             placeholder: '您最喜欢的篮球明星？'
           },
-          hidden: form => form.hobby ? form.hobby === 'football' : true // 通过 hidden 控制显示状态
+          hidden: form => form.hobby !== 'basketball' // 通过 hidden 控制显示状态
         },
       ]
     }
