@@ -15,14 +15,14 @@ export default {
           type: 'input',
           id: 'fullName',
           on: {
-            blur: (e) => {
-              this.$refs.form.updateForm({display: 'blur'})
+            blur: (e, updateForm) => {
+              updateForm({display: 'blur'})
             },
-            focus: (e) => {
-              this.$refs.form.updateForm({display: 'focus'})
+            focus: (e, updateForm) => {
+              updateForm({display: 'focus'})
             },
-            input: (e) => {
-              this.$refs.form.updateForm({display: 'input'})
+            input: (e, updateForm) => {
+              updateForm({display: 'input'})
             },
           },
         },

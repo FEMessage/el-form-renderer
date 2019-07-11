@@ -96,9 +96,9 @@ interface Content {
   // 当前表单值更新时触发, 入参分别为当前修改的id和值
   atChange?: (id: string, value: any) => void
 
-  // 监听表单项发出的事件
+  // 监听表单项发出的事件，updateForm就是formRenderer用来批量更新表单数据的方法
   on?: {
-    [eventName: string]: (event: Event) => void
+    [eventName: string]: (event: Event, updateForm: function) => void
   }
 }
 
