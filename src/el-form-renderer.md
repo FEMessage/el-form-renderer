@@ -52,7 +52,7 @@ interface Content {
 
   /**
    * @deprecated
-   * 
+   *
    * 传入一个对象，key为属性路径，value为指定值，校验通过则显示该表单项
    * 比如当前表单项值为{a: {b: 1}}，enableWhen={'a.b': 1}， 则校验通过
    * 也可以只传入属性路径，此时该属性非空就通过校验
@@ -92,8 +92,14 @@ interface Content {
   // 对应 el-form-item上的rules属性， 用于验证
   rules?: object
 
+  // @deprecated
   // 当前表单值更新时触发, 入参分别为当前修改的id和值
   atChange?: (id: string, value: any) => void
+
+  // 监听表单项发出的事件
+  on?: {
+    [eventName: string]: (event: Event) => void
+  }
 }
 
 /**
