@@ -1,4 +1,4 @@
-通过listeners监听表单项的各种事件
+监听表单项的各种事件
 
 ```vue
 <template>
