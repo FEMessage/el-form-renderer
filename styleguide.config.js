@@ -43,7 +43,7 @@ module.exports = {
     url: 'https://github.com/FEMessage/el-form-renderer'
   },
   sections,
-  require: ['./styleguide/element.js', './styleguide/upload-to-ali.js'],
+  require: ['./styleguide'],
   webpackConfig: {
     module: {
       rules: [

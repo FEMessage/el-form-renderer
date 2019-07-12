@@ -69,14 +69,20 @@ export default {
             : data.type
       let props = Object.assign({}, obj, {value})
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
+      const {updateForm} = this.$parent.$parent
+      const {on = {}} = data
       return h(
         data.component || 'el-' + elType,
         {
           attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
           props,
           on: {
+            ...Object.keys(on).reduce((obj, eName) => {
+              obj[eName] = (...args) => on[eName](args, updateForm)
+              return obj
+            }, {}),
             // 手动更新表单数据
-            input: value => {
+            input: (value, ...rest) => {
               // 默认字符串类型处理去空格
               const trimVal =
                 typeof value === 'string' &&
@@ -88,6 +94,7 @@ export default {
               if (typeof data.atChange === 'function') {
                 data.atChange(data.id, trimVal)
               }
+              if (on.input) on.input([trimVal, ...rest], updateForm)
             }
           }
         },
