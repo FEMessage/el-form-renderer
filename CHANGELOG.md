@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/FEMessage/el-form-renderer/compare/v1.8.0...v1.9.0) (2019-07-12)
+
+
+### Bug Fixes
+
+* **setOptions:** 修复setOptions  ([4160084](https://github.com/FEMessage/el-form-renderer/commit/4160084))
+
+
+### Features
+
+* 新增属性 on，可以绑定组件的事件 ([ba5b160](https://github.com/FEMessage/el-form-renderer/commit/ba5b160))
+
+
+
 ## [1.8.0](https://github.com/FEMessage/el-form-renderer/compare/v1.7.0...v1.8.0) (2019-07-12)
 
 
