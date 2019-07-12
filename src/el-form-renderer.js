@@ -32,7 +32,6 @@ export default {
     const content = transformContent(this.content)
     this._content = content
     content.forEach(this.initItemValue) // handle default value
-    content.forEach(this.initItemOption)
 
     return h(
       'el-form',
@@ -80,6 +79,8 @@ export default {
         this[item] = this.$refs.elForm[item]
       })
     })
+
+    this.initItemOption()
   },
   props: Object.assign({}, Form.props, {
     content: {
@@ -135,13 +136,17 @@ export default {
     /**
      * 初始化每个表单项的选项
      */
-    initItemOption(item) {
-      if (item.type === GROUP) {
-        item.items.forEach(child => {
-          this.setOptions([item.id, child.id].join('.'), child.options)
-        })
-      }
-      this.setOptions(item.id, item.options)
+    initItemOption() {
+      this.options = this._content.reduce((con, item) => {
+        con[item.id] =
+          item.type === GROUP
+            ? item.items.reduce((acc, cur) => {
+                acc[cur.id] = cur.options || []
+                return acc
+              }, {})
+            : item.options || []
+        return con
+      }, {})
     },
     /**
      * 更新表单数据
