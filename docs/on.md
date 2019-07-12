@@ -15,11 +15,11 @@ export default {
           type: 'input',
           id: 'fullName',
           on: {
-            blur: ([e], updateForm) => {
-              updateForm({display: 'blur' + e})
+            blur: ([event], updateForm) => {
+              updateForm({display: 'blur' + event})
             },
-            focus: ([e], updateForm) => {
-              updateForm({display: 'focus' + e})
+            focus: ([event], updateForm) => {
+              updateForm({display: 'focus' + event})
             },
             input: ([value], updateForm) => {
               updateForm({display: 'input' + value})
