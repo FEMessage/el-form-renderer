@@ -14,9 +14,9 @@ export default {
     return {
       content: [
         {
-          id: 'url',
+          id: 'avatar',
           // 全局注册的第三方组件
-          component: 'el-input-url',
+          component: 'upload-to-ali',
         }
       ]
     }

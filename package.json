@@ -38,7 +38,7 @@
     "@babel/core": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "@femessage/el-input-url": "^0.1.0",
+    "@femessage/upload-to-ali": "^1.8.0",
     "babel-loader": "^8.0.5",
     "element-ui": "^2.7.2",
     "file-loader": "^3.0.1",
