@@ -14,17 +14,9 @@ export default {
     return {
       content: [
         {
-          id: 'avatar',
+          id: 'url',
           // 全局注册的第三方组件
-          component: 'upload-to-ali',
-          on: {
-            loaded: (e) => {
-              console.log('loaded', e)
-            },
-            delete: (e) => {
-              console.log('delete', e)
-            }
-          }
+          component: 'el-input-url',
         }
       ]
     }
