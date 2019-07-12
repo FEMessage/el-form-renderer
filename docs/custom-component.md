@@ -16,7 +16,15 @@ export default {
         {
           id: 'avatar',
           // 全局注册的第三方组件
-          component: 'upload-to-ali'
+          component: 'upload-to-ali',
+          on: {
+            loaded: (e) => {
+              console.log('loaded', e)
+            },
+            delete: (e) => {
+              console.log('delete', e)
+            }
+          }
         }
       ]
     }

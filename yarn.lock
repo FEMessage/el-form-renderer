@@ -3029,6 +3029,11 @@ dotenv@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/dotenv/download/dotenv-5.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdotenv%2Fdownload%2Fdotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
 
+dotenv@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.npm.taobao.org/dotenv/download/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+  integrity sha1-7TEMFltOipe7dFsKnZnDG9pWZEA=
+
 dotgitignore@2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/dotgitignore/download/dotgitignore-2.1.0.tgz#a4b15a4e4ef3cf383598aaf1dfa4a04bcc089b7b"

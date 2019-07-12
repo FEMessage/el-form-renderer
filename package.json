@@ -40,6 +40,7 @@
     "@babel/preset-env": "^7.4.3",
     "@femessage/upload-to-ali": "^1.4.0",
     "babel-loader": "^8.0.5",
+    "dotenv": "^8.0.0",
     "element-ui": "^2.7.2",
     "file-loader": "^3.0.1",
     "github-release-notes": "^0.17.0",

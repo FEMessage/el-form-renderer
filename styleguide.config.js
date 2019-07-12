@@ -1,6 +1,12 @@
 const {VueLoaderPlugin} = require('vue-loader')
 const path = require('path')
 const glob = require('glob')
+const env = Object.assign({}, require('dotenv').config().parsed, {
+  OSS_KEY: process.env.OSS_KEY,
+  OSS_SECRET: process.env.OSS_SECRET,
+  OSS_BUCKET: process.env.OSS_BUCKET,
+  OSS_REGION: process.env.OSS_REGION
+})
 
 const sections = (() => {
   const docs = glob
@@ -70,6 +76,11 @@ module.exports = {
         }
       ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [
+      new VueLoaderPlugin(),
+      new (require('webpack')).DefinePlugin({
+        'process.env': JSON.stringify(env)
+      })
+    ]
   }
 }

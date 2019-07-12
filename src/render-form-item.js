@@ -78,11 +78,11 @@ export default {
           props,
           on: {
             ...Object.keys(on).reduce((obj, eName) => {
-              obj[eName] = e => on[eName](e, updateForm)
+              obj[eName] = (...args) => on[eName](args, updateForm)
               return obj
             }, {}),
             // 手动更新表单数据
-            input: value => {
+            input: (value, ...rest) => {
               // 默认字符串类型处理去空格
               const trimVal =
                 typeof value === 'string' &&
@@ -94,7 +94,7 @@ export default {
               if (typeof data.atChange === 'function') {
                 data.atChange(data.id, trimVal)
               }
-              if (on.input) on.input(trimVal, updateForm)
+              if (on.input) on.input([trimVal, ...rest], updateForm)
             }
           }
         },
