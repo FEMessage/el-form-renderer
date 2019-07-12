@@ -2,7 +2,9 @@
 
 ```vue
 <template>
-  <el-form-renderer :content="content" inline />
+  <el-form-renderer ref="form" :content="content" inline>
+    <el-button @click="setOptions">变更区域</el-button>
+  </el-form-renderer>
 </template>
 
 <script>
@@ -27,6 +29,20 @@ export default {
           }]
         }
       ]
+    }
+  },
+  methods: {
+    setOptions() {
+      this.$refs.form.setOptions('area', [
+        {
+          label: '广州',
+          value: 'guangzhou'
+        },
+        {
+          label: '杭州',
+          value: 'hangzhou'
+        }
+      ])
     }
   }
 }
