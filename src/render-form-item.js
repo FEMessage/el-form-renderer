@@ -70,7 +70,7 @@ export default {
       let props = Object.assign({}, obj, {value})
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       const {updateForm} = this.$parent.$parent
-      const on = data.on || {}
+      const {on = {}} = data
       return h(
         data.component || 'el-' + elType,
         {
