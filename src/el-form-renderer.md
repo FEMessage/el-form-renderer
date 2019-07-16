@@ -42,6 +42,9 @@ interface Content {
    */
   type: string
 
+  // 可以通过传入VNode类型，来设置form-item的slot-label
+  label: string | VNode
+
   /**
    * 当type="group"时使用
    * items内依然遵循同一层级的id不重复的原则

@@ -16,6 +16,9 @@ function validator(data) {
 export default {
   mixins: [mixinOptionExtensions, mixinEnableWhen, mixinHidden],
   props: {
+    /**
+     * {Object} 表单属性定义
+     */
     data: Object,
     prop: {
       type: String,
@@ -23,6 +26,7 @@ export default {
         return this.data.id
       }
     },
+    // 单项表单数据值
     itemValue: {},
     value: Object,
     disabled: Boolean,
@@ -36,30 +40,33 @@ export default {
       return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
     }
   },
-  render(h) {
+  render() {
     validator(this.data) // 对数据进行简单校验
-    return h(
-      'el-form-item',
-      {
-        props: {
-          prop: this.prop,
-          label: this.data.label,
-          rules:
-            this._show && Array.isArray(this.data.rules) ? this.data.rules : []
-        },
-        attrs: this.data.attrs,
-        style: !this._show ? 'display: none;' : '' // 使用 v-show 减少 dom 操作
-      },
-      [this.renderFormItemContent(h, this.data, this.itemValue)]
+    const {label} = this.data
+    const isLabelString = typeof label === 'string'
+    return (
+      <ElFormItem
+        prop={this.prop}
+        label={isLabelString ? label : ''}
+        rules={
+          this._show && Array.isArray(this.data.rules) ? this.data.rules : []
+        }
+        {...{attrs: this.data.attrs}}
+        style={!this._show ? 'display:none' : ''}
+      >
+        {[
+          this.renderFormItemContent(),
+          !isLabelString && <span slot="label">{label}</span>
+        ]}
+      </ElFormItem>
     )
   },
   methods: {
     /**
      * 渲染表单项的内容
-     * @param  {Object} data 表单属性定义
-     * @param  {All} value 单项表单数据值
      */
-    renderFormItemContent(h, data, value) {
+    renderFormItemContent() {
+      const {data, itemValue: value} = this
       let obj = isObject(data.el) ? data.el : {}
       let elType =
         data.type === 'checkbox-button'
@@ -71,7 +78,7 @@ export default {
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
-      return h(
+      return this.$createElement(
         data.component || 'el-' + elType,
         {
           attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
@@ -98,17 +105,15 @@ export default {
             }
           }
         },
-        [
-          (() => {
-            let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
-            if (
-              typeof optRenderer === 'function' &&
-              Array.isArray(this.options)
-            ) {
-              return this.options.map(optRenderer)
-            }
-          })()
-        ]
+        (() => {
+          let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
+          if (
+            typeof optRenderer === 'function' &&
+            Array.isArray(this.options)
+          ) {
+            return this.options.map(optRenderer)
+          }
+        })()
       )
     }
   }

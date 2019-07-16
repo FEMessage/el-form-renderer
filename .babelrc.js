@@ -1,6 +1,9 @@
 module.exports = api => {
   return {
-    presets: [['@babel/env', {modules: api.env('test') ? 'commonjs' : false}]],
+    presets: [
+      ['@babel/env', {modules: api.env('test') ? 'commonjs' : false}],
+      '@vue/babel-preset-jsx'
+    ],
     plugins: [
       [
         '@babel/transform-runtime',
