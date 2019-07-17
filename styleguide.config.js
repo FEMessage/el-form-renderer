@@ -44,6 +44,7 @@ module.exports = {
   },
   sections,
   require: ['./styleguide'],
+  jsxInExamples: true,
   webpackConfig: {
     module: {
       rules: [
