@@ -13,13 +13,13 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-* [Introduction](#Introduction)
-* [Feature](#Feature)
-* [Demo](#Demo)
-* [Quick start](#Quick-start)
-* [Inspiration](#Inspiration)
-* [License](#License)
-* [Contributors](#Contributors)
+* [Introduction](#introduction)
+* [Feature](#feature)
+* [Demo](#demo)
+* [Quick start](#quick-start)
+* [Inspiration](#inspiration)
+* [License](#license)
+* [Contributors](#contributors)
 
 ## Introduction
 
