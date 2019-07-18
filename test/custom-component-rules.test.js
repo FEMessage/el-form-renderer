@@ -5,7 +5,7 @@ const mockingComponentOptions = {
   staticRenderFns() {}
 }
 
-describe('增强组件表单项', () => {
+describe('自定义组件规则', () => {
   test('调用函数返回规则', () => {
     const {rulesContent, expectContent} = getFunctionRulesContent()
     expect(customComponentRules(rulesContent)).toEqual(expectContent)
