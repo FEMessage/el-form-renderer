@@ -2,7 +2,7 @@
 
 el-form-renderer 页面
 
-`YourPage.vue`
+`your-page.vue`
 
 ```html
 <template>
@@ -10,7 +10,7 @@ el-form-renderer 页面
 </template>
 
 <script>
-import YourComponent from './YourComponent.vue'
+import YourComponent from './your-component.vue'
 export default {
   data() {
     return {
@@ -29,7 +29,7 @@ export default {
 
 组件
 
-`YourComponent.vue`
+`your-component.vue`
 
 ```html
 <template>
