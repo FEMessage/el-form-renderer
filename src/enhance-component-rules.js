@@ -1,6 +1,6 @@
 export default function(content) {
   // 使用全局注册的组件暂时无法处理
-  if (!content.component && typeof content.component !== 'string') {
+  if (!content.component || typeof content.component === 'string') {
     return content
   }
 
