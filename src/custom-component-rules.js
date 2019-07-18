@@ -6,7 +6,7 @@ export default function(content) {
 
   const component = content.component
 
-  const rules = content.rules || (content.rules = [])
+  const {rules = []} = content
 
   if (component.rules) {
     typeof component.rules === 'function'
