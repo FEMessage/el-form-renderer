@@ -58,4 +58,5 @@ export default {
 
 ## 注意事项
 
-目前无法通过字符串`component: 'your-component'`的方式使用此特性
+目前无法通过字符串 `component: 'your-component'` 的方式使用此特性
+即使用 `Vue.component('your-component', YourComponent)` 注册的组件
