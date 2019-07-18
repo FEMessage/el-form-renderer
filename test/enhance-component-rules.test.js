@@ -1,4 +1,4 @@
-import enhanceContent from '../src/enhance-content'
+import enhanceComponentRules from '../src/enhance-component-rules'
 
 const mockingComponentOptions = {
   render() {},
@@ -42,5 +42,5 @@ const expectContent = {
 }
 
 test('增强组件表单项', () => {
-  expect(enhanceContent(targetContent)).toEqual(expectContent)
+  expect(enhanceComponentRules(targetContent)).toEqual(expectContent)
 })

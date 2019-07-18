@@ -1,4 +1,4 @@
-import enhanceContent from './enhance-content'
+import enhanceComponentRules from './enhance-component-rules'
 
 export default function transformContent(content) {
   return content.map(item => {
@@ -11,9 +11,9 @@ export default function transformContent(content) {
     }
 
     const transformedItem = transformItem(item)
-    const enhancedContent = enhanceContent(transformedItem)
+    const enhancedItem = enhanceComponentRules(transformedItem)
 
-    return enhancedContent
+    return enhancedItem
   })
 }
 
