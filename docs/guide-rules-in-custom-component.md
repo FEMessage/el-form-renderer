@@ -58,4 +58,4 @@ export default {
 
 ## 注意事项
 
-目前无法通过字符串`component: 'YourComponent'`的方式使用此特性
+目前无法通过字符串`component: 'your-component'`的方式使用此特性
