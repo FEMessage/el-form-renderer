@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/FEMessage/el-form-renderer/compare/v1.9.0...v1.10.0) (2019-07-18)
+
+
+### Features
+
+* 支持自定义组件自定义 rules ([a38368a](https://github.com/FEMessage/el-form-renderer/commit/a38368a))
+
+
+
 ## [1.9.0](https://github.com/FEMessage/el-form-renderer/compare/v1.8.0...v1.9.0) (2019-07-12)
 
 
