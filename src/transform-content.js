@@ -1,3 +1,5 @@
+import enhanceContent from './enhance-content'
+
 export default function transformContent(content) {
   return content.map(item => {
     if (item.type === 'group') {
@@ -8,7 +10,10 @@ export default function transformContent(content) {
       return item
     }
 
-    return transformItem(item)
+    const transformedItem = transformItem(item)
+    const enhancedContent = enhanceContent(transformedItem)
+
+    return enhancedContent
   })
 }
 

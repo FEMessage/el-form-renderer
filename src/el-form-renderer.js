@@ -29,10 +29,6 @@ const GROUP = 'group'
 export default {
   name: 'ElFormRenderer',
   render(h) {
-    const content = transformContent(this.content)
-    this._content = content
-    content.forEach(this.initItemValue) // handle default value
-
     return h(
       'el-form',
       {
@@ -41,7 +37,7 @@ export default {
         }),
         ref: 'elForm'
       },
-      content
+      this._content
         .map((item, index) => {
           const data = {
             props: {
@@ -71,6 +67,10 @@ export default {
   components: {
     RenderFormItem,
     RenderFormGroup
+  },
+  beforeMount() {
+    this._content = transformContent(this.content)
+    this._content.forEach(this.initItemValue)
   },
   mounted() {
     this.$nextTick(() => {
