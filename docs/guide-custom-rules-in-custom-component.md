@@ -38,14 +38,12 @@ export default {
 
 <script>
 export default {
-  rules() {
-    return [
-      {
-        required: true,
-        message: '自定义组件的提醒消息'
-      }
-    ]
-  },
+  rules: [
+    {
+      required: true,
+      message: '自定义组件的提醒消息'
+    }
+  ],
   props: ['value'],
   methods: {
     onInput(val) {
@@ -56,7 +54,21 @@ export default {
 </script>
 ```
 
+`rules` 也可以是个函数, 参数是当前表单项配置, 需要返回一个数组.
+
+```js
+rules(item) {
+  return [
+    {
+      required: true,
+      message: `${item.id} 不能为空`
+    }
+  ]
+}
+```
+
 ## 注意事项
 
-目前无法通过字符串 `component: 'your-component'` 的方式使用此特性
+暂不支持全局注册的组件
+
 即使用 `Vue.component('your-component', YourComponent)` 注册的组件
