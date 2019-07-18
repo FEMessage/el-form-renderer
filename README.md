@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![12月-18-2018 20-14-26](./assets/form.gif)
+![form.gif](https://cdn.nlark.com/yuque/0/2019/gif/224563/1561710423541-8a461306-63c8-4af4-a519-6e61e90fb8c8.gif#align=left&display=inline&height=693&name=form.gif&originHeight=693&originWidth=640&size=2958639&status=done&width=640)
 
 [English](./README-en.md)
 

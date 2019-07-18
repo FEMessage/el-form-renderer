@@ -1,3 +1,5 @@
+import customComponentRules from './custom-component-rules'
+
 export default function transformContent(content) {
   return content.map(item => {
     if (item.type === 'group') {
@@ -8,7 +10,8 @@ export default function transformContent(content) {
       return item
     }
 
-    return transformItem(item)
+    const transformedItem = transformItem(item)
+    return customComponentRules(transformedItem)
   })
 }
 
