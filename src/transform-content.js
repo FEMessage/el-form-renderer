@@ -1,4 +1,4 @@
-import enhanceComponentRules from './enhance-component-rules'
+import customComponentRules from './custom-component-rules'
 
 export default function transformContent(content) {
   return content.map(item => {
@@ -11,9 +11,7 @@ export default function transformContent(content) {
     }
 
     const transformedItem = transformItem(item)
-    const enhancedItem = enhanceComponentRules(transformedItem)
-
-    return enhancedItem
+    return customComponentRules(transformedItem)
   })
 }
 

@@ -1,4 +1,4 @@
-import enhanceComponentRules from '../src/enhance-component-rules'
+import customComponentRules from '../src/custom-component-rules'
 
 const mockingComponentOptions = {
   render() {},
@@ -8,12 +8,12 @@ const mockingComponentOptions = {
 describe('增强组件表单项', () => {
   test('调用函数返回规则', () => {
     const {rulesContent, expectContent} = getFunctionRulesContent()
-    expect(enhanceComponentRules(rulesContent)).toEqual(expectContent)
+    expect(customComponentRules(rulesContent)).toEqual(expectContent)
   })
 
   test('获取静态规则', () => {
     const {rulesContent, expectContent} = getStaticRulesContent()
-    expect(enhanceComponentRules(rulesContent)).toEqual(expectContent)
+    expect(customComponentRules(rulesContent)).toEqual(expectContent)
   })
 })
 
