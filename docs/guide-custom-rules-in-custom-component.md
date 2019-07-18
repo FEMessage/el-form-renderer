@@ -1,6 +1,6 @@
 # 自定义组件设置自定义校验规则
 
-el-form-renderer 页面
+使用了 el-form-renderer 的页面
 
 `your-page.vue`
 
