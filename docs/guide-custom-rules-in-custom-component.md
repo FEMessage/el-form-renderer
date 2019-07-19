@@ -70,7 +70,7 @@ export default {
 
 `rules` 也可以是个函数, 参数是当前表单项配置, 需要返回一个数组.
 
-```js
+```bash
 rules(item) {
   return [
     {
