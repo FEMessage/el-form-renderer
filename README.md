@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![form.gif](https://cdn.nlark.com/yuque/0/2019/gif/224563/1561710423541-8a461306-63c8-4af4-a519-6e61e90fb8c8.gif#align=left&display=inline&height=693&name=form.gif&originHeight=693&originWidth=640&size=2958639&status=done&width=640)
+![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
 
 [English](./README-en.md)
 
@@ -23,14 +23,11 @@
 
 ## Introduction
 
-## 前言
-
 我们 [github 有这些组件](https://github.com/FEMessage)，它们并非孤立的，而是有关联的
 
 我们开发的表单相关的组件都可以配合 [@femessage/el-form-renderer](https://github.com/FEMessage/el-form-renderer)（以下简称为 el-form-renderer）使用
 
 可以说 el-form-renderer 是核心，扮演着枢纽的角色
-![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
 
 ### 内部集成
 
