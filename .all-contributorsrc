@@ -66,6 +66,15 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "OuZuYu",
+      "name": "OuZuYu",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26338853?v=4",
+      "profile": "http://67.216.223.155/resume/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
