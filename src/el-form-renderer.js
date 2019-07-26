@@ -80,7 +80,6 @@ export default {
       })
 
       /**
-       * 重写 ElForm 的 resetFields 方法
        * 首先执行 ElForm 原本的 resetFields 方法
        * 遍历 formRenderer data 里面的 value 对象
        * 如果这是一个数组，那么就把这个数组里面的 undefined 值去掉
