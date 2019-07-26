@@ -25,6 +25,7 @@ module.exports = {
     '♻️ Tests:': ['test'],
     '🚀 Performance:': ['performance'],
     '⚓ Dependency upgrades:': ['dependencies'],
-    '🏡 Chore:': ['chore']
+    '🏡 Chore:': ['chore'],
+    '🎩 Hack': ['hack']
   }
 }
