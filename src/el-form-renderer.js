@@ -1,9 +1,9 @@
-import RenderFormItem from './render-form-item'
-import RenderFormGroup from './render-form-group'
 import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
-import {isObject} from './utils'
+import RenderFormGroup from './render-form-group'
+import RenderFormItem from './render-form-item'
 import transformContent from './transform-content'
+import {isObject} from './utils'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -78,6 +78,20 @@ export default {
       Object.keys(Form.methods).forEach(item => {
         this[item] = this.$refs.elForm[item]
       })
+
+      /**
+       * 首先执行 ElForm 原本的 resetFields 方法
+       * 遍历 formRenderer data 里面的 value 对象
+       * 如果这是一个数组，那么就把这个数组里面的 undefined 值去掉
+       */
+      this.resetFields = () => {
+        this.$refs.elForm['resetFields']()
+        Object.keys(this.value).forEach(key => {
+          if (Array.isArray(this.value[key])) {
+            this.value[key] = this.value[key].filter(val => val !== undefined)
+          }
+        })
+      }
     })
 
     this.initItemOption()

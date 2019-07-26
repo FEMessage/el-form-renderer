@@ -1,6 +1,9 @@
 types:
   feat: 'enhancement'
-  fix: 'bug'
+  fix: 
+    hack: 'hack'
+    default: 'bug'
+  hack: 'hack'
   docs: 'documentation'
   refactor: 'refactor'
   test: 'test'
