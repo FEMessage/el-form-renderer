@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![form.gif](https://cdn.nlark.com/yuque/0/2019/gif/224563/1561710423541-8a461306-63c8-4af4-a519-6e61e90fb8c8.gif#align=left&display=inline&height=693&name=form.gif&originHeight=693&originWidth=640&size=2958639&status=done&width=640)
+![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
 
 [English](./README-en.md)
 
@@ -15,40 +15,57 @@
 
 * [Introduction](#introduction)
 * [Feature](#feature)
-* [Demo](#demo)
-* [Quick start](#quick-start)
+* [Links](#links)
+* [Quick Start](#quick-start)
 * [Inspiration](#inspiration)
 * [License](#license)
 * [Contributors](#contributors)
 
 ## Introduction
 
-**WHAT**
+我们 [github 有这些组件](https://github.com/FEMessage)，它们并非孤立的，而是有关联的
 
-`el-form-renderer`是基于 [element-ui](https://github.com/ElemeFE/element) 封装的**表单渲染器**，但不局限于 [element-ui](https://github.com/ElemeFE/element) 组件。在完整继承了 element 的 form 表单属性的基础上进行了简单扩展，一些非表单组件或者封装的自定义组件，如图片上传、富文本等也可进行整合，从而用户能够通过使用一段预设的数据渲染出一个完整的表单。
+我们开发的表单相关的组件都可以配合 [@femessage/el-form-renderer](https://github.com/FEMessage/el-form-renderer)（以下简称为 el-form-renderer）使用
 
-**WHY**
+可以说 el-form-renderer 是核心，扮演着枢纽的角色
 
-日常需要面对大量表单类的场景，通常这些表单结构相似，逻辑存在重复。el-form-renderer 没有复杂的逻辑，只需进行简单配置 JSON 的方式就可实现常用表单功能，节省写代码的时间和精力，减少重复冗余的代码, 让开发者专注业务逻辑。
+### 内部集成
+
+el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活的配置内部表单渲染的场景。
+
+以 el-data-table 为例，我们知道通过 el-data-table 可以快速生成一个列表的 CRUD 页面。而其中的搜索框，新增编辑的内容弹框，就是由 el-form-renderer 生成的。通过传入对应的配置项，就能生成相应的内容，不需要写 template。
+
+### 外部扩展
+
+在一些表单项场景，el-form-renderer 可用于表单项进行扩展。
+
+自定义组件按一定的格式实现 v-model，就能让 el-form-render 能渲染自定义组件
+
+如下图所示，两个图片上传、一个富文本编辑器，都是借助 el-form-renderer 渲染的。
+
+![example.png](https://cdn.nlark.com/yuque/0/2019/png/160590/1562641394165-dc22af20-2863-443f-8f1a-17cd12b1f359.png#align=left&display=inline&height=1488&name=example.png&originHeight=1488&originWidth=2646&size=145427&status=done&width=2646)
 
 ## Feature
 
 * 只需进行简单的配置，即可实现常用表单功能
-* 支持使用自定义组件
-* 批量更新数据 updateForm
 * 支持 setOptions 方法，动态改变 select 的 options
 * content 支持 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
+* 支持 `on` 进行事件监听，处理表单数据联动
+* 支持 `hidden` 进行表单项动态显示与隐藏
+* 支持渲染自定义组件
+* 支持自定义组件设置校验规则
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## Demo
+## Links
 
-* [doc and online demo](https://femessage.github.io/el-form-renderer/)
+* [api doc and online demo](https://femessage.github.io/el-form-renderer/)
 * [自定义组件接入指南](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
+* [自定义组件设置校验规则](https://github.com/FEMessage/el-form-renderer/blob/master/docs/guide-custom-rules-in-custom-component.md)
 
 **[⬆ Back to Top](#table-of-contents)**
 
-## Quick start
+## Quick Start
 
 ```sh
 # Step1 确认你已经正确安装并使用了 element-ui
@@ -93,9 +110,17 @@ thanks to [element-patch](https://github.com/leezng/element-patch)
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/Alvin-Liu"><img src="https://avatars0.githubusercontent.com/u/11909145?v=4" width="100px;" alt="Alvin"/><br /><sub><b>Alvin</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=Alvin-Liu" title="Code">💻</a> <a href="#review-Alvin-Liu" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3AAlvin-Liu" title="Bug reports">🐛</a> <a href="#blog-Alvin-Liu" title="Blogposts">📝</a> <a href="#ideas-Alvin-Liu" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="http://levy.work"><img src="https://avatars3.githubusercontent.com/u/9384365?v=4" width="100px;" alt="levy"/><br /><sub><b>levy</b></sub></a><br /><a href="#review-levy9527" title="Reviewed Pull Requests">👀</a> <a href="#infra-levy9527" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-levy9527" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://evila.me"><img src="https://avatars3.githubusercontent.com/u/19513289?v=4" width="100px;" alt="EVILLT"/><br /><sub><b>EVILLT</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=evillt" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3Aevillt" title="Bug reports">🐛</a> <a href="#blog-evillt" title="Blogposts">📝</a> <a href="#ideas-evillt" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://donaldshen.github.io/portfolio"><img src="https://avatars3.githubusercontent.com/u/19591950?v=4" width="100px;" alt="Donald Shen"/><br /><sub><b>Donald Shen</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=donaldshen" title="Documentation">📖</a> <a href="#example-donaldshen" title="Examples">💡</a></td><td align="center"><a href="https://colmugx.github.io"><img src="https://avatars1.githubusercontent.com/u/21327913?v=4" width="100px;" alt="ColMugX"/><br /><sub><b>ColMugX</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Tests">⚠️</a> <a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Documentation">📖</a></td></tr></table>
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Alvin-Liu"><img src="https://avatars0.githubusercontent.com/u/11909145?v=4" width="100px;" alt="Alvin"/><br /><sub><b>Alvin</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=Alvin-Liu" title="Code">💻</a> <a href="#review-Alvin-Liu" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3AAlvin-Liu" title="Bug reports">🐛</a> <a href="#blog-Alvin-Liu" title="Blogposts">📝</a> <a href="#ideas-Alvin-Liu" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://levy.work"><img src="https://avatars3.githubusercontent.com/u/9384365?v=4" width="100px;" alt="levy"/><br /><sub><b>levy</b></sub></a><br /><a href="#review-levy9527" title="Reviewed Pull Requests">👀</a> <a href="#infra-levy9527" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-levy9527" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://evila.me"><img src="https://avatars3.githubusercontent.com/u/19513289?v=4" width="100px;" alt="EVILLT"/><br /><sub><b>EVILLT</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=evillt" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3Aevillt" title="Bug reports">🐛</a> <a href="#blog-evillt" title="Blogposts">📝</a> <a href="#ideas-evillt" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://donaldshen.github.io/portfolio"><img src="https://avatars3.githubusercontent.com/u/19591950?v=4" width="100px;" alt="Donald Shen"/><br /><sub><b>Donald Shen</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=donaldshen" title="Documentation">📖</a> <a href="#example-donaldshen" title="Examples">💡</a></td>
+    <td align="center"><a href="https://colmugx.github.io"><img src="https://avatars1.githubusercontent.com/u/21327913?v=4" width="100px;" alt="ColMugX"/><br /><sub><b>ColMugX</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Code">💻</a> <a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Tests">⚠️</a> <a href="https://github.com/FEMessage/el-form-renderer/commits?author=colmugx" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://67.216.223.155/resume/"><img src="https://avatars3.githubusercontent.com/u/26338853?v=4" width="100px;" alt="OuZuYu"/><br /><sub><b>OuZuYu</b></sub></a><br /><a href="https://github.com/FEMessage/el-form-renderer/issues?q=author%3AOuZuYu" title="Bug reports">🐛</a></td>
+  </tr>
+</table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

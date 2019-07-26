@@ -83,18 +83,21 @@ export default {
             }, {}),
             // 手动更新表单数据
             input: (value, ...rest) => {
-              // 默认字符串类型处理去空格
+              this.$emit('updateValue', {id: data.id, value: value})
+              // 更新表单时调用
+              if (typeof data.atChange === 'function') {
+                data.atChange(data.id, value)
+              }
+              if (on.input) on.input([value, ...rest], updateForm)
+            },
+            change: (value, ...rest) => {
               const trimVal =
                 typeof value === 'string' &&
                 (data.trim === undefined || data.trim)
                   ? value.trim()
                   : value
               this.$emit('updateValue', {id: data.id, value: trimVal})
-              // 更新表单时调用
-              if (typeof data.atChange === 'function') {
-                data.atChange(data.id, trimVal)
-              }
-              if (on.input) on.input([trimVal, ...rest], updateForm)
+              if (on.change) on.change([trimVal, ...rest], updateForm)
             }
           }
         },
