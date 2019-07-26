@@ -41,6 +41,10 @@
     "test": "jest"
   },
   "homepage": "https://github.com/FEMessage/el-form-renderer",
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.4.3",
@@ -85,10 +89,6 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "dependencies": {
-    "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
