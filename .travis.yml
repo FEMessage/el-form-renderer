@@ -8,7 +8,6 @@ git:
   depth: 3
 install:
 - yarn --frozen-lockfile
-- yarn test
 script:
 - ./build.sh
 after_success:
