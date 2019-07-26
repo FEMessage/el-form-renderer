@@ -3,7 +3,7 @@ import _set from 'lodash.set'
 import RenderFormGroup from './render-form-group'
 import RenderFormItem from './render-form-item'
 import transformContent from './transform-content'
-import {isObject, removeArrayUndefined} from './utils'
+import {isObject} from './utils'
 
 // 拷贝简单数据
 //    不考虑引用，函数等复杂数据
@@ -89,7 +89,7 @@ export default {
         this.$refs.elForm['resetFields']()
         Object.keys(this.value).forEach(key => {
           if (Array.isArray(this.value[key])) {
-            this.value[key] = removeArrayUndefined(this.value[key])
+            this.value[key] = this.value[key].filter(val => val !== undefined)
           }
         })
       }

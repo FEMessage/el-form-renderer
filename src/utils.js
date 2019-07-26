@@ -21,18 +21,3 @@ export const toUpperCaseFirst = str => {
 export const isObject = obj => {
   return Object.prototype.toString.call(obj) === '[object Object]'
 }
-
-/**
- * 清除数组里面的 undefined 值
- */
-export const removeArrayUndefined = (array = []) => {
-  if (!Array.isArray(array)) {
-    return
-  }
-
-  if (!array.length) {
-    return
-  }
-
-  return array.filter(val => val !== undefined)
-}
