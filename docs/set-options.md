@@ -1,9 +1,9 @@
-选择框
+Use setOptions to update select options
 
 ```vue
 <template>
   <el-form-renderer ref="form" :content="content" inline>
-    <el-button @click="setOptions">变更区域</el-button>
+    <el-button @click="setOptions">set</el-button>
   </el-form-renderer>
 </template>
 
@@ -16,15 +16,15 @@ export default {
         {
           id: 'area',
           type: 'select',
-          label: '选择框',
+          label: 'select',
           el: {
-            placeholder: '请选择内容'
+            placeholder: 'select'
           },
           options: [{
-            label: '区域一',
+            label: 'shanghai',
             value: 'shanghai'
           }, {
-            label: '区域二',
+            label: 'beijing',
             value: 'beijing'
           }]
         }
@@ -35,11 +35,11 @@ export default {
     setOptions() {
       this.$refs.form.setOptions('area', [
         {
-          label: '广州',
+          label: 'guangzhou',
           value: 'guangzhou'
         },
         {
-          label: '杭州',
+          label: 'hangzhou',
           value: 'hangzhou'
         }
       ])

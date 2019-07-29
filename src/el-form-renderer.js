@@ -173,7 +173,7 @@ export default {
       })
     },
     /**
-     * 对外提供获取表单数据的函数
+     * @return {object} key is item's id, value is item's value
      * @public
      */
     getFormValue() {
@@ -205,8 +205,8 @@ export default {
       return getValue(this.value, this._content)
     },
     /**
-     * 批量更新表单数据
-     * @param {Object} 要更新的表单数据
+     * update form values
+     * @param {object} values - key is item's id, value is the new value
      * @public
      */
     updateForm(values) {
@@ -229,9 +229,9 @@ export default {
       this.value = Object.assign({}, this.value, updateValue(this._content))
     },
     /**
-     * 动态设置新的options
-     * @param {String} 表单id
-     * @param {Array} 新选项
+     * update select options
+     * @param {string} id<br>
+     * @param {array} options
      * @public
      */
     setOptions(id, options) {
