@@ -1,5 +1,3 @@
-日期选择
-
 ```vue
 <template>
   <el-form-renderer :content="content" inline />

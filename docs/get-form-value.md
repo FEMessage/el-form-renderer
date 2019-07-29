@@ -1,12 +1,12 @@
-获取表单数据
+get the form value
 
 ```vue
 <template>
   <div>
     <el-form-renderer inline :content="content" ref="form">
       <el-form-item>
-        <el-button type="primary" @click="printValue">打印表单数据</el-button>
-        <el-button @click="data = {}">清除</el-button>
+        <el-button type="primary" @click="printValue">print</el-button>
+        <el-button @click="data = {}">reset</el-button>
       </el-form-item>
     </el-form-renderer>
     <pre>{{ data }}</pre>
@@ -22,24 +22,24 @@ export default {
         {
           id: 'name',
           type: 'input',
-          label: '姓名',
+          label: 'name',
           default: 'alvin',
           el: {
-            placeholder: '请输入'
+            placeholder: 'input sth'
           }
         },
         {
           id: 'area',
           type: 'select',
-          label: '选择框',
+          label: 'select',
           el: {
-            placeholder: '请选择内容'
+            placeholder: 'select stn'
           },
           options: [{
-            label: '区域一',
+            label: 'shanghai',
             value: 'shanghai'
           }, {
-            label: '区域二',
+            label: 'beijing',
             value: 'beijing'
           }]
         }

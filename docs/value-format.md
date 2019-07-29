@@ -1,12 +1,10 @@
-格式化表单值
-
 ```vue
 <template>
   <div class="format">
     <el-form-renderer :content="content" inline ref="formRender">
       <el-form-item>
-        <el-button @click="setValue">设置</el-button>
-        <el-button type="primary" @click="getValue">获取数据</el-button>
+        <el-button @click="setValue">set value</el-button>
+        <el-button type="primary" @click="getValue">log value</el-button>
       </el-form-item>
     </el-form-renderer>
   </div>
@@ -21,12 +19,11 @@
           {
             el: {
               type: 'daterange',
-              placeholder: '选择日期',
               valueFormat: 'yyyy-MM-dd'
             },
             type: 'date-picker',
             id: 'date',
-            label: '日期',
+            label: 'date',
             inputFormat: (row) => {
               return [row.startDate, row.endDate]
             },

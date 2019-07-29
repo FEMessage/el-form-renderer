@@ -1,5 +1,3 @@
-多选框组
-
 ```vue
 <template>
   <el-form-renderer :content="content" inline />
@@ -14,16 +12,15 @@ export default {
         {
           id: 'city',
           type: 'checkbox-group',
-          label: '城市',
+          label: 'city',
           el: {
             placeholder: '请输入'
           },
-          default: ['广州'],
+          default: ['new york'],
           options: [
-            { label: '上海' },
-            { label: '北京' },
-            { label: '广州' },
-            { label: '深圳' }
+            { label: 'new york' },
+            { label: 'guangzhou' },
+            { label: 'tokyo' },
           ]
         }
       ]
