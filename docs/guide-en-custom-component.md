@@ -1,19 +1,17 @@
-# Guide to custom component access
+# Guide to developing custom component
 
-## Forewords
+## Preface
 
-[el-form-renderer](https://github.com/femessage/el-form-renderer) has a limited of `type`, only normal form items can be rendered by default. What if wanna render an upload component? The `component` option comes in handy at this time.
+In some scenario, for personalized needs, such as rendering an upload component, common form items can not meet the demand. You may want to develop a custom form item. At this time, the component option can help.
 
-This article will describes how to develop custom component that conform to the [el-form-renderer](https://github.com/femessage/el-form-renderer) access standard for rendering custom component.
+This article will describes how to develop custom component that [el-form-renderer](https://github.com/femessage/el-form-renderer) can render.
 
-## Access Standard
+## How To
 
-The key of custom component access is to implement v-model inside the component
+The key point of writing custom component is to implement v-model inside the component in this manner:
 
-[el-form-renderer](https://github.com/femessage/el-form-renderer) request to v-model is:
-
-- Has a `value` prop
-- Emit `input`
+- a props name value
+- emit input event
 
 ### Example
 
@@ -35,7 +33,7 @@ export default {
 </script>
 ```
 
-Then render this component via [el-form-renderer](https://github.com/femessage/el-form-renderer)
+Now `@femessage/el-form-renderer` can render this custom input component via component option
 
 ```html
 <template>
@@ -60,18 +58,17 @@ export default {
 </script>
 ```
 
-## Actual cases
+## More Cases
 
-Currently, we implement v-model for common form extension components according to the [el-form-renderer](https://github.com/femessage/el-form-renderer) standard,
-so you can implements data-driven rendering via [el-form-renderer](https://github.com/femessage/el-form-renderer) without writing template.
+Here is a list of components that we can use `@femessage/el-form-renderer` to render without writing template.
 
 - Upload [https://github.com/FEMessage/upload-to-ali](https://github.com/FEMessage/upload-to-ali)
-- Rich-text editor [https://github.com/FEMessage/v-editor](https://github.com/FEMessage/v-editor)
+- Rich text editor [https://github.com/FEMessage/v-editor](https://github.com/FEMessage/v-editor)
 - Area selector(Chinese area only) [https://github.com/FEMessage/el-select-area](https://github.com/FEMessage/el-select-area)
-- Number-range input [https://github.com/FEMessage/el-number-range](https://github.com/FEMessage/el-number-range)
-- Semantic-version input [https://github.com/FEMessage/el-semver-input](https://github.com/FEMessage/el-semver-input)
+- Number range input [https://github.com/FEMessage/el-number-range](https://github.com/FEMessage/el-number-range)
+- Semantic version input [https://github.com/FEMessage/el-semver-input](https://github.com/FEMessage/el-semver-input)
 
-## Read more
+## Read More
 
 - [v-model basic](https://vuejs.org/v2/guide/forms.html#Basic-Usage)
 - [v-model with Components](https://vuejs.org/v2/guide/forms.html#v-model-with-Components)
