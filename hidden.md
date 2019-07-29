@@ -1,4 +1,4 @@
-可以对表单项进行隐藏
+Hide form-item dynamically
 
 ```vue
 <template>
@@ -14,34 +14,34 @@ export default {
         {
           type: 'select',
           id: 'hobby',
-          label: '爱好',
+          label: 'hobby',
           options: [
             {
-              label: '足球',
+              label: 'football',
               value: 'football'
             },
             {
-              label: '篮球',
+              label: 'basketball',
               value: 'basketball'
             }
           ]
         },
         {
-          label: '原因',
+          label: 'reason',
           type: 'input',
           id: 'reason',
           el: {
-            placeholder: '喜欢的原因？'
+            placeholder: 'why'
           }
         },
         {
-          label: '偶像',
+          label: 'idol',
           type: 'input',
           id: 'idol',
           el: {
-            placeholder: '您最喜欢的篮球明星？'
+            placeholder: 'your idol?'
           },
-          hidden: form => form.hobby !== 'basketball' // 通过 hidden 控制显示状态
+          hidden: form => form.hobby !== 'basketball'
         },
       ]
     }

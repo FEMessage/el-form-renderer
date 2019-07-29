@@ -1,4 +1,4 @@
-表单验证规则
+Set el-form-item's rules
 
 ```vue
 <template>
@@ -14,16 +14,15 @@ export default {
         {
           id: 'name',
           type: 'input',
-          label: '姓名',
+          label: 'name',
           el: {
-            placeholder: '请输入'
+            placeholder: 'name'
           },
           rules: [
             {
               required: true,
-              message: '请输入姓名',
-              trigger: 'change',
-              whitespace: true  // 不能仅包含空格
+              message: 'miss name',
+              trigger: 'change'
             }
           ]
         }
