@@ -9,37 +9,53 @@
 
 ![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
 
-[中文文档](./README-zh.md)
-
 ## Table of Contents <!-- omit in toc -->
 
 * [Introduction](#introduction)
+  * [内部集成](#内部集成)
+  * [外部扩展](#外部扩展)
 * [Feature](#feature)
 * [Links](#links)
-* [Quick start](#quick-start)
+* [Quick Start](#quick-start)
 * [Inspiration](#inspiration)
 * [License](#license)
 * [Contributors](#contributors)
 
 ## Introduction
 
-**WHAT**
+我们 [github 有这些组件](https://github.com/FEMessage)，它们并非孤立的，而是有关联的
 
-`el-form-renderer` is based on [element-ui](https://github.com/ElemeFE/element), but not limited [element-ui](https://github.com/ElemeFE/element) components. On the basis of completely inheriting the form attribute of element-ui, extension is made. Some non-form components or custom components, such as picture uploading and rich text editor, can also be integrated, thus, users can render a complete form by using a piece of json.
+我们开发的表单相关的组件都可以配合 [@femessage/el-form-renderer](https://github.com/FEMessage/el-form-renderer)（以下简称为 el-form-renderer）使用
 
-**WHY**
+可以说 el-form-renderer 是核心，扮演着枢纽的角色
 
-In our daily development, there are lots page with form, and usually the form structure is similar, the logic is repeated. el-form-renderer does not have complicated logic. It only convert JSON to render form item, save time and energy to write business logic, and reduce duplicate code.
+### 内部集成
+
+el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活的配置内部表单渲染的场景。
+
+以 el-data-table 为例，我们知道通过 el-data-table 可以快速生成一个列表的 CRUD 页面。而其中的搜索框，新增编辑的内容弹框，就是由 el-form-renderer 生成的。通过传入对应的配置项，就能生成相应的内容，不需要写 template。
+
+### 外部扩展
+
+在一些表单项场景，el-form-renderer 可用于表单项进行扩展。
+
+自定义组件按一定的格式实现 v-model，就能让 el-form-render 能渲染自定义组件
+
+如下图所示，两个图片上传、一个富文本编辑器，都是借助 el-form-renderer 渲染的。
+
+![example.png](https://cdn.nlark.com/yuque/0/2019/png/160590/1562641394165-dc22af20-2863-443f-8f1a-17cd12b1f359.png#align=left&display=inline&height=1488&name=example.png&originHeight=1488&originWidth=2646&size=145427&status=done&width=2646)
 
 ## Feature
 
-* Render form with json
-* Support integrate with custom components
-* Support batch update form data with updateForm method
-* Support setOptions method, dynamically change select options
-* Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
+* 只需进行简单的配置，即可实现常用表单功能
+* 支持 setOptions 方法，动态改变 select 的 options
+* content 支持 `inputFormat`、`outputFormat`、`trim`，对组件输入输出值处理
+* 支持 `on` 进行事件监听，处理表单数据联动
+* 支持 `hidden` 进行表单项动态显示与隐藏
+* 支持渲染自定义组件
+* 支持自定义组件设置校验规则
 
-**[⬆Back to Top](#table-of-contents)**
+**[⬆ Back to Top](#table-of-contents)**
 
 ## Links
 
@@ -47,11 +63,12 @@ In our daily development, there are lots page with form, and usually the form st
 * [自定义组件接入指南](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
 * [自定义组件设置校验规则](https://github.com/FEMessage/el-form-renderer/blob/master/docs/guide-custom-rules-in-custom-component.md)
 
-**[⬆Back to Top](#table-of-contents)**
+**[⬆ Back to Top](#table-of-contents)**
 
-## Quick start
+## Quick Start
 
 ```sh
+# Step1 确认你已经正确安装并使用了 element-ui
 yarn add @femessage/el-form-renderer
 ```
 
@@ -59,8 +76,10 @@ yarn add @femessage/el-form-renderer
 <template>
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
+
 <script>
 import ElFormRenderer from '@femessage/el-form-renderer'
+
 export default {
   components: {
     ElFormRenderer
@@ -74,7 +93,7 @@ export default {
 </script>
 ```
 
-**[⬆Back to Top](#table-of-contents)**
+**[⬆ Back to Top](#table-of-contents)**
 
 ## Inspiration
 
