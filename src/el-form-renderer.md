@@ -30,8 +30,8 @@ export default {
 
 /**
  * 表单项的typescript定义
- * definition of form-item written in typescript.
  * 支持所有el-form-item's props。表单项组件本身的props定义在el上
+ * definition of form-item written in typescript.
  * support all el-form-item's props. The component's props need to be set at prop el
  */
 interface Content {
@@ -41,16 +41,16 @@ interface Content {
 
   /**
    * 可以是element提供的所有表单组件类型，如传入'input'，则渲染出'el-input'
-   * support all element's form component, e.g., type 'input' will render as 'el-input'.
    * 当type="group"时，可以创造复杂对象类型的表单数据，配合items使用。此时getFormValue()返回的是对象类型的数据，对象的每个属性对应items里的每一项
+   * support all element's form component, e.g., type 'input' will render as 'el-input'.
    * you can create nested form value with type 'group' and use items to define that form value's shape. The type of this form value will be 'object'
    */
   type: string
 
   /**
    * 当type="group"时使用
-   * using with type 'group'
    * items内依然遵循同一层级的id不重复的原则
+   * using with type 'group'
    * the `id` in each item of items must be unique
    */
   items: Content[]
@@ -64,8 +64,8 @@ interface Content {
 
   /**
    * 传入一个方法，并返回 boolean，返回 true 时则隐藏该表单项
-   * hide the form-item when return true
    * formValue 为当前 form 的值，item 为当前表单项的定义
+   * hide the form-item when return true
    * formValue is same as what getFormValue returns, and item is the config of this form-item
    */
   hidden?: (formValue: Object, item: Content) => boolean
@@ -85,8 +85,8 @@ interface Content {
 
   /**
    * 使用自定义组件
-   * custom component
    * component适用于渲染局部注册组件和自定义组件，而type适用于带el-前缀的全局组件
+   * custom component
    * use it when element's form components are not enough
    */
   component?: Vue
