@@ -1,15 +1,10 @@
-# Custom rules in custom component
+# Setting validation rules in custom component
 
-## What benefit to set validation rules in custom component?
+## Why sets validation rules in custom component?
 
-A complex form item configuration often requires the definitions of validation rules to restrict users input, there may custom validators in the rules.
-Adding a bunch of such form items, it will cause the configuration item of the page file to become very long and long.
+A complex form item configuration often needs to define some rules to check user input. And there may also be some validation in the rules. Gernerally, this will cause configurations becomes very long.
 
-Now el-form-renderer provides an interface for custom component.
-Custom component can set some rules internally to achieve encapsulation and hiding.
-Users can no longer care about the validation rules of the form.
-
-**Just one component, it's all done for you!**
+The solution is set validation rules internally in custom components. Hiding configurations inside, so developers can no longer care about the validation rules, just import the component and use it.
 
 ## Tutorial
 
@@ -80,8 +75,8 @@ rules(item) {
 
 [Checkout live demo](https://rules-component.fem-misc.now.sh/#/misc)
 
-## Attention
+## Notice
 
-Currently did NOT support globally registered component
+Currently did NOT support globally registered component.
 
-which means register via `Vue.component('your-component', YourComponent)`
+It means component registered via `Vue.component('your-component', YourComponent)` will not work.
