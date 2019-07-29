@@ -16,7 +16,7 @@
 * [Introduction](#introduction)
 * [Features](#features)
 * [Links](#links)
-* [Quick start](#quick-start)
+* [Quick Start](#quick-start)
 * [Inspiration](#inspiration)
 * [License](#license)
 * [Contributors](#contributors)
