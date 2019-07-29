@@ -7,14 +7,14 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
+![](https://cdn.nlark.com/yuque/0/2019/png/237102/1564392138773-3b4a3555-9ce5-4825-8510-53ae092711f6.png)
 
 [中文文档](./README-zh.md)
 
 ## Table of Contents <!-- omit in toc -->
 
 * [Introduction](#introduction)
-* [Feature](#feature)
+* [Features](#features)
 * [Links](#links)
 * [Quick start](#quick-start)
 * [Inspiration](#inspiration)
@@ -31,7 +31,7 @@
 
 In our daily development, there are lots page with form, and usually the form structure is similar, the logic is repeated. el-form-renderer does not have complicated logic. It only convert JSON to render form item, save time and energy to write business logic, and reduce duplicate code.
 
-## Feature
+## Features
 
 * Render form with json
 * Support integrate with custom components
@@ -43,9 +43,9 @@ In our daily development, there are lots page with form, and usually the form st
 
 ## Links
 
-* [api doc and online demo](https://femessage.github.io/el-form-renderer/)
-* [自定义组件接入指南](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
-* [自定义组件设置校验规则](https://github.com/FEMessage/el-form-renderer/blob/master/docs/guide-custom-rules-in-custom-component.md)
+* [Docs](https://femessage.github.io/el-form-renderer/)
+* [Guide to developing custom component](https://github.com/femessage/el-form-renderer/blob/dev/docs/guide-en-custom-component.md)
+* [Setting validation rules in custom component](https://github.com/FEMessage/el-form-renderer/blob/dev/docs/guide-en-custom-rules-in-custom-component.md)
 
 **[⬆Back to Top](#table-of-contents)**
 
