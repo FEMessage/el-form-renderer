@@ -229,7 +229,7 @@ export default {
       this.value = Object.assign({}, this.value, updateValue(this._content))
     },
     /**
-     * update options
+     * update select options
      * @param {string} id<br>
      * @param {array} options
      * @public
