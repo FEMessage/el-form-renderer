@@ -16,7 +16,7 @@
 * [Introduction](#introduction)
 * [Features](#features)
 * [Links](#links)
-* [Quick start](#quick-start)
+* [Quick Start](#quick-start)
 * [Inspiration](#inspiration)
 * [License](#license)
 * [Contributors](#contributors)
@@ -49,7 +49,7 @@ In our daily development, there are lots page with form, and usually the form st
 
 **[⬆Back to Top](#table-of-contents)**
 
-## Quick start
+## Quick Start
 
 ```sh
 yarn add @femessage/el-form-renderer
