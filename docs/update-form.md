@@ -1,11 +1,9 @@
-更新表单值
-
 ```vue
 <template>
   <div class="update-form">
     <el-form-renderer :content="content" inline ref="formRender">
-      <el-button @click="setValue">设置名字</el-button>
-      <el-button type="primary" @click="getValue">获取数据</el-button>
+      <el-button @click="setValue">set name as alvin</el-button>
+      <el-button type="primary" @click="getValue">log value</el-button>
     </el-form-renderer>
   </div>
 </template>
@@ -19,23 +17,23 @@
           {
             id: 'name',
             type: 'input',
-            label: '姓名',
+            label: 'name',
             el: {
-              placeholder: '请输入'
+              placeholder: 'name'
             }
           },
           {
             id: 'area',
             type: 'select',
-            label: '选择框',
+            label: 'area',
             el: {
-              placeholder: '请选择内容'
+              placeholder: 'area'
             },
             options: [{
-              label: '区域一',
+              label: 'shanghai',
               value: 'shanghai'
             }, {
-              label: '区域二',
+              label: 'beijing',
               value: 'beijing'
             }]
           }
@@ -45,7 +43,7 @@
     methods: {
       getValue () {
         const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应id 和值组成的对象
+        console.log(value)
       },
       setValue () {
         this.$refs.formRender.updateForm({

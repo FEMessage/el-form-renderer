@@ -1,4 +1,4 @@
-监听表单项的各种事件
+Listen to any events the component emits
 
 ```vue
 <template>
@@ -11,7 +11,7 @@ export default {
     return {
       content: [
         {
-          label: '输入',
+          label: 'fullName',
           type: 'input',
           id: 'fullName',
           on: {
@@ -27,7 +27,7 @@ export default {
           },
         },
         {
-          label: '事件',
+          label: 'display',
           type: 'input',
           id: 'display',
           el: {disabled: true},
