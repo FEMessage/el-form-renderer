@@ -1,7 +1,7 @@
 可以对自定义组件传入 `props`，使用 `el` 传入
-Use `el` to set props of custom component
-
 例如配合 `upload-to-ali`，控制上传文件类型
+
+Use `el` to set props of custom component
 
 ```vue
 <template>
@@ -18,7 +18,7 @@ export default {
           id: 'document',
           component: 'upload-to-ali',
           el: {
-            accept: 'application/pdf'  // 限定 upload-to-ali 只允许 pdf 文件
+            accept: 'application/pdf'  // restrict upload-to-ali to only accept pdf
           }
         }
       ]

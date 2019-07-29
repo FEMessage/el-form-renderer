@@ -13,9 +13,6 @@ export default {
           id: 'city',
           type: 'checkbox-group',
           label: 'city',
-          el: {
-            placeholder: '请输入'
-          },
           default: ['new york'],
           options: [
             { label: 'new york' },

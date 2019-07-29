@@ -13,12 +13,12 @@ export default {
           id: 'city',
           type: 'radio-group',
           label: 'city',
-          default: 'gz',
+          default: 'new york',
           options: [
             // warnning：element radio-group use label only
-            { label: 'sh' },
-            { label: 'bj' },
-            { label: 'gz' },
+            { label: 'new york' },
+            { label: 'guangzhou' },
+            { label: 'tokyo' },
           ]
         }
       ]

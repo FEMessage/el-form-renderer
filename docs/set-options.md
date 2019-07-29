@@ -1,4 +1,4 @@
-Use setOptions to update options
+Use setOptions to update select options
 
 ```vue
 <template>
