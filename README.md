@@ -49,7 +49,7 @@ In our daily development, there are lots page with form, and usually the form st
 
 **[⬆Back to Top](#table-of-contents)**
 
-## Quick start
+## Quick Start
 
 ```sh
 yarn add @femessage/el-form-renderer
