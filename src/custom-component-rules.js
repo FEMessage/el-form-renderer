@@ -8,7 +8,7 @@ export default function(content) {
 
   const {rules = []} = content
 
-  if (component.rules) {
+  if (component.rules && content.overrideRules !== true) {
     typeof component.rules === 'function'
       ? rules.push(...component.rules(content))
       : rules.push(...component.rules)

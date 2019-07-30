@@ -71,6 +71,39 @@ rules(item) {
 }
 ```
 
+Set `overrideRules: true` to override the validation rules written in custom component
+
+```html
+<template>
+  <el-form-renderer ref="form" :content="content"></el-form-renderer>
+</template>
+
+<script>
+import YourComponent from './your-component.vue'
+export default {
+  data() {
+    return {
+      content: [
+        {
+          id: 'phone',
+          label: 'phone',
+          component: YourComponent,
+          overrideRules: true,
+          rules: [
+            {
+              required: true,
+              trigger: 'blur',
+              message: 'Can not empty!'
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
 ## Live Demo
 
 [Checkout live demo](https://rules-component.fem-misc.now.sh/#/misc)
