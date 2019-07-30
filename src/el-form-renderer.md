@@ -91,6 +91,14 @@ interface Content {
    */
   component?: Vue
 
+  /**
+   * 是否覆盖或关闭自定义组件内置的校验规则
+   * `true` 为覆盖或关闭， 否则堆叠
+   * whether to override or disable the verification rules built into custom components
+   * `true` to override or disable, stack otherwise
+   */
+  overrideRules: boolean
+
   label?: string //set el-form-item's label
   trim = true // trim value at change event
 
