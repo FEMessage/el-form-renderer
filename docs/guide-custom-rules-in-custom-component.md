@@ -81,7 +81,7 @@ rules(item) {
 }
 ```
 
-如果需要覆盖自定义组件内置的校验规则则可以通过 `overrideRules: true` 来覆盖
+可以通过 `overrideRules: true` 来覆盖自定义组件内置的校验规则
 
 ```html
 <template>
