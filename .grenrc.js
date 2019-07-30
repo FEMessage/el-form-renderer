@@ -26,6 +26,7 @@ module.exports = {
     '🚀 Performance:': ['performance'],
     '⚓ Dependency upgrades:': ['dependencies'],
     '🏡 Chore:': ['chore'],
+    '💄 Style:': ['style'],
     '🎩 Hack': ['hack']
   }
 }
