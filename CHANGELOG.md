@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/FEMessage/el-form-renderer/compare/v1.10.2...v1.11.0) (2019-07-30)
+
+
+### Features
+
+* 可以覆盖自定义组件内部的校验规则 ([#83](https://github.com/FEMessage/el-form-renderer/issues/83)) ([8b8a3af](https://github.com/FEMessage/el-form-renderer/commit/8b8a3af))
+
+
+
 ### [1.10.2](https://github.com/FEMessage/el-form-renderer/compare/v1.10.1...v1.10.2) (2019-07-29)
 
 
