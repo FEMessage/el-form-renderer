@@ -71,7 +71,7 @@ rules(item) {
 }
 ```
 
-If you need to override the validation rules written in custom component, just set `overrideRules: true`
+Set `overrideRules: true` to override the validation rules written in custom component
 
 ```html
 <template>
