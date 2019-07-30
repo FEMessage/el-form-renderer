@@ -92,10 +92,10 @@ interface Content {
   component?: Vue
 
   /**
-   * 是否覆盖或关闭自定义组件内置的校验规则
-   * `true` 为覆盖或关闭， 否则堆叠
-   * whether to override or disable the verification rules built into custom components
-   * `true` to override or disable, stack otherwise
+   * 是否覆盖自定义组件内置的校验规则
+   * `true` 为覆盖， 否则堆叠
+   * whether to override the verification rules built into custom components
+   * `true` to override, stack otherwise
    */
   overrideRules: boolean
 
