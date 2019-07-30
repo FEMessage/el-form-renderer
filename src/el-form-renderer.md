@@ -93,9 +93,9 @@ interface Content {
 
   /**
    * 是否覆盖自定义组件内置的校验规则
-   * `true` 为覆盖， 否则堆叠
-   * whether to override the verification rules built into custom components
-   * `true` to override, stack otherwise
+   * `true` 为覆盖， 默认为 `false`
+   * whether to override the validation rules written in custom components
+   * `true` to override, default `false`
    */
   overrideRules: boolean
 
