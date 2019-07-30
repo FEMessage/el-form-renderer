@@ -91,6 +91,14 @@ interface Content {
    */
   component?: Vue
 
+  /**
+   * 是否覆盖自定义组件内置的校验规则
+   * `true` 为覆盖， 默认为 `false`
+   * whether to override the validation rules written in custom components
+   * `true` to override, default `false`
+   */
+  overrideRules: boolean
+
   label?: string //set el-form-item's label
   trim = true // trim value at change event
 

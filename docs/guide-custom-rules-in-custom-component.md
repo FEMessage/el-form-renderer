@@ -81,6 +81,39 @@ rules(item) {
 }
 ```
 
+可以通过 `overrideRules: true` 来覆盖自定义组件内置的校验规则
+
+```html
+<template>
+  <el-form-renderer ref="form" :content="content"></el-form-renderer>
+</template>
+
+<script>
+import YourComponent from './your-component.vue'
+export default {
+  data() {
+    return {
+      content: [
+        {
+          id: 'phone',
+          label: 'phone',
+          component: YourComponent,
+          overrideRules: true,
+          rules: [
+            {
+              required: true,
+              trigger: 'blur',
+              message: '不能为空！'
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+</script>
+```
+
 ## 在线Demo
 
 [点击查看](https://rules-component.fem-misc.now.sh/#/misc)

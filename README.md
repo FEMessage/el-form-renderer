@@ -1,9 +1,9 @@
 # el-form-renderer
 
-[![Build Status](https://travis-ci.com/FEMessage/el-form-renderer.svg?branch=master)](https://travis-ci.com/FEMessage/el-form-renderer)
-[![NPM Download](https://img.shields.io/npm/dm/@femessage/el-form-renderer.svg)](https://www.npmjs.com/package/@femessage/el-form-renderer)
-[![NPM Version](https://img.shields.io/npm/v/@femessage/el-form-renderer.svg)](https://www.npmjs.com/package/@femessage/el-form-renderer)
-[![NPM License](https://img.shields.io/npm/l/@femessage/el-form-renderer.svg)](https://github.com/FEMessage/el-form-renderer/blob/master/LICENSE)
+[![Build Status](https://badgen.net/travis/FEMessage/el-form-renderer/master)](https://travis-ci.com/FEMessage/el-form-renderer)
+[![NPM Download](https://badgen.net/npm/dm/@femessage/el-form-renderer)](https://www.npmjs.com/package/@femessage/el-form-renderer)
+[![NPM Version](https://badgen.net/npm/v/@femessage/el-form-renderer)](https://www.npmjs.com/package/@femessage/el-form-renderer)
+[![NPM License](https://badgen.net/npm/license/@femessage/el-form-renderer)](https://github.com/FEMessage/el-form-renderer/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
@@ -11,23 +11,26 @@
 
 [中文文档](./README-zh.md)
 
-## Table of Contents <!-- omit in toc -->
+## Table of Contents
 
 * [Introduction](#introduction)
+  * [WHAT](#what)
+  * [WHY](#why)
 * [Features](#features)
 * [Links](#links)
 * [Quick Start](#quick-start)
 * [Inspiration](#inspiration)
-* [License](#license)
+* [Contributing](#contributing)
 * [Contributors](#contributors)
+* [License](#license)
 
 ## Introduction
 
-**WHAT**
+### WHAT
 
 `el-form-renderer` is based on [element-ui](https://github.com/ElemeFE/element), but not limited [element-ui](https://github.com/ElemeFE/element) components. On the basis of completely inheriting the form attribute of element-ui, extension is made. Some non-form components or custom components, such as picture uploading and rich text editor, can also be integrated, thus, users can render a complete form by using a piece of json.
 
-**WHY**
+### WHY
 
 In our daily development, there are lots page with form, and usually the form structure is similar, the logic is repeated. el-form-renderer does not have complicated logic. It only convert JSON to render form item, save time and energy to write business logic, and reduce duplicate code.
 
@@ -39,15 +42,16 @@ In our daily development, there are lots page with form, and usually the form st
 * Support setOptions method, dynamically change select options
 * Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
 
-**[⬆Back to Top](#table-of-contents)**
+[⬆Back to Top](#table-of-contents)
 
 ## Links
 
 * [Docs](https://femessage.github.io/el-form-renderer/)
 * [Guide to developing custom component](https://github.com/femessage/el-form-renderer/blob/dev/docs/guide-en-custom-component.md)
 * [Setting validation rules in custom component](https://github.com/FEMessage/el-form-renderer/blob/dev/docs/guide-en-custom-rules-in-custom-component.md)
+* [fem-vscode-helper](https://marketplace.visualstudio.com/items?itemName=FEMessage.fem-vscode-helper)
 
-**[⬆Back to Top](#table-of-contents)**
+[⬆Back to Top](#table-of-contents)
 
 ## Quick Start
 
@@ -74,17 +78,24 @@ export default {
 </script>
 ```
 
-**[⬆Back to Top](#table-of-contents)**
+[⬆Back to Top](#table-of-contents)
 
 ## Inspiration
 
 thanks to [element-patch](https://github.com/leezng/element-patch)
 
-## License
+## Contributing
 
-[MIT](./LICENSE)
+For those who are interested in contributing to this project, such as:
 
-**[⬆ Back to Top](#table-of-contents)**
+- report a bug
+- request new feature
+- fix a bug
+- implement a new feature
+
+Please refer to our [contributing guide](https://github.com/FEMessage/.github/blob/master/CONTRIBUTING.md).
+
+[⬆ Back to Top](#table-of-contents)
 
 ## Contributors
 
@@ -106,3 +117,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+[MIT](./LICENSE)
+
+[⬆ Back to Top](#table-of-contents)
