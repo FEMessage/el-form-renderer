@@ -87,8 +87,15 @@ export default {
         {
           id: 'phone',
           label: 'phone',
+          component: YourComponent,
           overrideRules: true,
-          component: YourComponent
+          rules: [
+            {
+              required: true,
+              trigger: 'blur',
+              message: 'Can not empty!'
+            }
+          ]
         }
       ]
     }
