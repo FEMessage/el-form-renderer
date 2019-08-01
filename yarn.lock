@@ -655,9 +655,9 @@
   integrity sha1-jvyszwvNi+1Y6SbXOCqA3/4rsuI=
 
 "@femessage/upload-to-ali@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.npm.taobao.org/@femessage/upload-to-ali/download/@femessage/upload-to-ali-1.8.0.tgz#a1f5868b15c8bba390da4af9513f7b29550fd362"
-  integrity sha1-ofWGixXIu6OQ2kr5UT97KVUP02I=
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@femessage/upload-to-ali/-/upload-to-ali-1.8.1.tgz#4217be23fe60dd218111222bb5c1f19334247fbc"
+  integrity sha512-fcdo/oAzF+tUmvHFd0w/r+dGrynW5PVtb/+65L0WNrOEN8vPEmcNdRQ6iuzzq5W+pVPzDlgIMBh1ZXDC6Wgxcg==
   dependencies:
     "@femessage/img-preview" "^1.2.0"
     ali-oss "^6.0.1"
