@@ -8,9 +8,9 @@
 
 ## 接入标准
 
-#### v-model
-
 自定义组件接入的关键是在组件内部实现 v-model
+
+**建议在自定义组件上绑定 [$attrs](https://cn.vuejs.org/v2/api/#vm-attrs) 和 [$listeners](https://cn.vuejs.org/v2/api/#vm-listeners)**
 
 [el-form-renderer](https://github.com/femessage/el-form-renderer) 对 v-model 的要求是:
 
@@ -21,12 +21,18 @@
 
 ```html
 <!-- 自定义组件 my-input -->
-<input :value="value" @input="onInput">
+<input :value="value" @input="onInput" v-bind="$attrs" v-on="$listeners">
 
 <script>
 export default {
   props: {
-    value: String
+    value: String,
+    title: String
+  },
+  watch: {
+    value(value) {
+      this.$emit('customEvent', value, 'message')
+    }
   },
   methods: {
     onInput(val) {
@@ -53,127 +59,20 @@ export default {
         {
           component: MyInput,
           id: 'myInput',
-          label: 'label'
-        }
-      ]
-    }
-  },
-}
-</script>
-```
-
-#### attributes: 通过 el 属性绑定自定义组件属性
-
-- 通过 v-bind 来继承没有定义 props 的组件属性
-- 例如 input 的 placeholder 和 type 属性
-- 也能将 props 中定义的组件属性绑定到该组件上，如例子中 title 属性
-
-```html
-<!-- 自定义组件 my-input -->
-<input :value="value" @input="onInput" v-bind="$attrs">
-
-<script>
-export default {
-  props: {
-    value: String,
-    title: String
-  },
-  methods: {
-    onInput(val) {
-      this.$emit('input', 'my-input: ' + val)
-    }
-  }
-}
-</script>
-```
-
-- 使用方法
-
-```html
-<template>
-  <el-form-renderer :content="content"/>
-</template>
-
-<script>
-import MyInput from '@/components/my-input.vue'
-export default {
-  data() {
-    return {
-      content: [
-        {
-          component: MyInput,
-          id: 'myInput',
           label: 'label',
+          // 传入组件属性
           el: {
             placeholder: '请输入一个 title',
             type: 'submit', // submit button
-            title: '这是一个标题' // 自定义组件的 props
-          }
-        }
-      ]
-    }
-  },
-}
-</script>
-```
-
-#### listeners: 通过 on 属性绑定自定义组件事件
-
-- 通过 v-on 来继承
-- 例如 foucs 和 change
-- 还可以绑定自定义事件 如例子中的「custom」事件
-
-```html
-<!-- 自定义组件 my-input -->
-<input :value="value" @input="onInput" v-on="$listeners">
-
-<script>
-export default {
-  props: {
-    value: String
-  },
-  watch: {
-    value(val) {
-      this.$emit('custom', val, '我是自定义组件')
-    }
-  },
-  methods: {
-    onInput(val) {
-      this.$emit('input', 'my-input: ' + val)
-    }
-  }
-}
-</script>
-```
-
-- 使用方法
-- 需要注意，on 中的 function 定义，组件 emit 事件的 payload 将以「数组」的方式，回调到第一个参数
-- 第二个参数为 updateForm 方法
-
-```html
-<template>
-  <el-form-renderer :content="content"/>
-</template>
-
-<script>
-import MyInput from '@/components/my-input.vue'
-export default {
-  data() {
-    return {
-      content: [
-        {
-          component: MyInput,
-          id: 'myInput',
-          label: 'label',
+            title: '这是一个标题' // custom defined props
+          },
+          // 传入组件事件
           on: {
             focus: ([event], updateForm) => {
-              console.log(event.target.value) // 输出：input value
+              console.log(event.target.value) // output: input value
             },
-            change: ([event], updateForm) => {
-            
-            },
-            custom: ([value, msg], updateForm) => {
-              console.log(msg) // 输出：'我是自定义组件'
+            customEvent: ([value, msg], updateForm) => {
+              console.log(msg) // output: 'message'
             }
           }
         }
@@ -183,6 +82,9 @@ export default {
 }
 </script>
 ```
+
+- 需要注意，on 中的 function 定义，组件 emit 事件的 payload 将以「数组」的方式，回调到第一个参数
+- 第二个参数为 updateForm 方法
 
 ## 实际案例
 
@@ -198,3 +100,5 @@ export default {
 
 - [v-model基础](https://cn.vuejs.org/v2/guide/forms.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 - [在组件上使用v-model](https://cn.vuejs.org/v2/guide/components.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-model)
+- [vue 组件继承属性 $attrs](https://cn.vuejs.org/v2/api/#vm-attrs)
+- [vue 组件继承事件 $listeners](https://cn.vuejs.org/v2/api/#vm-listeners)
