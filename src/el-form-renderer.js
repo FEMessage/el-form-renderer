@@ -70,6 +70,7 @@ export default {
   },
   beforeMount() {
     this._content = transformContent(this.content)
+    this.initItemOption()
     this._content.forEach(this.initItemValue)
   },
   mounted() {
@@ -93,8 +94,6 @@ export default {
         })
       }
     })
-
-    this.initItemOption()
   },
   props: Object.assign({}, Form.props, {
     content: {
