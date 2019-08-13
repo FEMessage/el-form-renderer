@@ -212,12 +212,14 @@ export default {
     updateForm(values) {
       const updateValue = content => {
         return content.reduce((acc, item) => {
-          const value =
-            item.type === GROUP
-              ? updateValue(item.items)
-              : typeof item.inputFormat === 'function'
+          let value
+          if (item.type === GROUP) {
+            value = updateValue(item.items)
+          } else {
+            value = typeof item.inputFormat === 'function'
               ? item.inputFormat(values)
               : values[id]
+          }
 
           if (value !== undefined) {
             _set(acc, item.id, value)
