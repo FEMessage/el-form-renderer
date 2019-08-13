@@ -215,8 +215,9 @@ export default {
           const value =
             item.type === GROUP
               ? updateValue(item.items)
-              : (item.inputFormat && item.inputFormat(values)) ||
-                values[item.id]
+              : typeof item.inputFormat === 'function'
+              ? item.inputFormat(values)
+              : values[id]
 
           if (value !== undefined) {
             _set(acc, item.id, value)
