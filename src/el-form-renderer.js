@@ -70,6 +70,7 @@ export default {
   },
   beforeMount() {
     this._content = transformContent(this.content)
+    this.initItemOption()
     this._content.forEach(this.initItemValue)
   },
   mounted() {
@@ -93,8 +94,6 @@ export default {
         })
       }
     })
-
-    this.initItemOption()
   },
   props: Object.assign({}, Form.props, {
     content: {
@@ -212,11 +211,14 @@ export default {
     updateForm(values) {
       const updateValue = content => {
         return content.reduce((acc, item) => {
-          const value =
-            item.type === GROUP
-              ? updateValue(item.items)
-              : (item.inputFormat && item.inputFormat(values)) ||
-                values[item.id]
+          let value
+          if (item.type === GROUP) {
+            value = updateValue(item.items)
+          } else {
+            value = typeof item.inputFormat === 'function'
+              ? item.inputFormat(values)
+              : values[id]
+          }
 
           if (value !== undefined) {
             _set(acc, item.id, value)

@@ -10,6 +10,8 @@
 
 自定义组件接入的关键是在组件内部实现 v-model
 
+**建议在自定义组件上绑定 [$attrs](https://cn.vuejs.org/v2/api/#vm-attrs) 和 [$listeners](https://cn.vuejs.org/v2/api/#vm-listeners)**
+
 [el-form-renderer](https://github.com/femessage/el-form-renderer) 对 v-model 的要求是:
 
 - 有一个 props 为 value
@@ -19,12 +21,18 @@
 
 ```html
 <!-- 自定义组件 my-input -->
-<input :value="value" @input="onInput">
+<input :value="value" @input="onInput" v-bind="$attrs" v-on="$listeners">
 
 <script>
 export default {
   props: {
-    value: String
+    value: String,
+    title: String
+  },
+  watch: {
+    value(value) {
+      this.$emit('customEvent', value, 'message')
+    }
   },
   methods: {
     onInput(val) {
@@ -51,7 +59,22 @@ export default {
         {
           component: MyInput,
           id: 'myInput',
-          label: 'label'
+          label: 'label',
+          // 传入组件属性
+          el: {
+            placeholder: '请输入一个 title',
+            type: 'submit', // submit button
+            title: '这是一个标题' // custom defined props
+          },
+          // 传入组件事件
+          on: {
+            focus: ([event], updateForm) => {
+              console.log(event.target.value) // output: input value
+            },
+            customEvent: ([value, msg], updateForm) => {
+              console.log(msg) // output: 'message'
+            }
+          }
         }
       ]
     }
@@ -59,6 +82,9 @@ export default {
 }
 </script>
 ```
+
+- 需要注意，on 中的 function 定义，组件 emit 事件的 payload 将以「数组」的方式，回调到第一个参数
+- 第二个参数为 updateForm 方法
 
 ## 实际案例
 
@@ -74,3 +100,5 @@ export default {
 
 - [v-model基础](https://cn.vuejs.org/v2/guide/forms.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 - [在组件上使用v-model](https://cn.vuejs.org/v2/guide/components.html#%E5%9C%A8%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-v-model)
+- [vue 组件继承属性 $attrs](https://cn.vuejs.org/v2/api/#vm-attrs)
+- [vue 组件继承事件 $listeners](https://cn.vuejs.org/v2/api/#vm-listeners)

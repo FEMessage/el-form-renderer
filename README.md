@@ -13,16 +13,16 @@
 
 ## Table of Contents
 
-* [Introduction](#introduction)
-  * [WHAT](#what)
-  * [WHY](#why)
-* [Features](#features)
-* [Links](#links)
-* [Quick Start](#quick-start)
-* [Inspiration](#inspiration)
-* [Contributing](#contributing)
-* [Contributors](#contributors)
-* [License](#license)
+- [Introduction](#introduction)
+  - [WHAT](#what)
+  - [WHY](#why)
+- [Features](#features)
+- [Links](#links)
+- [Quick Start](#quick-start)
+- [Inspiration](#inspiration)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## Introduction
 
@@ -36,20 +36,20 @@ In our daily development, there are lots page with form, and usually the form st
 
 ## Features
 
-* Render form with json
-* Support integrate with custom components
-* Support batch update form data with updateForm method
-* Support setOptions method, dynamically change select options
-* Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
+- Render form with json
+- Support integrate with custom components
+- Support batch update form data with updateForm method
+- Support setOptions method, dynamically change select options
+- Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
 
 [⬆Back to Top](#table-of-contents)
 
 ## Links
 
-* [Docs](https://femessage.github.io/el-form-renderer/)
-* [Guide to developing custom component](https://github.com/femessage/el-form-renderer/blob/dev/docs/guide-en-custom-component.md)
-* [Setting validation rules in custom component](https://github.com/FEMessage/el-form-renderer/blob/dev/docs/guide-en-custom-rules-in-custom-component.md)
-* [fem-vscode-helper](https://marketplace.visualstudio.com/items?itemName=FEMessage.fem-vscode-helper)
+- [Docs](https://femessage.github.io/el-form-renderer/)
+- [Guide to developing custom component](https://github.com/femessage/el-form-renderer/blob/dev/docs/guide-en-custom-component.md)
+- [Setting validation rules in custom component](https://github.com/FEMessage/el-form-renderer/blob/dev/docs/guide-en-custom-rules-in-custom-component.md)
+- [fem-vscode-helper](https://marketplace.visualstudio.com/items?itemName=FEMessage.fem-vscode-helper)
 
 [⬆Back to Top](#table-of-contents)
 
@@ -64,17 +64,17 @@ yarn add @femessage/el-form-renderer
   <el-form-renderer :content="content"></el-form-renderer>
 </template>
 <script>
-import ElFormRenderer from '@femessage/el-form-renderer'
-export default {
-  components: {
-    ElFormRenderer
-  },
-  data () {
-    return {
-      content: []
+  import ElFormRenderer from '@femessage/el-form-renderer'
+  export default {
+    components: {
+      ElFormRenderer
+    },
+    data() {
+      return {
+        content: []
+      }
     }
   }
-}
 </script>
 ```
 
