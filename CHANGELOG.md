@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/FEMessage/el-form-renderer/compare/v1.11.0...v1.11.1) (2019-08-15)
+
+
+### Bug Fixes
+
+* `inputFormat` 允许返回任何类型 ([#98](https://github.com/FEMessage/el-form-renderer/issues/98)) ([e89c2e0](https://github.com/FEMessage/el-form-renderer/commit/e89c2e0))
+* 当 type=group 时，options 报 undefined ([1ba062d](https://github.com/FEMessage/el-form-renderer/commit/1ba062d)), closes [#95](https://github.com/FEMessage/el-form-renderer/issues/95)
+
+
+
 ## [1.11.0](https://github.com/FEMessage/el-form-renderer/compare/v1.10.2...v1.11.0) (2019-07-30)
 
 
