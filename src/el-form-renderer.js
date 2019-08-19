@@ -215,9 +215,10 @@ export default {
           if (item.type === GROUP) {
             value = updateValue(item.items)
           } else {
-            value = typeof item.inputFormat === 'function'
-              ? item.inputFormat(values)
-              : values[id]
+            value =
+              typeof item.inputFormat === 'function'
+                ? item.inputFormat(values)
+                : values[item.id]
           }
 
           if (value !== undefined) {
