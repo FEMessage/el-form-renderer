@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.2](https://github.com/FEMessage/el-form-renderer/compare/v1.11.1...v1.11.2) (2019-08-19)
+
+
+### Bug Fixes
+
+* 当 type=group 时，options 报 undefined ([1ba062d](https://github.com/FEMessage/el-form-renderer/commit/1ba062d)), closes [#95](https://github.com/FEMessage/el-form-renderer/issues/95)
+* **updateForm:** id is not defined ([b442d92](https://github.com/FEMessage/el-form-renderer/commit/b442d92))
+
+
+
 ### [1.11.1](https://github.com/FEMessage/el-form-renderer/compare/v1.11.0...v1.11.1) (2019-08-15)
 
 
