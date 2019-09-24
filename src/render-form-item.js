@@ -126,6 +126,8 @@ export default {
     },
 
     triggerValidate(id) {
+      if (!this.data.rules || !this.data.rules.length) return
+
       let parent = this.$parent
       let name = parent.$options._componentTag
 
