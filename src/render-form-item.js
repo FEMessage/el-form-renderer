@@ -28,6 +28,15 @@ export default {
     disabled: Boolean,
     options: Array
   },
+  data() {
+    return {
+      isBlurTrigger:
+        this.data.rules &&
+        this.data.rules.some(rule => {
+          return rule.required && rule.trigger === 'blur'
+        })
+    }
+  },
   computed: {
     // 是否显示
     _show() {
@@ -86,6 +95,8 @@ export default {
                 data.atChange(data.id, value)
               }
               if (on.input) on.input([value, ...rest], updateForm)
+
+              this.triggerValidate(data.id)
             },
             change: (value, ...rest) => {
               const trimVal =
@@ -95,6 +106,8 @@ export default {
                   : value
               this.$emit('updateValue', {id: data.id, value: trimVal})
               if (on.change) on.change([trimVal, ...rest], updateForm)
+
+              this.triggerValidate(data.id)
             }
           }
         },
@@ -110,6 +123,25 @@ export default {
           })()
         ]
       )
+    },
+
+    triggerValidate(id) {
+      let parent = this.$parent
+      let name = parent.$options._componentTag
+
+      while (parent && (!name || name !== 'el-form')) {
+        parent = parent.$parent
+
+        if (parent) {
+          name = parent.$options._componentTag
+        }
+      }
+
+      if (!parent || this.isBlurTrigger) return
+
+      this.$nextTick(() => {
+        parent.validateField(id)
+      })
     }
   }
 }
