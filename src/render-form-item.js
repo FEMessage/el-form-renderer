@@ -131,7 +131,7 @@ export default {
       let parent = this.$parent
       let name = parent.$options._componentTag
 
-      while (parent && (!name || name !== 'el-form')) {
+      while (parent && name !== 'el-form') {
         parent = parent.$parent
 
         if (parent) {
