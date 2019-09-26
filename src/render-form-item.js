@@ -129,13 +129,13 @@ export default {
       if (!this.data.rules || !this.data.rules.length) return
 
       let parent = this.$parent
-      let name = parent.$options._componentTag
+      let name = parent.$options.componentName
 
-      while (parent && name !== 'el-form') {
+      while (parent && name !== 'ElForm') {
         parent = parent.$parent
 
         if (parent) {
-          name = parent.$options._componentTag
+          name = parent.$options.componentName
         }
       }
 
