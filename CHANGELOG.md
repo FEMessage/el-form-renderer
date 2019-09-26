@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/FEMessage/el-form-renderer/compare/v1.11.2...v1.11.3) (2019-09-26)
+
+
+### Bug Fixes
+
+* **hack:** 表单项值变更时清除校验信息 ([#107](https://github.com/FEMessage/el-form-renderer/issues/107)) ([6063505](https://github.com/FEMessage/el-form-renderer/commit/6063505))
+
+
+
 ### [1.11.2](https://github.com/FEMessage/el-form-renderer/compare/v1.11.1...v1.11.2) (2019-08-19)
 
 
