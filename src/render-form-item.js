@@ -128,6 +128,10 @@ export default {
     triggerValidate(id) {
       if (!this.data.rules || !this.data.rules.length) return
 
+      /**
+       * 下面代码可参考 `emitter`
+       * https://github.com/ElemeFE/element/blob/dev/src/mixins/emitter.js
+       */
       let parent = this.$parent
       let name = parent.$options.componentName
 
