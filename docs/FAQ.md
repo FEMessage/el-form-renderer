@@ -1,4 +1,6 @@
-## 验证规则问题
+## 即时校验
+
+> 改变值后立马触发校验规则的 trigger 是 `change`, 并不是 `blur`.
 
 类输入框表单组件(例如: select, **cascader**)不会触发 trigger 为 'blur' 的那条校验规则.
 
