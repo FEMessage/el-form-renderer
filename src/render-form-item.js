@@ -130,6 +130,8 @@ export default {
 
       /**
        * 下面代码可参考 `emitter`
+       * 目的: 为了清除表单校验信息
+       * 因为有部分表单项的值变更时没有清除校验信息, 因此需要触发一次校验用于清除
        * https://github.com/ElemeFE/element/blob/dev/src/mixins/emitter.js
        */
       let parent = this.$parent
