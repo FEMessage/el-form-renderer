@@ -28,6 +28,15 @@ export default {
     disabled: Boolean,
     options: Array
   },
+  data() {
+    return {
+      isBlurTrigger:
+        this.data.rules &&
+        this.data.rules.some(rule => {
+          return rule.required && rule.trigger === 'blur'
+        })
+    }
+  },
   computed: {
     // 是否显示
     _show() {
@@ -86,6 +95,8 @@ export default {
                 data.atChange(data.id, value)
               }
               if (on.input) on.input([value, ...rest], updateForm)
+
+              this.triggerValidate(data.id)
             },
             change: (value, ...rest) => {
               const trimVal =
@@ -95,6 +106,8 @@ export default {
                   : value
               this.$emit('updateValue', {id: data.id, value: trimVal})
               if (on.change) on.change([trimVal, ...rest], updateForm)
+
+              this.triggerValidate(data.id)
             }
           }
         },
@@ -110,6 +123,33 @@ export default {
           })()
         ]
       )
+    },
+
+    triggerValidate(id) {
+      if (!this.data.rules || !this.data.rules.length) return
+
+      /**
+       * 下面代码可参考 `emitter`
+       * 目的: 为了清除表单校验信息
+       * 因为有部分表单项的值变更时没有清除校验信息, 因此需要触发一次校验用于清除
+       * https://github.com/ElemeFE/element/blob/dev/src/mixins/emitter.js
+       */
+      let parent = this.$parent
+      let name = parent.$options.componentName
+
+      while (parent && name !== 'ElForm') {
+        parent = parent.$parent
+
+        if (parent) {
+          name = parent.$options.componentName
+        }
+      }
+
+      if (!parent || this.isBlurTrigger) return
+
+      this.$nextTick(() => {
+        parent.validateField(id)
+      })
     }
   }
 }
