@@ -15,7 +15,7 @@ rules: [
 ]
 ```
 
-为了能够使得表单项即时校验应该这样设置(trigger 变更为 change 或者不设置 trigger):
+如果想即时校验，则应该这样设置(trigger 变更为 change 或者不设置 trigger):
 
 ```diff
  rules: [
