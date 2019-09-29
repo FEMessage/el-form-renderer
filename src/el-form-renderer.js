@@ -5,25 +5,6 @@ import RenderFormItem from './render-form-item'
 import transformContent from './transform-content'
 import {isObject} from './utils'
 
-// 拷贝简单数据
-//    不考虑引用，函数等复杂数据
-function clone(data) {
-  if (Array.isArray(data)) {
-    return data.map(clone)
-  } else if (data && typeof data === 'object') {
-    let obj = Object.assign({}, data)
-    for (let key in obj) {
-      if (!obj.hasOwnProperty(key)) continue
-      if (typeof obj[key] === 'object') {
-        obj[key] = clone(obj[key])
-      }
-    }
-    return obj
-  } else {
-    return data
-  }
-}
-
 const GROUP = 'group'
 
 export default {
@@ -188,20 +169,20 @@ export default {
             acc[key] = getValue(values[key], item.items)
           } else {
             if (item.outputFormat) {
-              const formatVal = item.outputFormat(clone(values[key]))
+              const formatVal = item.outputFormat(values[key])
               // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
               isObject(formatVal)
                 ? Object.assign(acc, formatVal)
                 : (acc[key] = formatVal)
             } else {
-              acc[key] = clone(values[key])
+              acc[key] = values[key]
             }
           }
 
           return acc
         }, {})
       }
-      return getValue(this.value, this._content)
+      return {...getValue(this.value, this._content)}
     },
     /**
      * update form values
