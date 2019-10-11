@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.5](https://github.com/FEMessage/el-form-renderer/compare/v1.11.4...v1.11.5) (2019-10-11)
+
+
+### Bug Fixes
+
+* 解决`File` 对象丢失的问题 ([ba35594](https://github.com/FEMessage/el-form-renderer/commit/ba35594)), closes [#106](https://github.com/FEMessage/el-form-renderer/issues/106)
+
+
+
 ### [1.11.4](https://github.com/FEMessage/el-form-renderer/compare/v1.11.3...v1.11.4) (2019-09-29)
 
 
