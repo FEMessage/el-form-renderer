@@ -16,8 +16,8 @@ export default {
     return {
       content: [
         {
-          id: 'avatar',
-          component: 'upload-to-ali'
+          id: 'id',
+          component: 'el-semver-input',
         }
       ]
     }
