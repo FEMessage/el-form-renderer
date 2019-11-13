@@ -2,6 +2,7 @@ import mixinOptionExtensions from './mixins/package-option'
 import mixinEnableWhen from './mixins/enable-when'
 import mixinHidden from './mixins/hidden'
 import {toCamelCase, isObject} from './utils'
+import _get from 'lodash.get'
 
 function validator(data) {
   if (!data) {
@@ -56,7 +57,16 @@ export default {
         const {
           remoteUrl,
           request = () => this.$axios.get(remoteUrl).then(resp => resp.data),
-          onResponse = resp => resp,
+          labelKey = 'label',
+          valueKey = 'value',
+          dataPath = '',
+          onResponse = resp => {
+            const data = dataPath ? _get(resp, dataPath) : resp
+            return data.map(item => ({
+              label: item[labelKey],
+              value: item[valueKey]
+            }))
+          },
           onError = error => {
             console.error(error.message)
             return []

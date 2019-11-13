@@ -76,6 +76,9 @@ interface Content {
    * 你还可以远程获取选项数组。当options为一个配置对象时，接受以下属性：
    * remoteUrl: 远程接口的地址
    * request: 可选，请求方法
+   * labelKey
+   * valueKey
+   * dataPath: data在响应体中的路径
    * onResponse: 可选，处理请求回来的数据
    * onError: 可选，处理请求出错的情况
    *
@@ -84,13 +87,25 @@ interface Content {
    * use options as a config object, whose props are as follow:
    * remoteUrl: remote api address
    * request: optional, customize how to get your options
+   * labelKey
+   * valueKey
+   * dataPath: data's path in response
    * onResponse: optional, deal with your response
    * onError: optional, deal with request error
    */
   options?: {label: string; value?: any}[] | {
     remoteUrl: string
     request = () => this.$axios.get(remoteUrl).then(resp => resp.data)
-    onResponse = resp => resp
+    labelKey = 'label',
+    valueKey = 'value',
+    dataPath = '',
+    onResponse = resp => {
+      const data = dataPath ? _get(resp, dataPath) : resp
+      return data.map(item => ({
+        label: item[labelKey],
+        value: item[valueKey]
+      }))
+          },
     onError = error => {
       console.error(error.message)
       return []

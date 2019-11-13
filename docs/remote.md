@@ -30,7 +30,7 @@ export default {
               ]
               return new Promise(r => setTimeout(() => r(resp), 2000))
             },
-            onResponse: resp => resp.map(item => ({...item, label: item.title}))
+            labelKey: 'title'
           }
         },
         {
