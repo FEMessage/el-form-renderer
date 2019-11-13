@@ -26,10 +26,11 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
-    options: Array
+    options: [Array, Object]
   },
   data() {
     return {
+      optionsInner: [],
       isBlurTrigger:
         this.data.rules &&
         this.data.rules.some(rule => {
@@ -43,6 +44,29 @@ export default {
       // 当存在 hidden 时优先响应
       const isHidden = this.getHiddenStatus()
       return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
+    }
+  },
+  watch: {
+    options: {
+      handler(v) {
+        if (Array.isArray(v)) {
+          this.optionsInner = v
+          return
+        }
+        const {
+          remoteUrl,
+          request = () => this.$axios.get(remoteUrl).then(resp => resp.data),
+          onResponse = resp => resp,
+          onError = error => {
+            console.error(error.message)
+            return []
+          }
+        } = v
+        new Promise(r => r(request()))
+          .then(onResponse, onError)
+          .then(options => (this.optionsInner = options))
+      },
+      immediate: true
     }
   },
   render(h) {
@@ -69,11 +93,11 @@ export default {
      * @param  {All} value 单项表单数据值
      */
     renderFormItemContent(h, data, value) {
-      let obj = isObject(data.el) ? data.el : {}
-      let elType = data.type
+      const obj = isObject(data.el) ? data.el : {}
+      const elType = data.type
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      let props = Object.assign({}, obj, {value})
+      const props = {...obj, value}
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
@@ -116,9 +140,9 @@ export default {
             let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
             if (
               typeof optRenderer === 'function' &&
-              Array.isArray(this.options)
+              Array.isArray(this.optionsInner)
             ) {
-              return this.options.map(optRenderer)
+              return this.optionsInner.map(optRenderer)
             }
           })()
         ]

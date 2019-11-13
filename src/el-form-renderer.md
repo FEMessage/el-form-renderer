@@ -72,9 +72,30 @@ interface Content {
 
   /**
    * 具有选择功能的原子表单可用此定义可选项
+   * 包括type为select、radio-group、checkbox-group
+   * 你还可以远程获取选项数组。当options为一个配置对象时，接受以下属性：
+   * remoteUrl: 远程接口的地址
+   * request: 可选，请求方法
+   * onResponse: 可选，处理请求回来的数据
+   * onError: 可选，处理请求出错的情况
+   *
    * use with type: select, radio-group, radio-button, checkbox-group, checkbox-button
+   * support request options data from an api
+   * use options as a config object, whose props are as follow:
+   * remoteUrl: remote api address
+   * request: optional, customize how to get your options
+   * onResponse: optional, deal with your response
+   * onError: optional, deal with request error
    */
-  options?: {label: string; value?: any}[]
+  options?: {label: string; value?: any}[] | {
+    remoteUrl: string
+    request = () => this.$axios.get(remoteUrl).then(resp => resp.data)
+    onResponse = resp => resp
+    onError = error => {
+      console.error(error.message)
+      return []
+    }
+  }
 
   attrs?: object // html attributes
   /**
