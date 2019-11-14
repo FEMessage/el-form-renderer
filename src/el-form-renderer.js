@@ -1,4 +1,3 @@
-import Form from 'element-ui/lib/form'
 import _set from 'lodash.set'
 import RenderFormGroup from './render-form-group'
 import RenderFormItem from './render-form-item'
@@ -13,7 +12,7 @@ export default {
     return h(
       'el-form',
       {
-        props: Object.assign({}, this._props, {
+        props: Object.assign({}, this.$attrs, {
           model: this.value // 用于校验
         }),
         ref: 'elForm'
@@ -57,7 +56,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // proxy
-      Object.keys(Form.methods).forEach(item => {
+      Object.keys(this.$refs.elForm.$options.methods).forEach(item => {
         this[item] = this.$refs.elForm[item]
       })
 
@@ -76,7 +75,7 @@ export default {
       }
     })
   },
-  props: Object.assign({}, Form.props, {
+  props: {
     content: {
       type: Array,
       required: true
@@ -86,7 +85,7 @@ export default {
       type: Boolean,
       default: false
     }
-  }),
+  },
   data() {
     return {
       value: {}, // 表单数据对象
