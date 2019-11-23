@@ -2,6 +2,7 @@ import mixinOptionExtensions from './mixins/package-option'
 import mixinEnableWhen from './mixins/enable-when'
 import mixinHidden from './mixins/hidden'
 import {toCamelCase, isObject} from './utils'
+import _get from 'lodash.get'
 
 function validator(data) {
   if (!data) {
@@ -30,6 +31,8 @@ export default {
   },
   data() {
     return {
+      optionsInner: this.options,
+      propsInner: {},
       isBlurTrigger:
         this.data.rules &&
         this.data.rules.some(rule => {
@@ -43,6 +46,51 @@ export default {
       // 当存在 hidden 时优先响应
       const isHidden = this.getHiddenStatus()
       return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
+    }
+  },
+  watch: {
+    /**
+     * 这里其实用 remote 处理了两件事。有机会是可以拆分的
+     * 1. 基本用法，配置 url 后即可从远程获取某个 prop 注入到组件
+     * 2. 针对 select、checkbox-group & radio-group 组件，会直接将 resp 作为 options 处理；label & value 也是直接为这个场景而生的
+     */
+    'data.remote': {
+      handler(v) {
+        if (!v) return
+        const isOptionsCase =
+          ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) >
+          -1
+        const {
+          url,
+          request = () => this.$axios.get(url).then(resp => resp.data),
+          prop = 'options', // 默认处理 el-cascader 的情况
+          dataPath = '',
+          onResponse = resp => {
+            if (dataPath) resp = _get(resp, dataPath)
+            if (isOptionsCase) {
+              return resp.map(item => ({
+                label: item[label],
+                value: item[value]
+              }))
+            } else {
+              return resp
+            }
+          },
+          onError = error => console.error(error.message),
+          label = 'label',
+          value = 'value'
+        } = v
+        Promise.resolve(request())
+          .then(onResponse, onError)
+          .then(resp => {
+            if (isOptionsCase) {
+              this.optionsInner = resp
+            } else {
+              this.propsInner = {[prop]: resp}
+            }
+          })
+      },
+      immediate: true
     }
   },
   render(h) {
@@ -69,11 +117,11 @@ export default {
      * @param  {All} value 单项表单数据值
      */
     renderFormItemContent(h, data, value) {
-      let obj = isObject(data.el) ? data.el : {}
-      let elType = data.type
+      const obj = isObject(data.el) ? data.el : {}
+      const elType = data.type
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      let props = Object.assign({}, obj, {value})
+      const props = {...obj, value, ...this.propsInner}
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
@@ -116,9 +164,9 @@ export default {
             let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
             if (
               typeof optRenderer === 'function' &&
-              Array.isArray(this.options)
+              Array.isArray(this.optionsInner)
             ) {
-              return this.options.map(optRenderer)
+              return this.optionsInner.map(optRenderer)
             }
           })()
         ]

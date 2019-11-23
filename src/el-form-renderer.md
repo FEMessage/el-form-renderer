@@ -76,6 +76,54 @@ interface Content {
    */
   options?: {label: string; value?: any}[]
 
+  /**
+   * 配置remote.url，即可远程配置组件的某个prop！
+   * remote接受以下属性：
+   * url: 远程接口的地址
+   * prop: 要注入的 prop 的名称，默认为 options
+   * request: 可选，请求方法
+   * dataPath: 可选，data在响应体中的路径
+   * onResponse: 可选，处理请求回来的数据
+   * onError: 可选，处理请求出错的情况
+   * 另外，针对 select、radio-group、checkbox-group，远程数据能自动映射成 el-option 选项！以下属性仅在此情况使用
+   * label: 可选，可直接配置远程数据中用作 label 的key
+   * value: 可选，可直接配置远程数据中用作 value 的key
+   *
+   * use remote to set one prop! remote accept following props:
+   * url: remote api address
+   * prop: prop name that data inject
+   * request: optional, customize how to get your options
+   * dataPath: optional, data's path in response
+   * onResponse: optional, deal with your response
+   * onError: optional, deal with request error
+   * and, we treat select、radio-group、checkbox-group specially and the resp will be map as an el-option's group! following props only suitable for this case
+   * label: optional, label key in resp
+   * value: optional, value key in resp
+   */
+  remote?: {
+    url: string
+    request = () => this.$axios.get(url).then(resp => resp.data)
+    prop = 'options'
+    dataPath = ''
+    onResponse = resp => {
+      if (dataPath) resp = _get(resp, dataPath)
+      switch (this.data.type) {
+        case 'select':
+        case 'checkbox-group':
+        case 'radio-group':
+          return resp.map(item => ({
+            label: item[label],
+            value: item[value]
+          }))
+        default:
+          return resp
+      }
+    }
+    onError = error => console.error(error.message)
+    label = 'label'
+    value = 'value'
+  }
+
   attrs?: object // html attributes
   /**
    * 用于定义具体原子表单（如el-input）的属性，比如定义el-input的placeholder
