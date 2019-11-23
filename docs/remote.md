@@ -12,6 +12,7 @@ export default {
   data () {
     return {
       content: [
+        // 只需要设置 url，即可远程配置 options
         {
           type: 'select',
           id: 'select',
@@ -20,21 +21,27 @@ export default {
             url: 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote',
           }
         },
+        // 可以自定义 request 方法，做各种操作
         {
           type: 'radio-group',
           id: 'radio',
           label: 'radio',
           remote: {
             request() {
-              const resp = [
-                {title: 'resourceA'},
-                {title: 'resourceB'},
-              ]
+              const resp = {
+                path: [
+                  {title: 'resourceA', name: 1},
+                  {title: 'resourceB', name: 2},
+                ]
+              }
               return new Promise(r => setTimeout(() => r(resp), 2000))
             },
-            label: 'title'
+            dataPath: 'path',
+            label: 'title',
+            value: 'name'
           }
         },
+        // request 报错时也可以处理
         {
           type: 'checkbox-group',
           id: 'checkbox',
@@ -55,6 +62,7 @@ export default {
             }
           }
         },
+        // 你想远程配置任何 prop 都行！
         {
           type: 'cascader',
           id: 'cascader',
