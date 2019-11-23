@@ -119,10 +119,7 @@ interface Content {
           return resp
       }
     }
-    onError = error => {
-      console.error(error.message)
-      return []
-    }
+    onError = error => console.error(error.message)
     label = 'label'
     value = 'value'
   }

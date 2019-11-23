@@ -57,6 +57,9 @@ export default {
     'data.remote': {
       handler(v) {
         if (!v) return
+        const isOptionsCase =
+          ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) >
+          -1
         const {
           url,
           request = () => this.$axios.get(url).then(resp => resp.data),
@@ -64,36 +67,26 @@ export default {
           dataPath = '',
           onResponse = resp => {
             if (dataPath) resp = _get(resp, dataPath)
-            switch (this.data.type) {
-              case 'select':
-              case 'checkbox-group':
-              case 'radio-group':
-                return resp.map(item => ({
-                  label: item[label],
-                  value: item[value]
-                }))
-              default:
-                return resp
+            if (isOptionsCase) {
+              return resp.map(item => ({
+                label: item[label],
+                value: item[value]
+              }))
+            } else {
+              return resp
             }
           },
-          onError = error => {
-            console.error(error.message)
-            return []
-          },
+          onError = error => console.error(error.message),
           label = 'label',
           value = 'value'
         } = v
         Promise.resolve(request())
           .then(onResponse, onError)
           .then(resp => {
-            switch (this.data.type) {
-              case 'select':
-              case 'checkbox-group':
-              case 'radio-group':
-                this.optionsInner = resp
-                break
-              default:
-                this.propsInner = {[prop]: resp}
+            if (isOptionsCase) {
+              this.optionsInner = resp
+            } else {
+              this.propsInner = {[prop]: resp}
             }
           })
       },
