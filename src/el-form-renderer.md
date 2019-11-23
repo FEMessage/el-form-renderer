@@ -80,7 +80,7 @@ interface Content {
    * 配置remote.url，即可远程配置组件的某个prop！
    * remote接受以下属性：
    * url: 远程接口的地址
-   * prop: 该 prop 的名称
+   * prop: 要注入的 prop 的名称，默认为 options
    * request: 可选，请求方法
    * dataPath: 可选，data在响应体中的路径
    * onResponse: 可选，处理请求回来的数据
@@ -91,7 +91,7 @@ interface Content {
    *
    * use remote to set one prop! remote accept following props:
    * url: remote api address
-   * prop: that prop name
+   * prop: prop name that data inject
    * request: optional, customize how to get your options
    * dataPath: optional, data's path in response
    * onResponse: optional, deal with your response
