@@ -1,4 +1,6 @@
-远程获取el-select的options
+远程获取el-select、checkbox-group & radio-group 的options。
+
+你甚至可以远程获取任意一个组件prop！
 
 ```vue
 <template>
@@ -12,17 +14,17 @@ export default {
       content: [
         {
           type: 'select',
-          id: 'region',
-          label: 'area',
-          options: {
-            remoteUrl: 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote',
+          id: 'select',
+          label: 'select',
+          remote: {
+            url: 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote',
           }
         },
         {
           type: 'radio-group',
-          id: 'resource',
-          label: 'resource',
-          options: {
+          id: 'radio',
+          label: 'radio',
+          remote: {
             request() {
               const resp = [
                 {title: 'resourceA'},
@@ -30,15 +32,15 @@ export default {
               ]
               return new Promise(r => setTimeout(() => r(resp), 2000))
             },
-            labelKey: 'title'
+            label: 'title'
           }
         },
         {
           type: 'checkbox-group',
-          id: 'type',
-          label: 'type',
+          id: 'checkbox',
+          label: 'checkbox',
           default: [],
-          options: {
+          remote: {
             request() {
               // throw new Error('test')
               return Promise.reject(new Error('test2'))
@@ -51,6 +53,29 @@ export default {
                 {label: 'typeC'},
               ]
             }
+          }
+        },
+        {
+          type: 'cascader',
+          id: 'cascader',
+          label: 'cascader',
+          default: [],
+          remote: {
+            prop: 'options',
+            request() {
+              return [
+                {
+                  label: 'hello', 
+                  value: 'hello', 
+                  children: [
+                    {
+                      label: 'world',
+                      value: 'world',
+                    }
+                  ]
+                },
+              ]
+            },
           }
         },
       ]

@@ -72,44 +72,59 @@ interface Content {
 
   /**
    * 具有选择功能的原子表单可用此定义可选项
-   * 包括type为select、radio-group、checkbox-group
-   * 你还可以远程获取选项数组。当options为一个配置对象时，接受以下属性：
-   * remoteUrl: 远程接口的地址
+   * use with type: select, radio-group, radio-button, checkbox-group, checkbox-button
+   */
+  options?: {label: string; value?: any}[]
+
+  /**
+   * 配置remote.url，即可远程配置组件的某个prop！
+   * remote接受以下属性：
+   * url: 远程接口的地址
+   * prop: 该 prop 的名称
    * request: 可选，请求方法
-   * labelKey
-   * valueKey
-   * dataPath: data在响应体中的路径
+   * dataPath: 可选，data在响应体中的路径
    * onResponse: 可选，处理请求回来的数据
    * onError: 可选，处理请求出错的情况
+   * 另外，针对 select、radio-group、checkbox-group，远程数据能自动映射成 el-option 选项！以下属性仅在此情况使用
+   * label: 可选，可直接配置远程数据中用作 label 的key
+   * value: 可选，可直接配置远程数据中用作 value 的key
    *
-   * use with type: select, radio-group, radio-button, checkbox-group, checkbox-button
-   * support request options data from an api
-   * use options as a config object, whose props are as follow:
-   * remoteUrl: remote api address
+   * use remote to set one prop! remote accept following props:
+   * url: remote api address
+   * prop: that prop name
    * request: optional, customize how to get your options
-   * labelKey
-   * valueKey
-   * dataPath: data's path in response
+   * dataPath: optional, data's path in response
    * onResponse: optional, deal with your response
    * onError: optional, deal with request error
+   * and, we treat select、radio-group、checkbox-group specially and the resp will be map as an el-option's group! following props only suitable for this case
+   * label: optional, label key in resp
+   * value: optional, value key in resp
    */
-  options?: {label: string; value?: any}[] | {
-    remoteUrl: string
-    request = () => this.$axios.get(remoteUrl).then(resp => resp.data)
-    labelKey = 'label',
-    valueKey = 'value',
-    dataPath = '',
+  remote?: {
+    url: string
+    request = () => this.$axios.get(url).then(resp => resp.data)
+    prop = 'options'
+    dataPath = ''
     onResponse = resp => {
-      const data = dataPath ? _get(resp, dataPath) : resp
-      return data.map(item => ({
-        label: item[labelKey],
-        value: item[valueKey]
-      }))
-          },
+      if (dataPath) resp = _get(resp, dataPath)
+      switch (this.data.type) {
+        case 'select':
+        case 'checkbox-group':
+        case 'radio-group':
+          return resp.map(item => ({
+            label: item[label],
+            value: item[value]
+          }))
+        default:
+          return resp
+      }
+    }
     onError = error => {
       console.error(error.message)
       return []
     }
+    label = 'label'
+    value = 'value'
   }
 
   attrs?: object // html attributes

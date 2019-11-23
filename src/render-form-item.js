@@ -27,11 +27,12 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
-    options: [Array, Object]
+    options: Array
   },
   data() {
     return {
-      optionsInner: [],
+      optionsInner: this.options,
+      propsInner: {},
       isBlurTrigger:
         this.data.rules &&
         this.data.rules.some(rule => {
@@ -48,33 +49,53 @@ export default {
     }
   },
   watch: {
-    options: {
+    /**
+     * 这里其实用 remote 处理了两件事。有机会是可以拆分的
+     * 1. 基本用法，配置 url 后即可从远程获取某个 prop 注入到组件
+     * 2. 针对 select、checkbox-group & radio-group 组件，会直接将 resp 作为 options 处理；label & value 也是直接为这个场景而生的
+     */
+    'data.remote': {
       handler(v) {
-        if (Array.isArray(v)) {
-          this.optionsInner = v
-          return
-        }
+        if (!v) return
         const {
-          remoteUrl,
-          request = () => this.$axios.get(remoteUrl).then(resp => resp.data),
-          labelKey = 'label',
-          valueKey = 'value',
+          url,
+          request = () => this.$axios.get(url).then(resp => resp.data),
+          prop = 'options', // 默认处理 el-cascader 的情况
           dataPath = '',
           onResponse = resp => {
-            const data = dataPath ? _get(resp, dataPath) : resp
-            return data.map(item => ({
-              label: item[labelKey],
-              value: item[valueKey]
-            }))
+            if (dataPath) resp = _get(resp, dataPath)
+            switch (this.data.type) {
+              case 'select':
+              case 'checkbox-group':
+              case 'radio-group':
+                return resp.map(item => ({
+                  label: item[label],
+                  value: item[value]
+                }))
+              default:
+                return resp
+            }
           },
           onError = error => {
             console.error(error.message)
             return []
-          }
+          },
+          label = 'label',
+          value = 'value'
         } = v
-        new Promise(r => r(request()))
+        Promise.resolve(request())
           .then(onResponse, onError)
-          .then(options => (this.optionsInner = options))
+          .then(resp => {
+            switch (this.data.type) {
+              case 'select':
+              case 'checkbox-group':
+              case 'radio-group':
+                this.optionsInner = resp
+                break
+              default:
+                this.propsInner = {[prop]: resp}
+            }
+          })
       },
       immediate: true
     }
@@ -107,7 +128,7 @@ export default {
       const elType = data.type
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {...obj, value}
+      const props = {...obj, value, ...this.propsInner}
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
