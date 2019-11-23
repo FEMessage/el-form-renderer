@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/FEMessage/el-form-renderer/compare/v1.11.6...v1.12.0) (2019-11-23)
+
+
+### Features
+
+* options支持通过remote的方式获取 ([#120](https://github.com/FEMessage/el-form-renderer/issues/120)) ([8ac4044](https://github.com/FEMessage/el-form-renderer/commit/8ac4044))
+
+
+
 ### [1.11.6](https://github.com/FEMessage/el-form-renderer/compare/v1.11.5...v1.11.6) (2019-11-14)
 
 
