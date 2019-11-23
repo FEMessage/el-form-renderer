@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![](https://cdn.nlark.com/yuque/0/2019/png/160590/1563849166655-0c7319bc-37f1-4ddd-94ff-13051bdd6691.png)
+![](https://i.loli.net/2019/11/14/LBzrKgj7PCdfcev.png)
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活
 
 如下图所示，两个图片上传、一个富文本编辑器，都是借助 el-form-renderer 渲染的。
 
-![example.png](https://cdn.nlark.com/yuque/0/2019/png/160590/1562641394165-dc22af20-2863-443f-8f1a-17cd12b1f359.png#align=left&display=inline&height=1488&name=example.png&originHeight=1488&originWidth=2646&size=145427&status=done&width=2646)
+![example.png](https://i.loli.net/2019/11/14/yBUJ4LmjhPWHI9F.png)
 
 ## Feature
 

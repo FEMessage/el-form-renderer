@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/FEMessage/el-form-renderer/pulls)
 [![Automated Release Notes by gren](https://img.shields.io/badge/%F0%9F%A4%96-release%20notes-00B2EE.svg)](https://github-tools.github.io/github-release-notes/)
 
-![](https://cdn.nlark.com/yuque/0/2019/png/237102/1564392138773-3b4a3555-9ce5-4825-8510-53ae092711f6.png)
+![](https://i.loli.net/2019/11/14/Nz6n9l7KixqIHsa.png)
 
 [中文文档](./README-zh.md)
 
