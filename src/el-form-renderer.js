@@ -25,7 +25,7 @@ export default {
               data: item,
               value: this.value,
               itemValue: this.value[item.id],
-              disabled: this.disabled,
+              disabled: this.$attrs.disabled || false,
               options: this.options[item.id],
               // _parent 指向el-form, 在render-form-group里有用到
               _parent: this
@@ -79,12 +79,12 @@ export default {
     content: {
       type: Array,
       required: true
-    },
-    // 禁用所有表单
-    disabled: {
-      type: Boolean,
-      default: false
     }
+    // 禁用所有表单
+    // disabled: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   data() {
     return {
