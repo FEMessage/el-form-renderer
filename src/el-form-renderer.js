@@ -25,7 +25,7 @@ export default {
               data: item,
               value: this.value,
               itemValue: this.value[item.id],
-              disabled: this.$attrs.disabled || false,
+              disabled: !!this.$attrs.disabled,
               options: this.options[item.id],
               // _parent 指向el-form, 在render-form-group里有用到
               _parent: this
