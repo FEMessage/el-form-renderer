@@ -80,11 +80,6 @@ export default {
       type: Array,
       required: true
     }
-    // 禁用所有表单
-    // disabled: {
-    //   type: Boolean,
-    //   default: false
-    // }
   },
   data() {
     return {
