@@ -1,4 +1,4 @@
-el-form-renderer 的属性 disabled 会禁用所有表单项
+el-form-renderer 的 disabled 属性会禁用所有表单项
 
 而 content 中每个表单元素的 el 对象内的 disabled 可以禁用对应的表单项
 
