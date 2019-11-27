@@ -31,7 +31,6 @@ export default {
   },
   data() {
     return {
-      optionsInner: this.options,
       propsInner: {},
       isBlurTrigger:
         this.data.rules &&
@@ -84,7 +83,10 @@ export default {
           .then(onResponse, onError)
           .then(resp => {
             if (isOptionsCase) {
-              this.optionsInner = resp
+              let formRenderer = this.$parent
+              while (formRenderer.$options._componentTag !== 'el-form-renderer')
+                formRenderer = formRenderer.$parent
+              formRenderer.setOptions(this.prop, resp)
             } else {
               this.propsInner = {[prop]: resp}
             }
@@ -164,9 +166,9 @@ export default {
             let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
             if (
               typeof optRenderer === 'function' &&
-              Array.isArray(this.optionsInner)
+              Array.isArray(this.options)
             ) {
-              return this.optionsInner.map(optRenderer)
+              return this.options.map(optRenderer)
             }
           })()
         ]
