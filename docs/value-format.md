@@ -25,7 +25,9 @@
             id: 'date',
             label: 'date',
             inputFormat: (row) => {
-              return [row.startDate, row.endDate]
+              if (row.startDate && row.endDate) {
+                return [row.startDate, row.endDate]
+              }
             },
             outputFormat: (val) => {
               if (!val) {
