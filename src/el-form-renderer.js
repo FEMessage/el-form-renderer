@@ -49,9 +49,7 @@ export default {
     RenderFormGroup
   },
   beforeMount() {
-    this._content = transformContent(this.content)
-    this.initItemOption()
-    this._content.forEach(this.initItemValue)
+    this.init()
   },
   mounted() {
     this.$nextTick(() => {
@@ -90,6 +88,9 @@ export default {
     }
   },
   watch: {
+    content(val) {
+      val.length && this.init()
+    },
     _content: {
       handler(newVal) {
         if (!newVal.length) {
@@ -101,6 +102,14 @@ export default {
     }
   },
   methods: {
+    /**
+     * 初始化 content
+     */
+    init() {
+      this._content = transformContent(this.content)
+      this.initItemOption()
+      this._content.forEach(this.initItemValue)
+    },
     /**
      * 初始化每个表单原子的默认值
      * @param  {Object} item 表单原子描述
