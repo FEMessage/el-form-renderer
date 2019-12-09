@@ -13,7 +13,8 @@ export default {
       'el-form',
       {
         props: Object.assign({}, this.$attrs, {
-          model: this.value // 用于校验
+          model: this.value, // 用于校验,
+          disabled: false // 不使用全局 disabled，由各表单项处理
         }),
         ref: 'elForm'
       },

@@ -123,8 +123,10 @@ export default {
       const elType = data.type
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {...obj, value, ...this.propsInner}
-      this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
+      const inheritProps = {
+        disabled: this.disabled
+      }
+      const props = {...inheritProps, ...obj, value, ...this.propsInner}
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
       return h(
