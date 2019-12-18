@@ -54,7 +54,8 @@
       "contributions": [
         "doc",
         "example",
-        "code"
+        "code",
+        "blog"
       ]
     },
     {
@@ -78,5 +79,6 @@
       ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
