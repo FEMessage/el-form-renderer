@@ -65,7 +65,7 @@ el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活
 - [自定义组件设置校验规则](https://github.com/FEMessage/el-form-renderer/blob/master/docs/guide-custom-rules-in-custom-component.md)
 - [fem-vscode-helper](https://marketplace.visualstudio.com/items?itemName=FEMessage.fem-vscode-helper)
 - [实践案例](https://zhuanlan.zhihu.com/p/95725645)
-- [设置动态 options 指北](https://zhuanlan.zhihu.com/p/97827063)
+- [设置动态 options 指南](https://zhuanlan.zhihu.com/p/97827063)
 
 [⬆ Back to Top](#table-of-contents)
 
