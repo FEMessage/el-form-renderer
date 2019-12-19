@@ -10,6 +10,8 @@ FYI: `type` is used with element-ui's component, and `component` is used with cu
 </template>
 
 <script>
+// import ElSemverInput from '@femessage/el-semver-input' // 该组件已在全局注册过了，这里仅演示
+
 export default {
   name: 'custom-component',
   data() {
@@ -17,7 +19,8 @@ export default {
       content: [
         {
           id: 'id',
-          component: 'el-semver-input',
+          component: 'el-semver-input', // 如果已经使用 Vue.use(ElSemverInput) 或者在 Vue 实例选项的 components 里注册过了，可以这样使用
+          // component: ElSemverInput, // 也可以局部 import 组件后，直接传入引用
         }
       ]
     }
