@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils'
 import Element from 'element-ui'
-import ElFormRenderer from '../src/el-form-renderer'
+import ElFormRenderer from '../src/el-form-renderer.vue'
 
 const localVue = createLocalVue()
 

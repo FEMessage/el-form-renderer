@@ -1,4 +1,4 @@
-import component from '../src/el-form-renderer'
+import component from '../src/el-form-renderer.vue'
 const {setOptions} = component.methods
 
 const options = {

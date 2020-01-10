@@ -1,9 +1,9 @@
-import component from '../src/el-form-renderer'
+import component from '../src/el-form-renderer.vue'
 const {initItemOption} = component.methods
 
 const mocking = {
   options: {},
-  _content: [
+  innerContent: [
     {
       id: 'shell',
       options: [
