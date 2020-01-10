@@ -58,6 +58,13 @@ interface Content {
   default?: any
 
   /**
+   * 当 type === 'input' 时展示文本值
+   * 当 type === 'select' 时展示对应 label
+   * 对于其他组件等同于 disabled = true
+   */
+  readonly = false
+
+  /**
    * @deprecated
    */
   enableWhen?: object | string

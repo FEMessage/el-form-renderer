@@ -22,7 +22,7 @@ const sections = (() => {
   return [
     {
       name: 'Components',
-      components: 'src/el-form-renderer.js',
+      components: 'src/el-form-renderer.vue',
       usageMode: 'expand'
     },
     {
