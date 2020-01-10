@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/FEMessage/el-form-renderer/compare/v1.12.1...v1.13.0) (2020-01-10)
+
+
+### Bug Fixes
+
+* 修复 test & 增加 pre-push 钩子 ([#153](https://github.com/FEMessage/el-form-renderer/issues/153)) ([94cef0e](https://github.com/FEMessage/el-form-renderer/commit/94cef0e))
+* 原 babel 有时会出问题 ([#154](https://github.com/FEMessage/el-form-renderer/issues/154)) ([f17dcab](https://github.com/FEMessage/el-form-renderer/commit/f17dcab))
+
+
+### Build System
+
+* git depth = 30 ([1f5a5af](https://github.com/FEMessage/el-form-renderer/commit/1f5a5af))
+
+
+### Features
+
+* 新增 readonly 功能 & 重构 render 函数为 template ([#152](https://github.com/FEMessage/el-form-renderer/issues/152)) ([3180bfd](https://github.com/FEMessage/el-form-renderer/commit/3180bfd))
+
+
+
 ### [1.12.1](https://github.com/FEMessage/el-form-renderer/compare/v1.12.0...v1.12.1) (2019-11-27)
 
 
