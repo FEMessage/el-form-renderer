@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import renderFormItem from '../src/render-form-item'
+import renderFormItem from '../src/render-form-item.vue'
 
 const testOrigin = {
   type: 'input',
