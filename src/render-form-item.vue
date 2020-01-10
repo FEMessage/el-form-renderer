@@ -119,7 +119,7 @@ export default {
         case 'select':
           return readonlySelect(h, itemValue, options)
         default:
-          return readonlyInput(h, itemValue)
+          return false
       }
     },
     // 是否显示
@@ -188,10 +188,17 @@ export default {
       const value = this.itemValue
       const obj = isObject(data.el) ? data.el : {}
       const elType = data.type
-      if (this.readonly) return this.readonlyContent
+      if (this.readonly) {
+        if (this.readonlyContent) return this.readonlyContent
+      }
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {...obj, value, ...this.propsInner, disabled: this.disabled}
+      const props = {
+        ...obj,
+        value,
+        ...this.propsInner,
+        disabled: this.disabled || this.readonly
+      }
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
       return h(
