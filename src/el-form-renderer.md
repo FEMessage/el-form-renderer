@@ -59,7 +59,7 @@ interface Content {
 
   /**
    * 该表单项将用纯文本展示其 value
-   * 当前仅在 type === 'input' 时生效
+   * 当 type === 'select' 时展示 label
    */
   readonly = false
 

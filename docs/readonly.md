@@ -1,4 +1,4 @@
-在配置中使用 readonly 属性可将 input 组件的值用纯文本的方式展示
+设置 readonly 属性可直接展示对应的值（value）。对于 el-select，则显示对应的 label
 
 ```vue
 <template>
