@@ -1,5 +1,5 @@
 // Import vue component
-import Component from './el-form-renderer'
+import Component from './el-form-renderer.vue'
 
 // `Vue.use` automatically prevents you from using
 // the same plugin more than once,
