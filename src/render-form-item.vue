@@ -147,6 +147,21 @@ export default {
       const value = this.itemValue
       const obj = isObject(data.el) ? data.el : {}
       const elType = data.type
+      if (data.readonly) {
+        if (elType === 'input')
+          return h(
+            'div',
+            obj.type === 'textarea'
+              ? {
+                  style: {
+                    padding: '10px 0',
+                    lineHeight: 1.5
+                  }
+                }
+              : {},
+            value
+          )
+      }
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
       const props = {...obj, value, ...this.propsInner}
