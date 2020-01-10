@@ -2,7 +2,7 @@
 
 ```vue
 <template>
-  <el-form-renderer label-width="100px" :content="content" ref="ruleForm">
+  <el-form-renderer readonly label-width="100px" :content="content" ref="ruleForm">
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">submit</el-button>
       <el-button @click="resetForm('ruleForm')">reset</el-button>
@@ -16,7 +16,6 @@ export default {
     return {
       content: [
         {
-          readonly: true,
           default: '小明',
           type: 'input',
           id: 'name',
@@ -31,23 +30,21 @@ export default {
             { min: 3, max: 5, message: 'length between 3 to 5', trigger: 'blur' }
           ]
         }, {
-          readonly: true,
           default: 'shanghai',
           type: 'select',
           id: 'region',
           label: 'area',
           options: [{
-            label: 'area1',
+            label: '上海',
             value: 'shanghai'
           }, {
-            label: 'area2',
+            label: '北京',
             value: 'beijing'
           }],
           rules: [
             { required: true, message: 'miss area', trigger: 'change' }
           ]
         }, {
-          readonly: true,
           default: '[native Date Wed Jan 01 2020 00:00:00 GMT+0800 (中国标准时间)]',
           type: 'date-picker',
           id: 'date',
@@ -60,13 +57,11 @@ export default {
             { type: 'date', required: true, message: 'miss date', trigger: 'change' }
           ]
         }, {
-          readonly: true,
           default: true,
           type: 'switch',
           id: 'delivery',
           label: 'delivery'
         }, {
-          readonly: true,
           type: 'checkbox-group',
           id: 'type',
           label: 'type',
@@ -82,7 +77,6 @@ export default {
             { type: 'array', required: true, message: 'miss type', trigger: 'change' }
           ]
         }, {
-          readonly: true,
           default: 'resourceA',
           type: 'radio-group',
           id: 'resource',
@@ -96,7 +90,6 @@ export default {
             { required: true, message: 'miss resource', trigger: 'change' }
           ]
         }, {
-          readonly: true,
           default: '小明的一些描述小明的一些描述小明的一些描述小明的一些描述小明的一些描述小明的一些描述小明的一些描述',
           type: 'input',
           id: 'desc',

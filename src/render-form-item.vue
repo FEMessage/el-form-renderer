@@ -14,7 +14,7 @@
       :value="itemValue"
       @input="$emit('updateValue', {id: data.id, value: $event})"
     /> -->
-    <vnode :content="renderFormItemContent()" :fuck="true" />
+    <vnode :content="renderFormItemContent()" />
   </el-form-item>
 </template>
 <script>
@@ -34,6 +34,29 @@ function validator(data) {
   }
 }
 
+function readonlyInput(h, value) {
+  return h('div', value)
+}
+
+function readonlyTextArea(h, value) {
+  return h(
+    'div',
+    {
+      style: {
+        padding: '10px 0',
+        lineHeight: 1.5
+      }
+    },
+    value
+  )
+}
+
+function readonlySelect(h, value, options) {
+  const op = options.find(op => op.value === value)
+  if (!op) return ''
+  return h('div', op.label)
+}
+
 export default {
   components: {
     /**
@@ -46,7 +69,7 @@ export default {
       render: (h, ctx) => ctx.props.content
     },
     /**
-     * 牛逼的很。只需要有组件选项对象，就可以用函数式组件无痕地在 template 中使用
+     * 🐂🍺只需要有组件选项对象，就可以立刻包装成函数式组件在 template 中使用
      * FYI: https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6
      */
     /* eslint-disable vue/no-unused-components */
@@ -68,6 +91,7 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
+    readonly: Boolean,
     options: Array
   },
   data() {
@@ -81,6 +105,23 @@ export default {
     }
   },
   computed: {
+    readonlyContent() {
+      const {
+        $createElement: h,
+        data: {type, el = {}, options},
+        itemValue
+      } = this
+      switch (type) {
+        case 'input':
+          if (el && el.type === 'textarea')
+            return readonlyTextArea(h, itemValue)
+          return readonlyInput(h, itemValue)
+        case 'select':
+          return readonlySelect(h, itemValue, options)
+        default:
+          return readonlyInput(h, itemValue)
+      }
+    },
     // 是否显示
     _show() {
       // 当存在 hidden 时优先响应
@@ -147,25 +188,10 @@ export default {
       const value = this.itemValue
       const obj = isObject(data.el) ? data.el : {}
       const elType = data.type
-      if (data.readonly) {
-        if (elType === 'input')
-          return h(
-            'div',
-            obj.type === 'textarea'
-              ? {
-                  style: {
-                    padding: '10px 0',
-                    lineHeight: 1.5
-                  }
-                }
-              : {},
-            value
-          )
-      }
+      if (this.readonly) return this.readonlyContent
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {...obj, value, ...this.propsInner}
-      this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
+      const props = {...obj, value, ...this.propsInner, disabled: this.disabled}
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
       return h(

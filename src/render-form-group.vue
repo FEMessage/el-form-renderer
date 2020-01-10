@@ -10,6 +10,7 @@
         :value="value"
         :item-value="itemValue[item.id]"
         :disabled="disabled"
+        :readonly="readonly"
         :options="options[item.id]"
         @updateValue="updateValue"
       />
@@ -28,6 +29,7 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
+    readonly: Boolean,
     options: Object,
     _parent: Object
   },

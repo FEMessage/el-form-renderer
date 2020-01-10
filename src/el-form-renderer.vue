@@ -9,7 +9,8 @@
         :data="item"
         :value="value"
         :item-value="value[item.id]"
-        :disabled="!!$attrs.disabled"
+        :disabled="disabled || item.disabled"
+        :readonly="readonly || item.readonly"
         :options="options[item.id]"
         :_parent="this"
         @updateValue="updateValue"
@@ -37,6 +38,14 @@ export default {
     content: {
       type: Array,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
