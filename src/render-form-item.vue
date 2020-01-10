@@ -1,3 +1,23 @@
+<template>
+  <el-form-item
+    v-show="_show"
+    :prop="prop"
+    :label="data.label"
+    :rules="_show && Array.isArray(data.rules) ? data.rules : []"
+    v-bind="data.attrs"
+  >
+    <!-- TODO: 可用。后续将 renderFormItemContent 也要改造成 template 写法 -->
+    <!-- <custom-component
+      v-if="data.component"
+      :component="data.component"
+      :prefix="true"
+      :value="itemValue"
+      @input="$emit('updateValue', {id: data.id, value: $event})"
+    /> -->
+    <vnode :content="renderFormItemContent()" />
+  </el-form-item>
+</template>
+<script>
 import mixinOptionExtensions from './mixins/package-option'
 import mixinEnableWhen from './mixins/enable-when'
 import mixinHidden from './mixins/hidden'
@@ -14,7 +34,51 @@ function validator(data) {
   }
 }
 
+function readonlyInput(h, value) {
+  return h('div', value)
+}
+
+function readonlyTextArea(h, value) {
+  return h(
+    'div',
+    {
+      style: {
+        padding: '10px 0',
+        lineHeight: 1.5
+      }
+    },
+    value
+  )
+}
+
+function readonlySelect(h, value, options) {
+  const op = options.find(op => op.value === value)
+  if (!op) return ''
+  return h('div', op.label)
+}
+
 export default {
+  components: {
+    /**
+     * 在 template 的 {{}} 中是无法渲染 vnode 的；
+     * 这是在 template 里面写 vnode 的解决方案
+     * FYI: https://stackoverflow.com/questions/49352525/can-you-render-vnodes-in-a-vue-template
+     */
+    Vnode: {
+      functional: true,
+      render: (h, ctx) => ctx.props.content
+    },
+    /**
+     * 🐂🍺只需要有组件选项对象，就可以立刻包装成函数式组件在 template 中使用
+     * FYI: https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6
+     */
+    /* eslint-disable vue/no-unused-components */
+    CustomComponent: {
+      functional: true,
+      render: (h, ctx) => h(ctx.props.component, ctx.data)
+    }
+    /* eslint-enable vue/no-unused-components */
+  },
   mixins: [mixinOptionExtensions, mixinEnableWhen, mixinHidden],
   props: {
     data: Object,
@@ -27,6 +91,7 @@ export default {
     itemValue: {},
     value: Object,
     disabled: Boolean,
+    readonly: Boolean,
     options: Array
   },
   data() {
@@ -40,6 +105,23 @@ export default {
     }
   },
   computed: {
+    readonlyContent() {
+      const {
+        $createElement: h,
+        data: {type, el = {}, options},
+        itemValue
+      } = this
+      switch (type) {
+        case 'input':
+          if (el && el.type === 'textarea')
+            return readonlyTextArea(h, itemValue)
+          return readonlyInput(h, itemValue)
+        case 'select':
+          return readonlySelect(h, itemValue, options)
+        default:
+          return false
+      }
+    },
     // 是否显示
     _show() {
       // 当存在 hidden 时优先响应
@@ -48,6 +130,9 @@ export default {
     }
   },
   watch: {
+    data(v) {
+      validator(v)
+    },
     /**
      * 这里其实用 remote 处理了两件事。有机会是可以拆分的
      * 1. 基本用法，配置 url 后即可从远程获取某个 prop 注入到组件
@@ -95,36 +180,25 @@ export default {
       immediate: true
     }
   },
-  render(h) {
-    validator(this.data) // 对数据进行简单校验
-    return h(
-      'el-form-item',
-      {
-        props: {
-          prop: this.prop,
-          label: this.data.label,
-          rules:
-            this._show && Array.isArray(this.data.rules) ? this.data.rules : []
-        },
-        attrs: this.data.attrs,
-        style: !this._show ? 'display: none;' : '' // 使用 v-show 减少 dom 操作
-      },
-      [this.renderFormItemContent(h, this.data, this.itemValue)]
-    )
-  },
   methods: {
-    /**
-     * 渲染表单项的内容
-     * @param  {Object} data 表单属性定义
-     * @param  {All} value 单项表单数据值
-     */
-    renderFormItemContent(h, data, value) {
+    // TODO: 等待重构的怪物👹
+    renderFormItemContent() {
+      const h = this.$createElement
+      const data = this.data
+      const value = this.itemValue
       const obj = isObject(data.el) ? data.el : {}
       const elType = data.type
+      if (this.readonly) {
+        if (this.readonlyContent) return this.readonlyContent
+      }
       if (elType === 'checkbox-button') data.type = 'checkbox-group'
       else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {...obj, value, ...this.propsInner}
-      this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
+      const props = {
+        ...obj,
+        value,
+        ...this.propsInner,
+        disabled: this.disabled || this.readonly
+      }
       const {updateForm} = this.$parent.$parent
       const {on = {}} = data
       return h(
@@ -146,6 +220,7 @@ export default {
               }
               if (on.input) on.input([value, ...rest], updateForm)
 
+              // FIXME: 怪不得 rules 的 trigger 只写了 blur，却还会在 input 的时候触发校验！
               this.triggerValidate(data.id)
             },
             change: (value, ...rest) => {
@@ -157,6 +232,7 @@ export default {
               this.$emit('updateValue', {id: data.id, value: trimVal})
               if (on.change) on.change([trimVal, ...rest], updateForm)
 
+              // FIXME:
               this.triggerValidate(data.id)
             }
           }
@@ -203,3 +279,4 @@ export default {
     }
   }
 }
+</script>

@@ -1,6 +1,28 @@
+<template>
+  <el-form ref="elForm" v-bind="$attrs" :model="value">
+    <template v-for="(item, index) in innerContent">
+      <slot :name="`id:${item.id}`" />
+      <slot :name="`$id:${item.id}`" />
+      <component
+        :is="item.type === GROUP ? 'render-form-group' : 'render-form-item'"
+        :key="index"
+        :data="item"
+        :value="value"
+        :item-value="value[item.id]"
+        :disabled="disabled || item.disabled"
+        :readonly="readonly || item.readonly"
+        :options="options[item.id]"
+        :_parent="this"
+        @updateValue="updateValue"
+      />
+    </template>
+    <slot />
+  </el-form>
+</template>
+<script>
 import _set from 'lodash.set'
-import RenderFormGroup from './render-form-group'
-import RenderFormItem from './render-form-item'
+import RenderFormGroup from './render-form-group.vue'
+import RenderFormItem from './render-form-item.vue'
 import transformContent from './transform-content'
 import {isObject} from './utils'
 
@@ -8,50 +30,48 @@ const GROUP = 'group'
 
 export default {
   name: 'ElFormRenderer',
-  render(h) {
-    return h(
-      'el-form',
-      {
-        props: Object.assign({}, this.$attrs, {
-          model: this.value // 用于校验
-        }),
-        ref: 'elForm'
-      },
-      this._content
-        .map((item, index) => {
-          const data = {
-            props: {
-              key: index,
-              data: item,
-              value: this.value,
-              itemValue: this.value[item.id],
-              disabled: !!this.$attrs.disabled,
-              options: this.options[item.id],
-              // _parent 指向el-form, 在render-form-group里有用到
-              _parent: this
-            },
-            on: {
-              updateValue: this.updateValue
-            }
-          }
-          return [
-            this.$slots[`id:${item.id}`] || this.$slots[`$id:${item.id}`],
-            item.type === GROUP
-              ? h('render-form-group', data)
-              : h('render-form-item', data)
-          ]
-        })
-        .concat(this.$slots.default)
-    )
-  },
   components: {
     RenderFormItem,
     RenderFormGroup
   },
+  props: {
+    content: {
+      type: Array,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      GROUP,
+      value: {}, // 表单数据对象
+      options: {},
+      // 用于兼容数据操作
+      innerContent: []
+    }
+  },
+  watch: {
+    innerContent: {
+      handler(newVal) {
+        if (!newVal.length) {
+          return
+        }
+        this.updateOptions(newVal, this.options)
+      },
+      deep: true
+    }
+  },
   beforeMount() {
-    this._content = transformContent(this.content)
+    this.innerContent = transformContent(this.content)
     this.initItemOption()
-    this._content.forEach(this.initItemValue)
+    this.innerContent.forEach(this.initItemValue)
   },
   mounted() {
     this.$nextTick(() => {
@@ -66,7 +86,7 @@ export default {
        * 如果这是一个数组，那么就把这个数组里面的 undefined 值去掉
        */
       this.resetFields = () => {
-        this.$refs.elForm['resetFields']()
+        this.$refs.elForm.resetFields()
         Object.keys(this.value).forEach(key => {
           if (Array.isArray(this.value[key])) {
             this.value[key] = this.value[key].filter(val => val !== undefined)
@@ -74,31 +94,6 @@ export default {
         })
       }
     })
-  },
-  props: {
-    content: {
-      type: Array,
-      required: true
-    }
-  },
-  data() {
-    return {
-      value: {}, // 表单数据对象
-      options: {},
-      // 用于兼容数据操作
-      _content: []
-    }
-  },
-  watch: {
-    _content: {
-      handler(newVal) {
-        if (!newVal.length) {
-          return
-        }
-        this.updateOptions(newVal, this.options)
-      },
-      deep: true
-    }
   },
   methods: {
     /**
@@ -125,7 +120,7 @@ export default {
      * 初始化每个表单项的选项
      */
     initItemOption() {
-      this.options = this._content.reduce((con, item) => {
+      this.options = this.innerContent.reduce((con, item) => {
         con[item.id] =
           item.type === GROUP
             ? item.items.reduce((acc, cur) => {
@@ -176,7 +171,7 @@ export default {
           return acc
         }, {})
       }
-      return {...getValue(this.value, this._content)}
+      return {...getValue(this.value, this.innerContent)}
     },
     /**
      * update form values
@@ -204,7 +199,7 @@ export default {
         }, {})
       }
 
-      this.value = Object.assign({}, this.value, updateValue(this._content))
+      this.value = Object.assign({}, this.value, updateValue(this.innerContent))
     },
     /**
      * update select options
@@ -236,3 +231,4 @@ export default {
     }
   }
 }
+</script>

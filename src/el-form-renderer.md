@@ -58,6 +58,13 @@ interface Content {
   default?: any
 
   /**
+   * 当 type === 'input' 时展示文本值
+   * 当 type === 'select' 时展示对应 label
+   * 对于其他组件等同于 disabled = true
+   */
+  readonly = false
+
+  /**
    * @deprecated
    */
   enableWhen?: object | string
@@ -88,6 +95,7 @@ interface Content {
    * 另外，针对 select、radio-group、checkbox-group，远程数据能自动映射成 el-option 选项！以下属性仅在此情况使用
    * label: 可选，可直接配置远程数据中用作 label 的key
    * value: 可选，可直接配置远程数据中用作 value 的key
+   * @see https://zhuanlan.zhihu.com/p/97827063
    *
    * use remote to set one prop! remote accept following props:
    * url: remote api address
