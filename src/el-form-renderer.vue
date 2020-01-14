@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="elForm" v-bind="$attrs" :model="value">
+  <el-form ref="elForm" v-bind="$attrs" :model="value" class="el-form-renderer">
     <template v-for="(item, index) in innerContent">
       <slot :name="`id:${item.id}`" />
       <slot :name="`$id:${item.id}`" />
