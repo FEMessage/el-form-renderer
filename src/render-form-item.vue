@@ -6,23 +6,44 @@
     :rules="_show && Array.isArray(data.rules) ? data.rules : []"
     v-bind="data.attrs"
   >
-    <!-- TODO: 可用。后续将 renderFormItemContent 也要改造成 template 写法 -->
-    <!-- <custom-component
-      v-if="data.component"
-      :component="data.component"
-      :prefix="true"
+    <template v-if="readonly && hasReadonlyContent">
+      <div
+        v-if="data.type === 'input'"
+        :style="
+          data.el && data.el.type === 'textarea'
+            ? {padding: '10px 0', lineHeight: 1.5}
+            : ''
+        "
+      >
+        {{ itemValue }}
+      </div>
+      <div v-else-if="data.type === 'select'">
+        {{
+          (data.options.find(op => op.value === itemValue) || {label: ''}).label
+        }}
+      </div>
+    </template>
+    <custom-component
+      v-else
+      :component="data.component || `el-${data.type}`"
+      v-bind="{...data.el, ...propsInner}"
       :value="itemValue"
-      @input="$emit('updateValue', {id: data.id, value: $event})"
-    /> -->
-    <vnode :content="renderFormItemContent()" />
+      :disabled="disabled || readonly"
+      v-on="listeners"
+    >
+      <vnode :content="renderFormItemContent()" />
+    </custom-component>
   </el-form-item>
 </template>
 <script>
 import mixinOptionExtensions from './mixins/package-option'
 import mixinEnableWhen from './mixins/enable-when'
 import mixinHidden from './mixins/hidden'
-import {toCamelCase, isObject} from './utils'
+import {toCamelCase, noop} from './utils'
 import _get from 'lodash.get'
+import _includes from 'lodash.includes'
+import _topairs from 'lodash.topairs'
+import _frompairs from 'lodash.frompairs'
 
 function validator(data) {
   if (!data) {
@@ -34,29 +55,6 @@ function validator(data) {
   }
 }
 
-function readonlyInput(h, value) {
-  return h('div', value)
-}
-
-function readonlyTextArea(h, value) {
-  return h(
-    'div',
-    {
-      style: {
-        padding: '10px 0',
-        lineHeight: 1.5
-      }
-    },
-    value
-  )
-}
-
-function readonlySelect(h, value, options) {
-  const op = options.find(op => op.value === value)
-  if (!op) return ''
-  return h('div', op.label)
-}
-
 export default {
   components: {
     /**
@@ -64,6 +62,7 @@ export default {
      * 这是在 template 里面写 vnode 的解决方案
      * FYI: https://stackoverflow.com/questions/49352525/can-you-render-vnodes-in-a-vue-template
      */
+    /* eslint-disable vue/no-unused-components */
     Vnode: {
       functional: true,
       render: (h, ctx) => ctx.props.content
@@ -72,10 +71,9 @@ export default {
      * 🐂🍺只需要有组件选项对象，就可以立刻包装成函数式组件在 template 中使用
      * FYI: https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6
      */
-    /* eslint-disable vue/no-unused-components */
     CustomComponent: {
       functional: true,
-      render: (h, ctx) => h(ctx.props.component, ctx.data)
+      render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children)
     }
     /* eslint-enable vue/no-unused-components */
   },
@@ -105,34 +103,57 @@ export default {
     }
   },
   computed: {
-    readonlyContent() {
-      const {
-        $createElement: h,
-        data: {type, el = {}, options},
-        itemValue
-      } = this
-      switch (type) {
-        case 'input':
-          if (el && el.type === 'textarea')
-            return readonlyTextArea(h, itemValue)
-          return readonlyInput(h, itemValue)
-        case 'select':
-          return readonlySelect(h, itemValue, options)
-        default:
-          return false
-      }
-    },
+    hasReadonlyContent: ({data: {type}}) =>
+      _includes(['input', 'select'], type),
     // 是否显示
     _show() {
       // 当存在 hidden 时优先响应
       const isHidden = this.getHiddenStatus()
       return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
+    },
+    listeners() {
+      const {
+        data: {
+          id,
+          atChange = noop,
+          on = {},
+          on: {input: originOnInput = noop, change: originOnChange = noop} = {},
+          trim = true
+        },
+        $parent: {
+          $parent: {updateForm}
+        }
+      } = this
+      return {
+        ..._frompairs(
+          _topairs(on).map(([eName, handler]) => [
+            eName,
+            (...args) => handler(args, updateForm)
+          ])
+        ),
+        // 手动更新表单数据
+        input: (value, ...rest) => {
+          this.$emit('updateValue', {id, value})
+          // 更新表单时调用
+          atChange(id, value)
+          originOnInput([value, ...rest], updateForm)
+
+          // FIXME: rules 的 trigger 只写了 blur，依然会在 input 的时候触发校验！
+          this.triggerValidate(id)
+        },
+        change: (value, ...rest) => {
+          if (typeof value === 'string' && trim) value = value.trim()
+          this.$emit('updateValue', {id, value})
+          originOnChange([value, ...rest], updateForm)
+
+          // FIXME: rules 的 trigger 只写了 blur，依然会在 change 的时候触发校验！
+          this.triggerValidate(id)
+        }
+      }
     }
   },
   watch: {
-    data(v) {
-      validator(v)
-    },
+    data: validator,
     /**
      * 这里其实用 remote 处理了两件事。有机会是可以拆分的
      * 1. 基本用法，配置 url 后即可从远程获取某个 prop 注入到组件
@@ -183,72 +204,20 @@ export default {
   methods: {
     // TODO: 等待重构的怪物👹
     renderFormItemContent() {
-      const h = this.$createElement
-      const data = this.data
-      const value = this.itemValue
-      const obj = isObject(data.el) ? data.el : {}
-      const elType = data.type
-      if (this.readonly) {
-        if (this.readonlyContent) return this.readonlyContent
-      }
-      if (elType === 'checkbox-button') data.type = 'checkbox-group'
-      else if (elType === 'radio-button') data.type = 'radio-group'
-      const props = {
-        ...obj,
-        value,
-        ...this.propsInner,
-        disabled: this.disabled || this.readonly
-      }
-      const {updateForm} = this.$parent.$parent
-      const {on = {}} = data
-      return h(
-        data.component || 'el-' + elType,
-        {
-          attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
-          props,
-          on: {
-            ...Object.keys(on).reduce((obj, eName) => {
-              obj[eName] = (...args) => on[eName](args, updateForm)
-              return obj
-            }, {}),
-            // 手动更新表单数据
-            input: (value, ...rest) => {
-              this.$emit('updateValue', {id: data.id, value: value})
-              // 更新表单时调用
-              if (typeof data.atChange === 'function') {
-                data.atChange(data.id, value)
-              }
-              if (on.input) on.input([value, ...rest], updateForm)
-
-              // FIXME: 怪不得 rules 的 trigger 只写了 blur，却还会在 input 的时候触发校验！
-              this.triggerValidate(data.id)
-            },
-            change: (value, ...rest) => {
-              const trimVal =
-                typeof value === 'string' &&
-                (data.trim === undefined || data.trim)
-                  ? value.trim()
-                  : value
-              this.$emit('updateValue', {id: data.id, value: trimVal})
-              if (on.change) on.change([trimVal, ...rest], updateForm)
-
-              // FIXME:
-              this.triggerValidate(data.id)
-            }
+      const {
+        data: {type}
+      } = this
+      return [
+        (() => {
+          let optRenderer = type && this[`${toCamelCase(type)}_opt`]
+          if (
+            typeof optRenderer === 'function' &&
+            Array.isArray(this.options)
+          ) {
+            return this.options.map(optRenderer)
           }
-        },
-        [
-          (() => {
-            let optRenderer = data.type && this[`${toCamelCase(data.type)}_opt`]
-            if (
-              typeof optRenderer === 'function' &&
-              Array.isArray(this.options)
-            ) {
-              return this.options.map(optRenderer)
-            }
-          })()
-        ]
-      )
+        })()
+      ]
     },
 
     triggerValidate(id) {
