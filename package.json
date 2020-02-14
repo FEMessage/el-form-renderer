@@ -42,8 +42,11 @@
   },
   "homepage": "https://github.com/FEMessage/el-form-renderer",
   "dependencies": {
+    "lodash.frompairs": "^4.0.1",
     "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2"
+    "lodash.includes": "^4.3.0",
+    "lodash.set": "^4.3.2",
+    "lodash.topairs": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

@@ -7,7 +7,7 @@ el-form-renderer 的 disabled 属性会禁用所有表单项
   <div>
     <el-form-renderer label-width="100px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
     <el-checkbox v-model="disabledAll">禁用全部</el-checkbox>
-    <el-checkbox v-model="disabledArea">禁用 area</el-checkbox>
+    <!-- <el-checkbox v-model="disabledArea">禁用 area</el-checkbox> -->
   </div>
 </template>
 
@@ -107,6 +107,7 @@ export default {
 
   watch: {
     disabledArea(val) {
+      // FIXME: 不起作用
       this.$set(this.content[1].el, 'disabled', val)
     }
   }
