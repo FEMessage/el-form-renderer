@@ -50,7 +50,7 @@
   </el-form-item>
 </template>
 <script>
-import mixinEnableWhen from './mixins/enable-when'
+import getEnableWhenSatatus from './mixins/enable-when'
 import mixinHidden from './mixins/hidden'
 import {noop} from './utils'
 import _get from 'lodash.get'
@@ -79,7 +79,7 @@ export default {
       render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
     },
   },
-  mixins: [mixinEnableWhen, mixinHidden],
+  mixins: [mixinHidden],
   props: {
     data: Object,
     prop: {
@@ -111,7 +111,9 @@ export default {
     _show() {
       // 当存在 hidden 时优先响应
       const isHidden = this.getHiddenStatus()
-      return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
+      return isHidden !== undefined
+        ? !isHidden
+        : getEnableWhenSatatus(this.data.enableWhen, this.value)
     },
     listeners() {
       const {
