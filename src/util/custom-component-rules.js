@@ -17,6 +17,6 @@ export default function(content) {
   return {
     ...content,
     rules,
-    component
+    component,
   }
 }

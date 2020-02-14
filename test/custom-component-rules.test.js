@@ -1,8 +1,8 @@
-import customComponentRules from '../src/custom-component-rules'
+import customComponentRules from '../src/util/custom-component-rules'
 
 const mockingComponentOptions = {
   render() {},
-  staticRenderFns() {}
+  staticRenderFns() {},
 }
 
 describe('自定义组件规则', () => {
@@ -23,10 +23,10 @@ function getFunctionRulesContent() {
       return [
         {
           trigger: 'blur',
-          message: '自定义组件的错误信息'
-        }
+          message: '自定义组件的错误信息',
+        },
       ]
-    }
+    },
   })
 
   const rulesContent = {
@@ -36,9 +36,9 @@ function getFunctionRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
-      }
-    ]
+        message: 'el-form-renderer 的规则设置',
+      },
+    ],
   }
 
   const expectContent = {
@@ -48,18 +48,18 @@ function getFunctionRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
+        message: 'el-form-renderer 的规则设置',
       },
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   }
 
   return {
     rulesContent,
-    expectContent
+    expectContent,
   }
 }
 
@@ -68,9 +68,9 @@ function getStaticRulesContent() {
     rules: [
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   })
 
   const rulesContent = {
@@ -80,9 +80,9 @@ function getStaticRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
-      }
-    ]
+        message: 'el-form-renderer 的规则设置',
+      },
+    ],
   }
 
   const expectContent = {
@@ -92,17 +92,17 @@ function getStaticRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
+        message: 'el-form-renderer 的规则设置',
       },
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   }
 
   return {
     rulesContent,
-    expectContent
+    expectContent,
   }
 }

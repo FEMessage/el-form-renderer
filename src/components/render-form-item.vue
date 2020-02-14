@@ -50,8 +50,8 @@
   </el-form-item>
 </template>
 <script>
-import getEnableWhenSatatus from './mixins/enable-when'
-import {noop} from './utils'
+import getEnableWhenSatatus from '../util/enable-when'
+import {noop} from '../util/utils'
 import _get from 'lodash.get'
 import _includes from 'lodash.includes'
 import _topairs from 'lodash.topairs'

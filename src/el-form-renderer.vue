@@ -21,10 +21,10 @@
 </template>
 <script>
 import _set from 'lodash.set'
-import RenderFormGroup from './render-form-group.vue'
-import RenderFormItem from './render-form-item.vue'
-import transformContent from './transform-content'
-import {isObject} from './utils'
+import RenderFormGroup from './components/render-form-group.vue'
+import RenderFormItem from './components/render-form-item.vue'
+import transformContent from './util/transform-content'
+import {isObject} from './util/utils'
 
 const GROUP = 'group'
 
@@ -32,21 +32,21 @@ export default {
   name: 'ElFormRenderer',
   components: {
     RenderFormItem,
-    RenderFormGroup
+    RenderFormGroup,
   },
   props: {
     content: {
       type: Array,
-      required: true
+      required: true,
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     readonly: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
       value: {}, // 表单数据对象
       options: {},
       // 用于兼容数据操作
-      innerContent: []
+      innerContent: [],
     }
   },
   watch: {
@@ -65,8 +65,8 @@ export default {
         }
         this.updateOptions(newVal, this.options)
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   beforeMount() {
     this.innerContent = transformContent(this.content)
@@ -138,7 +138,7 @@ export default {
      */
     updateValue({id, value}) {
       this.value = Object.assign({}, this.value, {
-        [id]: value
+        [id]: value,
       })
     },
     /**
@@ -228,7 +228,7 @@ export default {
         }
         this.$set(options, item.id, item.options || [])
       })
-    }
-  }
+    },
+  },
 }
 </script>
