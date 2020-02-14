@@ -51,7 +51,6 @@
 </template>
 <script>
 import getEnableWhenSatatus from './mixins/enable-when'
-import mixinHidden from './mixins/hidden'
 import {noop} from './utils'
 import _get from 'lodash.get'
 import _includes from 'lodash.includes'
@@ -79,7 +78,6 @@ export default {
       render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
     },
   },
-  mixins: [mixinHidden],
   props: {
     data: Object,
     prop: {
@@ -107,13 +105,13 @@ export default {
   computed: {
     hasReadonlyContent: ({data: {type}}) =>
       _includes(['input', 'select'], type),
+    hiddenStatus: ({data: {hidden = () => false}, data, value}) =>
+      hidden(value, data),
+    enableWhenStatus: ({data: {enableWhen}, value}) =>
+      getEnableWhenSatatus(enableWhen, value),
     // 是否显示
     _show() {
-      // 当存在 hidden 时优先响应
-      const isHidden = this.getHiddenStatus()
-      return isHidden !== undefined
-        ? !isHidden
-        : getEnableWhenSatatus(this.data.enableWhen, this.value)
+      return !this.hiddenStatus && this.enableWhenStatus
     },
     listeners() {
       const {
