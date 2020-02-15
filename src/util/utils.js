@@ -1,3 +1,4 @@
+import _frompairs from 'lodash.frompairs'
 /**
  * 转换为大小驼峰命名
  * abc-efg => abcEfg
@@ -23,3 +24,20 @@ export const isObject = obj => {
 }
 
 export function noop() {}
+
+export function collect(content, key) {
+  return _frompairs(
+    content
+      .map(item => ({
+        id: item.id,
+        type: item.type,
+        value: item.type === 'group' ? collect(item.items, key) : item[key],
+      }))
+      .filter(
+        ({type, value}) =>
+          value !== undefined ||
+          (type === 'group' && Object.keys(value).length),
+      )
+      .map(({id, value}) => [id, value]),
+  )
+}

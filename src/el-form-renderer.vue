@@ -24,7 +24,7 @@ import _set from 'lodash.set'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
-import {isObject} from './util/utils'
+import {isObject, collect} from './util/utils'
 
 const GROUP = 'group'
 
@@ -70,8 +70,8 @@ export default {
   },
   beforeMount() {
     this.innerContent = transformContent(this.content)
-    this.initItemOption()
-    this.innerContent.forEach(this.initItemValue)
+    this.options = collect(this.innerContent, 'options')
+    this.value = collect(this.innerContent, 'default')
   },
   mounted() {
     this.$nextTick(() => {
@@ -96,41 +96,6 @@ export default {
     })
   },
   methods: {
-    /**
-     * 初始化每个表单原子的默认值
-     * @param  {Object} item 表单原子描述
-     */
-    initItemValue(item) {
-      if (!item.id || this.value[item.id] !== undefined) return
-      let defaultVal
-      if (item.type === GROUP) {
-        // group
-        defaultVal = item.items.reduce((acc, cur) => {
-          cur.default && cur.id && (acc[cur.id] = cur.default)
-          return acc
-        }, {})
-      } else if (item.default !== undefined) {
-        // not group
-        defaultVal = item.default
-      }
-      defaultVal !== undefined &&
-        this.updateValue({id: item.id, value: defaultVal})
-    },
-    /**
-     * 初始化每个表单项的选项
-     */
-    initItemOption() {
-      this.options = this.innerContent.reduce((con, item) => {
-        con[item.id] =
-          item.type === GROUP
-            ? item.items.reduce((acc, cur) => {
-                acc[cur.id] = cur.options || []
-                return acc
-              }, {})
-            : item.options || []
-        return con
-      }, {})
-    },
     /**
      * 更新表单数据
      * @param  {String} options.id 表单ID
