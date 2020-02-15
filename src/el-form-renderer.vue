@@ -58,17 +58,6 @@ export default {
       innerContent: [],
     }
   },
-  watch: {
-    innerContent: {
-      handler(newVal) {
-        if (!newVal.length) {
-          return
-        }
-        this.updateOptions(newVal, this.options)
-      },
-      deep: true,
-    },
-  },
   beforeMount() {
     this.innerContent = transformContent(this.content)
     this.options = collect(this.innerContent, 'options')
@@ -113,7 +102,7 @@ export default {
      */
     getFormValue() {
       const value = _clonedeep(this.value)
-      return transformValue(value)
+      return transformValue(value, this.content)
     },
     /**
      * update form values
@@ -135,22 +124,6 @@ export default {
         return
       }
       _set(this.options, id, options)
-    },
-    updateOptions(content, options) {
-      content.forEach(item => {
-        if (item.type !== GROUP && options[item.id]) {
-          return
-        }
-        if (item.type === GROUP) {
-          // 如果该group是动态添加的，则为 options 重新初始化属性
-          if (options[item.id] === undefined) {
-            this.$set(options, item.id, {})
-          }
-          this.updateOptions(item.items, options[item.id])
-          return
-        }
-        this.$set(options, item.id, item.options || [])
-      })
     },
   },
 }

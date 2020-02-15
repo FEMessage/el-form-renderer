@@ -34,6 +34,9 @@ export function mergeValue(oldV, newV, content) {
   })
 }
 
+/**
+ * 根据 content 中的 outputFormat 来处理 value
+ */
 export function transformValue(value, content) {
   Object.keys(value).forEach(k => {
     const item = content.find(item => item.id === k)
