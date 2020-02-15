@@ -24,7 +24,7 @@ import _set from 'lodash.set'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
-import {isObject, collect} from './util/utils'
+import {isObject, collect, mergeValue} from './util/utils'
 
 const GROUP = 'group'
 
@@ -71,6 +71,7 @@ export default {
   beforeMount() {
     this.innerContent = transformContent(this.content)
     this.options = collect(this.innerContent, 'options')
+    // TODO: 考虑过 inputFormat 吗
     this.value = collect(this.innerContent, 'default')
   },
   mounted() {
@@ -102,9 +103,8 @@ export default {
      * @param  {All} options.value 表单数据
      */
     updateValue({id, value}) {
-      this.value = Object.assign({}, this.value, {
-        [id]: value,
-      })
+      // TODO: 考虑过 group 没有？
+      this.value = {...this.value, [id]: value}
     },
     /**
      * @return {object} key is item's id, value is item's value
@@ -140,31 +140,12 @@ export default {
     },
     /**
      * update form values
-     * @param {object} values - key is item's id, value is the new value
+     * @param {object} newValue - key is item's id, value is the new value
      * @public
      */
-    updateForm(values) {
-      const updateValue = content => {
-        return content.reduce((acc, item) => {
-          let value
-          if (item.type === GROUP) {
-            value = updateValue(item.items)
-          } else {
-            value =
-              typeof item.inputFormat === 'function'
-                ? item.inputFormat(values)
-                : values[item.id]
-          }
-
-          if (value !== undefined) {
-            _set(acc, item.id, value)
-          }
-
-          return acc
-        }, {})
-      }
-
-      this.value = Object.assign({}, this.value, updateValue(this.innerContent))
+    updateForm(newValue) {
+      mergeValue(this.value, newValue, this.innerContent)
+      this.value = {...this.value}
     },
     /**
      * update select options

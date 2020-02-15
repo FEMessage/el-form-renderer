@@ -1,35 +1,74 @@
-import {collect} from '../src/util/utils'
+import {collect, mergeValue} from '../src/util/utils'
 
-const mocking = [
-  {
-    id: 'shell',
-    options: [
-      {
-        value: '❤ fish',
-      },
-    ],
-  },
-  {
-    id: 'name',
-    options: [
-      {
-        value: 'van darkholme',
-      },
-    ],
-  },
-]
+describe('collect', () => {
+  const mocking = [
+    {
+      id: 'shell',
+      options: [
+        {
+          value: '❤ fish',
+        },
+      ],
+    },
+    {
+      id: 'name',
+      options: [
+        {
+          value: 'van darkholme',
+        },
+      ],
+    },
+  ]
 
-test('initial item options', () => {
-  expect(collect(mocking, 'options')).toEqual({
-    shell: [
-      {
-        value: '❤ fish',
+  test('initial item options', () => {
+    expect(collect(mocking, 'options')).toEqual({
+      shell: [
+        {
+          value: '❤ fish',
+        },
+      ],
+      name: [
+        {
+          value: 'van darkholme',
+        },
+      ],
+    })
+  })
+})
+
+describe('mergeValue', () => {
+  test('合并带 group 的情况', () => {
+    const oldV = {
+      a: 1,
+      b: {
+        c: 2,
       },
-    ],
-    name: [
-      {
-        value: 'van darkholme',
+    }
+    const newV = {
+      a: 2,
+      b: {
+        c: 3,
+        d: 4,
       },
-    ],
+    }
+    const content = [
+      {
+        id: 'a',
+      },
+      {
+        id: 'b',
+        type: 'group',
+        items: [
+          {
+            id: 'c',
+          },
+          {
+            id: 'd',
+          },
+        ],
+      },
+    ]
+    mergeValue(oldV, newV, content)
+    expect(oldV).toEqual(newV)
   })
 })
