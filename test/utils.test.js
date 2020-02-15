@@ -1,4 +1,4 @@
-import {collect, mergeValue} from '../src/util/utils'
+import {collect, mergeValue, transformValue} from '../src/util/utils'
 
 describe('collect', () => {
   const mocking = [
@@ -69,6 +69,41 @@ describe('mergeValue', () => {
       },
     ]
     mergeValue(oldV, newV, content)
+    expect(oldV).toEqual(newV)
+  })
+})
+
+describe('transformValue', () => {
+  test('合并带 group 的情况', () => {
+    const oldV = {
+      a: 1,
+      b: {
+        c: 2,
+      },
+    }
+    const newV = {
+      a: 2,
+      b: {
+        c: 1,
+      },
+    }
+    const content = [
+      {
+        id: 'a',
+        outputFormat: v => v + 1,
+      },
+      {
+        id: 'b',
+        type: 'group',
+        items: [
+          {
+            id: 'c',
+            outputFormat: v => v - 1,
+          },
+        ],
+      },
+    ]
+    transformValue(oldV, content)
     expect(oldV).toEqual(newV)
   })
 })

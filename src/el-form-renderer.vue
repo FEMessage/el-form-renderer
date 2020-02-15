@@ -21,10 +21,11 @@
 </template>
 <script>
 import _set from 'lodash.set'
+import _clonedeep from 'lodash.clonedeep'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
-import {isObject, collect, mergeValue} from './util/utils'
+import {collect, mergeValue, transformValue} from './util/utils'
 
 const GROUP = 'group'
 
@@ -111,32 +112,8 @@ export default {
      * @public
      */
     getFormValue() {
-      const getValue = (values, content) => {
-        return Object.keys(values).reduce((acc, key) => {
-          const item = content.find(it => it.id === key)
-          if (!item) {
-            return acc
-          }
-
-          // 如果类型是group，对值递归处理
-          if (item.type === GROUP) {
-            acc[key] = getValue(values[key], item.items)
-          } else {
-            if (item.outputFormat) {
-              const formatVal = item.outputFormat(values[key])
-              // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
-              isObject(formatVal)
-                ? Object.assign(acc, formatVal)
-                : (acc[key] = formatVal)
-            } else {
-              acc[key] = values[key]
-            }
-          }
-
-          return acc
-        }, {})
-      }
-      return {...getValue(this.value, this.innerContent)}
+      const value = _clonedeep(this.value)
+      return transformValue(value)
     },
     /**
      * update form values

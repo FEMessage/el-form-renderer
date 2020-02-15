@@ -1,27 +1,4 @@
 import _frompairs from 'lodash.frompairs'
-/**
- * 转换为大小驼峰命名
- * abc-efg => abcEfg
- */
-export const toCamelCase = str => {
-  return str.indexOf('-') !== -1
-    ? str.replace(/-([a-zA-Z])/g, ($0, $1) => $1.toUpperCase())
-    : str
-}
-
-/**
- * 首字母大写, 其他不变
- */
-export const toUpperCaseFirst = str => {
-  return str[0].toUpperCase() + str.substr(1)
-}
-
-/**
- * 是否对象
- */
-export const isObject = obj => {
-  return Object.prototype.toString.call(obj) === '[object Object]'
-}
 
 export function noop() {}
 
@@ -55,4 +32,18 @@ export function mergeValue(oldV, newV, content) {
     if (item.type !== 'group') oldV[k] = newV[k]
     else mergeValue(oldV[k], newV[k], item.items)
   })
+}
+
+export function transformValue(value, content) {
+  Object.keys(value).forEach(k => {
+    const item = content.find(item => item.id === k)
+    if (!item) return
+    if (item.type !== 'group') {
+      const format = item.outputFormat || (v => v)
+      value[k] = format(value[k])
+    } else {
+      transformValue(value[k], item.items)
+    }
+  })
+  return value
 }
