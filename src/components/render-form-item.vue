@@ -50,7 +50,7 @@
   </el-form-item>
 </template>
 <script>
-import getEnableWhenSatatus from '../util/enable-when'
+import getEnableWhenStatus from '../util/enable-when'
 import {noop} from '../util/utils'
 import _get from 'lodash.get'
 import _includes from 'lodash.includes'
@@ -108,7 +108,7 @@ export default {
     hiddenStatus: ({data: {hidden = () => false}, data, value}) =>
       hidden(value, data),
     enableWhenStatus: ({data: {enableWhen}, value}) =>
-      getEnableWhenSatatus(enableWhen, value),
+      getEnableWhenStatus(enableWhen, value),
     // 是否显示
     _show() {
       return !this.hiddenStatus && this.enableWhenStatus

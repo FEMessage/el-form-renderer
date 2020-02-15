@@ -7,7 +7,7 @@ import _has from 'lodash.has'
  * 与条件: 简单依赖关系存在2种情况：简单对象 || 字符串
  * 或条件: 即使用 [] 包裹所有与条件 enableWhen: [{ a: 1 }, { a: 2 }]
  */
-export default function getEnableWhenSatatus(enableWhen, value) {
+export default function getEnableWhenStatus(enableWhen, value) {
   if (!enableWhen) return true
   // 处理一个与条件
   const handleCondition = condition => {
