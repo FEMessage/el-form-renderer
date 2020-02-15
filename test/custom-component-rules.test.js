@@ -1,4 +1,4 @@
-import customComponentRules from '../src/util/custom-component-rules'
+import {extractRulesFromComponent} from '../src/util/transform-content'
 
 const mockingComponentOptions = {
   render() {},
@@ -8,12 +8,14 @@ const mockingComponentOptions = {
 describe('自定义组件规则', () => {
   test('调用函数返回规则', () => {
     const {rulesContent, expectContent} = getFunctionRulesContent()
-    expect(customComponentRules(rulesContent)).toEqual(expectContent)
+    extractRulesFromComponent(rulesContent)
+    expect(rulesContent).toEqual(expectContent)
   })
 
   test('获取静态规则', () => {
     const {rulesContent, expectContent} = getStaticRulesContent()
-    expect(customComponentRules(rulesContent)).toEqual(expectContent)
+    extractRulesFromComponent(rulesContent)
+    expect(rulesContent).toEqual(expectContent)
   })
 })
 
