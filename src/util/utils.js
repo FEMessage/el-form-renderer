@@ -37,7 +37,7 @@ export function mergeValue(oldV, newV, content) {
 /**
  * 根据 content 中的 outputFormat 来处理 value
  */
-export function transformValue(value, content) {
+export function transformOutputValue(value, content) {
   Object.keys(value).forEach(k => {
     const item = content.find(item => item.id === k)
     if (!item) return
@@ -45,8 +45,30 @@ export function transformValue(value, content) {
       const format = item.outputFormat || (v => v)
       value[k] = format(value[k])
     } else {
-      transformValue(value[k], item.items)
+      transformOutputValue(value[k], item.items)
     }
   })
   return value
+}
+
+/**
+ * 根据 content 中的 inputFormat 来处理 value
+ * inputFormat 接受的是当前层级的 value
+ * 复杂点在于，不管传入的 value 是否包含某表单项的 key，所有使用了 inputFormat 的项都有可能在这次 update 中被更新
+ */
+export function transformInputValue(value, content) {
+  const newVal = {}
+  content.forEach(item => {
+    if (item.inputFormat) {
+      const v = item.inputFormat(value)
+      if (v) newVal[item.id] = v
+    } else if (item.id in value) {
+      if (item.type !== 'group') {
+        newVal[item.id] = value[item.id]
+      } else {
+        newVal[item.id] = transformInputValue(value[item.id], item.items)
+      }
+    }
+  })
+  return newVal
 }

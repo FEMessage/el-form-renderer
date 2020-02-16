@@ -25,7 +25,12 @@ import _clonedeep from 'lodash.clonedeep'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
-import {collect, mergeValue, transformValue} from './util/utils'
+import {
+  collect,
+  mergeValue,
+  transformOutputValue,
+  transformInputValue,
+} from './util/utils'
 
 const GROUP = 'group'
 
@@ -102,7 +107,7 @@ export default {
      */
     getFormValue() {
       const value = _clonedeep(this.value)
-      return transformValue(value, this.content)
+      return transformOutputValue(value, this.content)
     },
     /**
      * update form values
@@ -110,6 +115,7 @@ export default {
      * @public
      */
     updateForm(newValue) {
+      newValue = transformInputValue(newValue, this.innerContent)
       mergeValue(this.value, newValue, this.innerContent)
       this.value = {...this.value}
     },
@@ -120,10 +126,8 @@ export default {
      * @public
      */
     setOptions(id, options) {
-      if (!id || !Array.isArray(options)) {
-        return
-      }
       _set(this.options, id, options)
+      this.options = {...this.options} // 设置之前不存在的 options 时需要重新设置响应式更新
     },
   },
 }
