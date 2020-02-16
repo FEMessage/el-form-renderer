@@ -1,30 +1,25 @@
 /// <reference types="Cypress" />
 
-describe('测试 github page 文档', function() {
+describe('测试 basic 示例', function() {
   beforeEach(() => {
     cy.visit('/')
-    cy.get('li')
-      .contains('basic')
-      .click()
+    cy.$goto('basic')
   })
-  it('basic 示例', function() {
+  it('基础用例', function() {
     cy.contains('basic')
     cy.contains('submit').click()
     cy.contains('miss name')
-    const getInput = (label, el = 'input') =>
-      cy.contains('.el-form-item', label).find(el)
-
-    getInput('name').type('name')
-    getInput('area').click()
+    cy.$getFormItemInput('name').type('name')
+    cy.$getFormItemInput('area').click()
     cy.contains('area1').click()
-    getInput('date').click()
+    cy.$getFormItemInput('date').click()
     cy.contains('此刻').click()
     cy.contains('typeA').click()
     cy.contains('resourceA').click()
-    getInput('desc', 'textarea').type('desc')
+    cy.$getFormItemInput('desc', 'textarea').type('desc')
     cy.contains('submit').click()
     cy.contains('submit!')
     cy.contains('reset').click()
-    getInput('name').should('be.empty')
+    cy.$getFormItemInput('name').should('be.empty')
   })
 })
