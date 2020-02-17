@@ -21,7 +21,6 @@
 </template>
 <script>
 import _set from 'lodash.set'
-import _clonedeep from 'lodash.clonedeep'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
@@ -109,8 +108,7 @@ export default {
      * @public
      */
     getFormValue() {
-      const value = _clonedeep(this.value)
-      return transformOutputValue(value, this.content)
+      return transformOutputValue(this.value, this.content)
     },
     /**
      * update form values
