@@ -66,7 +66,10 @@ export default {
   beforeMount() {
     this.innerContent = transformContent(this.content)
     this.options = collect(this.innerContent, 'options')
-    // TODO: 考虑过 inputFormat 吗
+    /**
+     * default 值没法考虑 inputFormat
+     * 参考 value-format.md 的案例。那种情况下，default 该传什么？
+     */
     this.value = collect(this.innerContent, 'default')
   },
   mounted() {

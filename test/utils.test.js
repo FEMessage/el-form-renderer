@@ -84,12 +84,14 @@ describe('transformOutputValue', () => {
       a: 1,
       b: {
         c: 2,
+        d: 3,
       },
     }
     const newV = {
       a: 2,
       b: {
         c: 1,
+        e: 4,
       },
     }
     const content = [
@@ -105,11 +107,14 @@ describe('transformOutputValue', () => {
             id: 'c',
             outputFormat: v => v - 1,
           },
+          {
+            id: 'd',
+            outputFormat: v => ({e: v + 1}),
+          },
         ],
       },
     ]
-    transformOutputValue(oldV, content)
-    expect(oldV).toEqual(newV)
+    expect(transformOutputValue(oldV, content)).toEqual(newV)
   })
 })
 

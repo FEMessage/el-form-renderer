@@ -1,4 +1,5 @@
 import _frompairs from 'lodash.frompairs'
+import _isplainobject from 'lodash.isplainobject'
 
 export function noop() {}
 
@@ -38,17 +39,20 @@ export function mergeValue(oldV, newV, content) {
  * 根据 content 中的 outputFormat 来处理 value
  */
 export function transformOutputValue(value, content) {
-  Object.keys(value).forEach(k => {
-    const item = content.find(item => item.id === k)
-    if (!item) return
+  const newVal = {}
+  Object.keys(value).forEach(id => {
+    const item = content.find(item => item.id === id)
     if (item.type !== 'group') {
       const format = item.outputFormat || (v => v)
-      value[k] = format(value[k])
+      const v = format(value[id])
+      // REVIEW: 仅根据 format 后的类型来判断赋值形式，有些隐晦
+      if (_isplainobject(v)) Object.assign(newVal, v)
+      else newVal[id] = v
     } else {
-      transformOutputValue(value[k], item.items)
+      newVal[id] = transformOutputValue(value[id], item.items)
     }
   })
-  return value
+  return newVal
 }
 
 /**
@@ -59,14 +63,15 @@ export function transformOutputValue(value, content) {
 export function transformInputValue(value, content) {
   const newVal = {}
   content.forEach(item => {
+    const {id} = item
     if (item.inputFormat) {
       const v = item.inputFormat(value)
-      if (v) newVal[item.id] = v
-    } else if (item.id in value) {
+      if (v) newVal[id] = v
+    } else if (id in value) {
       if (item.type !== 'group') {
-        newVal[item.id] = value[item.id]
+        newVal[id] = value[id]
       } else {
-        newVal[item.id] = transformInputValue(value[item.id], item.items)
+        newVal[id] = transformInputValue(value[id], item.items)
       }
     }
   })

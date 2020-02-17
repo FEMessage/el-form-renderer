@@ -45,7 +45,7 @@
     methods: {
       getValue () {
         const value = this.$refs.formRender.getFormValue()
-        console.log(value)  // 输出为对应id 和值组成的对象
+        this.$message(JSON.stringify(value))
       },
       setValue () {
         this.$refs.formRender.updateForm({
