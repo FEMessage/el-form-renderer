@@ -1,19 +1,21 @@
-import customComponentRules from '../src/custom-component-rules'
+import {extractRulesFromComponent} from '../src/util/transform-content'
 
 const mockingComponentOptions = {
   render() {},
-  staticRenderFns() {}
+  staticRenderFns() {},
 }
 
 describe('自定义组件规则', () => {
   test('调用函数返回规则', () => {
     const {rulesContent, expectContent} = getFunctionRulesContent()
-    expect(customComponentRules(rulesContent)).toEqual(expectContent)
+    extractRulesFromComponent(rulesContent)
+    expect(rulesContent).toEqual(expectContent)
   })
 
   test('获取静态规则', () => {
     const {rulesContent, expectContent} = getStaticRulesContent()
-    expect(customComponentRules(rulesContent)).toEqual(expectContent)
+    extractRulesFromComponent(rulesContent)
+    expect(rulesContent).toEqual(expectContent)
   })
 })
 
@@ -23,10 +25,10 @@ function getFunctionRulesContent() {
       return [
         {
           trigger: 'blur',
-          message: '自定义组件的错误信息'
-        }
+          message: '自定义组件的错误信息',
+        },
       ]
-    }
+    },
   })
 
   const rulesContent = {
@@ -36,9 +38,9 @@ function getFunctionRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
-      }
-    ]
+        message: 'el-form-renderer 的规则设置',
+      },
+    ],
   }
 
   const expectContent = {
@@ -48,18 +50,18 @@ function getFunctionRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
+        message: 'el-form-renderer 的规则设置',
       },
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   }
 
   return {
     rulesContent,
-    expectContent
+    expectContent,
   }
 }
 
@@ -68,9 +70,9 @@ function getStaticRulesContent() {
     rules: [
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   })
 
   const rulesContent = {
@@ -80,9 +82,9 @@ function getStaticRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
-      }
-    ]
+        message: 'el-form-renderer 的规则设置',
+      },
+    ],
   }
 
   const expectContent = {
@@ -92,17 +94,17 @@ function getStaticRulesContent() {
     rules: [
       {
         required: true,
-        message: 'el-form-renderer 的规则设置'
+        message: 'el-form-renderer 的规则设置',
       },
       {
         trigger: 'blur',
-        message: '自定义组件的错误信息'
-      }
-    ]
+        message: '自定义组件的错误信息',
+      },
+    ],
   }
 
   return {
     rulesContent,
-    expectContent
+    expectContent,
   }
 }

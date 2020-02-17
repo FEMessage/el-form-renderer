@@ -22,7 +22,7 @@ import RenderFormItem from './render-form-item.vue'
 
 export default {
   components: {
-    RenderFormItem
+    RenderFormItem,
   },
   props: {
     data: Object,
@@ -31,7 +31,7 @@ export default {
     disabled: Boolean,
     readonly: Boolean,
     options: Object,
-    _parent: Object
+    _parent: Object,
   },
   methods: {
     updateValue({id, value}) {
@@ -39,10 +39,10 @@ export default {
         id: this.data.id,
         value: {
           ...this.itemValue,
-          [id]: value
-        }
+          [id]: value,
+        },
       })
-    }
-  }
+    },
+  },
 }
 </script>

@@ -1,13 +1,13 @@
 import Vue from 'vue'
-import renderFormItem from '../src/render-form-item.vue'
+import renderFormItem from '../src/components/render-form-item.vue'
 
 const testOrigin = {
   type: 'input',
-  id: 'name'
+  id: 'name',
 }
 
 const testValue = {
-  name: 'hello'
+  name: 'hello',
 }
 
 describe('mixin-hidden.js', () => {
@@ -19,7 +19,7 @@ describe('mixin-hidden.js', () => {
   describe('enableWhen 与 hidden', () => {
     test('没有使用 enableWhen 与 hidden', () => {
       const vm = new Constructor({
-        propsData: {data: testOrigin, value: testValue}
+        propsData: {data: testOrigin, value: testValue},
       })
 
       expect(vm._show).toBe(true)
@@ -29,20 +29,20 @@ describe('mixin-hidden.js', () => {
       const data = {...testOrigin, enableWhen: {name: false}}
       const vm = new Constructor({propsData: {data, value: testValue}})
 
-      expect(vm.getHiddenStatus()).toBe(undefined)
+      expect(vm.hiddenStatus).toBe(false)
       expect(vm._show).toBe(false)
     })
 
-    test('同时使用 hidden 与 enableWhen，仅响应 hidden', () => {
+    test('同时使用 hidden 与 enableWhen，取并集', () => {
       const data = {
         ...testOrigin,
         hidden: () => false,
-        enableWhen: {name: false}
+        enableWhen: {name: false},
       }
       const vm = new Constructor({propsData: {data, value: testValue}})
 
-      expect(vm.getHiddenStatus()).toBe(false)
-      expect(vm._show).toBe(true)
+      expect(vm.hiddenStatus).toBe(false)
+      expect(vm._show).toBe(false)
     })
   })
 
@@ -67,7 +67,7 @@ describe('mixin-hidden.js', () => {
       const data = {...testOrigin, hidden: form => form.name === 'hello'}
       const vm = new Constructor({propsData: {data, value: testValue}})
 
-      expect(vm.getHiddenStatus()).toBe(true)
+      expect(vm.hiddenStatus).toBe(true)
       expect(vm._show).toBe(false)
     })
 
@@ -75,7 +75,7 @@ describe('mixin-hidden.js', () => {
       const data = {...testOrigin, hidden: (_, item) => item.id === 'name'}
       const vm = new Constructor({propsData: {data, value: testValue}})
 
-      expect(vm.getHiddenStatus()).toBe(true)
+      expect(vm.hiddenStatus).toBe(true)
       expect(vm._show).toBe(false)
     })
   })

@@ -31,15 +31,27 @@
       :disabled="disabled || readonly"
       v-on="listeners"
     >
-      <vnode :content="renderFormItemContent()" />
+      <template v-for="opt in options">
+        <el-option
+          v-if="data.type === 'select'"
+          :key="opt.value"
+          v-bind="opt"
+        />
+        <!-- TODO: 支持 el-radio-button 变体 -->
+        <component
+          :is="`el-${data.type.slice(0, -6)}`"
+          v-else
+          :key="opt.label"
+          v-bind="opt"
+          >{{ opt.label }}</component
+        >
+      </template>
     </custom-component>
   </el-form-item>
 </template>
 <script>
-import mixinOptionExtensions from './mixins/package-option'
-import mixinEnableWhen from './mixins/enable-when'
-import mixinHidden from './mixins/hidden'
-import {toCamelCase, noop} from './utils'
+import getEnableWhenStatus from '../util/enable-when'
+import {noop} from '../util/utils'
 import _get from 'lodash.get'
 import _includes from 'lodash.includes'
 import _topairs from 'lodash.topairs'
@@ -58,39 +70,27 @@ function validator(data) {
 export default {
   components: {
     /**
-     * 在 template 的 {{}} 中是无法渲染 vnode 的；
-     * 这是在 template 里面写 vnode 的解决方案
-     * FYI: https://stackoverflow.com/questions/49352525/can-you-render-vnodes-in-a-vue-template
-     */
-    /* eslint-disable vue/no-unused-components */
-    Vnode: {
-      functional: true,
-      render: (h, ctx) => ctx.props.content
-    },
-    /**
      * 🐂🍺只需要有组件选项对象，就可以立刻包装成函数式组件在 template 中使用
      * FYI: https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6
      */
     CustomComponent: {
       functional: true,
-      render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children)
-    }
-    /* eslint-enable vue/no-unused-components */
+      render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
+    },
   },
-  mixins: [mixinOptionExtensions, mixinEnableWhen, mixinHidden],
   props: {
     data: Object,
     prop: {
       type: String,
       default() {
         return this.data.id
-      }
+      },
     },
     itemValue: {},
     value: Object,
     disabled: Boolean,
     readonly: Boolean,
-    options: Array
+    options: Array,
   },
   data() {
     return {
@@ -99,17 +99,19 @@ export default {
         this.data.rules &&
         this.data.rules.some(rule => {
           return rule.required && rule.trigger === 'blur'
-        })
+        }),
     }
   },
   computed: {
     hasReadonlyContent: ({data: {type}}) =>
       _includes(['input', 'select'], type),
+    hiddenStatus: ({data: {hidden = () => false}, data, value}) =>
+      hidden(value, data),
+    enableWhenStatus: ({data: {enableWhen}, value}) =>
+      getEnableWhenStatus(enableWhen, value),
     // 是否显示
     _show() {
-      // 当存在 hidden 时优先响应
-      const isHidden = this.getHiddenStatus()
-      return isHidden !== undefined ? !isHidden : this.getEnableWhenSatatus()
+      return !this.hiddenStatus && this.enableWhenStatus
     },
     listeners() {
       const {
@@ -118,18 +120,18 @@ export default {
           atChange = noop,
           on = {},
           on: {input: originOnInput = noop, change: originOnChange = noop} = {},
-          trim = true
+          trim = true,
         },
         $parent: {
-          $parent: {updateForm}
-        }
+          $parent: {updateForm},
+        },
       } = this
       return {
         ..._frompairs(
           _topairs(on).map(([eName, handler]) => [
             eName,
-            (...args) => handler(args, updateForm)
-          ])
+            (...args) => handler(args, updateForm),
+          ]),
         ),
         // 手动更新表单数据
         input: (value, ...rest) => {
@@ -148,9 +150,9 @@ export default {
 
           // FIXME: rules 的 trigger 只写了 blur，依然会在 change 的时候触发校验！
           this.triggerValidate(id)
-        }
+        },
       }
-    }
+    },
   },
   watch: {
     data: validator,
@@ -175,7 +177,7 @@ export default {
             if (isOptionsCase) {
               return resp.map(item => ({
                 label: item[label],
-                value: item[value]
+                value: item[value],
               }))
             } else {
               return resp
@@ -183,7 +185,7 @@ export default {
           },
           onError = error => console.error(error.message),
           label = 'label',
-          value = 'value'
+          value = 'value',
         } = v
         Promise.resolve(request())
           .then(onResponse, onError)
@@ -198,28 +200,10 @@ export default {
             }
           })
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
-    // TODO: 等待重构的怪物👹
-    renderFormItemContent() {
-      const {
-        data: {type}
-      } = this
-      return [
-        (() => {
-          let optRenderer = type && this[`${toCamelCase(type)}_opt`]
-          if (
-            typeof optRenderer === 'function' &&
-            Array.isArray(this.options)
-          ) {
-            return this.options.map(optRenderer)
-          }
-        })()
-      ]
-    },
-
     triggerValidate(id) {
       if (!this.data.rules || !this.data.rules.length) return
 
@@ -245,7 +229,7 @@ export default {
       this.$nextTick(() => {
         parent.validateField(id)
       })
-    }
-  }
+    },
+  },
 }
 </script>
