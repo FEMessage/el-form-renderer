@@ -29,6 +29,7 @@ import {
   mergeValue,
   transformOutputValue,
   transformInputValue,
+  correctValue,
 } from './util/utils'
 
 const GROUP = 'group'
@@ -158,6 +159,7 @@ export default {
       const newValue = this.form
         ? transformInputValue(this.form, this.innerContent)
         : collect(this.innerContent, 'default')
+      correctValue(newValue, this.innerContent)
       if (!_isequal(this.value, newValue)) this.value = newValue
     },
     /**
