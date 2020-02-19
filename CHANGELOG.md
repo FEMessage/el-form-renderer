@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/FEMessage/el-form-renderer/compare/v1.13.1...v1.14.0) (2020-02-19)
+
+
+### Features
+
+* v-model ([#162](https://github.com/FEMessage/el-form-renderer/issues/162)) ([e0f9089](https://github.com/FEMessage/el-form-renderer/commit/e0f9089))
+
+
+### Tests
+
+* 新增 e2e 测试 ([#159](https://github.com/FEMessage/el-form-renderer/issues/159)) ([ab4c4e4](https://github.com/FEMessage/el-form-renderer/commit/ab4c4e4))
+
+
+
 ### [1.13.1](https://github.com/FEMessage/el-form-renderer/compare/v1.13.0...v1.13.1) (2020-01-14)
 
 
