@@ -1,10 +1,10 @@
 ```vue
 <template>
-  <el-form-renderer label-width="100px" :content="content" ref="ruleForm">
+  <el-form-renderer label-width="100px" :content="content" v-model="form" ref="form">
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">submit</el-button>
-      <el-button @click="resetForm('ruleForm')">reset</el-button>
+      <el-button @click="resetForm">reset</el-button>
     </el-form-item>
+    <pre>{{form}}</pre>
   </el-form-renderer>
 </template>
 
@@ -12,6 +12,13 @@
 export default {
   data () {
     return {
+      form: {
+        name: '',
+        // region: [], // 应该能自动生成初始值 []
+        type: [],
+        startDate: '2019-01-01',
+        endDate: '2019-01-02'
+      },
       content: [
         {
           type: 'input',
@@ -29,14 +36,22 @@ export default {
         }, {
           type: 'select',
           id: 'region',
-          label: 'area',
-          options: [{
-            label: 'area1',
-            value: 'shanghai'
-          }, {
-            label: 'area2',
-            value: 'beijing'
-          }],
+          label: 'region',
+          options: [
+            {
+              label: 'shanghai',
+              value: 'shanghai'
+            }, 
+            {
+              label: 'beijing',
+              value: 'beijing'
+            },
+            {
+              label: 'guangzhou',
+              value: 'guangzhou'
+            },
+          ],
+          el: {filterable: true, multiple: true, multipleLimit: 2},
           rules: [
             { required: true, message: 'miss area', trigger: 'change' }
           ]
@@ -45,12 +60,26 @@ export default {
           id: 'date',
           label: 'date',
           el: {
-            type: 'datetime',
-            placeholder: 'select date'
+            type: 'daterange',
+            valueFormat: 'yyyy-MM-dd'
           },
           rules: [
             { type: 'date', required: true, message: 'miss date', trigger: 'change' }
-          ]
+          ],
+          inputFormat: (row) => {
+            if (row.startDate && row.endDate) {
+              return [row.startDate, row.endDate]
+            }
+          },
+          outputFormat: (val) => {
+            if (!val) {
+              return {startDate: '', endDate: ''}
+            }
+            return {
+              startDate: val[0],
+              endDate: val[1]
+            }
+          }
         }, {
           type: 'switch',
           id: 'delivery',
@@ -97,18 +126,8 @@ export default {
     }
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.$message('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm() {
+      this.$refs.form.resetFields();
     }
   }
 }
