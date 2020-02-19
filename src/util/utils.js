@@ -77,3 +77,17 @@ export function transformInputValue(value, content) {
   })
   return newVal
 }
+
+export function correctValue(value, content) {
+  content.forEach(({type, id, items}) => {
+    switch (type) {
+      case 'group':
+        if (!(id in value)) value[id] = {}
+        correctValue(value[id], items)
+        break
+      case 'checkbox-group':
+        if (!(id in value)) value[id] = []
+        break
+    }
+  })
+}

@@ -31,7 +31,6 @@ export default {
     disabled: Boolean,
     readonly: Boolean,
     options: Object,
-    _parent: Object,
   },
   methods: {
     updateValue({id, value}) {
