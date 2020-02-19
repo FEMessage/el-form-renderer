@@ -16,13 +16,13 @@ export default {
           id: 'fullName',
           on: {
             blur: ([event], updateForm) => {
-              updateForm({display: 'blur' + event})
+              updateForm({display: 'blur: ' + event})
             },
             focus: ([event], updateForm) => {
-              updateForm({display: 'focus' + event})
+              updateForm({display: 'focus: ' + event})
             },
             input: ([value], updateForm) => {
-              updateForm({display: 'input' + value})
+              updateForm({display: 'input: ' + value})
             },
           },
         },
@@ -30,7 +30,7 @@ export default {
           label: 'display',
           type: 'input',
           id: 'display',
-          el: {disabled: true},
+          el: {readonly: true},
         }
       ]
     }

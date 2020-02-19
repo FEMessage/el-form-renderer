@@ -55,6 +55,10 @@ interface Content {
    */
   items: Content[]
 
+  /**
+   * 默认值
+   * FIXME: 别用关键字做 key
+   */
   default?: any
 
   /**
