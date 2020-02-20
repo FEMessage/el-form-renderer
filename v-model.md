@@ -104,9 +104,11 @@ export default {
           id: 'resource',
           label: 'resource',
           options: [{
-            label: 'resourceA'
+            label: 'resourceA',
+            value: 'A',
           }, {
-            label: 'resourceB'
+            label: 'resourceB',
+            value: 'B'
           }],
           rules: [
             { required: true, message: 'miss resource', trigger: 'change' }
