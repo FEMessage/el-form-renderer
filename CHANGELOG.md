@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.1](https://github.com/FEMessage/el-form-renderer/compare/v1.14.0...v1.14.1) (2020-02-20)
+
+
+### Bug Fixes
+
+* radio 传 value 时用作 label 属性 ([#165](https://github.com/FEMessage/el-form-renderer/issues/165)) ([2f808e7](https://github.com/FEMessage/el-form-renderer/commit/2f808e7))
+
+
+
 ## [1.14.0](https://github.com/FEMessage/el-form-renderer/compare/v1.13.1...v1.14.0) (2020-02-19)
 
 
