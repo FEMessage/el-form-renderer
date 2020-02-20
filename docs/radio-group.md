@@ -15,9 +15,13 @@ export default {
           label: 'city',
           default: 'new york',
           options: [
-            // warnning：element radio-group use label only
+            /**
+             * el-radio 用 label 来做 v-model 的值
+             * 这里会渲染成 <el-radio label="new york">new york</el-radio>
+             */
             { label: 'new york' },
-            { label: 'guangzhou' },
+            // 这里会渲染成 <el-radio label="a">guangzhou</el-radio>
+            { label: 'guangzhou', value: 'a' },
             { label: 'tokyo' },
           ]
         }

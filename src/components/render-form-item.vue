@@ -37,13 +37,20 @@
           :key="opt.value"
           v-bind="opt"
         />
-        <!-- TODO: 支持 el-radio-button 变体 -->
-        <component
-          :is="`el-${data.type.slice(0, -6)}`"
-          v-else
+        <!-- TODO: 支持 el-checkbox-button 变体 -->
+        <el-checkbox
+          v-else-if="data.type === 'checkbox-group'"
           :key="opt.label"
           v-bind="opt"
-          >{{ opt.label }}</component
+        />
+        <!-- WARNING: radio 用 label 属性来表示 value 的含义 -->
+        <!-- FYI: radio 的 value 属性可以在没有 radio-group 时用来关联到同一个 v-model -->
+        <el-radio
+          v-else-if="data.type === 'radio-group'"
+          :key="opt.label"
+          v-bind="opt"
+          :label="'value' in opt ? opt.value : opt.label"
+          >{{ opt.label }}</el-radio
         >
       </template>
     </custom-component>
