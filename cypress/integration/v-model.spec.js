@@ -55,7 +55,7 @@ describe('测试 v-model 示例', function() {
         endDate: '2019-01-03',
         type: ['typeA'],
         region: ['shanghai'],
-        resource: 'resourceA',
+        resource: 'A',
         desc: 'desc',
       }),
     )
