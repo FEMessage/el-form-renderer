@@ -1,6 +1,7 @@
-el-form-renderer 的 disabled 属性会禁用所有表单项
-
-而 content 中每个表单元素的 disabled 可以禁用对应的表单项
+disabled 可以设置在三个地方
+1. 作为 el-form-renderer 的 prop 传入，禁用整个表单项，优先级最高
+2. 作为 el 的属性传入，作用于单个表单项组件
+3. 与 el 平级传入，效果和 2 相同（因历史原因存在
 
 ```vue
 <template>
@@ -94,6 +95,7 @@ export default {
           id: 'desc',
           label: 'desc',
           el: {
+            disabled: true,
             type: 'textarea'
           },
           rules: [
