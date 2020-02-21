@@ -10,7 +10,7 @@
       <div
         v-if="data.type === 'input'"
         :style="
-          data.el && data.el.type === 'textarea'
+          componentProps.type === 'textarea'
             ? {padding: '10px 0', lineHeight: 1.5}
             : ''
         "
@@ -26,9 +26,9 @@
     <custom-component
       v-else
       :component="data.component || `el-${data.type}`"
-      v-bind="{...data.el, ...propsInner}"
+      v-bind="componentProps"
       :value="itemValue"
-      :disabled="disabled || readonly"
+      :disabled="disabled || componentProps.disabled || readonly"
       v-on="listeners"
     >
       <template v-for="opt in options">
@@ -110,6 +110,8 @@ export default {
     }
   },
   computed: {
+    // 解构运算符会处理 undefined 的情况
+    componentProps: ({data: {el}, propsInner}) => ({...el, ...propsInner}),
     hasReadonlyContent: ({data: {type}}) =>
       _includes(['input', 'select'], type),
     hiddenStatus: ({data: {hidden = () => false}, data, value}) =>
