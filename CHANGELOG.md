@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.3](https://github.com/FEMessage/el-form-renderer/compare/v1.14.2...v1.14.3) (2020-02-26)
+
+
+### Bug Fixes
+
+* 表单项的值为对象类型时错误覆盖回整个表单的值中 ([#171](https://github.com/FEMessage/el-form-renderer/issues/171)) ([8fa4dc0](https://github.com/FEMessage/el-form-renderer/commit/8fa4dc0))
+
+
+
 ### [1.14.2](https://github.com/FEMessage/el-form-renderer/compare/v1.14.1...v1.14.2) (2020-02-21)
 
 
