@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.4](https://github.com/FEMessage/el-form-renderer/compare/v1.14.3...v1.14.4) (2020-02-26)
+
+
+### Bug Fixes
+
+* 修复 resetFields 有时无法恢复初始值的问题 ([#172](https://github.com/FEMessage/el-form-renderer/issues/172)) ([27e5efa](https://github.com/FEMessage/el-form-renderer/commit/27e5efa))
+
+
+
 ### [1.14.3](https://github.com/FEMessage/el-form-renderer/compare/v1.14.2...v1.14.3) (2020-02-26)
 
 
