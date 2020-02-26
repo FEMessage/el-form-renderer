@@ -21,6 +21,7 @@
 <script>
 import _set from 'lodash.set'
 import _isequal from 'lodash.isequal'
+import _clonedeep from 'lodash.clonedeep'
 import RenderFormGroup from './components/render-form-group.vue'
 import RenderFormItem from './components/render-form-item.vue'
 import transformContent from './util/transform-content'
@@ -112,6 +113,11 @@ export default {
     },
   },
   mounted() {
+    /**
+     * 与 element 相同，在 mounted 阶段存储 initValue
+     * @see https://github.com/ElemeFE/element/blob/6ec5f8e900ff698cf30e9479d692784af836a108/packages/form/src/form-item.vue#L304
+     */
+    this.initValue = _clonedeep(this.value)
     this.$nextTick(() => {
       // proxy
       Object.keys(this.$refs.elForm.$options.methods).forEach(item => {
@@ -124,7 +130,6 @@ export default {
        * @hack
        */
       this.clearValidate()
-      this.initValue = this.value
     })
   },
   methods: {
@@ -146,7 +151,7 @@ export default {
        *   3. 点击 reset 按钮，此时 log 两条数据： '1' '1', '' ''
        *   4. 因为 _isequal(v, oldV)，所以没有触发 v-model 更新
        */
-      this.value = this.initValue
+      this.value = _clonedeep(this.initValue)
       this.$nextTick(this.clearValidate)
     },
     setValueFromModel() {

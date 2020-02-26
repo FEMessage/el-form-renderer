@@ -6,7 +6,7 @@ describe('测试 update-form 示例', function() {
     cy.$goto('update-form')
   })
   it('基础用例', function() {
-    cy.$getFormItemInput('name').should('be.empty')
+    cy.$getFormItemInput('name').should('have.value', '')
     cy.contains('button', 'set name as alvin').click()
     cy.$getFormItemInput('name').should('have.value', 'alvin')
   })

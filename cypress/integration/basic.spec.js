@@ -20,6 +20,6 @@ describe('测试 basic 示例', function() {
     cy.contains('submit').click()
     cy.contains('submit!')
     cy.contains('reset').click()
-    cy.$getFormItemInput('name').should('be.empty')
+    cy.$getFormItemInput('name').should('have.value', '')
   })
 })
