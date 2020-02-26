@@ -116,6 +116,19 @@ describe('transformOutputValue', () => {
     ]
     expect(transformOutputValue(oldV, content)).toEqual(newV)
   })
+  test('没 outputFormat 时，对象值不会被覆盖到外层', () => {
+    const v = {
+      a: {
+        b: 1,
+      },
+    }
+    const content = [
+      {
+        id: 'a',
+      },
+    ]
+    expect(transformOutputValue(v, content)).toEqual(v)
+  })
 })
 
 describe('transformInputValue', () => {
@@ -127,7 +140,7 @@ describe('transformInputValue', () => {
       },
     }
     const newV = {
-      a: 1,
+      a: 0,
       b: {
         c: 2,
       },
@@ -135,7 +148,7 @@ describe('transformInputValue', () => {
     const content = [
       {
         id: 'a',
-        inputFormat: v => v.aa,
+        inputFormat: v => v.aa - 1,
       },
       {
         id: 'b',
