@@ -64,7 +64,7 @@ export default {
             valueFormat: 'yyyy-MM-dd'
           },
           rules: [
-            { type: 'date', required: true, message: 'miss date', trigger: 'change' }
+            { required: true, message: 'miss date', trigger: 'change' }
           ],
           inputFormat: (row) => {
             if (row.startDate && row.endDate) {
