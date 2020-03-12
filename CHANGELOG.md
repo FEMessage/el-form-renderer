@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.5](https://github.com/FEMessage/el-form-renderer/compare/v1.14.4...v1.14.5) (2020-03-12)
+
+
+### Bug Fixes
+
+* get form value ([#174](https://github.com/FEMessage/el-form-renderer/issues/174)) ([268a03b](https://github.com/FEMessage/el-form-renderer/commit/268a03b))
+* remote 仅在有效变更时发送请求 ([#169](https://github.com/FEMessage/el-form-renderer/issues/169)) ([c19a166](https://github.com/FEMessage/el-form-renderer/commit/c19a166))
+* 修复 v-model & content 示例中修改 date range 报错的问题 ([#173](https://github.com/FEMessage/el-form-renderer/issues/173)) ([448055c](https://github.com/FEMessage/el-form-renderer/commit/448055c))
+
+
+
 ### [1.14.4](https://github.com/FEMessage/el-form-renderer/compare/v1.14.3...v1.14.4) (2020-02-26)
 
 
