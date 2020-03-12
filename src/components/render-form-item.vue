@@ -18,9 +18,19 @@
         {{ itemValue }}
       </div>
       <div v-else-if="data.type === 'select'">
-        {{
-          (data.options.find(op => op.value === itemValue) || {label: ''}).label
-        }}
+        <template v-if="get(data, 'el.multiple')">
+          {{
+            (itemValue || [])
+              .map(val => data.options.find(op => op.value === val).label)
+              .join()
+          }}
+        </template>
+        <template v-else>
+          {{
+            (data.options.find(op => op.value === itemValue) || {label: ''})
+              .label
+          }}
+        </template>
       </div>
     </template>
     <custom-component
@@ -107,6 +117,7 @@ export default {
         this.data.rules.some(rule => {
           return rule.required && rule.trigger === 'blur'
         }),
+      get: _get,
     }
   },
   computed: {
