@@ -171,8 +171,11 @@ export default {
      * 2. 针对 select、checkbox-group & radio-group 组件，会直接将 resp 作为 options 处理；label & value 也是直接为这个场景而生的
      */
     'data.remote': {
-      handler(v) {
+      handler(v, oldV) {
         if (!v) return
+        if (oldV) {
+          if (v.url === oldV.url || v.request === oldV.request) return
+        }
         const isOptionsCase =
           ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) >
           -1
