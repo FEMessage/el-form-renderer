@@ -180,7 +180,7 @@ export default {
      * @public
      */
     getFormValue() {
-      return transformOutputValue(this.value, this.content)
+      return transformOutputValue(this.value, this.innerContent)
     },
     /**
      * update form values
