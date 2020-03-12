@@ -5,6 +5,9 @@
 ```vue
 <template>
   <el-form-renderer label-width="100px" :content="content" v-model="form" ref="form">
+    <template #id:region>
+      <div>requestRemoteCount: {{requestRemoteCount}}</div>
+    </template>
     <el-form-item>
       <el-button @click="resetForm">resetForm</el-button>
       <el-button @click="disableName">{{content[0].disabled ? '启' : '禁'}}用第一项</el-button>
@@ -28,6 +31,7 @@ export default {
         endDate: '2019-01-02'
       },
       id: 0,
+      requestRemoteCount: 0,
       content: [
         {
           type: 'input',
@@ -46,20 +50,27 @@ export default {
           type: 'select',
           id: 'region',
           label: 'region',
-          options: [
-            {
-              label: 'shanghai',
-              value: 'shanghai'
-            }, 
-            {
-              label: 'beijing',
-              value: 'beijing'
-            },
-            {
-              label: 'guangzhou',
-              value: 'guangzhou'
-            },
-          ],
+          remote: {
+            // url: 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote',
+            request: () => {
+              const data = [
+                {
+                  label: 'shanghai',
+                  value: 'shanghai'
+                }, 
+                {
+                  label: 'beijing',
+                  value: 'beijing'
+                },
+                {
+                  label: 'guangzhou',
+                  value: 'guangzhou'
+                },
+              ]
+              this.requestRemoteCount++
+              return new Promise(r => setTimeout(() => r(data), 2000))
+            }
+          },
           el: {filterable: true, multiple: true, multipleLimit: 2},
           rules: [
             { required: true, message: 'miss area', trigger: 'change' }
@@ -73,7 +84,7 @@ export default {
             valueFormat: 'yyyy-MM-dd'
           },
           rules: [
-            { type: 'date', required: true, message: 'miss date', trigger: 'change' }
+            { required: true, message: 'miss date', trigger: 'change' }
           ],
           inputFormat: (row) => {
             if (row.startDate && row.endDate) {
