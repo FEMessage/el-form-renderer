@@ -18,7 +18,7 @@
         {{ itemValue }}
       </div>
       <div v-else-if="data.type === 'select'">
-        <template v-if="get(data, 'el.multiple')">
+        <template v-if="_get(data, 'el.multiple')">
           {{
             (itemValue || [])
               .map(val => data.options.find(op => op.value === val).label)
@@ -117,7 +117,6 @@ export default {
         this.data.rules.some(rule => {
           return rule.required && rule.trigger === 'blur'
         }),
-      get: _get,
     }
   },
   computed: {
@@ -227,6 +226,7 @@ export default {
     },
   },
   methods: {
+    _get,
     triggerValidate(id) {
       if (!this.data.rules || !this.data.rules.length) return
 
