@@ -1,3 +1,4 @@
+import _kebabcase from 'lodash.kebabcase'
 /**
  * content 的每一项会浅拷贝一层
  * 只可以在 item 层新增修改属性，如 item.a = b
@@ -10,6 +11,8 @@ export default function transformContent(content) {
     } else {
       removeDollarInKey(item)
       extractRulesFromComponent(item)
+      // 有些旧写法是 checkboxGroup & radioGroup
+      item.type = _kebabcase(item.type)
     }
 
     return item

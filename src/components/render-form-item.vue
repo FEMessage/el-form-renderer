@@ -18,9 +18,9 @@
         {{ itemValue }}
       </div>
       <div v-else-if="data.type === 'select'">
-        {{
-          (data.options.find(op => op.value === itemValue) || {label: ''}).label
-        }}
+        <template>
+          {{ multipleValue }}
+        </template>
       </div>
     </template>
     <custom-component
@@ -161,6 +161,16 @@ export default {
           this.triggerValidate(id)
         },
       }
+    },
+
+    multipleValue: ({data, itemValue, options = []}) => {
+      const multipleSelectValue =
+        _get(data, 'el.multiple') && Array.isArray(itemValue)
+          ? itemValue
+          : [itemValue]
+      return multipleSelectValue
+        .map(val => (options.find(op => op.value === val) || {}).label)
+        .join()
     },
   },
   watch: {
