@@ -18,17 +18,13 @@
         {{ itemValue }}
       </div>
       <div v-else-if="data.type === 'select'">
-        <template v-if="_get(data, 'el.multiple')">
+        <template>
           {{
-            (itemValue || [])
-              .map(val => data.options.find(op => op.value === val).label)
+            (_get(data, 'el.multiple') ? itemValue : [itemValue] || [])
+              .map(
+                val => (data.options.find(op => op.value === val) || {}).label,
+              )
               .join()
-          }}
-        </template>
-        <template v-else>
-          {{
-            (data.options.find(op => op.value === itemValue) || {label: ''})
-              .label
           }}
         </template>
       </div>
