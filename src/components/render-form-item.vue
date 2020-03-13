@@ -226,7 +226,6 @@ export default {
     },
   },
   methods: {
-    _get,
     triggerValidate(id) {
       if (!this.data.rules || !this.data.rules.length) return
 
