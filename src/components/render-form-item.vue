@@ -163,13 +163,13 @@ export default {
       }
     },
 
-    multipleValue({data, itemValue}) {
+    multipleValue: ({data, itemValue, options = []}) => {
       const multipleSelectValue =
         _get(data, 'el.multiple') && Array.isArray(itemValue)
           ? itemValue
           : [itemValue]
       return multipleSelectValue
-        .map(val => (data.options.find(op => op.value === val) || {}).label)
+        .map(val => (options.find(op => op.value === val) || {}).label)
         .join()
     },
   },
