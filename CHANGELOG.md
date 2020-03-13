@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.6](https://github.com/FEMessage/el-form-renderer/compare/v1.14.5...v1.14.6) (2020-03-13)
+
+
+### Bug Fixes
+
+* remote + readonly + el-select + multiple 场景 ([#177](https://github.com/FEMessage/el-form-renderer/issues/177)) ([c1f1cd0](https://github.com/FEMessage/el-form-renderer/commit/c1f1cd0))
+* 兼容 type 的 camelCase 写法 ([#176](https://github.com/FEMessage/el-form-renderer/issues/176)) ([76f4c89](https://github.com/FEMessage/el-form-renderer/commit/76f4c89))
+* 解决 select 为 multiple 时 readonly 无法显示的问题 ([#175](https://github.com/FEMessage/el-form-renderer/issues/175)) ([ad1ea44](https://github.com/FEMessage/el-form-renderer/commit/ad1ea44))
+
+
+
 ### [1.14.5](https://github.com/FEMessage/el-form-renderer/compare/v1.14.4...v1.14.5) (2020-03-12)
 
 
