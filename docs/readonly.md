@@ -45,6 +45,24 @@ export default {
             { required: true, message: 'miss area', trigger: 'change' }
           ]
         }, {
+          default: ['shanghai','beijing'],
+          type: 'select',
+          id: 'multi-region',
+          label: 'multi area',
+          options: [{
+            label: '上海',
+            value: 'shanghai'
+          }, {
+            label: '北京',
+            value: 'beijing'
+          }],
+          el: {
+            multiple: true
+          },
+          rules: [
+            { required: true, message: 'miss area', trigger: 'change' }
+          ]
+        }, {
           default: '[native Date Wed Jan 01 2020 00:00:00 GMT+0800 (中国标准时间)]',
           type: 'date-picker',
           id: 'date',
