@@ -90,8 +90,10 @@ export default {
   },
   watch: {
     form: {
-      handler(v, oldV) {
-        if (!v || _isequal(v, oldV)) return
+      handler(v) {
+        // QUESTION: 为什么总是相等？？
+        // if (_isequal(v, oldV)) return
+        if (!v) return
         this.setValueFromModel()
       },
       immediate: true,
