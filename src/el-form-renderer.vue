@@ -91,8 +91,6 @@ export default {
   watch: {
     form: {
       handler(v) {
-        // QUESTION: 为什么总是相等？？
-        // if (_isequal(v, oldV)) return
         if (!v) return
         this.setValueFromModel()
       },
