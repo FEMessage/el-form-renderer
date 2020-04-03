@@ -90,8 +90,8 @@ export default {
   },
   watch: {
     form: {
-      handler(v, oldV) {
-        if (!v || _isequal(v, oldV)) return
+      handler(v) {
+        if (!v) return
         this.setValueFromModel()
       },
       immediate: true,
@@ -109,7 +109,7 @@ export default {
         if (!v || _isequal(v, oldV)) return
         this.$emit('input', transformOutputValue(v, this.innerContent))
       },
-      // deep: true, // 应该是没有必要的
+      // deep: true, // updateValue 是全量更新，所以不用
     },
   },
   mounted() {
