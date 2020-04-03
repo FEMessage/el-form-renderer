@@ -3,6 +3,7 @@
   <el-form-renderer label-width="100px" :content="content" v-model="form" ref="form">
     <el-form-item>
       <el-button @click="resetForm">reset</el-button>
+      <el-button @click="setValue">设置名字为小明</el-button>
     </el-form-item>
     <pre>{{form}}</pre>
   </el-form-renderer>
@@ -130,7 +131,10 @@ export default {
   methods: {
     resetForm() {
       this.$refs.form.resetFields();
-    }
+    },
+    setValue() {
+      this.form.name = '小明'
+    },
   }
 }
 </script>

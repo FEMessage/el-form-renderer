@@ -61,5 +61,7 @@ describe('测试 v-model 示例', function() {
     )
     cy.contains('reset').click()
     cy.contains(stringify(initState))
+    cy.contains('设置名字为小明').click()
+    cy.$getFormItemInput('name').should('have.value', '小明')
   })
 })
