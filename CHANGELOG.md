@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/FEMessage/el-form-renderer/compare/v1.14.7...v1.15.0) (2020-05-27)
+
+
+### Features
+
+* 改进 input 的 readonly 样式 ([#185](https://github.com/FEMessage/el-form-renderer/issues/185)) ([635c0c6](https://github.com/FEMessage/el-form-renderer/commit/635c0c6))
+
+
+
 ### [1.14.7](https://github.com/FEMessage/el-form-renderer/compare/v1.14.6...v1.14.7) (2020-04-03)
 
 
