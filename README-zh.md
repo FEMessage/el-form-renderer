@@ -55,6 +55,7 @@ el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活
 - 支持 `hidden` 进行表单项动态显示与隐藏
 - 支持渲染自定义组件
 - 支持自定义组件设置校验规则
+- 支持 v-model
 
 [⬆ Back to Top](#table-of-contents)
 
@@ -66,6 +67,7 @@ el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活
 - [fem-vscode-helper](https://marketplace.visualstudio.com/items?itemName=FEMessage.fem-vscode-helper)
 - [实践案例](https://zhuanlan.zhihu.com/p/95725645)
 - [设置动态 options 指南](https://zhuanlan.zhihu.com/p/97827063)
+- [v-model 落地实践分析](https://zhuanlan.zhihu.com/p/108055158)
 
 [⬆ Back to Top](#table-of-contents)
 
@@ -86,13 +88,13 @@ yarn add @femessage/el-form-renderer
 
   export default {
     components: {
-      ElFormRenderer
+      ElFormRenderer,
     },
     data() {
       return {
-        content: []
+        content: [],
       }
-    }
+    },
   }
 </script>
 ```

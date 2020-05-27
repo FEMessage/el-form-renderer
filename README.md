@@ -41,6 +41,7 @@ In our daily development, there are lots page with form, and usually the form st
 - Support batch update form data with updateForm method
 - Support setOptions method, dynamically change select options
 - Content support `inputFormat` , `outputFormat` , `trim` to process component's input and output values
+- Support v-model
 
 [⬆Back to Top](#table-of-contents)
 
@@ -67,13 +68,13 @@ yarn add @femessage/el-form-renderer
   import ElFormRenderer from '@femessage/el-form-renderer'
   export default {
     components: {
-      ElFormRenderer
+      ElFormRenderer,
     },
     data() {
       return {
-        content: []
+        content: [],
       }
-    }
+    },
   }
 </script>
 ```
