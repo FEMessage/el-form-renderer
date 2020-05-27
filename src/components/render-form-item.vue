@@ -3,20 +3,18 @@
     v-show="_show"
     :prop="prop"
     :label="data.label"
-    :rules="_show && Array.isArray(data.rules) ? data.rules : []"
+    :rules="!readonly && Array.isArray(data.rules) ? data.rules : []"
     v-bind="data.attrs"
+    class="render-form-item"
   >
     <template v-if="readonly && hasReadonlyContent">
-      <div
+      <el-input
         v-if="data.type === 'input'"
-        :style="
-          componentProps.type === 'textarea'
-            ? {padding: '10px 0', lineHeight: 1.5}
-            : ''
-        "
-      >
-        {{ itemValue }}
-      </div>
+        v-bind="componentProps"
+        :value="itemValue"
+        readonly
+        v-on="listeners"
+      />
       <div v-else-if="data.type === 'select'">
         <template>
           {{ multipleValue }}
@@ -255,3 +253,14 @@ export default {
   },
 }
 </script>
+<style lang="less">
+.render-form-item {
+  textarea[readonly] {
+    border: 1px solid #dcdee6; // 只读状态不要有 focus 状态
+  }
+
+  input[readonly] {
+    border: 1px solid #dcdee6;
+  }
+}
+</style>
