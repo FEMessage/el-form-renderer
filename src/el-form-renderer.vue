@@ -71,6 +71,10 @@ export default {
   },
   data() {
     return {
+      /**
+       * 用来给子组件递归 options 判断是否是父容器的标识
+       */
+      isElFormRenderer: true,
       GROUP,
       /**
        * inputFormat 让整个输入机制复杂了很多。value 有以下输入路径:

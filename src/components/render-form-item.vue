@@ -16,9 +16,7 @@
         v-on="listeners"
       />
       <div v-else-if="data.type === 'select'">
-        <template>
-          {{ multipleValue }}
-        </template>
+        <template>{{ multipleValue }}</template>
       </div>
     </template>
     <custom-component
@@ -212,7 +210,7 @@ export default {
           .then(resp => {
             if (isOptionsCase) {
               let formRenderer = this.$parent
-              while (formRenderer.$options._componentTag !== 'el-form-renderer')
+              while (!formRenderer.isElFormRenderer)
                 formRenderer = formRenderer.$parent
               formRenderer.setOptions(this.prop, resp)
             } else {
