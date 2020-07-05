@@ -99,7 +99,8 @@ export default {
     },
     innerContent: {
       handler(v) {
-        this.options = collect(v, 'options')
+        const oldOptions = {...this.options}
+        this.options = {...oldOptions, ...collect(v, 'options')}
         this.setValueFromModel()
       },
       immediate: true,
