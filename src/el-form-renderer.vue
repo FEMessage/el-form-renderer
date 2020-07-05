@@ -1,11 +1,11 @@
 <template>
   <el-form ref="elForm" v-bind="$attrs" :model="value" class="el-form-renderer">
-    <template v-for="item in innerContent">
+    <template v-for="(item, index) in innerContent">
       <slot :name="`id:${item.id}`" />
       <slot :name="`$id:${item.id}`" />
       <component
         :is="item.type === GROUP ? 'render-form-group' : 'render-form-item'"
-        :key="item.id"
+        :key="`${item.id}_${index}`"
         :data="item"
         :value="value"
         :item-value="value[item.id]"
