@@ -215,7 +215,8 @@ export default {
           .then(onResponse, onError)
           .then(resp => {
             if (isOptionsCase) {
-              this.elFormRenderer.setOptions(this.prop, resp)
+              this.elFormRenderer &&
+                this.elFormRenderer.setOptions(this.prop, resp)
             } else {
               this.propsInner = {[prop]: resp}
             }
@@ -230,7 +231,7 @@ export default {
 
       if (this.isBlurTrigger) return
       this.$nextTick(() => {
-        this.elForm.validateField(id)
+        this.elForm && this.elForm.validateField(id)
       })
     },
   },
