@@ -12,6 +12,8 @@ const testValue = {
 
 describe('mixin-hidden.js', () => {
   let Constructor
+  // 防止测试过程中注入报错
+  delete renderFormItem.inject
   beforeEach(() => {
     Constructor = Vue.extend(renderFormItem)
   })
