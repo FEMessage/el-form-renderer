@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/FEMessage/el-form-renderer/compare/v1.15.0...v1.15.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* fix the options lost ([#188](https://github.com/FEMessage/el-form-renderer/issues/188)) ([8a4a332](https://github.com/FEMessage/el-form-renderer/commit/8a4a332))
+* 获取父实例对象由遍历改为注入的形式 ([#190](https://github.com/FEMessage/el-form-renderer/issues/190)) ([f6af33c](https://github.com/FEMessage/el-form-renderer/commit/f6af33c))
+
+
+
 ## [1.15.0](https://github.com/FEMessage/el-form-renderer/compare/v1.14.7...v1.15.0) (2020-05-27)
 
 
