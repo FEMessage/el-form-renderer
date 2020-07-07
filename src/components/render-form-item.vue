@@ -83,6 +83,10 @@ export default {
       render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
     },
   },
+  /**
+   * elForm inject from https://github.com/ElemeFE/element/blob/dev/packages/form/src/form.vue#L19
+   */
+  inject: ['elFormRenderer', 'elForm'],
   props: {
     data: Object,
     prop: {
@@ -211,10 +215,8 @@ export default {
           .then(onResponse, onError)
           .then(resp => {
             if (isOptionsCase) {
-              let formRenderer = this.$parent
-              while (formRenderer.$options._componentTag !== 'el-form-renderer')
-                formRenderer = formRenderer.$parent
-              formRenderer.setOptions(this.prop, resp)
+              this.elFormRenderer &&
+                this.elFormRenderer.setOptions(this.prop, resp)
             } else {
               this.propsInner = {[prop]: resp}
             }
@@ -227,27 +229,9 @@ export default {
     triggerValidate(id) {
       if (!this.data.rules || !this.data.rules.length) return
 
-      /**
-       * 下面代码可参考 `emitter`
-       * 目的: 为了清除表单校验信息
-       * 因为有部分表单项的值变更时没有清除校验信息, 因此需要触发一次校验用于清除
-       * https://github.com/ElemeFE/element/blob/dev/src/mixins/emitter.js
-       */
-      let parent = this.$parent
-      let name = parent.$options.componentName
-
-      while (parent && name !== 'ElForm') {
-        parent = parent.$parent
-
-        if (parent) {
-          name = parent.$options.componentName
-        }
-      }
-
-      if (!parent || this.isBlurTrigger) return
-
+      if (this.isBlurTrigger) return
       this.$nextTick(() => {
-        parent.validateField(id)
+        this.elForm && this.elForm.validateField(id)
       })
     },
   },
