@@ -41,6 +41,11 @@ export default {
     RenderFormItem,
     RenderFormGroup,
   },
+  provide() {
+    return {
+      elFormRenderer: this,
+    }
+  },
   /**
    * value 已经被内部大量使用，所以换用 form
    */
