@@ -104,7 +104,8 @@ export default {
     },
     innerContent: {
       handler(v) {
-        this.options = collect(v, 'options')
+        // 如果 content 没有变动 remote 的部分，这里需要保留之前 remote 注入的 options
+        this.options = {...this.options, ...collect(v, 'options')}
         this.setValueFromModel()
       },
       immediate: true,
