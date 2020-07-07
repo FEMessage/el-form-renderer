@@ -43,6 +43,9 @@ export function transformOutputValue(value, content) {
   const newVal = {}
   Object.keys(value).forEach(id => {
     const item = content.find(item => item.id === id)
+    // 无此 item 时不做任何操作
+    // 此情况出现在动态减表单项，防止出现错误
+    if (!item) return
     if (item.type !== 'group') {
       if (item.outputFormat) {
         const v = item.outputFormat(value[id])

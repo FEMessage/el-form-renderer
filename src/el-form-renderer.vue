@@ -166,8 +166,9 @@ export default {
         : collect(this.innerContent, 'default')
       correctValue(newValue, this.innerContent)
       if (!_isequal(this.value, newValue)) {
-        // 同时保留旧的表单值
-        this.value = {...this.value, ...newValue}
+        // 排除不在 `content` 的表单项
+        const oldValue = this.getFormValue()
+        this.value = {...oldValue, ...newValue}
       }
     },
     /**
