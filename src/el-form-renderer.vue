@@ -165,7 +165,10 @@ export default {
         ? transformInputValue(this.form, this.innerContent)
         : collect(this.innerContent, 'default')
       correctValue(newValue, this.innerContent)
-      if (!_isequal(this.value, newValue)) this.value = newValue
+      if (!_isequal(this.value, newValue)) {
+        // 同时保留旧的表单值
+        this.value = {...this.value, ...newValue}
+      }
     },
     /**
      * 更新表单数据
