@@ -2,11 +2,16 @@
   <el-form-item
     v-show="_show"
     :prop="prop"
-    :label="data.label"
+    :label="typeof data.label === 'string' ? data.label : ''"
     :rules="!readonly && Array.isArray(data.rules) ? data.rules : []"
     v-bind="data.attrs"
     class="render-form-item"
   >
+    <vnode
+      v-if="typeof data.label !== 'string'"
+      slot="label"
+      :content="data.label"
+    />
     <template v-if="readonly && hasReadonlyContent">
       <el-input
         v-if="data.type === 'input'"
@@ -81,6 +86,10 @@ export default {
     CustomComponent: {
       functional: true,
       render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
+    },
+    Vnode: {
+      functional: true,
+      render: (_, ctx) => ctx.props.content,
     },
   },
   /**
