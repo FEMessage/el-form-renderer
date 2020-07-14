@@ -7,7 +7,7 @@
     v-bind="data.attrs"
     class="render-form-item"
   >
-    <vnode
+    <v-node
       v-if="typeof data.label !== 'string'"
       slot="label"
       :content="data.label"
@@ -87,9 +87,9 @@ export default {
       functional: true,
       render: (h, ctx) => h(ctx.props.component, ctx.data, ctx.children),
     },
-    Vnode: {
+    VNode: {
       functional: true,
-      render: (_, ctx) => ctx.props.content,
+      render: (h, ctx) => ctx.props.content,
     },
   },
   /**
