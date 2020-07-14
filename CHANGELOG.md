@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/FEMessage/el-form-renderer/compare/v1.15.1...v1.16.0) (2020-07-14)
+
+
+### Features
+
+* 支持 label slot 功能 ([#193](https://github.com/FEMessage/el-form-renderer/issues/193)) ([f28725c](https://github.com/FEMessage/el-form-renderer/commit/f28725c))
+
+
+
 ### [1.15.1](https://github.com/FEMessage/el-form-renderer/compare/v1.15.0...v1.15.1) (2020-07-07)
 
 
