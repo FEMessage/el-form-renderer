@@ -8,7 +8,7 @@
 <script>
 export default {
   data () {
-    const h = this.$createElement
+    var h = this.$createElement
     return {
       content: [
         {
