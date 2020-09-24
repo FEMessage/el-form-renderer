@@ -51,7 +51,13 @@ export default {
           rules: [
             { type: 'date', required: true, message: 'miss date', trigger: 'change' }
           ]
-        }, {
+        },
+        {
+          type: "checkbox",
+          id: "checkbox",
+          label: <span>checkbox<i class="el-icon-edit"></i></span>,
+        },
+        {
           type: 'switch',
           id: 'delivery',
           label: 'delivery'
