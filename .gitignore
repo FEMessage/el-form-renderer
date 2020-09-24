@@ -6,6 +6,8 @@ yarn-error.log*
 dist
 docs/build
 docs/index.html
+docs/*.ttf
+docs/*.woff
 
 # Editor directories and files
 .idea
@@ -15,3 +17,6 @@ docs/index.html
 *.njsproj
 *.sln
 .env
+
+cypress/screenshots
+cypress/videos

@@ -55,6 +55,10 @@ interface Content {
    */
   items: Content[]
 
+  /**
+   * 默认值
+   * FIXME: 别用关键字做 key
+   */
   default?: any
 
   /**
@@ -158,11 +162,13 @@ interface Content {
   label?: string //set el-form-item's label
   trim = true // trim value at change event
 
-  // 用于处理输入值，辅助updateForm进行对应值更新，参数为updateForm传入的对象
+  // 用于处理输入值，输入的值包括：1. default；2. v-model；3. updateForm。参数为整个表单的值对象或 updateForm 传入的对象
+  // 如果 inputFormat 返回 undefined，则不会更新此表单项
   // obj is param you passed to updateForm. You can use this function to hijack this process and customize the form value
   inputFormat?: (obj: any) => any
 
   // 用于处理输出值，参数为对应组件返回值
+  // 如果处理后的值是对象类型，会覆盖（Object.assign）到整个表单的值上
   // used to hijack the getFormValue's process and customize the return value
   outputFormat?: (val: any) => any
 

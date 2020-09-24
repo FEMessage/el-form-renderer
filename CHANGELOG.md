@@ -2,6 +2,119 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/FEMessage/el-form-renderer/compare/v1.15.1...v1.16.0) (2020-07-14)
+
+
+### Features
+
+* 支持 label slot 功能 ([#193](https://github.com/FEMessage/el-form-renderer/issues/193)) ([f28725c](https://github.com/FEMessage/el-form-renderer/commit/f28725c))
+
+
+
+### [1.15.1](https://github.com/FEMessage/el-form-renderer/compare/v1.15.0...v1.15.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* fix the options lost ([#188](https://github.com/FEMessage/el-form-renderer/issues/188)) ([8a4a332](https://github.com/FEMessage/el-form-renderer/commit/8a4a332))
+* 获取父实例对象由遍历改为注入的形式 ([#190](https://github.com/FEMessage/el-form-renderer/issues/190)) ([f6af33c](https://github.com/FEMessage/el-form-renderer/commit/f6af33c))
+
+
+
+## [1.15.0](https://github.com/FEMessage/el-form-renderer/compare/v1.14.7...v1.15.0) (2020-05-27)
+
+
+### Features
+
+* 改进 input 的 readonly 样式 ([#185](https://github.com/FEMessage/el-form-renderer/issues/185)) ([635c0c6](https://github.com/FEMessage/el-form-renderer/commit/635c0c6))
+
+
+
+### [1.14.7](https://github.com/FEMessage/el-form-renderer/compare/v1.14.6...v1.14.7) (2020-04-03)
+
+
+### Bug Fixes
+
+* v-model 不能赋值 ([#182](https://github.com/FEMessage/el-form-renderer/issues/182)) ([ff917d1](https://github.com/FEMessage/el-form-renderer/commit/ff917d1))
+
+
+
+### [1.14.6](https://github.com/FEMessage/el-form-renderer/compare/v1.14.5...v1.14.6) (2020-03-13)
+
+
+### Bug Fixes
+
+* remote + readonly + el-select + multiple 场景 ([#177](https://github.com/FEMessage/el-form-renderer/issues/177)) ([c1f1cd0](https://github.com/FEMessage/el-form-renderer/commit/c1f1cd0))
+* 兼容 type 的 camelCase 写法 ([#176](https://github.com/FEMessage/el-form-renderer/issues/176)) ([76f4c89](https://github.com/FEMessage/el-form-renderer/commit/76f4c89))
+* 解决 select 为 multiple 时 readonly 无法显示的问题 ([#175](https://github.com/FEMessage/el-form-renderer/issues/175)) ([ad1ea44](https://github.com/FEMessage/el-form-renderer/commit/ad1ea44))
+
+
+
+### [1.14.5](https://github.com/FEMessage/el-form-renderer/compare/v1.14.4...v1.14.5) (2020-03-12)
+
+
+### Bug Fixes
+
+* get form value ([#174](https://github.com/FEMessage/el-form-renderer/issues/174)) ([268a03b](https://github.com/FEMessage/el-form-renderer/commit/268a03b))
+* remote 仅在有效变更时发送请求 ([#169](https://github.com/FEMessage/el-form-renderer/issues/169)) ([c19a166](https://github.com/FEMessage/el-form-renderer/commit/c19a166))
+* 修复 v-model & content 示例中修改 date range 报错的问题 ([#173](https://github.com/FEMessage/el-form-renderer/issues/173)) ([448055c](https://github.com/FEMessage/el-form-renderer/commit/448055c))
+
+
+
+### [1.14.4](https://github.com/FEMessage/el-form-renderer/compare/v1.14.3...v1.14.4) (2020-02-26)
+
+
+### Bug Fixes
+
+* 修复 resetFields 有时无法恢复初始值的问题 ([#172](https://github.com/FEMessage/el-form-renderer/issues/172)) ([27e5efa](https://github.com/FEMessage/el-form-renderer/commit/27e5efa))
+
+
+
+### [1.14.3](https://github.com/FEMessage/el-form-renderer/compare/v1.14.2...v1.14.3) (2020-02-26)
+
+
+### Bug Fixes
+
+* 表单项的值为对象类型时错误覆盖回整个表单的值中 ([#171](https://github.com/FEMessage/el-form-renderer/issues/171)) ([8fa4dc0](https://github.com/FEMessage/el-form-renderer/commit/8fa4dc0))
+
+
+
+### [1.14.2](https://github.com/FEMessage/el-form-renderer/compare/v1.14.1...v1.14.2) (2020-02-21)
+
+
+### Bug Fixes
+
+* 修复 disabled 写在 el 中的用法 ([#167](https://github.com/FEMessage/el-form-renderer/issues/167)) ([4abdaaf](https://github.com/FEMessage/el-form-renderer/commit/4abdaaf))
+
+
+
+### [1.14.1](https://github.com/FEMessage/el-form-renderer/compare/v1.14.0...v1.14.1) (2020-02-20)
+
+
+### Bug Fixes
+
+* radio 传 value 时用作 label 属性 ([#165](https://github.com/FEMessage/el-form-renderer/issues/165)) ([2f808e7](https://github.com/FEMessage/el-form-renderer/commit/2f808e7))
+
+
+
+## [1.14.0](https://github.com/FEMessage/el-form-renderer/compare/v1.13.1...v1.14.0) (2020-02-19)
+
+
+### Features
+
+* v-model ([#162](https://github.com/FEMessage/el-form-renderer/issues/162)) ([e0f9089](https://github.com/FEMessage/el-form-renderer/commit/e0f9089))
+
+
+### Tests
+
+* 新增 e2e 测试 ([#159](https://github.com/FEMessage/el-form-renderer/issues/159)) ([ab4c4e4](https://github.com/FEMessage/el-form-renderer/commit/ab4c4e4))
+
+
+
+### [1.13.1](https://github.com/FEMessage/el-form-renderer/compare/v1.13.0...v1.13.1) (2020-01-14)
+
+
+
 ## [1.13.0](https://github.com/FEMessage/el-form-renderer/compare/v1.12.1...v1.13.0) (2020-01-10)
 
 

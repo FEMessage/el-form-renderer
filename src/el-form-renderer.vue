@@ -1,18 +1,17 @@
 <template>
   <el-form ref="elForm" v-bind="$attrs" :model="value" class="el-form-renderer">
-    <template v-for="(item, index) in innerContent">
+    <template v-for="item in innerContent">
       <slot :name="`id:${item.id}`" />
       <slot :name="`$id:${item.id}`" />
       <component
         :is="item.type === GROUP ? 'render-form-group' : 'render-form-item'"
-        :key="index"
+        :key="item.id"
         :data="item"
         :value="value"
         :item-value="value[item.id]"
         :disabled="disabled || item.disabled"
         :readonly="readonly || item.readonly"
         :options="options[item.id]"
-        :_parent="this"
         @updateValue="updateValue"
       />
     </template>
@@ -21,10 +20,18 @@
 </template>
 <script>
 import _set from 'lodash.set'
-import RenderFormGroup from './render-form-group.vue'
-import RenderFormItem from './render-form-item.vue'
-import transformContent from './transform-content'
-import {isObject} from './utils'
+import _isequal from 'lodash.isequal'
+import _clonedeep from 'lodash.clonedeep'
+import RenderFormGroup from './components/render-form-group.vue'
+import RenderFormItem from './components/render-form-item.vue'
+import transformContent from './util/transform-content'
+import {
+  collect,
+  mergeValue,
+  transformOutputValue,
+  transformInputValue,
+  correctValue,
+} from './util/utils'
 
 const GROUP = 'group'
 
@@ -32,104 +39,139 @@ export default {
   name: 'ElFormRenderer',
   components: {
     RenderFormItem,
-    RenderFormGroup
+    RenderFormGroup,
+  },
+  provide() {
+    return {
+      elFormRenderer: this,
+    }
+  },
+  /**
+   * value 已经被内部大量使用，所以换用 form
+   */
+  model: {
+    prop: 'form',
+    event: 'input',
   },
   props: {
     content: {
       type: Array,
-      required: true
+      required: true,
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     readonly: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    /**
+     * v-model 的值。传入后会优先使用
+     */
+    form: {
+      type: Object,
+      default: undefined,
+    },
   },
   data() {
     return {
       GROUP,
+      /**
+       * inputFormat 让整个输入机制复杂了很多。value 有以下输入路径:
+       * 1. 传入的 form => inputFormat 处理
+       * 2. updateForm => inputFormat 处理
+       * 3. 但 content 中的 default 没法经过 inputFormat 处理，因为 inputFormat 要接受整个 value 作为参数
+       * 4. 组件内部更新 value，不需要走 inputFormat
+       */
       value: {}, // 表单数据对象
       options: {},
-      // 用于兼容数据操作
-      innerContent: []
+      initValue: null,
     }
+  },
+  computed: {
+    // 用于兼容数据操作
+    innerContent: ({content}) => transformContent(content),
   },
   watch: {
-    innerContent: {
-      handler(newVal) {
-        if (!newVal.length) {
-          return
-        }
-        this.updateOptions(newVal, this.options)
+    form: {
+      handler(v) {
+        if (!v) return
+        this.setValueFromModel()
       },
-      deep: true
-    }
-  },
-  beforeMount() {
-    this.innerContent = transformContent(this.content)
-    this.initItemOption()
-    this.innerContent.forEach(this.initItemValue)
+      immediate: true,
+      deep: true,
+    },
+    innerContent: {
+      handler(v) {
+        // 如果 content 没有变动 remote 的部分，这里需要保留之前 remote 注入的 options
+        this.options = {...this.options, ...collect(v, 'options')}
+        this.setValueFromModel()
+      },
+      immediate: true,
+    },
+    value: {
+      handler(v, oldV) {
+        if (!v || _isequal(v, oldV)) return
+        this.$emit('input', transformOutputValue(v, this.innerContent))
+      },
+      // deep: true, // updateValue 是全量更新，所以不用
+    },
   },
   mounted() {
+    /**
+     * 与 element 相同，在 mounted 阶段存储 initValue
+     * @see https://github.com/ElemeFE/element/blob/6ec5f8e900ff698cf30e9479d692784af836a108/packages/form/src/form-item.vue#L304
+     */
+    this.initValue = _clonedeep(this.value)
     this.$nextTick(() => {
       // proxy
       Object.keys(this.$refs.elForm.$options.methods).forEach(item => {
+        if (item in this) return
         this[item] = this.$refs.elForm[item]
       })
-
       /**
-       * 首先执行 ElForm 原本的 resetFields 方法
-       * 遍历 formRenderer data 里面的 value 对象
-       * 如果这是一个数组，那么就把这个数组里面的 undefined 值去掉
+       * 有些组件会 created 阶段更新初始值为合法值，这会触发 validate。目前已知的情况有：
+       * - el-select 开启 multiple 时，会更新初始值 undefined 为 []
+       * @hack
        */
-      this.resetFields = () => {
-        this.$refs.elForm.resetFields()
-        Object.keys(this.value).forEach(key => {
-          if (Array.isArray(this.value[key])) {
-            this.value[key] = this.value[key].filter(val => val !== undefined)
-          }
-        })
-      }
+      this.clearValidate()
     })
   },
   methods: {
     /**
-     * 初始化每个表单原子的默认值
-     * @param  {Object} item 表单原子描述
+     * 重置表单为初始值
+     *
+     * @public
      */
-    initItemValue(item) {
-      if (!item.id || this.value[item.id] !== undefined) return
-      let defaultVal
-      if (item.type === GROUP) {
-        // group
-        defaultVal = item.items.reduce((acc, cur) => {
-          cur.default && cur.id && (acc[cur.id] = cur.default)
-          return acc
-        }, {})
-      } else if (item.default !== undefined) {
-        // not group
-        defaultVal = item.default
-      }
-      defaultVal !== undefined &&
-        this.updateValue({id: item.id, value: defaultVal})
+    resetFields() {
+      /**
+       * 之所以不用 el-form 的 resetFields 机制，有以下原因：
+       * - el-form 的 resetFields 无视 el-form-renderer 的自定义组件
+       * - el-form 的 resetFields 不会触发 input & change 事件，无法监听
+       * - bug1: https://github.com/FEMessage/el-data-table/issues/176#issuecomment-587280825
+       * - bug2:
+       *   0. 建议先在监听器 watch.value 里 console.log(v.name, oldV.name)
+       *   1. 打开 basic 示例
+       *   2. 在 label 为 name 的输入框里输入 1，此时 log：'1' ''
+       *   3. 点击 reset 按钮，此时 log 两条数据： '1' '1', '' ''
+       *   4. 因为 _isequal(v, oldV)，所以没有触发 v-model 更新
+       */
+      this.value = _clonedeep(this.initValue)
+      this.$nextTick(this.clearValidate)
     },
-    /**
-     * 初始化每个表单项的选项
-     */
-    initItemOption() {
-      this.options = this.innerContent.reduce((con, item) => {
-        con[item.id] =
-          item.type === GROUP
-            ? item.items.reduce((acc, cur) => {
-                acc[cur.id] = cur.options || []
-                return acc
-              }, {})
-            : item.options || []
-        return con
-      }, {})
+    setValueFromModel() {
+      if (!this.innerContent.length) return
+      /**
+       * 没使用 v-model 时才从 default 采集数据
+       * default 值没法考虑 inputFormat
+       * 参考 value-format.md 的案例。那种情况下，default 该传什么？
+       */
+      const newValue = this.form
+        ? transformInputValue(this.form, this.innerContent)
+        : collect(this.innerContent, 'default')
+      correctValue(newValue, this.innerContent)
+      if (!_isequal(this.value, newValue)) this.value = newValue
     },
     /**
      * 更新表单数据
@@ -137,69 +179,24 @@ export default {
      * @param  {All} options.value 表单数据
      */
     updateValue({id, value}) {
-      this.value = Object.assign({}, this.value, {
-        [id]: value
-      })
+      this.value = {...this.value, [id]: value}
     },
     /**
      * @return {object} key is item's id, value is item's value
      * @public
      */
     getFormValue() {
-      const getValue = (values, content) => {
-        return Object.keys(values).reduce((acc, key) => {
-          const item = content.find(it => it.id === key)
-          if (!item) {
-            return acc
-          }
-
-          // 如果类型是group，对值递归处理
-          if (item.type === GROUP) {
-            acc[key] = getValue(values[key], item.items)
-          } else {
-            if (item.outputFormat) {
-              const formatVal = item.outputFormat(values[key])
-              // 如果 outputFormat 返回的是一个对象，则合并该对象，否则在原有 acc 上新增该 属性：值
-              isObject(formatVal)
-                ? Object.assign(acc, formatVal)
-                : (acc[key] = formatVal)
-            } else {
-              acc[key] = values[key]
-            }
-          }
-
-          return acc
-        }, {})
-      }
-      return {...getValue(this.value, this.innerContent)}
+      return transformOutputValue(this.value, this.innerContent)
     },
     /**
      * update form values
-     * @param {object} values - key is item's id, value is the new value
+     * @param {object} newValue - key is item's id, value is the new value
      * @public
      */
-    updateForm(values) {
-      const updateValue = content => {
-        return content.reduce((acc, item) => {
-          let value
-          if (item.type === GROUP) {
-            value = updateValue(item.items)
-          } else {
-            value =
-              typeof item.inputFormat === 'function'
-                ? item.inputFormat(values)
-                : values[item.id]
-          }
-
-          if (value !== undefined) {
-            _set(acc, item.id, value)
-          }
-
-          return acc
-        }, {})
-      }
-
-      this.value = Object.assign({}, this.value, updateValue(this.innerContent))
+    updateForm(newValue) {
+      newValue = transformInputValue(newValue, this.innerContent)
+      mergeValue(this.value, newValue, this.innerContent)
+      this.value = {...this.value}
     },
     /**
      * update select options
@@ -208,27 +205,9 @@ export default {
      * @public
      */
     setOptions(id, options) {
-      if (!id || !Array.isArray(options)) {
-        return
-      }
       _set(this.options, id, options)
+      this.options = {...this.options} // 设置之前不存在的 options 时需要重新设置响应式更新
     },
-    updateOptions(content, options) {
-      content.forEach(item => {
-        if (item.type !== GROUP && options[item.id]) {
-          return
-        }
-        if (item.type === GROUP) {
-          // 如果该group是动态添加的，则为 options 重新初始化属性
-          if (options[item.id] === undefined) {
-            this.$set(options, item.id, {})
-          }
-          this.updateOptions(item.items, options[item.id])
-          return
-        }
-        this.$set(options, item.id, item.options || [])
-      })
-    }
-  }
+  },
 }
 </script>

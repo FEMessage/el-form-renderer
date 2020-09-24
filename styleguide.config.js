@@ -23,23 +23,24 @@ const sections = (() => {
     {
       name: 'Components',
       components: 'src/el-form-renderer.vue',
-      usageMode: 'expand'
+      usageMode: 'expand',
     },
     {
       name: 'Demo',
       sections: demos,
-      sectionDepth: 2
+      sectionDepth: 2,
     },
     ...(faq ? [faq] : []),
-    ...(guides.length ? [{name: 'Guide', sections: guides}] : [])
+    ...(guides.length ? [{name: 'Guide', sections: guides}] : []),
   ]
 })()
 
 module.exports = {
+  jsxInExamples: true,
   styleguideDir: 'docs',
   pagePerSection: true,
   ribbon: {
-    url: 'https://github.com/FEMessage/el-form-renderer'
+    url: 'https://github.com/FEMessage/el-form-renderer',
   },
   sections,
   require: ['./styleguide'],
@@ -48,27 +49,27 @@ module.exports = {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: 'vue-loader',
         },
         {
           test: /\.js?$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
         {
           test: /\.css$/,
-          loaders: ['style-loader', 'css-loader']
+          loaders: ['style-loader', 'css-loader'],
         },
         {
           test: /\.less$/,
-          loaders: ['vue-style-loader', 'css-loader', 'less-loader']
+          loaders: ['vue-style-loader', 'css-loader', 'less-loader'],
         },
         {
           test: /\.(woff2?|eot|[ot]tf)(\?.*)?$/,
-          loader: 'file-loader'
-        }
-      ]
+          loader: 'file-loader',
+        },
+      ],
     },
-    plugins: [new VueLoaderPlugin()]
-  }
+    plugins: [new VueLoaderPlugin()],
+  },
 }

@@ -1,4 +1,4 @@
-import transformContent from '../src/transform-content'
+import transformContent from '../src/util/transform-content'
 
 const oldContent = [
   {
@@ -8,12 +8,12 @@ const oldContent = [
     $attrs: {'data-name': 'form1'},
     $el: {
       size: 'mini',
-      placeholder: 'test placeholder'
+      placeholder: 'test placeholder',
     },
     rules: [
       {required: true, message: '请输入活动名称', trigger: 'blur'},
-      {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
-    ]
+      {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'},
+    ],
   },
   {
     $type: 'select',
@@ -23,14 +23,14 @@ const oldContent = [
     $options: [
       {
         label: '区域一',
-        value: 'shanghai'
+        value: 'shanghai',
       },
       {
         label: '区域二',
-        value: 'beijing'
-      }
+        value: 'beijing',
+      },
     ],
-    rules: [{required: true, message: '请选择活动区域', trigger: 'change'}]
+    rules: [{required: true, message: '请选择活动区域', trigger: 'change'}],
   },
   {
     $type: 'date-picker',
@@ -38,30 +38,30 @@ const oldContent = [
     label: '活动时间',
     $el: {
       type: 'datetime',
-      placeholder: '请选择'
+      placeholder: '请选择',
     },
     rules: [
       {
         type: 'date',
         required: true,
         message: '请选择日期时间',
-        trigger: 'change'
-      }
-    ]
+        trigger: 'change',
+      },
+    ],
   },
   {
     $type: 'switch',
     $id: 'delivery',
-    label: '即时配送'
+    label: '即时配送',
   },
   {
     $type: 'input',
     $id: 'enableWhenDelivery',
     $el: {
-      placeholder: '如果你选择即时配送就看到我啦'
+      placeholder: '如果你选择即时配送就看到我啦',
     },
     label: '隐藏项demo',
-    $enableWhen: {delivery: true}
+    $enableWhen: {delivery: true},
   },
   {
     $type: 'checkbox-group',
@@ -70,26 +70,26 @@ const oldContent = [
     $default: [],
     $options: [
       {
-        label: '美食/餐厅线上活动'
+        label: '美食/餐厅线上活动',
       },
       {
-        label: '地推活动'
+        label: '地推活动',
       },
       {
-        label: '线下主题活动'
+        label: '线下主题活动',
       },
       {
-        label: '单纯品牌曝光'
-      }
+        label: '单纯品牌曝光',
+      },
     ],
     rules: [
       {
         type: 'array',
         required: true,
         message: '请至少选择一个活动性质',
-        trigger: 'change'
-      }
-    ]
+        trigger: 'change',
+      },
+    ],
   },
   {
     $type: 'radio-group',
@@ -97,23 +97,23 @@ const oldContent = [
     label: '特殊资源',
     $options: [
       {
-        label: '线上品牌商赞助'
+        label: '线上品牌商赞助',
       },
       {
-        label: '线下场地免费'
-      }
+        label: '线下场地免费',
+      },
     ],
-    rules: [{required: true, message: '请选择活动资源', trigger: 'change'}]
+    rules: [{required: true, message: '请选择活动资源', trigger: 'change'}],
   },
   {
     $type: 'input',
     $id: 'desc',
     label: '活动形式',
     $el: {
-      type: 'textarea'
+      type: 'textarea',
     },
-    rules: [{required: true, message: '请填写活动形式', trigger: 'blur'}]
-  }
+    rules: [{required: true, message: '请填写活动形式', trigger: 'blur'}],
+  },
 ]
 
 const expectContent = [
@@ -124,12 +124,12 @@ const expectContent = [
     attrs: {'data-name': 'form1'},
     el: {
       size: 'mini',
-      placeholder: 'test placeholder'
+      placeholder: 'test placeholder',
     },
     rules: [
       {required: true, message: '请输入活动名称', trigger: 'blur'},
-      {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
-    ]
+      {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'},
+    ],
   },
   {
     type: 'select',
@@ -139,14 +139,14 @@ const expectContent = [
     options: [
       {
         label: '区域一',
-        value: 'shanghai'
+        value: 'shanghai',
       },
       {
         label: '区域二',
-        value: 'beijing'
-      }
+        value: 'beijing',
+      },
     ],
-    rules: [{required: true, message: '请选择活动区域', trigger: 'change'}]
+    rules: [{required: true, message: '请选择活动区域', trigger: 'change'}],
   },
   {
     type: 'date-picker',
@@ -154,30 +154,30 @@ const expectContent = [
     label: '活动时间',
     el: {
       type: 'datetime',
-      placeholder: '请选择'
+      placeholder: '请选择',
     },
     rules: [
       {
         type: 'date',
         required: true,
         message: '请选择日期时间',
-        trigger: 'change'
-      }
-    ]
+        trigger: 'change',
+      },
+    ],
   },
   {
     type: 'switch',
     id: 'delivery',
-    label: '即时配送'
+    label: '即时配送',
   },
   {
     type: 'input',
     id: 'enableWhenDelivery',
     el: {
-      placeholder: '如果你选择即时配送就看到我啦'
+      placeholder: '如果你选择即时配送就看到我啦',
     },
     label: '隐藏项demo',
-    enableWhen: {delivery: true}
+    enableWhen: {delivery: true},
   },
   {
     type: 'checkbox-group',
@@ -186,26 +186,26 @@ const expectContent = [
     default: [],
     options: [
       {
-        label: '美食/餐厅线上活动'
+        label: '美食/餐厅线上活动',
       },
       {
-        label: '地推活动'
+        label: '地推活动',
       },
       {
-        label: '线下主题活动'
+        label: '线下主题活动',
       },
       {
-        label: '单纯品牌曝光'
-      }
+        label: '单纯品牌曝光',
+      },
     ],
     rules: [
       {
         type: 'array',
         required: true,
         message: '请至少选择一个活动性质',
-        trigger: 'change'
-      }
-    ]
+        trigger: 'change',
+      },
+    ],
   },
   {
     type: 'radio-group',
@@ -213,23 +213,23 @@ const expectContent = [
     label: '特殊资源',
     options: [
       {
-        label: '线上品牌商赞助'
+        label: '线上品牌商赞助',
       },
       {
-        label: '线下场地免费'
-      }
+        label: '线下场地免费',
+      },
     ],
-    rules: [{required: true, message: '请选择活动资源', trigger: 'change'}]
+    rules: [{required: true, message: '请选择活动资源', trigger: 'change'}],
   },
   {
     type: 'input',
     id: 'desc',
     label: '活动形式',
     el: {
-      type: 'textarea'
+      type: 'textarea',
     },
-    rules: [{required: true, message: '请填写活动形式', trigger: 'blur'}]
-  }
+    rules: [{required: true, message: '请填写活动形式', trigger: 'blur'}],
+  },
 ]
 
 test('transform content', () => {

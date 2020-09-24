@@ -1,11 +1,12 @@
-el-form-renderer 的 disabled 属性会禁用所有表单项
-
-而 content 中每个表单元素的 el 对象内的 disabled 可以禁用对应的表单项
+disabled 可以设置在三个地方
+1. 作为 el-form-renderer 的 prop 传入，禁用整个表单项，优先级最高
+2. 作为 el 的属性传入，作用于单个表单项组件
+3. 与 el 平级传入，效果和 2 相同（因历史原因存在
 
 ```vue
 <template>
   <div>
-    <el-form-renderer label-width="100px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
+    <el-form-renderer v-model="formData" label-width="100px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
     <el-checkbox v-model="disabledAll">禁用全部</el-checkbox>
     <el-checkbox v-model="disabledArea">禁用 area</el-checkbox>
   </div>
@@ -15,6 +16,7 @@ el-form-renderer 的 disabled 属性会禁用所有表单项
 export default {
   data () {
     return {
+      formData: {},
       disabledAll: false,
       disabledArea: false,
       content: [
@@ -35,9 +37,7 @@ export default {
           type: 'select',
           id: 'region',
           label: 'area',
-          el: {
-            disabled: false
-          },
+          disabled: false,
           options: [{
             label: 'area1',
             value: 'shanghai'
@@ -95,6 +95,7 @@ export default {
           id: 'desc',
           label: 'desc',
           el: {
+            disabled: true,
             type: 'textarea'
           },
           rules: [
@@ -107,7 +108,8 @@ export default {
 
   watch: {
     disabledArea(val) {
-      this.$set(this.content[1].el, 'disabled', val)
+      this.content[1].disabled = val
+      this.content = [...this.content]
     }
   }
 }
