@@ -2,13 +2,17 @@
   <el-form-item
     v-show="_show"
     :prop="prop"
-    :label="typeof data.label === 'string' ? data.label : ''"
+    :label="
+      typeof data.label === 'string' && data.type !== 'checkbox'
+        ? data.label
+        : ''
+    "
     :rules="!readonly && Array.isArray(data.rules) ? data.rules : []"
     v-bind="data.attrs"
     class="render-form-item"
   >
     <v-node
-      v-if="typeof data.label !== 'string'"
+      v-if="typeof data.label !== 'string' && data.type !== 'checkbox'"
       slot="label"
       :content="data.label"
     />
@@ -55,6 +59,12 @@
           :label="'value' in opt ? opt.value : opt.label"
           >{{ opt.label }}</el-radio
         >
+      </template>
+      <template v-if="data.type === 'checkbox'">
+        <template v-if="typeof data.label === 'string'">
+          {{ data.label }}
+        </template>
+        <v-node v-else slot="label" :content="data.label" />
       </template>
     </custom-component>
   </el-form-item>
