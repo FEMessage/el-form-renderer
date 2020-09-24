@@ -61,11 +61,14 @@ export default {
           label: 'type',
           default: [],
           options: [{
-            label: 'typeA'
+            label: 'typeA',
+            value: 'A'
           }, {
-            label: 'typeB'
+            label: 'typeB',
+            value:'B'
           }, {
-            label: 'typeC'
+            label: 'typeC',
+            value: 'C'
           }],
           rules: [
             { type: 'array', required: true, message: 'miss type', trigger: 'change' }
