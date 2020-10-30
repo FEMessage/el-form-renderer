@@ -1,5 +1,7 @@
 import Vue, {VueConstructor, VNode} from 'vue'
 
+import {Form} from 'element-ui/types/element-ui'
+
 declare module '@femessage/el-form-renderer' {
   class FemessageComponent extends Vue {
     static install(vue: typeof Vue): void
@@ -70,7 +72,8 @@ declare module '@femessage/el-form-renderer' {
 
   export interface ElFormRendererType
     extends FemessageComponent,
-      ElFormRenderer {}
+      ElFormRenderer,
+      Form {}
 
   const ElFormRendererConstruction: ExtendedVue<
     Vue,
