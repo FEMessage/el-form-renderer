@@ -1,6 +1,6 @@
 import Vue, {VueConstructor, VNode} from 'vue'
 
-import {Form} from 'element-ui/types/element-ui'
+import {Form} from '@femessage/types/element-ui'
 
 declare module '@femessage/el-form-renderer' {
   class FemessageComponent extends Vue {

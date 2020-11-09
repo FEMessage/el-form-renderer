@@ -768,6 +768,11 @@
     require-yaml "0.0.1"
     valid-url "^1.0.9"
 
+"@femessage/types@^1.0.2":
+  version "1.0.2"
+  resolved "https://frontend-infra.deepexi.com:4873/@femessage%2ftypes/-/types-1.0.2.tgz#79f87c4d271eeb22b09d46a2ca4a848d5d623770"
+  integrity sha512-w3B4x0IE71VDPBieA+NLRalQxIkhLN5iMDukbH0ppHA42rCSp3ZrKeiNSRUc42CpbKndZcMxyVj8StQTbbsvdA==
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.npm.taobao.org/@jest/console/download/@jest/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"

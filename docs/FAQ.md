@@ -33,8 +33,6 @@ rules: [
 <script lang="ts">
 // 需要引入这个
 // import { ElFormRendererType } from '@femessage/el-form-renderer'
-// 如果你用的是 @femessage/element-ui
-// import { ElFormRendererType } from '@femessage/el-form-renderer/src/femessage'
 export default {
   mounted() {
     (this.$refs.form as ElFormRendererType).readonly = true
