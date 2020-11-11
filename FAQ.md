@@ -26,3 +26,18 @@ rules: [
    }
  ]
 ```
+
+## 在 TypeScript 中指定组件的类型
+
+```html
+<script lang="ts">
+// 需要引入这个
+// import { ElFormRendererType } from '@femessage/el-form-renderer'
+export default {
+  mounted() {
+    (this.$refs.form as ElFormRendererType).readonly = true
+  },
+}
+</script>
+```
+> 关于更多可用类型请参考：[el-form-renderer.d.ts](https://github.com/FEMessage/el-form-renderer/blob/dev/src/el-form-renderer.d.ts)
