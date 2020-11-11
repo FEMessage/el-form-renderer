@@ -44,7 +44,6 @@
   },
   "homepage": "https://github.com/FEMessage/el-form-renderer",
   "dependencies": {
-    "@femessage/types": "^1.0.2",
     "lodash.clonedeep": "^4.5.0",
     "lodash.frompairs": "^4.0.1",
     "lodash.get": "^4.4.2",
@@ -62,6 +61,7 @@
     "@babel/preset-env": "^7.4.3",
     "@femessage/el-semver-input": "^1.1.3",
     "@femessage/github-release-notes": "latest",
+    "@femessage/types": "^1.0.3",
     "@vue/test-utils": "^1.0.0-beta.30",
     "axios": "^0.19.0",
     "babel-core": "^7.0.0-bridge.0",
