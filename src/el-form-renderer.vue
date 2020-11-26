@@ -229,7 +229,7 @@ export default {
       })
       const itemContent = content.find(item => item.id === id)
       if (!itemContent) {
-        return null
+        return undefined
       }
 
       if (itemContent.groupId) {
