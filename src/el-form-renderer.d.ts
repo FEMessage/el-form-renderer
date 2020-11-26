@@ -45,7 +45,7 @@ declare module '@femessage/el-form-renderer' {
 
     setOptions: (id: string, options: any[]) => void
 
-    getCustomComponentRef:  (id: string) => Component | undefined
+    getComponentById:  (id: string) => Component | undefined
   }
 
   type ElFormRendererComputed = {}
