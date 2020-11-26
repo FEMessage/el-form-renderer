@@ -28,6 +28,7 @@
     </template>
     <custom-component
       v-else
+      ref="customComponent"
       :component="data.component || `el-${data.type}`"
       v-bind="componentProps"
       :value="itemValue"
