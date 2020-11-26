@@ -6,6 +6,7 @@
       <component
         :is="item.type === GROUP ? 'render-form-group' : 'render-form-item'"
         :key="item.id"
+        :ref="item.id"
         :data="item"
         :value="value"
         :item-value="value[item.id]"
@@ -207,6 +208,37 @@ export default {
     setOptions(id, options) {
       _set(this.options, id, options)
       this.options = {...this.options} // 设置之前不存在的 options 时需要重新设置响应式更新
+    },
+    /**
+     * get custom component
+     * @param {string} id<br>
+     * @public
+     */
+    getComponentById(id) {
+      let content = []
+      this.content.forEach(item => {
+        if (item.type === GROUP) {
+          const items = item.items.map(formItem => {
+            formItem.groupId = item.id
+            return formItem
+          })
+          content.push(...items)
+        } else {
+          content.push(item)
+        }
+      })
+      const itemContent = content.find(item => item.id === id)
+      if (!itemContent) {
+        return undefined
+      }
+
+      if (itemContent.groupId) {
+        const componentRef = this.$refs[itemContent.groupId][0]
+        return componentRef.$refs[`formItem-${id}`][0].$refs.customComponent
+      } else {
+        const componentRef = this.$refs[id][0]
+        return componentRef.$refs.customComponent
+      }
     },
   },
 }

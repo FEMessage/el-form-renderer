@@ -5,6 +5,7 @@
       <slot :name="`$id:${item.id}`" />
       <render-form-item
         :key="index"
+        :ref="`formItem-${item.id}`"
         :prop="`${data.id}.${item.id}`"
         :data="item"
         :value="value"
