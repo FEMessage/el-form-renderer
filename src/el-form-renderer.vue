@@ -214,7 +214,7 @@ export default {
      * @param {string} id<br>
      * @public
      */
-    getCustomComponentRef(id) {
+    getComponentById(id) {
       let content = []
       this.content.forEach(item => {
         if (item.type === GROUP) {

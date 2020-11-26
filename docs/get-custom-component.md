@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     getComponent(id){
-      console.log(this.$refs.form.getCustomComponentRef(id))
+      console.log(this.$refs.form.getComponentById(id))
     }
   },
 }
