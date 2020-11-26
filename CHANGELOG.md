@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/FEMessage/el-form-renderer/compare/v1.18.0...v1.19.0) (2020-11-26)
+
+
+### Features
+
+* 增加API getComponentById ([#202](https://github.com/FEMessage/el-form-renderer/issues/202)) ([1b2b112](https://github.com/FEMessage/el-form-renderer/commit/1b2b112))
+
+
+
 ## [1.18.0](https://github.com/FEMessage/el-form-renderer/compare/v1.17.0...v1.18.0) (2020-11-11)
 
 
