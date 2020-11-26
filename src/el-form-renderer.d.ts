@@ -1,4 +1,4 @@
-import Vue, {VueConstructor, VNode} from 'vue'
+import Vue, {VueConstructor, VNode, Component} from 'vue'
 
 import {Form} from '@femessage/types/element-ui'
 
@@ -45,7 +45,7 @@ declare module '@femessage/el-form-renderer' {
 
     setOptions: (id: string, options: any[]) => void
 
-    getCustomComponentRef:  (id: string) => VNode | undefined
+    getCustomComponentRef:  (id: string) => Component | undefined
   }
 
   type ElFormRendererComputed = {}
