@@ -129,6 +129,39 @@ describe('transformOutputValue', () => {
     ]
     expect(transformOutputValue(v, content)).toEqual(v)
   })
+
+  test('form oldV和content的key没有对应上的情况', () => {
+    const oldV = {
+      a: 1,
+      b: {
+        c: 2,
+        d: 3,
+      },
+    }
+    const newV = {
+      b: {
+        c: 1,
+        e: 4,
+      },
+    }
+    const content = [
+      {
+        id: 'b',
+        type: 'group',
+        items: [
+          {
+            id: 'c',
+            outputFormat: c => c - 1,
+          },
+          {
+            id: 'd',
+            outputFormat: d => ({e: d + 1}),
+          },
+        ],
+      },
+    ]
+    expect(transformOutputValue(oldV, content)).toEqual(newV)
+  })
 })
 
 describe('transformInputValue', () => {
