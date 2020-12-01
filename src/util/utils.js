@@ -43,6 +43,7 @@ export function transformOutputValue(value, content) {
   const newVal = {}
   Object.keys(value).forEach(id => {
     const item = content.find(item => item.id === id)
+    if (!item) return
     if (item.type !== 'group') {
       if (item.outputFormat) {
         const v = item.outputFormat(value[id])
