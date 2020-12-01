@@ -151,11 +151,11 @@ describe('transformOutputValue', () => {
         items: [
           {
             id: 'c',
-            outputFormat: v => v - 1,
+            outputFormat: c => c - 1,
           },
           {
             id: 'd',
-            outputFormat: v => ({e: v + 1}),
+            outputFormat: d => ({e: d + 1}),
           },
         ],
       },
