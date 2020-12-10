@@ -35,10 +35,10 @@
       :disabled="disabled || componentProps.disabled || readonly"
       v-on="listeners"
     >
-      <template v-for="opt in options">
+      <template v-for="(opt, index) in options">
         <el-option
           v-if="data.type === 'select'"
-          :key="opt.value"
+          :key="optionKey(opt) || index"
           v-bind="opt"
         />
         <!-- TODO: 支持 el-checkbox-button 变体 -->
@@ -246,6 +246,17 @@ export default {
       this.$nextTick(() => {
         this.elForm && this.elForm.validateField(id)
       })
+    },
+    optionKey(opt) {
+      if (opt.value instanceof Object) {
+        if (!this.data.el || !this.data.el.valueKey) {
+          return
+        }
+
+        return opt.value[this.data.el.valueKey]
+      } else {
+        return opt.value
+      }
     },
   },
 }
