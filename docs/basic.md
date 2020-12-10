@@ -30,12 +30,21 @@ export default {
           type: 'select',
           id: 'region',
           label: 'area',
+          el: {
+            valueKey: 'id',
+          },
           options: [{
             label: 'area1',
-            value: 'shanghai'
+            value: {
+              id: 'shanghai',
+              name: 'shanghai'
+            }
           }, {
             label: 'area2',
-            value: 'beijing'
+            value: {
+              id: 'beijing',
+              name: 'beijing'
+            }
           }],
           rules: [
             { required: true, message: 'miss area', trigger: 'change' }
