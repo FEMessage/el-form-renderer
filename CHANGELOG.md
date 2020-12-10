@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.2](https://github.com/FEMessage/el-form-renderer/compare/v1.19.0...v1.19.2) (2020-12-10)
+
+
+### Bug Fixes
+
+* form和content的key没有对应上，导致find取不到item对象 ([#203](https://github.com/FEMessage/el-form-renderer/issues/203)) ([79dc7a8](https://github.com/FEMessage/el-form-renderer/commit/79dc7a8))
+* select option 支持 object ([#206](https://github.com/FEMessage/el-form-renderer/issues/206)) ([1970da2](https://github.com/FEMessage/el-form-renderer/commit/1970da2))
+
+
+
 ### [1.19.1](https://github.com/FEMessage/el-form-renderer/compare/v1.19.0...v1.19.1) (2020-12-01)
 
 
