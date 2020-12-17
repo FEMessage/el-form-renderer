@@ -3,7 +3,7 @@
     v-show="_show"
     :prop="prop"
     :label="typeof data.label === 'string' ? data.label : ''"
-    :rules="!readonly && Array.isArray(data.rules) ? data.rules : []"
+    :rules="!readonly && Array.isArray(data.rules) ? data.rules : undefined"
     v-bind="data.attrs"
     class="render-form-item"
   >
