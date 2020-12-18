@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.3](https://github.com/FEMessage/el-form-renderer/compare/v1.19.2...v1.19.3) (2020-12-18)
+
+
+### Bug Fixes
+
+* show -> if ([ecc08f3](https://github.com/FEMessage/el-form-renderer/commit/ecc08f3))
+
+
+
 ### [1.19.2](https://github.com/FEMessage/el-form-renderer/compare/v1.19.0...v1.19.2) (2020-12-10)
 
 
