@@ -1,6 +1,6 @@
 <template>
   <el-form-item
-    v-show="_show"
+    v-if="_show"
     :prop="prop"
     :label="typeof data.label === 'string' ? data.label : ''"
     :rules="!readonly && Array.isArray(data.rules) ? data.rules : []"
