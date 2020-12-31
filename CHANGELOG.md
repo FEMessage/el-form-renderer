@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.4](https://github.com/FEMessage/el-form-renderer/compare/v1.19.3...v1.19.4) (2020-12-31)
+
+
+### Bug Fixes
+
+* form prop rules不生效 ([#208](https://github.com/FEMessage/el-form-renderer/issues/208)) ([4d518ce](https://github.com/FEMessage/el-form-renderer/commit/4d518ce))
+
+
+
 ### [1.19.3](https://github.com/FEMessage/el-form-renderer/compare/v1.19.2...v1.19.3) (2020-12-18)
 
 
