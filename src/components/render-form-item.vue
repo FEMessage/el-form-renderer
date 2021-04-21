@@ -33,6 +33,7 @@
       v-bind="componentProps"
       :value="itemValue"
       :disabled="disabled || componentProps.disabled || readonly"
+      :loading="loading"
       v-on="listeners"
     >
       <template v-for="(opt, index) in options">
@@ -116,6 +117,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       propsInner: {},
       isBlurTrigger:
         this.data.rules &&
@@ -195,45 +197,27 @@ export default {
      * 1. 基本用法，配置 url 后即可从远程获取某个 prop 注入到组件
      * 2. 针对 select、checkbox-group & radio-group 组件，会直接将 resp 作为 options 处理；label & value 也是直接为这个场景而生的
      */
-    'data.remote': {
+    'data.remote.request': {
       handler(v, oldV) {
-        if (!v) return
-        if (oldV) {
-          if (v.url === oldV.url || v.request === oldV.request) return
-        }
-        const isOptionsCase =
-          ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) >
-          -1
-        const {
-          url,
-          request = () => this.$axios.get(url).then(resp => resp.data),
-          prop = 'options', // 默认处理 el-cascader 的情况
-          dataPath = '',
-          onResponse = resp => {
-            if (dataPath) resp = _get(resp, dataPath)
-            if (isOptionsCase) {
-              return resp.map(item => ({
-                label: item[label],
-                value: item[value],
-              }))
-            } else {
-              return resp
-            }
-          },
-          onError = error => console.error(error.message),
-          label = 'label',
-          value = 'value',
-        } = v
-        Promise.resolve(request())
-          .then(onResponse, onError)
-          .then(resp => {
-            if (isOptionsCase) {
-              this.elFormRenderer &&
-                this.elFormRenderer.setOptions(this.prop, resp)
-            } else {
-              this.propsInner = {[prop]: resp}
-            }
-          })
+        // 不应该用 watch data.remote，因为对象引用是同一个 https://cn.vuejs.org/v2/api/#vm-watch (估计当初这样写是为了方便)
+        // 现改写成：分开处理 remote.request，remote.url
+        // 至于为什么判断新旧值相同则返回，是因为 form 的 content 是响应式的，防止用户直接修改 content 其他内容时，导致 remote.request 重新发请求
+        if (!v || typeof v !== 'function' || v === oldV) return
+        this.makingRequest(this.data.remote)
+      },
+      immediate: true,
+    },
+    /**
+     * 设计意图：外部修改 url, 重新发送请求。如果同时存在 url 与 request，则请 request 为准。
+     */
+    'data.remote.url': {
+      handler(url, oldV) {
+        // 第三个判断条件：防止 url 与 request 同时存在时，发送两次请求
+        if (!url || url === oldV || (!oldV && this.data.remote.request)) return
+        const request =
+          this.data.remote.request ||
+          (() => this.$axios.get(url).then(resp => resp.data))
+        this.makingRequest(Object.assign({}, this.data.remote, {request}))
       },
       immediate: true,
     },
@@ -257,6 +241,47 @@ export default {
       } else {
         return opt.value
       }
+    },
+    makingRequest(remoteConfig) {
+      const isOptionsCase =
+        ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) > -1
+      const {
+        request,
+        prop = 'options', // 默认处理 el-cascader 的情况
+        dataPath = '',
+        onResponse = resp => {
+          if (dataPath) resp = _get(resp, dataPath)
+          if (isOptionsCase) {
+            return resp.map(item => ({
+              label: item[label],
+              value: item[value],
+            }))
+          } else {
+            return resp
+          }
+        },
+        onError = error => {
+          console.error(error.message)
+          this.loading = false
+        },
+        label = 'label',
+        value = 'value',
+      } = remoteConfig
+
+      this.loading = true
+
+      Promise.resolve(request())
+        .then(onResponse, onError)
+        .then(resp => {
+          if (isOptionsCase) {
+            this.elFormRenderer &&
+              this.elFormRenderer.setOptions(this.prop, resp)
+          } else {
+            this.propsInner = {[prop]: resp}
+          }
+
+          this.loading = false
+        })
     },
   },
 }
