@@ -212,7 +212,8 @@ export default {
      */
     'data.remote.url': {
       handler(url, oldV) {
-        if (!url || url === oldV) return
+        // 第三个判断条件：防止 url 与 request 同时存在时，发送两次请求
+        if (!url || url === oldV || (!oldV && this.data.remote.request)) return
         const request =
           this.data.remote.request ||
           (() => this.$axios.get(url).then(resp => resp.data))

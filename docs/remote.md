@@ -36,6 +36,7 @@ export default {
           id: 'radio',
           label: 'radio',
           remote: {
+            url: 'fake.url', // 同时存在 url 与 request, 以后者为准
             request() {
               const resp = {
                 path: [
