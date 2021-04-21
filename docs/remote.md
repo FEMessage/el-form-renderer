@@ -10,6 +10,7 @@
 <script>
 export default {
   data () {
+    let getRemoteUrl = (query) => 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote&input=' + query
     return {
       content: [
         // 只需要设置 url，即可远程配置 options
@@ -18,7 +19,15 @@ export default {
           id: 'select',
           label: 'select',
           remote: {
-            url: 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote',
+            url: ''
+          },
+          el: {
+            placeholder: '请输入，会发请求',
+            filterable: true,
+            remote: true,
+            remoteMethod: query => {
+              this.content[0].remote.url = getRemoteUrl(query)
+            }
           }
         },
         // 可以自定义 request 方法，做各种操作
@@ -73,8 +82,8 @@ export default {
             request() {
               return [
                 {
-                  label: 'hello', 
-                  value: 'hello', 
+                  label: 'hello',
+                  value: 'hello',
                   children: [
                     {
                       label: 'world',
