@@ -29,7 +29,7 @@
     <custom-component
       v-else
       ref="customComponent"
-      :component="data.component || `el-${data.type}`"
+      :component="data.component || `el-${data.type || 'input'}`"
       v-bind="componentProps"
       :value="itemValue"
       :disabled="disabled || componentProps.disabled || readonly"
