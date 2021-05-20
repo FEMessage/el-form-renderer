@@ -38,6 +38,12 @@ export default {
           id: "desc",
           label: "desc",
         },
+        {
+          type: "input",
+          id: "money",
+          label: "money",
+					rules: [{required: true, validator: (rule, value, callback) => value >= 0.01 ? callback() : callback(new Error('最小充值金额为0.01元'))}],
+        },
       ]
     }
   }
