@@ -287,13 +287,13 @@ export default {
 }
 </script>
 <style lang="less">
-.render-form-item {
-  textarea[readonly] {
-    border: 1px solid #dcdee6; // 只读状态不要有 focus 状态
-  }
-
-  input[readonly] {
-    border: 1px solid #dcdee6;
-  }
-}
+//.render-form-item {
+//  textarea[readonly] {
+//    border: 1px solid #dcdee6; // 只读状态不要有 focus 状态
+//  }
+//
+//  input[readonly] {
+//    border: 1px solid #dcdee6;
+//  }
+//}
 </style>
