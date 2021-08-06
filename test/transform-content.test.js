@@ -232,6 +232,13 @@ const expectContent = [
   },
 ]
 
+const hasId = [{id: 'id'}]
+const hasName = [{name: 'id'}]
+const hasProp = [{prop: 'id'}]
+
 test('transform content', () => {
   expect(transformContent(oldContent)).toEqual(expectContent)
+
+  expect(transformContent(hasName)[0].id).toBe(hasId[0].id)
+  expect(transformContent(hasProp)[0].id).toBe(hasId[0].id)
 })
