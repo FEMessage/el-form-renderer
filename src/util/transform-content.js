@@ -10,6 +10,7 @@ export default function transformContent(content) {
       item.items = transformContent(item.items)
     } else {
       removeDollarInKey(item)
+      setItemId(item)
       extractRulesFromComponent(item)
       // 有些旧写法是 checkboxGroup & radioGroup
       item.type = _kebabcase(item.type)
@@ -19,11 +20,17 @@ export default function transformContent(content) {
   })
 }
 
+// 兼容旧写法：$id、$name
 function removeDollarInKey(item) {
   Object.keys(item)
-    .filter(k => k.startsWith('$'))
-    .filter(k => !(k.slice(1) in item))
+    .filter(k => k.startsWith('$') && !(k.slice(1) in item))
     .forEach(k => ((item[k.slice(1)] = item[k]), delete item[k]))
+}
+
+function setItemId(item) {
+  if (item.id) return
+  // name 是符合表单项直觉的命名； prop 是为了与 element 的 table 的 columns 匹配
+  item.id = item.name || item.prop
 }
 
 export function extractRulesFromComponent(item) {
