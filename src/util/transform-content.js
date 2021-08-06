@@ -19,10 +19,10 @@ export default function transformContent(content) {
   })
 }
 
+// 兼容旧写法：$id、$name
 function removeDollarInKey(item) {
   Object.keys(item)
-    .filter(k => k.startsWith('$'))
-    .filter(k => !(k.slice(1) in item))
+    .filter(k => k.startsWith('$') && !(k.slice(1) in item))
     .forEach(k => ((item[k.slice(1)] = item[k]), delete item[k]))
 }
 
