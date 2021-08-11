@@ -18,7 +18,11 @@ export default {
         "type": [],
         "startDate": "2019-01-01",
         "endDate": "2019-01-02",
-        "region": []
+        "region": [],
+        "date": [
+          "2019-01-01",
+          "2019-01-02"
+        ]
       },
       content: [
         {

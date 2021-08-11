@@ -92,6 +92,7 @@ describe('transformOutputValue', () => {
       a: 2,
       b: {
         c: 1,
+        d: 3, // 冗余字段
         e: 4,
       },
     }
@@ -131,7 +132,7 @@ describe('transformOutputValue', () => {
     expect(transformOutputValue(v, content)).toEqual(v)
   })
 
-  test('form oldV和content的key没有对应上的情况', () => {
+  test('oldV 和 content 的 key 没有对应上的情况', () => {
     const oldV = {
       a: 1,
       b: {
@@ -140,9 +141,11 @@ describe('transformOutputValue', () => {
       },
     }
     const newV = {
+      a: 1, // 冗余字段
       b: {
         c: 1,
         e: 4,
+        d: 3, // 冗余字段
       },
     }
     const content = [
