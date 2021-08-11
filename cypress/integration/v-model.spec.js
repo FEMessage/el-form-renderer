@@ -16,6 +16,7 @@ describe('测试 v-model 示例', function() {
       startDate: '2019-01-01',
       endDate: '2019-01-02',
       region: [],
+      date: ['2019-01-01', '2019-01-02'],
     }
     cy.contains(stringify(initState))
     // 初始值不触发校验
@@ -26,15 +27,7 @@ describe('测试 v-model 示例', function() {
      * 之前对 form 用深拷贝再赋值给 value 时出过这个问题
      */
     cy.contains('miss').should('not.exist')
-    cy.contains(
-      stringify({
-        name: '111',
-        type: [],
-        startDate: '2019-01-01',
-        endDate: '2019-01-02',
-        region: [],
-      }),
-    )
+    cy.contains(stringify(Object.assign({}, initState, {name: '111'})))
     cy.$getFormItemInput('region')
       .first() // 开了 multiple 的 el-select 有两个 input，牛逼
       .click()
@@ -55,6 +48,7 @@ describe('测试 v-model 示例', function() {
         startDate: '2019-01-01',
         endDate: '2019-01-03',
         region: ['shanghai'],
+        date: ['2019-01-01', '2019-01-03'],
         resource: 'A',
         desc: 'desc',
       }),

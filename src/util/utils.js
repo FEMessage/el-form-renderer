@@ -38,7 +38,7 @@ export function mergeValue(oldV, newV, content) {
  * 如果 outputFormat 处理后的值是对象类型，会覆盖（Object.assign）到 value 上
  */
 export function transformOutputValue(value, content) {
-  const newVal = {}
+  const newVal = {...value}
   Object.keys(value).forEach(id => {
     const item = content.find(item => item.id === id) || {}
     if (item.type !== 'group') {
