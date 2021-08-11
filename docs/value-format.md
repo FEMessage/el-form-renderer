@@ -7,6 +7,7 @@
         <el-button type="primary" @click="getValue">log value</el-button>
       </el-form-item>
     </el-form-renderer>
+    <pre>{{form}}</pre>
   </div>
 </template>
 
@@ -15,6 +16,7 @@
     name: 'format',
     data() {
       return {
+        form: {},
         content: [
           {
             el: {
@@ -45,7 +47,7 @@
     methods: {
       getValue () {
         const value = this.$refs.formRender.getFormValue()
-        this.$message(JSON.stringify(value))
+        this.form = JSON.stringify(value)
       },
       setValue () {
         this.$refs.formRender.updateForm({

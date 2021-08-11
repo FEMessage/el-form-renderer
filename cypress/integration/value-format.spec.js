@@ -14,6 +14,8 @@ describe('测试 value-format 示例', function() {
       .next()
       .should('have.value', '2019-01-02')
     cy.contains('log value').click()
-    cy.contains('{"startDate":"2019-01-01","endDate":"2019-01-02"}')
+    cy.contains(
+      `{"startDate":"2019-01-01","endDate":"2019-01-02","date":["2019-01-01","2019-01-02"]}`,
+    )
   })
 })
