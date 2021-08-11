@@ -12,9 +12,9 @@ describe('测试 v-model 示例', function() {
   it('基础用例', function() {
     const initState = {
       name: '',
+      type: [],
       startDate: '2019-01-01',
       endDate: '2019-01-02',
-      type: [],
       region: [],
     }
     cy.contains(stringify(initState))
@@ -29,9 +29,9 @@ describe('测试 v-model 示例', function() {
     cy.contains(
       stringify({
         name: '111',
+        type: [],
         startDate: '2019-01-01',
         endDate: '2019-01-02',
-        type: [],
         region: [],
       }),
     )
@@ -51,9 +51,9 @@ describe('测试 v-model 示例', function() {
     cy.contains(
       stringify({
         name: '111',
+        type: ['typeA'],
         startDate: '2019-01-01',
         endDate: '2019-01-03',
-        type: ['typeA'],
         region: ['shanghai'],
         resource: 'A',
         desc: 'desc',
