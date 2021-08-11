@@ -92,6 +92,7 @@ describe('transformOutputValue', () => {
       a: 2,
       b: {
         c: 1,
+        d: 3, // 冗余字段
         e: 4,
       },
     }
