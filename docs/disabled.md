@@ -7,9 +7,16 @@ disabled 可以设置在三个地方. 可以是一个函数.
 ```vue
 <template>
   <div>
-    <el-form-renderer label-width="140px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
-    <el-checkbox v-model="disabledAll">禁用全部</el-checkbox>
-    <el-checkbox v-model="disabledArea">禁用 area</el-checkbox>
+    <el-form-renderer label-width="140px"
+      ref="form"
+      :content="content"
+      :disabled="disabledAll">
+      <el-checkbox v-model="disabledAll">禁用全部</el-checkbox>
+      <el-checkbox v-model="disabledArea">禁用 area</el-checkbox>
+    </el-form-renderer>
+    <div style="margin-top: 16px;">
+      <el-button type="primary" @click="submit">提交，在控制台查看表单数据</el-button>
+    </div>
   </div>
 </template>
 
@@ -73,7 +80,8 @@ export default {
         {
           type: 'input',
           id: 'desc',
-          label: '使用el禁用',
+          label: 'desc',
+          default: '使用el禁用',
           el: {
             disabled: true,
             type: 'textarea',
@@ -90,6 +98,13 @@ export default {
     disabledArea(val) {
       this.content[1].disabled = val
       this.content = [...this.content]
+    }
+  },
+  methods: {
+    submit() {
+      this.$refs.form.validate(valid => {
+        if(valid) console.log(this.$refs.form.getFormValue())
+      })
     }
   }
 }
