@@ -50,6 +50,7 @@ describe('mergeValue', () => {
       },
     }
     const newV = {
+      i: 1, // 冗余字段
       a: 2,
       b: {
         c: 3,
@@ -133,18 +134,21 @@ describe('transformOutputValue', () => {
 
 describe('transformInputValue', () => {
   test('合并带 group 的情况', () => {
-    const oldV = {
+    const inputVal = {
       aa: 1,
       b: {
         cc: 2,
       },
     }
-    const newV = {
+    const expectedVal = {
       a: 0,
+      aa: 1, // 输入的冗余字段
       b: {
-        c: 2,
+        c: 3,
+        cc: 2, // 输入的冗余字段
       },
     }
+
     const content = [
       {
         id: 'a',
@@ -156,11 +160,11 @@ describe('transformInputValue', () => {
         items: [
           {
             id: 'c',
-            inputFormat: v => v.cc,
+            inputFormat: v => v.cc + 1,
           },
         ],
       },
     ]
-    expect(transformInputValue(oldV, content)).toEqual(newV)
+    expect(transformInputValue(inputVal, content)).toEqual(expectedVal)
   })
 })

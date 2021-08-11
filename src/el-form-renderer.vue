@@ -10,7 +10,12 @@
         :data="item"
         :value="value"
         :item-value="value[item.id]"
-        :disabled="disabled || item.disabled"
+        :disabled="
+          disabled ||
+            (typeof item.disabled === 'function'
+              ? item.disabled(value)
+              : item.disabled)
+        "
         :readonly="readonly || item.readonly"
         :options="options[item.id]"
         @updateValue="updateValue"
@@ -60,7 +65,7 @@ export default {
       required: true,
     },
     disabled: {
-      type: Boolean,
+      type: [Boolean, Function],
       default: false,
     },
     readonly: {

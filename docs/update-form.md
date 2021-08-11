@@ -2,8 +2,8 @@
 <template>
   <div class="update-form">
     <el-form-renderer :content="content" inline ref="formRender">
-      <el-button @click="setValue">set name as alvin</el-button>
-      <el-button type="primary" @click="getValue">log value</el-button>
+      <el-button @click="setValue">updateForm()</el-button>
+      <el-button type="primary" @click="getValue">log getFormValue()</el-button>
     </el-form-renderer>
   </div>
 </template>
@@ -47,7 +47,8 @@
       },
       setValue () {
         this.$refs.formRender.updateForm({
-          name: 'alvin'
+          name: 'alvin',
+          newKey: 'newValue',
         })
       }
     }
