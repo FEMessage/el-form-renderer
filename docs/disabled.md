@@ -1,4 +1,5 @@
-disabled 可以设置在三个地方
+disabled 可以设置在三个地方. 可以是一个函数.
+
 1. 作为 el-form-renderer 的 prop 传入，禁用整个表单项，优先级最高
 2. 作为 el 的属性传入，作用于单个表单项组件
 3. 与 el 平级传入，效果和 2 相同（因历史原因存在
@@ -6,7 +7,7 @@ disabled 可以设置在三个地方
 ```vue
 <template>
   <div>
-    <el-form-renderer v-model="formData" label-width="100px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
+    <el-form-renderer label-width="140px" :content="content" ref="ruleForm" :disabled="disabledAll"></el-form-renderer>
     <el-checkbox v-model="disabledAll">禁用全部</el-checkbox>
     <el-checkbox v-model="disabledArea">禁用 area</el-checkbox>
   </div>
@@ -16,7 +17,6 @@ disabled 可以设置在三个地方
 export default {
   data () {
     return {
-      formData: {},
       disabledAll: false,
       disabledArea: false,
       content: [
@@ -48,26 +48,17 @@ export default {
           rules: [
             { required: true, message: 'miss area', trigger: 'change' }
           ]
-        }, {
-          type: 'date-picker',
-          id: 'date',
-          label: 'date',
-          el: {
-            type: 'datetime',
-            placeholder: 'select date'
-          },
-          rules: [
-            { type: 'date', required: true, message: 'miss date', trigger: 'change' }
-          ]
-        }, {
+        },
+        {
           type: 'switch',
           id: 'delivery',
-          label: 'delivery'
+          label: '禁用开关',
+          default: true,
         }, {
           type: 'checkbox-group',
           id: 'type',
-          label: 'type',
-          default: [],
+          label: '根据开关值禁用',
+          disabled: form => form.delivery,
           options: [{
             label: 'typeA'
           }, {
@@ -78,25 +69,14 @@ export default {
           rules: [
             { type: 'array', required: true, message: 'miss type', trigger: 'change' }
           ]
-        }, {
-          type: 'radio-group',
-          id: 'resource',
-          label: 'resource',
-          options: [{
-            label: 'resourceA'
-          }, {
-            label: 'resourceB'
-          }],
-          rules: [
-            { required: true, message: 'miss resource', trigger: 'change' }
-          ]
-        }, {
+        },
+        {
           type: 'input',
           id: 'desc',
-          label: 'desc',
+          label: '使用el禁用',
           el: {
             disabled: true,
-            type: 'textarea'
+            type: 'textarea',
           },
           rules: [
             { required: true, message: 'miss desc', trigger: 'blur' }
