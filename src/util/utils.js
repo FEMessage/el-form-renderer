@@ -22,14 +22,12 @@ export function collect(content, key) {
 
 /**
  * 递归合并 oldV & newV，策略如下：
- * 1. 过滤掉 newV 中不存在于 content 中的项
- * 2. 如果该项的 type 不是 GROUP，直接覆盖合并到 oldV
- * 3. 如果是，则递归执行步骤 1 到 3
+ * 1. 如果该项的 type 不是 GROUP，直接覆盖合并到 oldV
+ * 2. 如果是，则递归执行步骤 1
  */
 export function mergeValue(oldV, newV, content) {
   Object.keys(newV).forEach(k => {
-    const item = content.find(item => item.id === k)
-    if (!item) return
+    const item = content.find(item => item.id === k) || {}
     if (item.type !== 'group') oldV[k] = newV[k]
     else mergeValue(oldV[k], newV[k], item.items)
   })
@@ -42,8 +40,7 @@ export function mergeValue(oldV, newV, content) {
 export function transformOutputValue(value, content) {
   const newVal = {}
   Object.keys(value).forEach(id => {
-    const item = content.find(item => item.id === id)
-    if (!item) return
+    const item = content.find(item => item.id === id) || {}
     if (item.type !== 'group') {
       if (item.outputFormat) {
         const v = item.outputFormat(value[id])
@@ -66,7 +63,7 @@ export function transformOutputValue(value, content) {
  * 复杂点在于，不管传入的 value 是否包含某表单项的 key，所有使用了 inputFormat 的项都有可能在这次 update 中被更新
  */
 export function transformInputValue(value, content) {
-  const newVal = {}
+  const newVal = {...value}
   content.forEach(item => {
     const {id} = item
     if (item.inputFormat) {
