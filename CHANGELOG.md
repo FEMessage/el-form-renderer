@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/FEMessage/el-form-renderer/compare/v1.20.0...v1.21.0) (2021-08-12)
+
+
+### Features
+
+* item.disabled 可以是个函数 & updateForm 可以存储冗余字段 ([#217](https://github.com/FEMessage/el-form-renderer/issues/217)) ([567d056](https://github.com/FEMessage/el-form-renderer/commit/567d056))
+
+
+### Tests
+
+* 补充 transformOutputValue 测试用例 ([#218](https://github.com/FEMessage/el-form-renderer/issues/218)) ([42617de](https://github.com/FEMessage/el-form-renderer/commit/42617de))
+
+
+
 ## [1.20.0](https://github.com/FEMessage/el-form-renderer/compare/v1.19.7...v1.20.0) (2021-08-06)
 
 
