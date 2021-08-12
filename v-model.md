@@ -14,11 +14,15 @@ export default {
   data () {
     return {
       form: {
-        name: '',
-        // region: [], // 应该能自动生成初始值 []
-        type: [],
-        startDate: '2019-01-01',
-        endDate: '2019-01-02'
+        "name": "",
+        "type": [],
+        "startDate": "2019-01-01",
+        "endDate": "2019-01-02",
+        "region": [],
+        "date": [
+          "2019-01-01",
+          "2019-01-02"
+        ]
       },
       content: [
         {
@@ -42,7 +46,7 @@ export default {
             {
               label: 'shanghai',
               value: 'shanghai'
-            }, 
+            },
             {
               label: 'beijing',
               value: 'beijing'
