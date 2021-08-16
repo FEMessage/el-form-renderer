@@ -34,6 +34,9 @@
       :value="itemValue"
       :disabled="disabled || componentProps.disabled || readonly"
       :loading="loading"
+      :remote-method="
+        data.remoteMethod || componentProps.remoteMethod || remoteMethod
+      "
       v-on="listeners"
     >
       <template v-for="(opt, index) in options">
@@ -242,7 +245,7 @@ export default {
         return opt.value
       }
     },
-    makingRequest(remoteConfig) {
+    makingRequest(remoteConfig, query) {
       const isOptionsCase =
         ['select', 'checkbox-group', 'radio-group'].indexOf(this.data.type) > -1
       const {
@@ -270,7 +273,7 @@ export default {
 
       this.loading = true
 
-      Promise.resolve(request())
+      Promise.resolve(request(query))
         .then(onResponse, onError)
         .then(resp => {
           if (isOptionsCase) {
@@ -282,6 +285,15 @@ export default {
 
           this.loading = false
         })
+    },
+    remoteMethod(query) {
+      if (
+        _get(this.data, 'type') === 'select' &&
+        _get(this.data, 'el.filterable') &&
+        _get(this.data, 'el.remote')
+      ) {
+        this.makingRequest(this.data.remote, query)
+      }
     },
   },
 }
