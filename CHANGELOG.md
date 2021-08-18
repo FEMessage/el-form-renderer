@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/FEMessage/el-form-renderer/compare/v1.21.0...v1.22.0) (2021-08-18)
+
+
+### Features
+
+* el-select 时 remote.request 能获取输入的 query ([#220](https://github.com/FEMessage/el-form-renderer/issues/220)) ([a6ff3ae](https://github.com/FEMessage/el-form-renderer/commit/a6ff3ae))
+
+
+
 ## [1.21.0](https://github.com/FEMessage/el-form-renderer/compare/v1.20.0...v1.21.0) (2021-08-12)
 
 
