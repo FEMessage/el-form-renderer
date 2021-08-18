@@ -13,16 +13,15 @@ export default {
     let getRemoteUrl = (query) => 'https://mockapi.eolinker.com/IeZWjzy87c204a1f7030b2a17b00f3776ce0a07a5030a1b/el-form-renderer?q=remote&input=' + query
     return {
       content: [
-        // 只需要设置 url，即可远程配置 options
         {
           type: 'select',
           id: 'select',
-          label: 'select',
+          label: 'remote-by-url',
           remote: {
-            url: ''
+            url: '' // 通过设置 url，获取远程配置 options
           },
           el: {
-            placeholder: '请输入，会发请求',
+            placeholder: '请输入会发请求,',
             filterable: true,
             remote: true,
             remoteMethod: query => {
@@ -30,6 +29,24 @@ export default {
             }
           }
         },
+        {
+          type: 'select',
+          id: 'remote-by-request',
+          label: 'remote-by-request',
+          remote: {
+            // filterable 与 remote 为 true 时，会传入 query 参数
+            request(query) {
+              console.log(query)
+            }
+          },
+          el: {
+            width: '200px',
+            placeholder: '请输入，控制台会打印输入值',
+            filterable: true,
+            remote: true,
+          }
+        },
+
         // 可以自定义 request 方法，做各种操作
         {
           type: 'radio-group',
