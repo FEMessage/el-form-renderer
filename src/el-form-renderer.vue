@@ -191,8 +191,8 @@ export default {
      * @return {object} key is item's id, value is item's value
      * @public
      */
-    getFormValue() {
-      return transformOutputValue(this.value, this.innerContent)
+    getFormValue({strict = false} = {}) {
+      return transformOutputValue(this.value, this.innerContent, {strict})
     },
     /**
      * update form values

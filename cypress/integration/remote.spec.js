@@ -6,7 +6,8 @@ describe('测试 remote 示例', function() {
     cy.$goto('remote')
   })
   it('测试所有 remote 配置', function() {
-    cy.$getFormItemInput('select')
+    cy.get('.el-select')
+      .first()
       .click()
       .type('input')
     cy.contains('area1').click()
