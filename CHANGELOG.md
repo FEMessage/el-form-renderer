@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/FEMessage/el-form-renderer/compare/v1.22.0...v1.23.0) (2021-08-23)
+
+
+### Features
+
+* getFormValue 可以开启 strict mode ([#221](https://github.com/FEMessage/el-form-renderer/issues/221)) ([98df1b1](https://github.com/FEMessage/el-form-renderer/commit/98df1b1))
+
+
+
 ## [1.22.0](https://github.com/FEMessage/el-form-renderer/compare/v1.21.0...v1.22.0) (2021-08-18)
 
 
