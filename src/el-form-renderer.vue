@@ -188,11 +188,13 @@ export default {
       this.value = {...this.value, [id]: value}
     },
     /**
+     * 当 strict 为 true 时，只返回设置的表单项的值, 过滤掉冗余字段, 更多请看 update-form 示例
+     * @param {{strict: Boolean}} 默认 false
      * @return {object} key is item's id, value is item's value
      * @public
      */
-    getFormValue() {
-      return transformOutputValue(this.value, this.innerContent)
+    getFormValue({strict = false} = {}) {
+      return transformOutputValue(this.value, this.innerContent, {strict})
     },
     /**
      * update form values

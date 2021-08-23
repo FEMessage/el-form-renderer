@@ -133,21 +133,6 @@ describe('transformOutputValue', () => {
   })
 
   test('oldV 和 content 的 key 没有对应上的情况', () => {
-    const oldV = {
-      a: 1,
-      b: {
-        c: 2,
-        d: 3,
-      },
-    }
-    const newV = {
-      a: 1, // 冗余字段
-      b: {
-        c: 1,
-        e: 4,
-        d: 3, // 冗余字段
-      },
-    }
     const content = [
       {
         id: 'b',
@@ -164,7 +149,32 @@ describe('transformOutputValue', () => {
         ],
       },
     ]
-    expect(transformOutputValue(oldV, content)).toEqual(newV)
+    const input = {
+      a: 1,
+      b: {
+        c: 2,
+        d: 3,
+      },
+    }
+    const outputStrict = {
+      b: {
+        c: 1,
+        e: 4,
+      },
+    }
+    const outputNonstrict = {
+      b: {
+        c: 1,
+        e: 4,
+        d: 3, // 冗余字段
+      },
+      a: 1, // 冗余字段
+    }
+
+    expect(transformOutputValue(input, content, {strict: true})).toEqual(
+      outputStrict,
+    )
+    expect(transformOutputValue(input, content)).toEqual(outputNonstrict)
   })
 })
 

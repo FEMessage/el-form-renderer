@@ -37,10 +37,13 @@ export function mergeValue(oldV, newV, content) {
  * 根据 content 中的 outputFormat 来处理 value；
  * 如果 outputFormat 处理后的值是对象类型，会覆盖（Object.assign）到 value 上
  */
-export function transformOutputValue(value, content) {
-  const newVal = {...value}
+export function transformOutputValue(value, content, {strict = false} = {}) {
+  const newVal = strict ? {} : {...value}
+
   Object.keys(value).forEach(id => {
-    const item = content.find(item => item.id === id) || {}
+    const item = content.find(item => item.id === id)
+    if (!item) return
+
     if (item.type !== 'group') {
       if (item.outputFormat) {
         const v = item.outputFormat(value[id])
@@ -51,7 +54,7 @@ export function transformOutputValue(value, content) {
         newVal[id] = value[id]
       }
     } else {
-      newVal[id] = transformOutputValue(value[id], item.items)
+      newVal[id] = transformOutputValue(value[id], item.items, {strict})
     }
   })
   return newVal
