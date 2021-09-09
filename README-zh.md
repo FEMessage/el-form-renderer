@@ -61,6 +61,7 @@ el-data-table、el-data-tree 等组件内部集成该组件，用于更加灵活
 
 ## Links
 
+- [钉钉交流群](https://github.com/FEMessage/el-data-table/issues/181)
 - [api doc and online demo](https://femessage.github.io/el-form-renderer/)
 - [自定义组件接入指南](https://github.com/femessage/el-form-renderer/blob/master/docs/guide-custom-component.md)
 - [自定义组件设置校验规则](https://github.com/FEMessage/el-form-renderer/blob/master/docs/guide-custom-rules-in-custom-component.md)
