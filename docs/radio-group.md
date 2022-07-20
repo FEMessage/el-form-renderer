@@ -12,11 +12,11 @@ export default {
         {
           id: 'city',
           type: 'radio-group',
-          label: 'city',
           /**
            * sytle 属性是为了满足 el-radio-button属性而设置,如果不需要使用el-radio-button这可不设置
            */
           style: 'button',
+          label: 'city',
           default: 'new york',
           options: [
             /**
@@ -27,6 +27,17 @@ export default {
             // 这里会渲染成 <el-radio label="a">guangzhou</el-radio>
             { label: 'guangzhou', value: 'a' },
             { label: 'tokyo' },
+          ]
+        },
+        {
+          id: 'city',
+          type: 'radio-group',
+          label: 'city',
+          default: 'new york',
+          options: [
+            { label: 'new york' },
+            { label: 'guangzhou', value: 'a' },
+            { label: 'tokyo',  disabled: true},
           ]
         }
       ]
