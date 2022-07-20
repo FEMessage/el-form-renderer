@@ -97,6 +97,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "chengaopan",
+      "name": "chengaopan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18641281?v=4",
+      "profile": "https://github.com/chengaopan",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
