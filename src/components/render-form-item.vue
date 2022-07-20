@@ -45,7 +45,6 @@
           :key="optionKey(opt) || index"
           v-bind="opt"
         />
-        <!-- TODO: 支持 el-checkbox-button 变体 -->
         <el-checkbox-button
           v-else-if="data.type === 'checkbox-group' && data.style === 'button'"
           :key="opt.value"
@@ -65,7 +64,6 @@
         </el-checkbox>
         <!-- WARNING: radio 用 label 属性来表示 value 的含义 -->
         <!-- FYI: radio 的 value 属性可以在没有 radio-group 时用来关联到同一个 v-model -->
-        <!-- TODO: 支持 el-radio-button 变体 -->
         <el-radio-button
           v-else-if="data.type === 'radio-group' && data.style === 'button'"
           :key="opt.label"
