@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/FEMessage/el-form-renderer/compare/v1.23.0...v1.24.0) (2022-07-20)
+
+
+### Features
+
+* 增加  el-checkbox-button,el-radio-button 支持 ([#227](https://github.com/FEMessage/el-form-renderer/issues/227)) ([814f1da](https://github.com/FEMessage/el-form-renderer/commit/814f1da))
+
+
+
 ## [1.23.0](https://github.com/FEMessage/el-form-renderer/compare/v1.22.0...v1.23.0) (2021-08-23)
 
 
