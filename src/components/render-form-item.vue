@@ -147,7 +147,16 @@ export default {
   },
   computed: {
     // 解构运算符会处理 undefined 的情况
-    componentProps: ({data: {el}, propsInner}) => ({...el, ...propsInner}),
+    componentProps: ({data: {el}, propsInner, elFormRenderer}) => {
+      const elAttrs =
+        typeof el === 'function'
+          ? el(elFormRenderer ? elFormRenderer.getFormValue() : {})
+          : el
+      return {
+        ...elAttrs,
+        ...propsInner,
+      }
+    },
     hasReadonlyContent: ({data: {type}}) =>
       _includes(['input', 'select'], type),
     hiddenStatus: ({data: {hidden = () => false}, data, value}) =>
