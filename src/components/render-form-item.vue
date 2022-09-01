@@ -69,16 +69,16 @@
           :key="opt.label"
           v-bind="opt"
           :label="'value' in opt ? opt.value : opt.label"
-          >{{ opt.label }}</el-radio-button
-        >
+          >{{ opt.label }}
+        </el-radio-button>
 
         <el-radio
           v-else-if="data.type === 'radio-group' && data.style !== 'button'"
           :key="opt.label"
           v-bind="opt"
           :label="'value' in opt ? opt.value : opt.label"
-          >{{ opt.label }}</el-radio
-        >
+          >{{ opt.label }}
+        </el-radio>
       </template>
     </custom-component>
   </el-form-item>
@@ -167,15 +167,16 @@ export default {
           on: {input: originOnInput = noop, change: originOnChange = noop} = {},
           trim = true,
         },
-        $parent: {
-          $parent: {updateForm},
-        },
       } = this
       return {
         ..._frompairs(
           _topairs(on).map(([eName, handler]) => [
             eName,
-            (...args) => handler(args, updateForm),
+            (...args) =>
+              handler(
+                args,
+                this.elFormRenderer ? this.elFormRenderer.updateForm : null,
+              ),
           ]),
         ),
         // 手动更新表单数据
@@ -183,7 +184,10 @@ export default {
           this.$emit('updateValue', {id, value})
           // 更新表单时调用
           atChange(id, value)
-          originOnInput([value, ...rest], updateForm)
+          originOnInput(
+            [value, ...rest],
+            this.elFormRenderer ? this.elFormRenderer.updateForm : null,
+          )
 
           // FIXME: rules 的 trigger 只写了 blur，依然会在 input 的时候触发校验！
           this.triggerValidate(id)
@@ -191,7 +195,10 @@ export default {
         change: (value, ...rest) => {
           if (typeof value === 'string' && trim) value = value.trim()
           this.$emit('updateValue', {id, value})
-          originOnChange([value, ...rest], updateForm)
+          originOnChange(
+            [value, ...rest],
+            this.elFormRenderer ? this.elFormRenderer.updateForm : null,
+          )
 
           // FIXME: rules 的 trigger 只写了 blur，依然会在 change 的时候触发校验！
           this.triggerValidate(id)
